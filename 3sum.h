@@ -18,6 +18,9 @@
  Solution: Simplify '3sum' to '2sum' O(n^2). http://en.wikipedia.org/wiki/3SUM
  */
  
+ /* do not consider duplicates */
+ /* will figure it out */
+ 
  
  vector<vector<int>> 3sum(vector<int> &num)
  {
