@@ -42,3 +42,39 @@ vector<string> anagrams(vector<string>& strs)
     return res;
     
 }
+
+
+---------------------
+
+vector<string> anagrams(vector<string> & strs)
+{
+    typedef unordered_map(string, int) MAP;
+    MAP anagram;
+    vector<string> res;
+    
+    for(int i = 0; i < strs.size(); i++)
+    {
+        string s = strs[i];
+        sort(s.begin(), s.end());
+        MAP::iterator it = anagram.find(s);
+        
+        if (it == anagram.end())
+        {
+            anagrams[s] = i;  
+        else
+        {
+            if (it->second >= 0)
+            {
+                res.push_back(strs[it->second]);
+                it->second = -1;
+            }
+            
+            res.push_back(strs[i]);
+        }
+        
+    }
+    
+    return res;
+  
+}
+
