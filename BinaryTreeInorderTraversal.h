@@ -46,7 +46,7 @@
                 s.push(pCurr);
                 pCurr = pCurr->left;
             }
-            else if (!s.empty())
+            else
             {
                 pCurr = s.top();
                 s.pop();
