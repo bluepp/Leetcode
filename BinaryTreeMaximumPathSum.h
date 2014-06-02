@@ -33,11 +33,10 @@
         int r = maxpath(root->right, maxsum);
         
         int sum = max(root->val, max(l,r) + root->val);
-        maxsum = max(sum, maxsum);
-        maxsum = max(maxsum, l+r+root->val);
+        maxsum = max(maxsum, max(l+r+root->val, sum));
         
         return sum;
         
-    }
+    }    
     
     
