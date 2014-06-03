@@ -27,3 +27,37 @@
               3. Vector. Contributed by yinlinglin.
               
 */
+
+vector<vector<int> > zigzagLevelOrder(TreeNode *root) {
+         vector<vector<int>> res;
+        if (!root) return res;
+        queue<TreeNode *> q;
+        q.push(root);
+        q.push(NULL);   // end indicator of one level
+        bool left2right = true;
+        vector<int> level;
+        
+        while (true)
+        {
+            TreeNode *pCurr = q.front(); q.pop();
+            if (pCurr)
+            {
+                level.push_back(pCurr->val);
+                if (pCurr->left) q.push(pCurr->left);
+                if (pCurr->right) q.push(pCurr->right);
+            }
+            else
+            {
+                if (!left2right) 
+                    reverse(level.begin(), level.end());
+                res.push_back(level);
+                level.clear();
+                if (q.empty())
+                    break;
+                q.push(NULL);
+                left2right = !left2right;
+            }
+        }
+        return res;
+        
+    }
