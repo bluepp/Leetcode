@@ -13,20 +13,21 @@
  	Solution: Recursion.
  */
  
- 	TreeNode *buildTree(vector<int> &preorder, vector<int> &inorder) {
-        int n = preorder.size();
-        return _build(preorder.begin(), preorder.end(), n);
-        
+   TreeNode *buildTree(vector<int> &preorder, vector<int> &inorder) {
+        return _build(preorder.begin(), inorder.begin(), preorder.size());
     }
     
-     TreeNode* _build(vector<int>::iterator preorder, vector<int>::iterator inorder, int n) {
-        if (n <= 0) return NULL;
+    TreeNode* _build(vector<int>::iterator preorder, vector<int>::iterator inorder, int n) 
+    {
+        if (n == 0) return NULL;
+        int rootval = *preorder;
         
-        vector<int>::iterator it = find(inorder, inorder + n, *preorder);
+        vector<int>::iterator it = find(inorder, inorder + n, rootval);
         int index = it - inorder;
         
-        TreeNode *root = new TreeNode(*preorder);
+        TreeNode *root = new TreeNode(rootval);
         root->left = _build(preorder+1, inorder, index);
-        root->right =_build(preorder+1+index, inorder+index+1, n-1-index);
+        root->right = _build(preorder+1+index, inorder+index+1, n-1-index);
+        
         return root;
     }
