@@ -13,19 +13,18 @@
  */
  
 class Mycompare {
+class Mycompare {
 public:
     bool operator()(ListNode *a, ListNode *b) {
         return a->val > b->val;
     }
 };
 
- 
- 
 class Solution {
    
 public:
     ListNode *mergeKLists(vector<ListNode *> &lists) {
-        priority_queue<ListNode*, vector<listNode*>&lists, Mycompare q>;
+        priority_queue<ListNode *, vector<ListNode *>, Mycompare> q;
         
         for (int i = 0; i < lists.size(); i++)
         {
@@ -42,7 +41,7 @@ public:
             p = p->next;
             
             if (pCurr->next)
-                pCurr = pCurr->next;
+                q.push(pCurr->next);
         }
         
         return dummy.next;
