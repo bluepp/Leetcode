@@ -42,3 +42,29 @@
         return dp[0] -1;
         
     }
+
+
+
+---------------
+
+
+
+    int minCut(string s) {
+        int N = s.size();
+        bool isP[N];
+        int dp[N];
+        dp[0] = 0;
+        for (int i = 1; i < N; ++i) 
+        {
+            isP[i] = true;
+            dp[i] = dp[i-1] + 1;
+            for (int j = 0; j < i; ++j) 
+            {
+                isP[j] = (s[i] == s[j]) ? isP[j+1] : false; // isP[j] == true   -> [j...i] is a palindrome
+                                                            // isP[j+1] == true -> [j+1...i-1] is a palindrome
+                if (isP[j])
+                    dp[i] = (j == 0) ? 0 : min(dp[i], dp[j-1] + 1);  // dp[i] -> minCount for [0...i]
+            }
+        }
+        return dp[N-1];
+    }
