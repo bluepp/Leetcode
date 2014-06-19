@@ -36,6 +36,7 @@
               3. Recursive: DFS. Defect: Use extra stack space for recursion.
  */
  
+ /* recursion version */
  
     void connect(TreeLinkNode *root) {
         if (!root)
@@ -55,6 +56,35 @@
         connect(root->left);
         connect(root->right);
         
+    }
+    
+    
+/* while , iterative version， my soluition */
+
+    void connect(TreeLinkNode *root) {
+      
+      while (root)
+      {
+         TreeLinkNode *pLevel = root;
+         
+         while (pLevel)
+         {
+             if (pLevel->left)
+             {
+                pLevel->left->next = pLevel->right;
+             }
+             if (pLevel->right)
+             {
+                 pLevel->right->next = pLevel->next ? pLevel->next->left : NULL;
+             }
+             
+             pLevel = pLevel->next;
+                
+         }
+         
+         root = root->left ? root->left : root->right;
+      }
+       
     }
  
  
