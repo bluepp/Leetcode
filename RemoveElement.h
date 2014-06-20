@@ -28,6 +28,6 @@
             
         }
         
-        return (k > 0) ? k: 0;
+        return k;
         
     }
