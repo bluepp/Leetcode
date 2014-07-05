@@ -2,9 +2,10 @@
     Bluepp
     May the force be with me! 
     2014-05-29
+    2014-07-06
     
     Problem:    Add Two Numbers
-    Source:     http://www.leetcode.com/onlinejudge
+    Source:     https://oj.leetcode.com/problems/add-two-numbers/
  
     Notes:
     You are given two linked lists representing two non-negative numbers. 
@@ -18,40 +19,67 @@
 
  */
   
-   ListNode *addTwoNumbers(ListNode *l1, ListNode *l2) 
-   {
-        ListNode dummy(0);
-        ListNode *pCurr = &dummy;
-        int carry = 0;
+  /* seems long, but in fact, maybe faster */
+  
+   ListNode *addTwoNumbers(ListNode *l1, ListNode *l2) {
+        if (!l1 && !l2) return NULL;
+        if (!l1 && l2) return l2;
+        if (l1 && !l2) return l1;
         
-        while (l1 != NULL || l2 != NULL || carry)
+        ListNode dummy(0);  
+      
+        int tmp = l1->val + l2->val;
+        l1 = l1->next;l2 = l2->next;
+        
+        int val = tmp%10; int carry = tmp/10;
+        ListNode *pnode = new ListNode(val);
+        dummy.next = pnode;
+        
+        while (l1 && l2)
         {
-            int sum = carry;
+            int tmp = l1->val + l2->val + carry;
+            int val = tmp % 10;
+            carry = tmp/10;
             
-            if (l1)
-            {
-              sum += l1->value;
-              l1 = l1->next;
-            }
-            if (l2)
-            {
-              sum += l2->value;
-              l2 = l2->value;
-            }
+            ListNode *pCurr = new ListNode(val);
+            pnode->next = pCurr;
+            pnode = pnode->next;
             
-            carry = (sum >= 10) ? 1 : 0;
-            sum = sum % 10;
-            
-            ListNode* pNew = new ListNode(sum);
-            pCurr->next = pNew;
-            pCurr = pCurr->next;
-          
-            
+            l1 = l1->next;
+            l2 = l2->next;
         }
         
-          
-        return dummy.next;
+        while (l1)
+        {
+            int tmp = carry + l1->val;
+            int val = tmp % 10;
+            carry = tmp/10;
+            
+            ListNode *pCurr = new ListNode (val);
+            pnode->next = pCurr;
+            pnode = pnode->next;
+            l1 = l1->next;
+        }
         
-          
+        while (l2)
+        {
+            int tmp = carry + l2->val;
+            int val = tmp%10;
+            carry = tmp/10;
+            
+            ListNode *pCurr = new ListNode (val);
+            pnode->next = pCurr;
+            pnode = pnode->next;
+            l2 = l2->next;
+        }
         
-   }
+        if (carry)
+        {
+            ListNode *pCurr = new ListNode(1);
+            pnode->next = pCurr;
+            pnode = pnode->next;
+        }
+            
+        return dummy.next;    
+        
+    }
