@@ -1,11 +1,12 @@
 /* 
   bluepp
   2014-05-29
+  2014-07-06
   May the force be with me!
   
   Problem:    Anagrams
 
-  Source:     http://leetcode.com/onlinejudge#question_49
+  Source:     https://oj.leetcode.com/problems/anagrams/
   Notes:
   Given an array of strings, return all groups of strings that are anagrams.
   Note: All inputs will be in lower-case.
@@ -14,34 +15,36 @@
            
 */
 
-vector<string> anagrams(vector<string>& strs)
-{
-    typedef map<string, vector<int>> MAP;
-    MAP map;
-    
-    for (int i = 0; i < strs.ize(); i++)
-    {
-        string s = strs[i];
-        sort(s.begin(), s.end());
-        map[s].push_back(i);
-    }
-    
-    vector<string> res;
-    MAP::iterator it = map.begin();
-    
-    for(;it != map.end(); it++)
-    {
-        vector<int> anagram = it->second();
-        if(anagram.size() > 1)
+  vector<string> anagrams(vector<string> &strs) {
+        vector<string> res;
+        int n = strs.size();
+        typedef unordered_map<string, vector<int>> MAP;
+        MAP map;
+        
+        for (int i = 0; i < n; i++)
         {
-            for(int i = 0; i < anagram.size(); i++)
-                res.push_back(strs[anagrams[i]);
+            string tmp = strs[i];
+            sort(tmp.begin(), tmp.end());
+            map[tmp].push_back(i);
         }
+        
+        MAP::iterator it = map.begin();
+        for (; it != map.end(); it++)
+        {
+            vector<int> index = it->second;
+            
+            if (index.size() > 1)
+            {
+                for (int i = 0; i < index.size(); i++)
+                {
+                    string s = strs[index[i]];
+                    res.push_back(s);
+                }
+            }
+        }
+        
+        return res;
     }
-    
-    return res;
-    
-}
 
 
 ---------------------
