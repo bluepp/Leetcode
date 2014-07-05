@@ -1,10 +1,11 @@
 /*
   bluepp
   2014-05-31
-  May the force be with me
+  2014-07-06
+  May the force be with me!
   
   Problem:    Balanced Binary Tree
-  Source:     http://leetcode.com/onlinejudge#question_110
+  Source:     https://oj.leetcode.com/problems/balanced-binary-tree/
   Notes:
   Given a binary tree, determine if it is height-balanced.
   For this problem, a height-balanced binary tree is defined as a binary tree in which 
@@ -12,7 +13,30 @@
 
   Solution: DFS.
  */
-
+ 
+/* my solution */ 
+  bool isBalanced(TreeNode *root) {
+        if (!root || !root->left && !root->right) return true;
+        
+        int l = height(root->left);
+        int r = height(root->right);
+        if (abs(l-r) > 1) return false;
+        
+        return isBalanced(root->left) && isBalanced(root->right);
+    }
+    
+    int height(TreeNode *root)
+    {
+        if (!root) return 0;
+        if (!root->left && !root->right) return 1;
+        
+        int l = height(root->left);
+        int r = height(root->right);
+        return max(l,r) + 1;
+    }
+ 
+ 
+/* others */
 bool isBalanced(TreeNode *root) {
         int height = 0;    
         return isBalanced_help(root, height);    
