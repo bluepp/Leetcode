@@ -15,34 +15,32 @@ Notes:
  Solution: Similar to 3Sum, taking O(n^2) time complexity.
  */
  
- int 3SumCloset(vector<int> &num, int target)
- {
-      int n = num.size();
-      sort(num.begin(), num.end());
-      
-      int tt = INT_MAX;
-      
-      for (int i = 0; i < n-2; i ++)
-      {
-          int k = i + 1, j = n-1;
-          
-          while(k < j)
-          {
-              int t = num[i] + num[j] + num[k];
-              int abst = abs(t -target);
-              
-              if (t == target)
-                  return target;
-              else if (t > target)
-                  j --;
-              else
-                  k ++;
-              
-              if (t = INT_MAX || abs(t - target) < abs(tt-target)
-                  tt = abs(t-target);
-              
-          }
-      }
-      
-      return tt;
- }
+ int threeSumClosest(vector<int> &num, int target) {
+        int n = num.size();
+        sort(num.begin(), num.end());
+        int min_diff = INT_MAX; int res = INT_MAX;
+        
+        for (int i = 0; i < n-2; i++)
+        {
+            int l = i+1, r = n-1;
+            
+            while (l < r)
+            {
+                int tmp = num[i] + num[l] + num[r];
+                
+                if (tmp == target) return target;
+                else if (tmp < target) l++;
+                else r--;
+               
+                int diff = abs(target - tmp);
+                if (diff < min_diff)
+                {
+                    min_diff = diff;
+                    res = tmp;
+                }
+                 
+            }
+        }
+        
+        return res;
+    }
