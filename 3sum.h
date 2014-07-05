@@ -1,4 +1,5 @@
 /* 2014 05 26 */
+/* 2014-07-05 */
 /* May the force be with me */
 
 /*
@@ -18,40 +19,43 @@
  Solution: Simplify '3sum' to '2sum' O(n^2). http://en.wikipedia.org/wiki/3SUM
  */
  
- /* do not consider duplicates */
- /* will figure it out */
  
  
- vector<vector<int>> 3sum(vector<int> &num)
- {
-    vector<vector<int>> res;
-    int n = num.size();
-    sort(num.begin(), num.end());
-    
-    for (int i = 0; i < n-2; i ++)
-    {
-        int j = i + 1, k = n - 1;
+ vector<vector<int> > threeSum(vector<int> &num) {
+        vector<vector<int> > res;
+       
+        int n = num.size();
+        if (n < 3) return res;
         
-        while (j < k)
+        sort (num.begin(), num.end());
+        
+        for (int i = 0; i < n-2; i++)
         {
-            int t = num[i] + num[j] + num[k];
+            if (i > 0 && num[i] == num[i-1]) continue;
             
-            if (t == 0)
+            int l = i+1, r = n-1;
+            while (l < r)
             {
-                vector<int> triple;
-                triple.push_back(num[i]);
-                triple.push_back(num[j]);
-                triple.push_back(num[k]);
-                res.push_back(triple);
-                j ++; k --;
+                vector<int> vec;
+                int tmp = num[i] + num[l] + num[r];
+                if (tmp == 0) 
+                {
+                    vec.push_back(num[i]);
+                    vec.push_back(num[l]);
+                    vec.push_back(num[r]);
+                    l++;r--;
+                    
+                    while (l < r && num[l] == num[l-1]) l++;
+                    while (l < r && num[r] == num[r+1]) r--;
+                }
+                else if (tmp < 0) l++;
+                else r--;
+                
+                if (vec.size() != 0)
+                    res.push_back(vec);
             }
-            else if (t > 0)
-            {
-                j ++;
-            }
-            else
-                k --;
         }
+        
+        return res;
     }
- }
  
