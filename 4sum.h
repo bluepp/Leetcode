@@ -1,12 +1,13 @@
 /*
- Author:     bluepp
- May the force be with my
+ bluepp
  2014-05-28
+ 2014-07-05
+ May the force be with me!
 
 
  Problem:    4Sum
  Difficulty: Medium
- Source:     http://leetcode.com/onlinejudge#question_18
+ Source:    https://oj.leetcode.com/problems/4sum/
  Notes:
  Given an array S of n integers, are there elements a, b, c in S such that a + b + c = 0? 
  Find all unique triplets in the array which gives the sum of zero.
@@ -25,59 +26,43 @@
  Solution: Similar to 3Sum, 2Sum.
  */
 
-vector<vector<int>> 4Sum(vector<int> &num, int target)
-{
-    int n = num.size();
-    vector<vector<int>> res;
-    if (n < 4) return res;
-    
-    sort(num.begin(), num.end());
-    
-    for (int i = 0; i < n-3; i ++)
-    {
-        if (i > 0 && num[i] == num[i-1])
-            continue;
+    vector<vector<int> > fourSum(vector<int> &num, int target) {
+        vector<vector<int> > res;
+        int n = num.size();
+        if (n < 4) return res;
+        sort(num.begin(), num.end());
         
-        for (int j = i +1; j < n -2; j++)
+        for (int i = 0; i < n-3; i++)
         {
-            int l = j + 1; 
-            int r = n - 1;
-            
-            if (j > i +1 && num[j] == num[j-1])
-                continue;
-            int twosum = target - num[i] - num[j];    
-            
-            while (l < r)
+            if (i > 0 && num[i] == num[i-1]) continue;
+            for (int j = i+1; j < n-2; j++)
             {
-                int sum = num[l] + num[r];
+                if (j > i+1 && num[j] == num[j-1]) continue;
                 
-                if (sum == twosum)
+                int l = j+1, r = n-1;
+                while (l < r)
                 {
-                    vector<int>tmp;
-                    tmp.push_back(num[i]);
-                    tmp.push_back(num[j]);
-                    tmp.push_back(num[l]);
-                    tmp.push_back(num[r]);
-                    res.push_back(tmp);
-                    
-                    while (l < r && num[l] == num[l+1])
-                        l ++;
-                    while(l < r && num[r] == num[r-1])
-                        r--;
+                    int tmp = num[i] + num[j] + num[l] + num[r];
+                    if (tmp == target)
+                    {
+                        vector<int> vec;
+                        vec.push_back(num[i]);
+                        vec.push_back(num[j]);
+                        vec.push_back(num[l]);
+                        vec.push_back(num[r]);
+                        res.push_back(vec);
                         
-                    l ++;
-                    r--
-                    
+                        while (l > 0 && num[l] == num[l+1]) l++;
+                        while (r < n-1 && num[r] == num[r-1]) r--;
+                        
+                        l++; r--;
+                    }
+                    else if (tmp < target) l++;
+                    else r--;
                 }
-                else if (sum < twosum)
-                    l ++;
-                else
-                    r --;
-                  
             }
-            
         }
+        
+        return res;
+        
     }
-    
-    
-}
