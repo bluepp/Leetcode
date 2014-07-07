@@ -1,6 +1,7 @@
 /*
     bluepp
     2014-06-01
+    2014-07-07
     May the force be with me!
     
     Problem:    Best Time to Buy and Sell Stock III
@@ -15,34 +16,29 @@
                          0 <= i <= N-1
  */
  
-    for(int i = 1; i < n; i ++)
+    int maxProfit(vector<int> &prices) {
+        int n = prices.size();
+        if (n == 0 || n == 1) return 0;
+        
+        int min_price = prices[0], max_price = prices[n-1];
+        int maxprofit1[n], maxprofit2[n];
+        int maxprofit = 0;
+        
+        maxprofit1[0] = 0;
+        for (int i = 1; i < n; i++)
         {
-            if (prices[i] < prices[min])
-                min = i;
-            int tmp = prices[i] - prices[min];
-            if (tmp > lprofit[i-1])
-                lprofit[i] = tmp;
-            else
-                lprofit[i] = lprofit[i-1];
+            if (prices[i] < min_price) min_price = prices[i];
+            maxprofit1[i] = max(maxprofit1[i-1], prices[i]-min_price);
         }
         
-        for (int i = n-1; i >= 0; i--)
+        maxprofit2[n-1] = 0;
+        for (int i = n-2; i >= 0; i--)
         {
-            if (prices[i] > prices[max])
-                max = i;
-            int tmp = prices[max] - prices[i];
-            if (tmp > rprofit[i+1])
-                rprofit[i] = tmp;
-            else
-                rprofit[i] = rprofit[i+1];
+            if (prices[i] > max_price) max_price = prices[i];
+            maxprofit2[i] = max(maxprofit2[i+1], max_price-prices[i]);
             
-            int ktmp = lprofit[i] + rprofit[i];    
-            
-            if (ktmp > maxprofit)
-                maxprofit = ktmp;
-                
+            maxprofit = max(maxprofit, maxprofit1[i] + maxprofit2[i]);
         }
         
         return maxprofit;
-       
     }
