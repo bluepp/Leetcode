@@ -1,6 +1,7 @@
 /*
     bluepp  
     2014-06-02
+    2014-07-08
     May the force be with me!
     
     Problem:    Binary Tree Postorder Traversal 
@@ -26,8 +27,8 @@
               http://www.cnblogs.com/AnnieKim/archive/2013/06/15/MorrisTraversal.html
 */
 
-/* runtime error? */
-vector<int> postorderTraversal(TreeNode *root) {
+/* my version */
+    vector<int> postorderTraversal(TreeNode *root) {
         vector<int> res;
         
         stack<TreeNode*> s;
