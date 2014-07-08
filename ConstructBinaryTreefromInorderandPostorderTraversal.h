@@ -1,6 +1,7 @@
 /*
 	bluepp	
 	2014-06-05
+	2014-07-08
 	May the force be with me!
 	
 	Problem:    Construct Binary Tree from Inorder and Postorder Traversal
@@ -24,6 +25,7 @@
  */
  
  
+  	
   	TreeNode *buildTree(vector<int> &inorder, vector<int> &postorder) {
         int n = inorder.size();
         return _buildTree(inorder.begin(), postorder.begin(), n);
