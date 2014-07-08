@@ -26,7 +26,7 @@
  
  
   	
- TreeNode *buildTree(vector<int> &inorder, vector<int> &postorder) {
+    TreeNode *buildTree(vector<int> &inorder, vector<int> &postorder) {
         int n = inorder.size();
         return _build(inorder.begin(), postorder.begin(), n);
     }
