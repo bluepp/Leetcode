@@ -1,6 +1,7 @@
 /*
     bluepp
     2014-06-3
+    2014-07-08
     May the force be with me!
     
     Problem:    Binary Tree Zigzag Level Order Traversal
@@ -28,36 +29,34 @@
               
 */
 
-vector<vector<int> > zigzagLevelOrder(TreeNode *root) {
-         vector<vector<int>> res;
+/* My version, first solution *./
+    vector<vector<int> > zigzagLevelOrder(TreeNode *root) {
+        vector<vector<int> >res;
         if (!root) return res;
-        queue<TreeNode *> q;
-        q.push(root);
-        q.push(NULL);   // end indicator of one level
-        bool left2right = true;
         vector<int> level;
+        queue<TreeNode *> q1, q2;
+        q1.push(root);
+        bool left2right = true;
         
-        while (true)
+        while (!q1.empty())
         {
-            TreeNode *pCurr = q.front(); q.pop();
-            if (pCurr)
+            TreeNode *pCurr = q1.front();
+            q1.pop();
+            level.push_back(pCurr->val);
+            
+            if (pCurr->left) q2.push(pCurr->left);
+            if (pCurr->right) q2.push(pCurr->right);
+            
+            if (q1.empty())
             {
-                level.push_back(pCurr->val);
-                if (pCurr->left) q.push(pCurr->left);
-                if (pCurr->right) q.push(pCurr->right);
-            }
-            else
-            {
-                if (!left2right) 
-                    reverse(level.begin(), level.end());
+                if (!left2right) reverse(level.begin(), level.end());
                 res.push_back(level);
                 level.clear();
-                if (q.empty())
-                    break;
-                q.push(NULL);
                 left2right = !left2right;
+                swap(q1, q2);
             }
         }
+        
         return res;
         
     }
