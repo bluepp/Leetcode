@@ -1,6 +1,7 @@
 /*
 	bluepp
 	2014-06-05
+	2014-07-08
 	May the force be with me!
 	
 	Problem:    Combinations
@@ -21,7 +22,7 @@
  	Solution: DFS.
  */
  
- 	vector<vector<int> > combine(int n, int k) {
+    vector<vector<int> > combine(int n, int k) {
         vector<vector<int> > res;
         vector<int> vec;
         _comb(1, n, k, vec, res);
