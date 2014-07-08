@@ -30,36 +30,33 @@
 /* my version */
     vector<int> postorderTraversal(TreeNode *root) {
         vector<int> res;
-        
+        if (!root) return res;
         stack<TreeNode*> s;
         TreeNode *prev = NULL;
         s.push(root);
         
-        while(!s.empty())
+        while (!s.empty())
         {
             TreeNode *pCurr = s.top();
-            
-            if (prev || prev->left == pCurr || prev->right == pCurr)
+            if (!prev || prev->left == pCurr|| prev->right == pCurr)
             {
-                if (pCurr->left)
-                    s.push(pCurr->left);
-                else if (pCurr->right)
-                    s.push(pCurr->right);
+                if (pCurr->left) s.push(pCurr->left);
+                else if(pCurr->right) s.push(pCurr->right);
             }
-            else if(prev == pCurr->left)
+            else if (pCurr->left == prev)
             {
-                if (pCurr->right)
-                    s.push(pCurr->right);
+                if (pCurr->right) s.push(pCurr->right);
             }
-            else 
+            else
             {
                 res.push_back(pCurr->val);
                 s.pop();
             }
+            
+            prev = pCurr;
         }
         
         return res;
-      
     }
     
     
