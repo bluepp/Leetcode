@@ -1,6 +1,7 @@
 /*
 	bluepp
 	2014-06-05
+	2014-07-08
 	May the force be with me!
 	
 	Problem:    Combination Sum
@@ -21,28 +22,30 @@
  	Solution: Sort & Recursion.
 */
 
-	vector<vector<int> > combinationSum(vector<int> &candidates, int target) {
+   vector<vector<int> > combinationSum(vector<int> &candidates, int target) {
         vector<vector<int> > res;
-        sort(candidates.begin(), candidates.end());
+        if (candidates.size() == 0) return res;
         vector<int> vec;
-        _comb(candidates, target, 0, vec, res);
         
+        sort(candidates.begin(), candidates.end());
+        _comb(candidates, target, 0, vec, res);
         return res;
     }
     
-    void _comb(vector<int> &candidates, int target, int start, vector<int>&vec, vector<vector<int> > &res)
+    void _comb(vector<int> &candidates, int target, int start, vector<int>&vec, vector<vector<int> >&res)
     {
+        
         if (target == 0)
         {
             res.push_back(vec);
             return;
         }
-        
+   
         for (int i = start; i < candidates.size() && target >= candidates[i]; i++)
         {
             vec.push_back(candidates[i]);
             _comb(candidates, target-candidates[i], i, vec, res);
             vec.pop_back();
         }
-            
     }
+    
