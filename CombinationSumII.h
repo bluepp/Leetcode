@@ -1,6 +1,7 @@
 /*
 	bluepp
 	2014-06-05
+	2014-07-08
 	May the force be with me!
 	
 	Problem:    Combination Sum II
@@ -24,16 +25,18 @@
  	Solution: ..Similar to Combination Sum I, except for line 42 && 44.
 */
 
-	vector<vector<int> > combinationSum2(vector<int> &num, int target) {
+    vector<vector<int> > combinationSum2(vector<int> &num, int target) {
         vector<vector<int> >res;
+        if (num.size() == 0) return res;
         vector<int> vec;
         
         sort(num.begin(), num.end());
-        _comb(num, 0, target, vec, res);
+        _comb(num, target, 0, vec, res);
+        
         return res;
     }
     
-    void _comb(vector<int>& num, int start, int target, vector<int>& vec, vector<vector<int> >& res)
+    void _comb(vector<int> &num, int target, int start, vector<int>&vec, vector<vector<int> >&res)
     {
         if (target == 0)
         {
@@ -41,11 +44,12 @@
             return;
         }
         
-        for(int i = start; i < num.size() && target >= num[i]; i++)
+        for (int i = start; i < num.size() && num[i] <= target; i++)
         {
             if (i > start && num[i] == num[i-1]) continue;
+            
             vec.push_back(num[i]);
-            _comb(num, i+1, target-num[i], vec, res);
+            _comb(num, target-num[i], i+1, vec, res);
             vec.pop_back();
         }
     }
