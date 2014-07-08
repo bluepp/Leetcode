@@ -1,6 +1,7 @@
 /*
     bluepp
     2014-06-03
+    2014-07-08
     May the force be with me!
     
     Problem:    Binary Tree Preorder Traversal
@@ -22,6 +23,7 @@
               3. Threaded tree (Morris).  Time: O(n), Space: O(1).
  */
  
+ /* first iterative version, with stack */
  vector<int> preorderTraversal(TreeNode *root) {
         vector<int> res;
         
