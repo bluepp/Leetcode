@@ -1,6 +1,7 @@
 /*
 	bluepp
 	2014-06-06
+	2014-07-09
 	May the force be with me!
 
 	Problem:    Convert Sorted Array to Binary Search Tree
@@ -11,7 +12,7 @@
  	Solution: Recursion.
 */
 
-	TreeNode *sortedArrayToBST(vector<int> &num) {
+	  TreeNode *sortedArrayToBST(vector<int> &num) {
         int n = num.size();
         return _build(num, 0, n-1);
         
