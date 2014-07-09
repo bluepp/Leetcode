@@ -1,6 +1,7 @@
 /*
     bluepp
     2014-06-07
+    2014-07-10
     May the force be with me!
     
     Problem:    Copy List with Random Pointer
@@ -15,8 +16,8 @@
 
 /* Solution 1 */
 
-RandomListNode *copyRandomList(RandomListNode *head) {
-        
+    RandomListNode *copyRandomList(RandomListNode *head) {
+
         RandomListNode *pCurr = head;
         while (pCurr)
         {
@@ -25,36 +26,28 @@ RandomListNode *copyRandomList(RandomListNode *head) {
             pCurr->next = pNew;
             pCurr = pCurr->next->next;
         }
-        
+
         pCurr = head;
         while (pCurr)
         {
-            if (pCurr->random)
-            {
-                pCurr->next->random = pCurr->random->next;
-            }
+            if (pCurr->random) pCurr->next->random = pCurr->random->next;
             pCurr = pCurr->next->next;
         }
         
-         RandomListNode dummy(0), *pCurrNew = &dummy;
-
+        RandomListNode dummy(0), *pNew = &dummy;
         pCurr = head;
-        
         while (pCurr)
         {
-            pCurrNew->next = pCurr->next;
-            pCurrNew = pCurrNew->next;
+            pNew->next = pCurr->next;
+            pNew = pNew->next;
             pCurr->next = pCurr->next->next;
             pCurr = pCurr->next;
-            
         }
-  
+        
+        
         return dummy.next;
         
     }
-
-
-
 
 
 /* Solution 2 */
