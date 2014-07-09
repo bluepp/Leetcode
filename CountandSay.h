@@ -1,6 +1,7 @@
 /*
 	bluepp
 	2014-06-07
+	2014-07-10
 	May the force be with me!
 	
 	Problem:    Count and Say
@@ -18,7 +19,7 @@
  	Solution: ...
 */	
 	
-string countAndSay(int n) {
+    string countAndSay(int n) {
         string res = "1";
         
         for (int i = 2; i <= n; i++)
