@@ -12,21 +12,20 @@
  	Solution: Recursion.
 */
 
-	  TreeNode *sortedArrayToBST(vector<int> &num) {
+    TreeNode *sortedArrayToBST(vector<int> &num) {
         int n = num.size();
-        return _build(num, 0, n-1);
-        
+        return _bst(num, 0, n-1);
     }
     
-    TreeNode* _build(vector<int>&num, int start, int end)
+    TreeNode* _bst(vector<int> &num, int l, int r)
     {
-        if(start > end) return NULL;
+        if (l > r) return NULL;
+        int m = l + (r-l)/2;
+        int rootval = num[m];
         
-        int m = start + (end - start) /2;
-        
-        TreeNode* root = new TreeNode(num[m]);
-        root->left = _build(num, start, m-1);
-        root->right = _build(num, m+1, end);
+        TreeNode *root = new TreeNode(rootval);
+        root->left = _bst(num, l, m-1);
+        root->right = _bst(num, m+1, r);
         
         return root;
     }
