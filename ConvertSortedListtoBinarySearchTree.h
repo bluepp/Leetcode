@@ -1,6 +1,7 @@
 /*
     bluepp  
     2014-06-06
+    2014-07-09
     May the force be with me!
     
     Problem:    Convert Sorted List to Binary Search Tree
@@ -10,6 +11,47 @@
 
     Solution: Recursion. Pre-order. O(n)
 */
+
+/* my version */
+/* 2014-07-09 */
+
+    TreeNode *sortedListToBST(ListNode *head) {
+        int count = 0;
+        ListNode *pCurr = head;
+        while (pCurr != NULL)
+        {
+            count ++;
+            pCurr = pCurr->next;
+        }
+        
+        return _bst(head, 0, count-1);
+    }
+    
+    TreeNode *_bst(ListNode *head, int l, int r)
+    {
+        if (l > r) return NULL;
+        int count = 0;
+        int m = l + (r-l)/2;
+        
+        ListNode *pCurr = head;
+        while (pCurr && count < m-l)
+        {
+            count ++;
+            pCurr = pCurr->next;
+        }
+        
+        int rootval = pCurr->val;
+        TreeNode *root = new TreeNode(rootval);
+        root->left = _bst(head, l, m-1);
+        if (pCurr->next) root->right = _bst(pCurr->next, m+1, r);
+        return root;
+        
+    }
+
+
+
+
+//----------------------------------------------------------------------
 
     TreeNode *sortedListToBST(ListNode *head) {
         int n = _getlength(head);
