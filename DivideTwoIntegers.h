@@ -12,7 +12,7 @@
  	Solution: Use << operator.
 */
 
-int divide(int dividend, int divisor) {
+    int divide(int dividend, int divisor) {
        assert(divisor != 0);
        bool flag = ((divisor < 0 && dividend > 0) ||
             (divisor > 0 && dividend < 0));
