@@ -1,6 +1,7 @@
 /*
 	bluepp
 	2014-06-09
+	2014-07-11
 	May the force be with me!
 	
 	Problem:    Gas Station
@@ -15,38 +16,29 @@
  Solution: ...
 */
 
-/* time limit exceed ? */
- int canCompleteCircuit(vector<int> &gas, vector<int> &cost) {
-        int index, kgas = 0, kcost = 0;
+/* my solution, time limit exceed , bad!! */
+    int canCompleteCircuit(vector<int> &gas, vector<int> &cost) {
         int n = gas.size();
-        int left[n];
-        for (int i = 0; i < n; i++)
-            left[i] = 0;
         
         for (int i = 0; i < n; i++)
         {
-            left[i] = gas[i] - cost[i];
+            int index = i, j = i;
+            int ccost = 0, ggas = 0;
             
-            int index = i;
-            if (left[i] < 0)
-                continue;
-                
-            int k;    
-            for (k = index+1; k < index+n; k++)
+            while (j < i+n)
             {
-                kgas += gas[k];
-                kcost += cost[k];
+                ccost += cost[j];
+                ggas += gas[j];
+                if (ccost > ggas) break;
+                j++;
             }
             
-            if (k == index+n-1)
-                return index;
+            if (ccost <= ggas) return index;
         }
         
         return -1;
         
     }
-    
-    
     -----------------
     
      int canCompleteCircuit(vector<int> &gas, vector<int> &cost) {
