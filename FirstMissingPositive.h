@@ -18,7 +18,7 @@
            Pick out the first one that does not satisfy A[i] == i + 1.
  */
  
-    int firstMissingPositive(int A[], int n) {
+     int firstMissingPositive(int A[], int n) {
         
         int i = 0;
         while (i < n)
