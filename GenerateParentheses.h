@@ -1,6 +1,7 @@
 /*
     bluepp
     2014-06-09
+    2014-07-11
     May the force be with me!
     
     Problem:    Generate Parentheses
@@ -14,29 +15,18 @@
            Cannot place ')' if there are no enough matching '('.
  */
  
- vector<string> res;
+    vector<string> res;
     vector<string> generateParenthesis(int n) {
-        
         res.clear();
-        _gen(n, n, "");
-        
+        generateParenthesisRe(n, n, "");
         return res;
     }
     
-    void _gen(int left, int right, string s)
-    {
-       if (left == 0 && right == 0)
-       {
-           res.push_back(s);
-           return;
-       }
-       if (left > 0)
-       {
-           _gen(left-1, right,s+"(");
-       }
-       if (right > left)
-       {
-           _gen(left,right-1, s+")");
-       }
-        
+    void generateParenthesisRe(int left, int right, string s) {
+        if (left == 0 && right == 0)
+            res.push_back(s);
+        if (left > 0)
+            generateParenthesisRe(left - 1, right, s + "(");
+        if (right > left)
+            generateParenthesisRe(left, right - 1, s + ")");
     }
