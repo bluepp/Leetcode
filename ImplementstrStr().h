@@ -1,6 +1,7 @@
 /* 
     bluepp
     2014-06-10
+    2014-07-11
     May the force be with me!
     
     Problem:    Implement strStr()
@@ -12,22 +13,19 @@
     Solution: Check in the haystack one by one. If not equal to needle, reset the pointer.
  */
  
- char *strStr(char *haystack, char *needle)
+  char *strStr(char *haystack, char *needle)
     {
         while (true)
         {
-            char *h = haystack, *n = needle;
-            while (*n != '\0' && *n == *h)
+            char *p1 = haystack, *p2 = needle;
+            while (*p1 != '\0' && *p1 == *p2)
             {
-                n++;
-                h++;
-            }    
+                p1++; p2++;
+            }
             
-            if (*n == '\0')
-                return haystack;
-            if (*h == '\0')
-                return NULL;
-            haystack++;    
+            if (*p2 == '\0') return haystack;
+            if (*p1 == '\0') return NULL;
+            haystack++;
         }
-        
+       
     }
