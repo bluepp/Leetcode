@@ -1,6 +1,7 @@
 /*
 	bluepp
 	2014-06-10
+	2014-07-15
 	May the force be with me!
 	
 	Author:     Annie Kim, anniekim.pku@gmail.com
@@ -15,7 +16,7 @@
  	A = [3,2,1,0,4], return false.
  */
  
-  bool canJump(int a[], int n) {
+    bool canJump(int a[], int n) {
         int i = 0, far = 0;
         while (i <= far && far < n)
         {
@@ -24,4 +25,26 @@
         }
         
         return far >= (n-1);
+    }
+    
+    
+  
+    /* my verion */
+  
+    bool canJump(int A[], int n) {
+
+        if (A[0] >= n-1) return true;
+        
+        int canjump = A[0];
+        int j = 0;
+        
+        while (j <= canjump)
+        {
+            int tmp = A[j]+j;
+            if (tmp >= n-1) return true;
+            if (tmp >= canjump) canjump = tmp;
+            j++;
+        }
+        
+        return canjump >= n-1;
     }
