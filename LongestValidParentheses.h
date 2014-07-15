@@ -20,28 +20,26 @@
 /* http://haixiaoyang.wordpress.com/?s=parentheses */
  
      int longestValidParentheses(string s) {
-        int ret = 0;
+        int n = s.length();
         stack<int> stk;
         
-        for (int i = 0; i < s.size(); i++)
+        int res = 0;
+        for (int i = 0; i < n; i++)
         {
             if (s[i] == '(')
                 stk.push(i);
-            else if (s[i] == ')')
+            else
             {
-                if (!stk.empty() && s[stk.top()] == '(') 
+                if(!stk.empty() && s[stk.top()] == '(')
                 {
                     stk.pop();
-                    ret = max(ret, stk.empty()?i+1:i-stk.top());
+                    res = max(res, stk.empty() ? i+1:i-stk.top());
                 }
-                else
-                {
-                    stk.push(i);
-                }
+                else stk.push(i);
             }
             
         }
         
-        return ret;
+        return res;
         
     }
