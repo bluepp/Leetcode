@@ -1,6 +1,7 @@
 /*
     bluepp
     2014-06-14
+    2014-07-16
     May the force be with me!
     
     Problem:    Merge Intervals
@@ -16,31 +17,45 @@
 */
 
 
-bool mycompare(Interval a, Interval b)
-{
-    return a.start < b.start;
-}
+ bool mycompare(Interval a, Interval b)
+    {
+        return a.start < b.start;
+    }
+ 
  
 class Solution {
 public:
+   
+    
     vector<Interval> merge(vector<Interval> &intervals) {
-        int n = intervals.size();
-        if (n <= 1) return intervals;
-        sort(intervals.begin(), intervals.end(), mycompare);
-        vector<Interval> res;
-        Interval last = intervals[0];
         
-        for (int i = 1; i < n; ++i) 
+        vector<Interval> res;
+        int n = intervals.size();
+        if (n == 0 || n == 1) return intervals;
+        
+        sort(intervals.begin(), intervals.end(), mycompare);
+        
+        Interval tmp = intervals[0];
+        for (int i = 1; i < n; i++)
         {
-            if (intervals[i].start > last.end) {
-                res.push_back(last);
-                last = intervals[i];
-            } else {
-                last.end = max(last.end, intervals[i].end);
+            if (tmp.end < intervals[i].start)   
+            {
+                res.push_back(tmp);
+                tmp = intervals[i];
             }
+            else if (tmp.start > intervals[i].end)
+            {
+                res.push_back(tmp);
+            }
+            else
+            {
+                tmp.start = min(tmp.start, intervals[i].start);
+                tmp.end = max(tmp.end, intervals[i].end);
+            }
+            
         }
-        res.push_back(last);
+        
+        res.push_back(tmp);
         return res;
-       
+        
     }
-};
