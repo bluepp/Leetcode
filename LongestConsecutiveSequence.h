@@ -20,12 +20,16 @@
 
     int longestConsecutive(vector<int> &num) {
         unordered_set<int> s;
-        int res = 0;
-        for (int i = 0; i < num.size(); i++)
+        int n = num.size();
+        
+        for (int i = 0; i < n; i++)
             s.insert(num[i]);
         
-        for (int i = 0; i < num.size() && !s.empty(); i++)
+        int res = 0;
+        for(int i = 0; i < n && !s.empty(); i++)
         {
+            if (s.find(num[i]) == s.end()) continue;
+            
             int upper = num[i], lower = num[i];
             
             while (s.find(upper+1) != s.end())
@@ -37,5 +41,4 @@
         }
         
         return res;
-    
     }
