@@ -1,6 +1,7 @@
 /*
     bluepp
     2014-06-14
+    2014-07-16
     May the force be with you!
     
     Problem:    Maximum Depth of Binary Tree
@@ -22,7 +23,7 @@
  * };
  */
  
- int maxDepth(TreeNode *root) {
+    int maxDepth(TreeNode *root) {
         if (!root) return 0;
         int l = maxDepth(root->left);
         int r = maxDepth(root->right);
