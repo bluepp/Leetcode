@@ -1,6 +1,7 @@
 /*
     bluepp
     2014-06-12
+    2014-07-15
     May the force be with me!
     
     Problem:    Linked List Cycle
@@ -13,19 +14,18 @@
     Solution: two pointers.
 */
 
-    bool hasCycle(ListNode *head) {
-        if (!head || !head->next)
-            return false;
+     bool hasCycle(ListNode *head) {
+        
+        if (!head || !head->next) return false;
         
         ListNode *p1 = head, *p2 = head;
-        while (1)
+        
+        while (p1 && p1->next)
         {
-            if (p1 == NULL || p1->next == NULL || p2 == NULL || p2->next == NULL|| p2->next->next == NULL)
-                break;
-            p1 = p1->next;
-            p2 = p2->next->next;
-            if (p1 == p2)
-                return true;
+            p1 = p1->next->next;
+            p2 = p2->next;
+            
+            if (p1 == p2) return true;
         }
         
         return false;
