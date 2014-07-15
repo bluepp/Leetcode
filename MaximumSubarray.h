@@ -1,6 +1,7 @@
 /*
     bluepp
     2014-06-14
+    2014-07-16
     May the force be with me!
     
     Problem:    Maximum Subarray
@@ -12,7 +13,7 @@
     Solution: dp.
  */
  
- int maxSubArray(int a[], int n) {
+   int maxSubArray(int a[], int n) {
         
         int sum = a[0];
         int ret = a[0];
