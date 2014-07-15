@@ -1,6 +1,7 @@
 /*
 	bluepp
 	2014-06-12
+	2014-07-15
 	May the force be with me!
 	
 	
@@ -14,29 +15,7 @@
  	Solution: From Matthew. Simpler.
 */
 
-/* My solution, TLE */ 
-	ListNode *detectCycle(ListNode *head) {
-        
-        ListNode *p1 = head;
-        while (p1)
-        {
-            ListNode* p2 = p1->next;
-            while (p2)
-            {
-                if (p1->next == p2->next)
-                    return p1->next;
-                p2 = p2->next;    
-            }
-            p1 = p1->next;
-            
-        }
-        
-        return NULL;
-        
-    }
-    
-    ---------------------
-    
+
     ListNode *detectCycle(ListNode *head) {
         if (!head || !head->next)
             return NULL;
