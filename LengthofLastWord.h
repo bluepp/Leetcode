@@ -16,20 +16,15 @@
  	Solution: ...
  */
  
- 	int lengthOfLastWord(const char *s) {
-        int n = strlen(s);
-        int res = 0;
-        int i = n-1;
-        for (; i >= 0; i--)
+  int lengthOfLastWord(const char *s) {
+        int len = strlen(s);
+        int count = 0;
+        
+        for (int i = len-1; i >= 0; i--)
         {
-            if (s[i] != ' ')
-                res ++;
-            else
-            {
-                if (res > 0)
-                    break;
-            }
+            if (s[i] != ' ') count++;
+            else if (count > 0) break;
         }
-     
-        return res;
+        
+        return count;
     }
