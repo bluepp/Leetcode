@@ -4,7 +4,6 @@
 	2014-07-15
 	May the force be with me!
 	
-	Author:     Annie Kim, anniekim.pku@gmail.com
  	Problem:    Largest Rectangle in Histogram
  	Source:     https://oj.leetcode.com/problems/largest-rectangle-in-histogram/
  	Notes:
