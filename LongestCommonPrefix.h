@@ -1,6 +1,7 @@
 /*
     bluepp
     2014-06-12
+    2014-07-15
     May the force be with me!
     
     Problem:    Longest Common Prefix
@@ -12,25 +13,23 @@
  */
  
     string longestCommonPrefix(vector<string> &strs) {
-        string res;
-        if (strs.empty())
-            return res;
-        
-        
-        for (int j = 0; j < strs[0].size(); j++)
-        {
-            char t = strs[0][j];
-            
-            for (int i = 0; i < strs.size(); i++)
-            {
-                if (j == strs[i].size() || strs[i][j] != t)
-                    return res;
-            }
-            
-            res.push_back(t);
+       string res;
+       if (strs.empty()) return res;
+       
+       int n = strs[0].size(), m = strs.size();
+       
+       for (int j = 0; j < n; j++)
+       {
+           char tmp = strs[0][j];
            
-        }
-        
-        return res;
-   
+           for (int i = 0; i < m; i++)
+           {
+               if (tmp != strs[i][j]) return res;
+           }
+           
+           res.push_back(tmp);
+       }
+       
+       return res;
+       
     }
