@@ -1,6 +1,7 @@
 /*
     bluepp
     2014-06-16
+    2014-07-16
     May the force be with me!
     
     Problem:    Merge k Sorted Lists
@@ -12,7 +13,7 @@
                complexity: O(NlgK)
  */
  
-class Mycompare {
+
 class Mycompare {
 public:
     bool operator()(ListNode *a, ListNode *b) {
