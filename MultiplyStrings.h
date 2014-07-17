@@ -1,6 +1,7 @@
 /*
     bluepp
     2014-06-17
+    2014-07-17
     May the force be with me!
     
     Problem:    Multiply Strings
@@ -14,26 +15,26 @@
  
  
     string multiply(string num1, string num2) {
-        int n = num1.size(), m = num2.size();
-        string res(m+n, '0');
+        int n1 = num1.size(), n2 = num2.size();
+        string res(n1+n2, '0');
         
-        for (int i= n-1; i >= 0; i--)
+        for (int i = n1-1; i >= 0; i--)
         {
             int carry = 0;
-            
-            for (int j = m-1; j >=0; j--)
+            for (int j = n2-1; j >= 0; j--)
             {
-                int sum = carry + res[i+j+1]-'0'
-                    + (num1[i] - '0') * (num2[i] - '0');
-                res[i+j+1] = sum % 10 + '0';
-                carry = sum / 10;
+                int t = (num1[i]-'0')*(num2[j]-'0')+(res[i+j+1]-'0')+carry;
+                
+                int num = t % 10;
+                carry = t/10;
+                res[i+j+1] = num+'0';
             }
             
             res[i] += carry;
         }
         
-        while (res.size() > 1 && res[0] == '0')
+        while(res.size() > 1 && res[0] == '0')
             res.erase(res.begin());
         
-        return res;    
+        return res;   
     }
