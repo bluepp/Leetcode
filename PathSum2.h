@@ -1,6 +1,7 @@
 /*
     bluepp
     2014-06-18
+    2014-06-19
     May the force be with me!
     
     Problem:    Path Sum 2
@@ -29,32 +30,24 @@
     vector<vector<int> > pathSum(TreeNode *root, int sum) {
         vector<int> vec;
         vector<vector<int> > res;
-        
+       
         _path(root, sum, vec, res);
         return res;
     }
     
     void _path(TreeNode *root, int sum, vector<int>& vec, vector<vector<int> >&res)
     {
-        if (!root)
-            return;
-        
-        if (!root->left && !root->right)
+        if (!root) return;
+        if (root->val == sum && !root->left && !root->right)
         {
-            if (root->val == sum)
-            {
-                vec.push_back(root->val);
-                res.push_back(vec);
-                vec.pop_back();
-                
-            }
-            
+            vec.push_back(root->val);
+            res.push_back(vec);
+            vec.pop_back();
             return;
         }
         
-        
         vec.push_back(root->val);
         _path(root->left, sum - root->val, vec, res);
-        _path(root->right, sum - root->val, vec, res);
+        _path(root->right, sum-root->val, vec, res);
         vec.pop_back();
     }
