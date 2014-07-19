@@ -1,6 +1,7 @@
 /*
     bluepp
     2014-06-18
+    2014-07-19
     May the force be with me!
     
     Problem:    Partition List
@@ -15,20 +16,17 @@
     Solution: ...
  */
  
- /* My solution, TLE */
- 
-    ListNode *partition(ListNode *head, int x) {
-        ListNode dummy1(0), *p1 = &dummy1, dummy2(0), *p2 = &dummy2;
-        ListNode *pCurr = head;
+     ListNode *partition(ListNode *head, int x) {
+        ListNode dummy1(0), dummy2(0);
+        ListNode *p1 = &dummy1, *p2 = &dummy2;
         
+        ListNode *pCurr = head;
         while (pCurr)
         {
-            
             if (pCurr->val < x)
             {
                 p1->next = pCurr;
                 p1 = p1->next;
-                
             }
             else
             {
@@ -39,7 +37,8 @@
             pCurr = pCurr->next;
         }
         
+        p2->next = NULL;
         p1->next = dummy2.next;
         return dummy1.next;
-    
+        
     }
