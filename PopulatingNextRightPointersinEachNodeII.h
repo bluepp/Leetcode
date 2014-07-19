@@ -30,50 +30,32 @@
  */
  
  
- /* TLE */
- 
     void connect(TreeLinkNode *root) {
+        if (!root || (!root->left && !root->right)) return;
+        
+        TreeLinkNode *pCurr = root;
+        while (pCurr)
+        {
+            TreeLinkNode *pNode = pCurr, *plast = NULL;
+            pCurr = NULL;
             
-            while (root)
+            while (pNode)
             {
-                TreeLinkNode *pLevel = root;
-                TreeLinkNode *pNext = pLevel->next;
-                while (pNext && !pNext->left && !pNext->right)
-                    pNext = pNext->next;
+                TreeLinkNode *l = pNode->left, *r = pNode->right;
                 
-               
-                while (pLevel)
+                if (l || r)
                 {
-                    if (pLevel->left)
-                    {
-                        if (pLevel->right)
-                        {
-                            pLevel->left->next = pLevel->right;
-                        }
-                        else
-                        {
-                            pLevel->left->next = pNext ? (pNext->left ? pNext->left : pNext->right): NULL;
-                           
-                        }
-                            
-                    }
-                    
-                    if (pLevel->right)
-                    {
-                        pLevel->right->next = pNext ? (pNext->left ? pNext->left : pNext->right) : NULL;
-                       
-                    }
-                    
-                    pLevel = pNext;
-               
-                } // while
+                    if (plast) plast->next = l ? l : r;
+                    if (l) l->next = r;
+                    if (!pCurr) pCurr = l? l: r;
+                    plast = r ? r : l;
+                }
                 
-                
-                
-                root = root->left ? root->left : root->right;
+                pNode = pNode->next;
             }
-         
-            
-      
+        }
         
     }
+    
+    
+    ----------------------
