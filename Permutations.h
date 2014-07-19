@@ -1,6 +1,7 @@
 /*
 	bluepp	
 	2014-06-19
+	2014-07-19
 	May the force be with me!
 	
 	
@@ -15,34 +16,32 @@
  	Solution: dfs...
  */
  
- 	vector<vector<int> > permute(vector<int> &num) {
-        vector<vector<int> > res;
+    vector<vector<int> > permute(vector<int> &num) {
+        vector<int> vec;
+        vector<vector<int> >res;
         vector<bool> avail(num.size(), true);
-        vector<int> pum;
         
-        _perm(num, avail, pum, res);
-        
+        _perm(num, avail, vec, res);
         return res;
     }
     
-    void _perm(vector<int> &num, vector<bool> &avail, vector<int> &pum, vector<vector<int> > &res)
+    void _perm(vector<int> &num, vector<bool> &avail, vector<int>&vec, vector<vector<int> >&res)
     {
-        if (pum.size() == num.size())
+        if(vec.size() == num.size())
         {
-            res.push_back(pum);
+            res.push_back(vec);
             return;
         }
         
-        for (int i = 0; i < num.size(); i ++)
+        for (int i = 0; i < num.size(); i++)
         {
             if (avail[i])
             {
                 avail[i] = false;
-                pum.push_back(num[i]);
-                _perm(num, avail, pum, res);
-                pum.pop_back();
+                vec.push_back(num[i]);
+                _perm(num, avail, vec, res);
+                vec.pop_back();
                 avail[i] = true;
-                
             }
         }
     }
