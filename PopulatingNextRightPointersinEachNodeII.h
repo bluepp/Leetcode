@@ -1,6 +1,7 @@
 /*
     bluepp
     2014-06-19
+    2014-07-20
     May the force be with me!
   
  lating Next Right Pointers in Each Node II
@@ -31,31 +32,28 @@
  
  
     void connect(TreeLinkNode *root) {
-        if (!root || (!root->left && !root->right)) return;
-        
         TreeLinkNode *pCurr = root;
+        
         while (pCurr)
         {
-            TreeLinkNode *pNode = pCurr, *plast = NULL;
+            TreeLinkNode *pNode = pCurr, *pLast = NULL;
             pCurr = NULL;
             
             while (pNode)
             {
-                TreeLinkNode *l = pNode->left, *r = pNode->right;
+                TreeLinkNode *left = pNode->left, *right = pNode->right;
                 
-                if (l || r)
+                if (left || right)
                 {
-                    if (plast) plast->next = l ? l : r;
-                    if (l) l->next = r;
-                    if (!pCurr) pCurr = l? l: r;
-                    plast = r ? r : l;
+                    if (pLast) pLast->next = left ? left:right;
+                    if (left) left->next = right;
+                    if (!pCurr) pCurr = left ? left : right;
+                    pLast = right ? right : left;
                 }
                 
                 pNode = pNode->next;
             }
         }
-        
     }
-    
     
     ----------------------
