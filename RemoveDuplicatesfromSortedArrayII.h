@@ -1,11 +1,11 @@
 /*
     bluepp
     2014-06-20
+    2014-07-22
     May the force be with me!
     
     
  Problem:    Remove Duplicates from Sorted Array II
- Difficulty: Easy
  Source:     https://oj.leetcode.com/problems/remove-duplicates-from-sorted-array-ii/
  Notes:
  Follow up for "Remove Duplicates":
