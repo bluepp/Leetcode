@@ -1,6 +1,7 @@
 /*
     bluepp
     2014-06-21
+    2014-07-21
     May the force be with me!
     
  Problem:    Remove Duplicates from Sorted List
@@ -15,6 +16,23 @@
            2. Copy value first (like Remove Duplicates from Array) and then delete the remaining elements.
  */
  
+ /* my new version */
+     ListNode *deleteDuplicates(ListNode *head) {
+        if (!head || !head->next) return head;
+        
+        ListNode *pCurr = head;
+        while (pCurr)
+        {
+            ListNode *pNext = pCurr->next;
+            if (pNext && pNext->val == pCurr->val) pCurr->next = pNext->next;
+            else pCurr = pNext;
+        }
+        
+        return head;
+    }
+ 
+ 
+/* my older version */ 
     ListNode *deleteDuplicates(ListNode *head) {
         if (!head || !head->next)
             return head;
