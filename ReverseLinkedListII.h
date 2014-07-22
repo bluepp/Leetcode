@@ -1,6 +1,7 @@
 /*
     bluepp
     2014-06-21
+    2014-07-23
     May the force be with me!
     
     
@@ -30,7 +31,7 @@
             prev = prev->next;
         }
         
-        ListNode *pCurr = prev ->next;
+        ListNode *pCurr = prev->next;
         ListNode *pEnd = pCurr;
         ListNode *pprev = NULL;
         
