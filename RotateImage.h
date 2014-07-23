@@ -23,11 +23,11 @@
         if (matrix.empty() || matrix[0].empty())
             return;
             
-        int m = matrix.size(), n = matrix[0].size();
+        int n = matrix.size();
         
         for (int i = 0; i < n; i++)
         {
-            for (int j = 0; j < m/2; j++)
+            for (int j = 0; j < n/2; j++)
             {
                 swap(matrix[i][j], matrix[i][n-1-j]);
             }
