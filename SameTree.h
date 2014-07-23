@@ -1,6 +1,7 @@
 /*
     bluepp
     2014-06-22
+    2014-07-23
     May the force be with me!
     
    
@@ -12,7 +13,18 @@
 
  Solution: recursion.
  */
-
+ 
+ 
+ /* latest version */
+     bool isSameTree(TreeNode *p, TreeNode *q) {
+        if (!p && !q) return true;
+        if (!p ||!q||p->val != q->val) return false;
+        
+        return isSameTree(p->left, q->left) && isSameTree(p->right, q->right);
+    }
+    
+    
+/* older version */
     bool isSameTree(TreeNode *p, TreeNode *q) {
         if (!p && !q)
             return true;
