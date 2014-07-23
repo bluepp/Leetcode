@@ -1,6 +1,7 @@
 /*
     bluepp
     2014-06-22
+    2014-07-24
     May the force be with me!
     
  Problem:    Search for a Range
@@ -22,45 +23,68 @@
  
 /* There is another solution */ 
 /* My solution, not logn? */ 
-  vector<int> searchRange(int a[], int n, int target) {
+    vector<int> searchRange(int A[], int n, int target) {
         vector<int> res;
-        
         int l = 0, r = n-1;
-        while (l <= r)
+        while(l <= r)
         {
-            int m = l + (r-l)/2;
-            
-            if (a[m] == target)
+            int m = l+(r-l)/2;
+            if(target == A[m])
             {
                 int ll = m, rr = m;
-                while (ll > l && a[ll] == target)
-                {
-                    ll--;
-                }
-                while (rr < r && a[rr] == target)
-                {
-                    rr ++;
-                }
-                
-                if (a[rr] != target)
-                    rr--;
-                if (a[ll] != target)
-                    ll++;
-                
+                while (ll > 0 && A[ll-1] == A[m]) ll--;
+                while (rr < n-1 && A[rr+1] == A[m]) rr++;
                 res.push_back(ll);
                 res.push_back(rr);
                 return res;
             }
-            
-            if (a[m] < target)
-                l ++;
-            else
-                r --;
+            else if (target < A[m]) r = m-1;
+            else l = m+1;
         }
         
         res.push_back(-1);
         res.push_back(-1);
-        
         return res;
-        
     }
+ 
+-------------------------------------------------------------------    
+    
+    vector<int> searchRange(int A[], int n, int target) {
+        vector<int> res(2, -1);
+        int lower = getLowerBound(A, n, target);
+        int upper = getUpperBound(A, n, target);
+        if (lower <= upper)
+        {
+            res[0] = lower;
+            res[1] = upper;
+        }
+        return res;
+    }
+    
+    int getLowerBound(int A[], int n, int target)
+    {
+        int l = 0, u = n-1;
+        while (l <= u)
+        {
+            int mid = (l + u) / 2;
+            if (A[mid] < target)
+                l = mid + 1;
+            else
+                u = mid - 1;
+        }
+        return l;
+    }
+    
+    int getUpperBound(int A[], int n, int target)
+    {
+        int l = 0, u = n-1;
+        while (l <= u)
+        {
+            int mid = (l + u) / 2;
+            if (A[mid] <= target)
+                l = mid + 1;
+            else
+                u = mid - 1;
+        }
+        return u;
+    }    
