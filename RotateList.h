@@ -1,6 +1,7 @@
 /*
     bluepp
     2014-06-22
+    2014-07-23
     May the force be with me!
     
     
@@ -17,47 +18,26 @@
            This solution traverses the list twice at most.
 */
 
-/** ??????, wrong !!! */
-ListNode *rotateRight(ListNode *head, int k) {
-        if (!head || !head->next)
-            return head;
-            
-        ListNode dummy(0);
-        ListNode *p1 = &dummy, *p2 = &dummy;
-        dummy.next = head;
+    ListNode *rotateRight(ListNode *head, int k) {
+        if (!head) return NULL;
         
-        for (int i = 0; i < k; i++)
+        ListNode* tail = head;
+        int count = 1;
+        while (tail->next)
         {
-            if (p2)
-                p2 = p2->next;
-            else
-                return dummy.next;
+            tail = tail->next;
+            count++;
         }
+        k = k % count;   // in case the list rotates more than one round.
+        if (k == 0) return head;
         
-        while (p2->next)
-        {
-            if (p1 && p2)
-            {
-                p1 = p1->next;
-                p2 = p2->next;
-            }
-            else
-            {
-                return dummy.next;
-            }
-        }
+        ListNode* cur = head;
+        for (int i = 0; i < count - k - 1; i++)
+            cur = cur->next;
         
-        ListNode *pp2 = p1->next, *prev = NULL;
-        while (pp2)
-        {
-            ListNode *pNext = pp2->next;
-            pp2->next = prev;
-            prev = pp2;
-            pp2 = pNext;
-        }
+        ListNode* newHead = cur->next;
+        cur->next = NULL;
+        tail->next = head;
         
-        p1->next = prev;
-        
-        return dummy.next;
-        
+        return newHead;
     }
