@@ -52,3 +52,50 @@
         
         return false;
     }
+    
+    
+        bool exist(vector<vector<char> > &board, string word) {
+        if (board.empty() || board[0].empty()) return false;
+        
+        int m = board.size(), n = board[0].size();
+        vector<vector<char> > avail(m, vector<char>(n, '0'));
+        string s;
+        bool existt = false;
+        for (int i = 0; i < m; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                _exist(board, word, s, i, j, avail, existt);
+            }
+        }
+        
+        return existt;
+    }
+    
+    
+    /* my version, TLE */
+    void _exist(vector<vector<char> >&board, string word, string &s, int row, int col, vector<vector<char> >&avail, bool &existt)
+    {
+        if (s == word) {existt = true; return;}
+        if (row >= board.size() || col >= board[0].size()) return;
+        if (s.size() == word.size()) return;
+        
+        for (int i = 0; i < board.size(); i++)
+        {
+            for (int j = 0; j < board[0].size(); j++)
+            {
+                if (avail[i][j] == '0')
+                {
+                    avail[i][j] = '1';
+                    s.push_back(board[i][j]);
+                    _exist(board, word, s, row+1, col+1, avail, existt);
+                    _exist(board, word, s, row-1, col-1, avail, existt);
+                    _exist(board, word, s, row+1, col-1, avail, existt);
+                    _exist(board, word, s, row-1, col+1, avail, existt);
+                    s.pop_back();
+                    avail[i][j] = '0';
+                    
+                }
+            }
+        }
+    }
