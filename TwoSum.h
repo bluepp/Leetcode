@@ -1,6 +1,7 @@
 /*
     bluepp
     2014-06-30
+    2014-07-31
     May the force be with me!
     
  
@@ -25,6 +26,12 @@
  */
  
  /* sort */
+ 
+     bool mycompare(pair<int, int> a, pair<int, int> b)
+    {
+        return a.first < b.first;
+    }
+
     vector<int> twoSum(vector<int> &numbers, int target) {
         vector<int> res;
         if (numbers.empty()) return res;
