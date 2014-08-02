@@ -1,6 +1,7 @@
 /*
     bluepp
     2014-06-27
+    2014-08-02
     May the force be with me!
     
     
@@ -42,4 +43,33 @@
         return l+r;
     }
     
-    /* iteration ? */
+    /* iteration  */
+    
+    int sumNumbers(TreeNode *root) {
+        if (!root) return 0;
+        
+        int res = 0;
+        queue<pair<TreeNode *, int> > q;
+        q.push(make_pair(root, 0));
+        
+        while (!q.empty())
+        {
+            TreeNode *pNode = q.front().first;
+            int sum = q.front().second*10 + pNode->val;
+            q.pop();
+            
+            if (!pNode->left && !pNode->right)
+            {
+                res += sum;
+                continue;
+            }
+            
+            if (pNode->left) q.push(make_pair(pNode->left, sum));
+            if (pNode->right) q.push(make_pair(pNode->right, sum));
+            
+            
+        }
+        
+        return res;
+      
+    }
