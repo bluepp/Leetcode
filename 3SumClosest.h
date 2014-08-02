@@ -1,10 +1,11 @@
 /* bleupp */
 /* 2014-05-27 */
 /* 2014-07-05 */
+/* 2014-08-03 */
 /* May the force be with me */
 
 /* 
-Source:     http://leetcode.com/onlinejudge#question_16 
+Source:     https://oj.leetcode.com/problems/3sum-closest/
 
 Notes:
  Given an array  S of n integers, find three integers in S such that the sum is closest to 
