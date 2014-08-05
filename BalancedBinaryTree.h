@@ -16,7 +16,7 @@
  */
  
 /* my solution */ 
-  bool isBalanced(TreeNode *root) {
+    bool isBalanced(TreeNode *root) {
         if (!root || !root->left && !root->right) return true;
         
         int l = height(root->left);
@@ -29,7 +29,6 @@
     int height(TreeNode *root)
     {
         if (!root) return 0;
-        if (!root->left && !root->right) return 1;
         
         int l = height(root->left);
         int r = height(root->right);
@@ -38,7 +37,7 @@
  
  
 /* others */
-bool isBalanced(TreeNode *root) {
+    bool isBalanced(TreeNode *root) {
         int height = 0;    
         return isBalanced_help(root, height);    
     }
@@ -56,9 +55,7 @@ bool isBalanced(TreeNode *root) {
         bool l = isBalanced_help(root->left, left_height);
         bool r = isBalanced_help(root->right, right_height);
         
-        
         height = max(left_height, right_height) + 1;
-        
        
         if (l && r && (abs(left_height - right_height) <= 1))
             return true;
