@@ -24,13 +24,12 @@
  */
  
  /* first iterative version, with stack */
- vector<int> preorderTraversal(TreeNode *root) {
+    vector<int> preorderTraversal(TreeNode *root) {
         vector<int> res;
-        
         stack<TreeNode *> s;
         TreeNode *pCurr = root;
         
-        while (pCurr || !s.empty())
+        while (!s.empty() || pCurr)
         {
             if (pCurr)
             {
@@ -40,11 +39,11 @@
             }
             else
             {
-                pCurr = s.top()->right;
+                TreeNode *pTmp = s.top();
                 s.pop();
+                pCurr = pTmp->right;
             }
         }
         
         return res;
-        
     }
