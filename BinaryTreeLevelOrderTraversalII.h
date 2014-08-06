@@ -30,42 +30,33 @@
  - 
  - // time exceed!
  - 
- - vector<vector<int> > levelOrderBottom(TreeNode *root) {
- -        vector<vector<int> > res;
- -        if (!root) return res;
- -        
- -        vector<int> level;
- -        queue<TreeNode *> q;
- -        q.push(root);
- -        q.push(NULL);
- -        
- -        while (true)
- -        {
- -            TreeNode *pCurr = q.front();
- -            q.pop();
- -            
- -            if (pCurr)
- -            {
- -                res.push_back(level);
- -                level.clear();
- -                
- -                if (!q.empty())
- -                    break;
- -                
- -                q.push(NULL);
- -            }
- -            else
- -            {
- -                level.push_back(pCurr->val);
- -                if (pCurr->left)
- -                    q.push(pCurr->left);
- -                if (pCurr->right)
- -                    q.push(pCurr->right);
- -            }
- -          
- -        }
- -        
- -        reverse(res.begin(), res.end());
- -        return res;
- -   
- -    }
+       vector<vector<int> > res;
+        if (!root) return res;
+        
+        vector<int> vec;
+        queue<TreeNode *> q;
+        q.push(root);
+        q.push(NULL);
+        
+        while (!q.empty())
+        {
+            TreeNode *pCurr = q.front();
+            q.pop();
+            
+            if (pCurr)
+            {
+                vec.push_back(pCurr->val);
+                if (pCurr->left) q.push(pCurr->left);
+                if (pCurr->right) q.push(pCurr->right);
+            }
+            else
+            {
+               res.push_back(vec);
+               vec.clear();
+               if (q.empty()) break;
+               q.push(NULL);
+            }
+        }
+        
+        reverse(res.begin(), res.end());
+        return res;
