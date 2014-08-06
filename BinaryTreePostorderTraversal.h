@@ -2,6 +2,7 @@
     bluepp  
     2014-06-02
     2014-07-08
+    2014-08-07
     May the force be with me!
     
     Problem:    Binary Tree Postorder Traversal 
@@ -62,38 +63,34 @@
     
     -----------------------------
     
-    vector<int> postorderTraversal(TreeNode *root) {
-      vector<int> res;
-      
-      TreeNode *prev = NULL, *pCurr = root;
-      stack<TreeNode*> s;
-      
-      
-      while (s.empty() || pCurr)
-      {
-          if (pCurr)
-          {
-              s.push(pCurr);
-              pCurr = pCurr->left;
-          }
-          else
-          {
-              TreeNode *ptmp = s.top();
-              if (pCurr->right && prev != pCurr->right)
-              {
-                pCurr = ptmp->right;
-              }
-              else
-              {
-                  res.push_back(pCurr->val);
-                  s.pop();
-                  prev = pCurr;
-              }
-            
-          }
-       }
-       
-       return res;
-      
-      
+vector<int> postorderTraversal(TreeNode *root) {
+        vector<int> res;
+        stack<TreeNode *> s;
+        TreeNode *pCurr = root, *prev = NULL;
+        
+        while (pCurr || !s.empty())
+        {
+            if (pCurr)
+            {
+                s.push(pCurr);
+                pCurr = pCurr->left;
+            }
+            else
+            {
+                TreeNode *pTmp = s.top();
+                
+                if (pTmp->right && prev != pTmp->right)
+                {
+                    pCurr = pTmp->right;
+                }
+                else
+                {
+                    res.push_back(pTmp->val);
+                    s.pop();
+                    prev = pTmp;
+                }
+            }
+        }
+        
+        return res;
     }
