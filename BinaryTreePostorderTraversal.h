@@ -63,7 +63,7 @@
     
     -----------------------------
     
-vector<int> postorderTraversal(TreeNode *root) {
+    vector<int> postorderTraversal(TreeNode *root) {
         vector<int> res;
         stack<TreeNode *> s;
         TreeNode *pCurr = root, *prev = NULL;
