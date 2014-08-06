@@ -27,10 +27,8 @@
  - 
  -    Solution: Queue version. On the basis of 'Binary Tree Level Order Traversal', reverse the final vector.
  - */
- - 
- - // time exceed!
- - 
-       vector<vector<int> > res;
+    vector<vector<int> > levelOrderBottom(TreeNode *root) {
+        vector<vector<int> > res;
         if (!root) return res;
         
         vector<int> vec;
@@ -60,3 +58,4 @@
         
         reverse(res.begin(), res.end());
         return res;
+    }
