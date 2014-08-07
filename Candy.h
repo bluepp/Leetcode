@@ -2,10 +2,11 @@
     bluepp
     2014-06-04
     2014-07-08
+    2014-08-07
     May the force be with me!
     
  
-    Difficulty: Easy
+  
     Source:     http://oj.leetcode.com/problems/candy/
     Notes:
     There are N children standing in a line. Each child is assigned a rating value.
