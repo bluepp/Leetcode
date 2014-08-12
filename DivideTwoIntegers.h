@@ -33,7 +33,7 @@
            }
            
            dend -= div;
-           res += curr_q;
+           res |= curr_q;
        }
        
        return flag ? -res : res;
