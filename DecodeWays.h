@@ -2,6 +2,7 @@
     bluepp  
     2014-06-07
     2014-07-10
+    2014-08-13
     May the force be with me!
     
     Problem:    Decode Ways
@@ -21,36 +22,27 @@
 */
 
     int numDecodings(string s) {
- 
-        int len = s.size();
-	    if (len == 0) return 0;
-
-	    int ways[len+1];
-	    //this value is set for easy calculation for last two numbers
-	    ways[len] = 1; 
-	    //the ways decoding for last number
-	    ways[len-1] = s[len-1] == '0'? 0 : 1; 
-
-	    for (int i = len-2; i >= 0; --i)
-	    {
-		    char c0 = s[i];
-		    if(c0 == '0')
-		    {
-			    ways[i] = 0;
-			    continue;
-		    }
-
-		    //decode current number only
-		    ways[i] = ways[i+1];
-
-		    //decode with next number to be two
-		    char c1 = s[i+1];
-		    //valid two numbers decoding
-		    if (c0 == '1' 
-			    || (c0 == '0' && c1 != '0') 
-			    || (c0 == '2' && c1 <= '6'))
-			ways[i] += ways[i+2];
-
-	    }
-	    return ways[0];
+        int n = s.size();
+        if (n == 0) return 0;
+        
+        int dp[n+1];
+        memset(dp, 0, sizeof(dp));
+        dp[n] = 1;
+        dp[n-1] = s[n-1] == '0' ? 0 : 1;
+        
+        for (int i = n-2; i >= 0; i--)
+        {
+            char c0 = s[i], c1 = s[i+1];
+            if (c0 == '0')
+            {
+                dp[i] = 0;
+                continue;
+            }
+            
+            dp[i] = dp[i+1];
+            if (c0 == '1' || (c0 =='2' && c1 <= '6'))
+                dp[i] += dp[i+2];
+        }
+        
+        return dp[0];
     }
