@@ -20,7 +20,7 @@
     Solution: dp. Note that '0' must be decoded in together with the number in front of it.
 */
 
- int numDecodings(string s) {
+    int numDecodings(string s) {
  
         int len = s.size();
 	    if (len == 0) return 0;
