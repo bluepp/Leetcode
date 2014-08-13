@@ -23,13 +23,15 @@
  	Solution: Refer to http://en.wikipedia.org/wiki/Gray_code.
  */
  
- 	vector<int> grayCode(int n) {
-        vector<int> res(1<<n, 0);
-       
-        for(int i = 1; i < (1<<n); i++)
+    vector<int> grayCode(int n) {
+        
+        vector<int> res(1 << n, 0);
+        
+        for (int i = 1; i <= (1<<n); i++)
         {
             res[i] = (i >> 1) ^ i;
         }
         
         return res;
+        
     }
