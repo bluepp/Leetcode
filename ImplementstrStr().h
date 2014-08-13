@@ -14,19 +14,22 @@
     Solution: Check in the haystack one by one. If not equal to needle, reset the pointer.
  */
  
-  char *strStr(char *haystack, char *needle)
-    {
+    char *strStr(char *haystack, char *needle) {
+        
         while (true)
         {
             char *p1 = haystack, *p2 = needle;
+            
             while (*p1 != '\0' && *p1 == *p2)
             {
-                p1++; p2++;
+                p1 ++;
+                p2++;
             }
             
             if (*p2 == '\0') return haystack;
             if (*p1 == '\0') return NULL;
-            haystack++;
+            
+            haystack ++;
         }
-       
+        
     }
