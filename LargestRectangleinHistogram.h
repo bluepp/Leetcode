@@ -44,8 +44,24 @@
     }
     
     
-    
-
+/* haixiao yang too */    
+//a binary search solution
+int GetBiggestRectBin(int a[], int n)
+{
+    if (n <= 0) return 0;
+    assert(a);
+ 
+    int nMinIndex = 0;
+    for (int i = 1; i < n; i++)
+        if (a[nMinIndex] > a[i])
+            nMinIndex = i;
+     
+    int nCur = a[nMinIndex] * n;
+    int nLft = GetBiggestRectBin(a, nMinIndex);
+    int nRgt = GetBiggestRectBin(a + nMinIndex + 1, n - 1 -nMinIndex);
+ 
+    return max(nCur, max(nLft, nRgt));
+}
 
 
 int largestRectangleArea(vector<int> &height) {
