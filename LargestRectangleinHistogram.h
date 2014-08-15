@@ -2,6 +2,7 @@
 	bluepp
 	2014-06-11
 	2014-07-15
+	2014-08-15
 	May the force be with me!
 	
  	Problem:    Largest Rectangle in Histogram
@@ -16,6 +17,36 @@
  	Solution: 1. Only calucate area when reaching local maximum value.
               2. Keep a non-descending stack. O(n).
 */
+
+/* haixiao yang, http://haixiaoyang.wordpress.com/?s=rectangle */
+    int largestRectangleArea(vector<int> &height) {
+       int res = 0;
+       int n = height.size();
+       stack<int> s;
+       
+       for (int i = 0; i <= n; i++)
+       {
+           int curr = (i == n) ? INT_MIN:height[i];
+           
+           while (!s.empty() && curr < height[s.top()])
+           {
+               int h = height[s.top()];
+               s.pop();
+               int w = s.empty() ? i : i-s.top()-1;
+               res = max(res,h*w);
+           }
+           
+           s.push(i);
+        
+       }
+       
+       return res;
+    }
+    
+    
+    
+
+
 
 int largestRectangleArea(vector<int> &height) {
         
