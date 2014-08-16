@@ -2,6 +2,7 @@
   bluepp
   2014-07-01
   2014-07-30
+  2014-08-16
   May the force be with me!
   
   
@@ -21,18 +22,20 @@
 
 #include <cctype> 
 
-class Solution {
-public:
     bool isPalindrome(string s) {
-         for (int i = 0, j = s.size() - 1; i < j; ++i, --j)
-        {
-            while (i < j && !isalnum(s[i])) i++;
-            while (i < j && !isalnum(s[j])) j--;
-
-            if (tolower(s[i]) != tolower(s[j]))
-                return false;
-        }
-        return true;
+        int n = s.size();
+        if (n == 0) return true;
         
+        int l = 0, r = n-1;
+
+        while (l < r)
+        {
+            while (l < r && !isalnum(s[l])) l++;
+            while (l < r && !isalnum(s[r])) r--;
+            
+            if (tolower(s[l]) != tolower(s[r])) return false;
+            l++; r--;
+        }
+        
+        return true;
     }
-};
