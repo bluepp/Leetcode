@@ -2,6 +2,7 @@
     bluepp
     2014-06-30
     2014-07-31
+    2014-08-17
     May the force be with me!
     
 
@@ -27,8 +28,6 @@
 
 /* DFS */
  vector<TreeNode *> generateTrees(int n) {
-       vector<TreeNode *> res;
-     
        return _gen(1, n);
     }
     
