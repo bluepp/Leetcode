@@ -2,6 +2,7 @@
     bluepp
     2014-06-27
     2014-08-02
+    2014-08-19
     May the force be with me!
     
     
@@ -26,19 +27,17 @@
  
  /* recursion, my version */
     int sumNumbers(TreeNode *root) {
-        
         return _sum(root, 0);
     }
     
     int _sum(TreeNode *root, int n)
     {
         if (!root) return 0;
+        int value = n*10 + root->val;
+        if (!root->left && !root->right) return value;
         
-        n = n * 10 + root->val;
-        if (!root->left && !root->right) return n;
-        
-        int l = _sum(root->left, n);
-        int r = _sum(root->right, n);
+        int l = _sum(root->left, value);
+        int r = _sum(root->right, value);
         
         return l+r;
     }
