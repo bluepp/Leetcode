@@ -2,6 +2,7 @@
     bluepp
     2014-06-29
     2014-08-01
+    2014-08-18
     May the force be with me!
     
     
@@ -30,23 +31,18 @@
 /* recursion version */ 
  
     bool isSymmetric(TreeNode *root) {
-        if (!root || (!root->left && !root->right))
-            return true;
+        if (!root) return true;
         
-        TreeNode *L = root->left , *R = root->right;    
-        if (!L || !R) return false;
-        if (L->val != R->val) return false;
-            
-        return _isSymme(L, R);    
+        return _issym(root->left, root->right);
     }
     
-    bool _isSymme(TreeNode *n1, TreeNode *n2)
+    bool _issym(TreeNode *l, TreeNode *r)
     {
-        if (!n1 && !n2) return true;
-        if (!n1 || !n2) return false;
-        if (n1->val != n2->val) return false;
+        if (!l && !r) return true;
+        if (!l || !r) return false;
+        if (l->val != r->val) return false;
         
-        return _isSymme(n1->left, n2->right) && _isSymme(n1->right, n2->left);
+        return _issym(l->left, r->right) && _issym(l->right, r->left);
     }
     
     
