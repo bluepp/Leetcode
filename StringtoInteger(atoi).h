@@ -2,6 +2,7 @@
     bluepp
     2014-06-26
     2014-07-27
+    2014-08-19
     May the force be with me!
     
    
@@ -32,25 +33,26 @@
 
     int atoi(const char *str) {
         if (!str) return 0;
-        while (*str == ' ') str ++;
-        bool positive = true;
-        if (*str == '+' || *str == '-')
+        const char *p = str;
+        while (*p == ' ') p++;
+        bool neg = false;
+        
+        if (*p == '+' || *p == '-')
         {
-             positive = *str == '+';
-             str ++;
+            if (*p == '-') neg = true;
+            p++;        }
+        
+        long long num = 0;
+        while(isdigit(*p))
+        {
+            num = num *10 + (*p -'0');
+            p++;
         }
         
-        long long res = 0;
-        while (isdigit(*str))
-        {
-            res = res * 10 + (*str -'0');
-            str++;
-        }
+        num = neg ? -num : num;
         
-        res = positive ? res : -res;
-        if (res > INT_MAX)  return INT_MAX;
-        if (res < INT_MIN)  return INT_MIN;
+        if (num > INT_MAX) num = INT_MAX;
+        if (num < INT_MIN) num = INT_MIN;
         
-        return (int)res;
-        
+        return (int)num;
     }
