@@ -33,18 +33,20 @@
         int p = -1, q = n;
         int i = 0;
         
-        while (i < q)
+        for (int i = 0; i < q; )
         {
             switch(A[i])
             {
             case 0:
-                swap(A[i++], A[++p]);
+                swap(A[i], A[++p]);
+                i++;
                 break;
             case 1:
                 i++;
                 break;
             case 2:
                 swap(A[i], A[--q]);
-                
+                break;
             }
         }
+    }
