@@ -8,7 +8,7 @@
     
  Problem:    Sort Colors
  Difficulty: Medium
- Source:     http://leetcode.com/onlinejudge#question_75
+ Source:     https://oj.leetcode.com/problems/sort-colors/
  Notes:
  Given an array with n objects colored red, white or blue, sort them so that objects of the same color
  are adjacent, with the colors in the order red, white and blue.
