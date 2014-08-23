@@ -2,10 +2,10 @@
     bluepp
     2014-06-17
     2014-07-19
+    2014-08-24
     May the force be with me!
     
     Problem:    Palindrome Partitioning II
-    Difficulty: Hard
     Source:     https://oj.leetcode.com/problems/palindrome-partitioning-ii/
     Notes:
     Given a string s, partition s such that every substring of the partition is a palindrome.
