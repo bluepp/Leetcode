@@ -3,6 +3,7 @@
     2014-06-01
     2014-07-07
     2014-08-06
+    2014-08-26
     May the force be with me!
     
      
@@ -32,34 +33,39 @@
               
 */
 
-/* TLE, my version */
+/* my version */
     vector<vector<int> > levelOrder(TreeNode *root) {
-        vector<int> vec;
         vector<vector<int> > res;
-        queue<TreeNode *> q1, q2;
         if (!root) return res;
-        q1.push(root);
+        vector<int> vec;
         
-        while (!q1.empty())
+        queue<TreeNode *> q;
+        q.push(root);
+        q.push(NULL);
+        
+        while (!q.empty())
         {
-            
-            TreeNode *pCurr = q1.front();
-            q1.pop();
-            vec.push_back(pCurr->val);
-            
-            if (pCurr->right) q2.push(pCurr->right);
-            if (pCurr->left) q2.push(pCurr->left);
-            
-            if (q1.empty())
+            TreeNode *tmp = q.front(); q.pop();
+            if(!tmp)
             {
                 res.push_back(vec);
-                swap(q1, q2);
+                vec.clear();
+                if (q.empty()) break;
+                
+                q.push(NULL);
+                continue;
             }
+            
+            vec.push_back(tmp->val);
+            if (tmp->left) q.push(tmp->left);
+            if (tmp->right) q.push(tmp->right);
+           
         }
         
         return res;
-        
     }
+
+
 
 
 vector<vector<int> > levelOrder(TreeNode *root) {
