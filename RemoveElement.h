@@ -2,6 +2,7 @@
     bluepp
     2014-06-20
     2014-07-22
+    2014-08-28
     May the force be with me!
 
  Problem:    Remove Element
@@ -13,22 +14,15 @@
  Solution: Refactor: Update solution. Use two pointers.
  */
  
- int removeElement(int a[], int n, int elem) {
-        
-        if (n == 0)
-            return 0;
+    int removeElement(int A[], int n, int elem) {
         
         int k = 0;
         for (int i = 0; i < n; i++)
         {
-            if (a[i] != elem && k < n)
-            {
-                a[k] = a[i];
-                k++;
-            }
-            
+            if (A[i] == elem) continue;
+            A[k] = A[i];
+            k++;
         }
         
         return k;
-        
     }
