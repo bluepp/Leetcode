@@ -1,12 +1,15 @@
 /*
     bluepp
+    
     2014-06-21
     2014-07-23
+    2014-09-02
+    
     May the force be with me!
     
     
  Problem:    Reverse Integer
- Source:     http://leetcode.com/onlinejudge#question_7
+ Source:     https://oj.leetcode.com/problems/reverse-integer/
  Notes:
  Reverse digits of an integer.
  Example1: x = 123, return 321
