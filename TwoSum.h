@@ -1,8 +1,11 @@
 /*
     bluepp
+    
     2014-06-30
     2014-07-31
     2014-08-17
+    2014-09-03
+    
     May the force be with me!
     
  
@@ -29,6 +32,37 @@
  Note:  Hash Table solution has been updated.  In case that the two elements are the same, 
         all the indices should be stored in the map.
  */
+ 
+ /* my version */
+     vector<int> twoSum(vector<int> &numbers, int target) {
+        typedef unordered_map<int, int> MAP;
+        MAP map;
+        int n = numbers.size();
+        int t1= 0, t2 = 0;
+        
+        for (int i = 0; i < n; i++)
+        {
+            
+            if (map.find(target-numbers[i]) != map.end())
+            {
+                MAP:: iterator it = map.find(target-numbers[i]);
+                t1 = i+1;
+                t2 = it->second;
+            }
+            else
+            {
+                map[numbers[i]] = i+1;
+            }
+        }
+        
+        vector<int> res;
+        res.push_back(min(t1, t2));
+        res.push_back(max(t1, t2));
+        
+        return res;
+    }
+ 
+ 
  
  /* sort */
  
