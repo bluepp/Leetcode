@@ -1,7 +1,10 @@
 /*
     bluepp
+    
     2014-06-16
     2014-07-17
+    2014-09-03
+    
     May the force be with me!
     
     Problem:    Minimum Path Sum
