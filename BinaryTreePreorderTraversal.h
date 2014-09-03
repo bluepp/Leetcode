@@ -1,8 +1,11 @@
 /*
     bluepp
+    
     2014-06-03
     2014-07-08
     2014-08-07
+    2014-09-03
+    
     May the force be with me!
     
     Problem:    Binary Tree Preorder Traversal
@@ -23,6 +26,29 @@
               2. Recursive solution.      Time: O(n), Space: O(n).
               3. Threaded tree (Morris).  Time: O(n), Space: O(1).
  */
+ 
+ /* my version, 2014-09-03 */
+     vector<int> preorderTraversal(TreeNode *root) {
+        vector<int> vec;
+        stack<TreeNode* > s;
+        TreeNode *pCurr = root;
+        
+        while (pCurr || !s.empty())
+        {
+            if (pCurr)
+            {
+                vec.push_back(pCurr->val);
+                s.push(pCurr->right);
+                s.push(pCurr->left);
+            }
+            
+            pCurr = s.top();
+            s.pop();
+        }
+        
+        return vec;
+    }
+ 
  
  /* first iterative version, with stack */
     vector<int> preorderTraversal(TreeNode *root) {
