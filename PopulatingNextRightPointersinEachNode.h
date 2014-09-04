@@ -1,7 +1,10 @@
 /*
     bluepp
+    
     2014-06-19
     2014-07-19
+    2014-09-05
+    
     May the force be with me!
     
     Problem:    Populating Next Right Pointers in Each Node
@@ -40,23 +43,13 @@
  /* recursion version */
  
     void connect(TreeLinkNode *root) {
-        if (!root)
-        {
-            return;
-        }
-        
-        if (root->left)
-        {
-            root->left->next = root->right?root->right: NULL;
-        }
-        if (root->right)
-        {
-            root->right->next = root->next? root->next->left : NULL;
-        }
+        if (!root) return;
+       
+        if (root->left) root->left->next = root->right;
+        if (root->right) root->right->next = root->next ? root->next->left : NULL;
         
         connect(root->left);
         connect(root->right);
-        
     }
     
     
@@ -90,4 +83,41 @@
  
  
  
+ /* queue versiion, my solutiion */
+ 
+     void connect(TreeLinkNode *root) {
+        
+        queue<TreeLinkNode *> q;
+        TreeLinkNode *pCurr = root;
+        TreeLinkNode *pNext = NULL;
+        
+        while (pCurr || !q.empty())
+        {
+            if (pCurr)
+            {
+                if (!q.empty()) {pNext = q.front(); q.pop();}
+                else pNext = NULL;
+                
+                pCurr->next = pNext;
+                
+                if (pCurr->left) q.push(pCurr->left);
+                if (pCurr->right) q.push(pCurr->right);
+                
+                if (q.empty()) break;
+                
+                pCurr = pNext;
+                
+            }
+            else
+            {
+                q.push(NULL);
+                
+                if (!q.empty())
+                {
+                    pCurr = q.front();
+                    q.pop();
+                }
+            }
+        }
+    }
  
