@@ -26,7 +26,7 @@
        {
            char tmp = strs[0][j];
            
-           for (int i = 0; i < m; i++)
+           for (int i = 1; i < m; i++)
            {
                if (tmp != strs[i][j]) return res;
            }
