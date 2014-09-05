@@ -1,8 +1,11 @@
 /*
 	bluepp	
+	
 	2014-06-05
 	2014-07-09
 	2014-08-12
+	2014-09-06
+	
 	May the force be with me!
 	
 	Problem:    Container With Most Water
@@ -17,25 +20,25 @@
  	Solution: From both sides to the center.
 */
 
-	int maxArea(vector<int> &height) {
-        int n = height.size();
-        int l = 0, r = n-1;
-        int res = 0;
-        
-        while (l < r)
-        {
-            if (height[l] <= height[r])
-            {
-                res =max(res, height[l] * (r-l));
-                l++;
-            }
-            else
-            {
-                res = max(res, height[r] * (r-l));
-                r--;
-            }
-        }
-        
-        return res;
-        
+    int maxArea(vector<int> &height) {
+         int n = height.size();
+         
+         int l = 0, r = n-1;
+         int area = 0;
+         
+         while (l < r)
+         {
+             if (height[l] <= height[r])
+             {
+                 area = max(area, height[l] * (r-l));
+                 l++;
+             }
+             else
+             {
+                 area = max(area, height[r]*(r-l));
+                 r--;
+             }
+         }
+         
+         return area;
     }
