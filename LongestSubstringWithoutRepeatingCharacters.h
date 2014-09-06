@@ -1,7 +1,10 @@
 /*
     bluepp
+    
     2014-06-12
     2014-07-15
+    2014-09-06
+    
     May the force be with me!
     
     Problem:    Longest Substring Without Repeating Characters
