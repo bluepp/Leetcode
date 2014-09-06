@@ -1,8 +1,11 @@
 /*
   bluepp
+  
   2014-05-31
   2014-07-06
   2014-08-05
+  2014-09-09, the second solution
+  
   May the force be with me!
   
   Problem:    Balanced Binary Tree
