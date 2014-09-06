@@ -1,9 +1,12 @@
 /*
     bluepp
+    
     2014-06-27
     2014-08-02
     2014-08-19
     2014-08-27
+    2014-09-07, iterative solution
+    
     May the force be with me!
     
     
