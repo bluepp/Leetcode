@@ -22,30 +22,25 @@
     Solution: Jump to the position where we can jump farthest (index + A[index]) next time.
  */
  
-    int jump(int a[], int n) {
-        int start = 0, far = 0;
+    int jump(int A[], int n) {
         int count = 0;
+        int start = 0;
         
         while (start < n-1)
         {
             count ++;
-            far = start+a[start];
-            if (far >= n-1)
-            {
-                return count;
-            }
+            int far = start + A[start];
+            if (far >= n-1) return count;
             
             int max = start;
-            
             for (int i = start+1; i <= far; i++)
             {
-                if(a[i] +i > a[max]+max)
-                {
-                    max = i;
-                }
+                if (A[i]+i > A[max]+max) max = i;
             }
             
             start = max;
         }
-    
+        
+        return count;
+        
     }
