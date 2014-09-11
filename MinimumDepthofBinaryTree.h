@@ -1,7 +1,10 @@
 /*
     bluepp
+    
     2014-06-16
     2014-07-16
+    2014-09-12
+    
     May the force be with me!
 
     Problem:    Minimum Depth of Binary Tree
@@ -60,4 +63,36 @@
         
         return depth;
        
+    }
+
+/* 2014-09-12, my version */
+    int minDepth(TreeNode *root) {
+        if (!root) return 0;
+        if (!root->left && !root->right) return 1;
+        
+        queue<TreeNode *> q;
+        q.push(root);
+        q.push(NULL);
+        int count = 0;
+        
+        while (!q.empty())
+        {
+            TreeNode *pCurr = q.front(); q.pop();
+            
+            if (pCurr)
+            {
+                if (!pCurr->left && !pCurr->right) break;
+                if (pCurr->left) q.push(pCurr->left);
+                if (pCurr->right) q.push(pCurr->right);
+            }
+            else
+            {
+                if (q.empty()) break;
+                q.push(NULL);
+                
+                count ++;
+            }
+        }
+        
+        return count+1;
     }
