@@ -1,7 +1,10 @@
 /*
     bluepp
+    
     2014-06-17
     2014-07-17
+    2014-09-13
+    
     May the force be with me!
     
     Problem:    Multiply Strings
