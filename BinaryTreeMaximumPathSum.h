@@ -1,8 +1,11 @@
 /*
     bluepp
+    
     2014-06-01
     2014-07-08
     2014-08-06
+    2014-09-14
+    
     May the force be with me!
     
     Problem:    Binary Tree Maximum Path Sum
@@ -20,6 +23,35 @@
     Solution: Recursion...
 */
 
+
+/* my version, 2014-09-14 */
+    int maxPathSum(TreeNode *root) {
+        int sum = INT_MIN;
+        int curr_sum = 0;
+        
+        _path(root, sum, curr_sum);
+        
+        return sum;
+    }
+    
+    void _path(TreeNode *root, int &sum, int &curr_sum)
+    {
+        if (!root)
+        {
+            curr_sum = 0;
+            return;
+        }
+        
+        int lsum = 0, rsum = 0;
+        _path(root->left, sum, lsum);
+        _path(root->right, sum, rsum);
+        
+        curr_sum = max(root->val, max(lsum, rsum)+root->val);
+        sum = max(sum, max(curr_sum, root->val+lsum+rsum));
+    }
+
+
+--------------------------------------------------------------
    int maxPathSum(TreeNode *root) {
         int maxsum = INT_MIN;
         
