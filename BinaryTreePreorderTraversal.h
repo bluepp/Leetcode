@@ -5,6 +5,7 @@
     2014-07-08
     2014-08-07
     2014-09-03
+    2014-09-15
     
     May the force be with me!
     
@@ -26,6 +27,35 @@
               2. Recursive solution.      Time: O(n), Space: O(n).
               3. Threaded tree (Morris).  Time: O(n), Space: O(1).
  */
+ 
+ 
+ 
+ /* 2014-09-15, my version */
+     vector<int> preorderTraversal(TreeNode *root) {
+        vector<int> vec;
+        stack<TreeNode *> s;
+        s.push(root);
+        
+        while (!s.empty())
+        {
+            TreeNode *pCurr = s.top(); s.pop();
+            
+            if (pCurr)
+            {
+                vec.push_back(pCurr->val);
+            
+                if (pCurr->right) s.push(pCurr->right);
+                if (pCurr->left) s.push(pCurr->left);
+            }
+        }
+        
+        return vec;
+       
+    }
+ 
+ 
+ 
+ 
  
  /* my version, 2014-09-03 */
      vector<int> preorderTraversal(TreeNode *root) {
