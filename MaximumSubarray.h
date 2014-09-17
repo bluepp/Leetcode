@@ -4,6 +4,7 @@
     2014-06-14
     2014-07-16
     2014-09-02
+    2014-09-18
     
     May the force be with me!
     
@@ -15,6 +16,8 @@
 
     Solution: dp.
  */
+ 
+ /* 2014-09-18 , my version */
  
    int maxSubArray(int a[], int n) {
         
