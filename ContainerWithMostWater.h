@@ -20,6 +20,30 @@
  	Solution: From both sides to the center.
 */
 
+/* 2014-09-19, http://haixiaoyang.wordpress.com/?s=water */
+
+    int maxArea(vector<int> &height) {
+        
+        int n = height.size();
+        int l = 0, r = n-1;
+        int ret = 0;
+        
+        while (l < r)
+        {
+            ret = max(ret, (r-l) * min(height[l], height[r]));
+            
+            if (height[l] < height[r]) l++;
+            else r--;
+        }
+        
+        return ret;
+
+    }
+
+
+
+
+
     int maxArea(vector<int> &height) {
          int n = height.size();
          
