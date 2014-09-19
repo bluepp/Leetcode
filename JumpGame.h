@@ -1,8 +1,11 @@
 /*
 	bluepp
+	
 	2014-06-10
 	2014-07-15
 	2014-08-14
+	2014-09-20
+	
 	May the force be with me!
 	
 	Author:     Annie Kim, anniekim.pku@gmail.com
@@ -16,6 +19,25 @@
  	A = [2,3,1,1,4], return true.
  	A = [3,2,1,0,4], return false.
  */
+ 
+ /* 2014-09-20, my version */
+     bool canJump(int A[], int n) {
+        int far = A[0];
+        int i = 1;
+        
+        while (i < n && i <= far)
+        {
+            int curr_far = A[i]+i;
+            if (curr_far >= n-1) return true;
+            
+            far = max(far, curr_far);
+            i++;
+        }
+        
+        return far >= n-1;
+    }
+ 
+ 
  
     bool canJump(int a[], int n) {
         int i = 0, far = 0;
