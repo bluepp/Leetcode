@@ -5,6 +5,7 @@
     2014-07-11
     2014-08-14
     2014-09-16
+    2014-09-21
     
     May the force be with me!
     
@@ -18,6 +19,29 @@
     Solution: Place n left '(' and n right ')'.
            Cannot place ')' if there are no enough matching '('.
  */
+ 
+ /* 2014-09-21, my version */
+     vector<string> generateParenthesis(int n) {
+        vector<string> res;
+        _gen(n, n, "", res);
+        
+        return res;
+    }
+    
+    void _gen(int l, int r, string s, vector<string> &res)
+    {
+        if (l == 0 && r == 0)
+        {
+            res.push_back(s);
+            return;
+        }
+        
+        if (l > 0) _gen(l-1, r, s+"(", res);
+        if (r > l) _gen(l, r-1, s+")", res);
+    }
+ 
+ 
+ 
  
     vector<string> res;
     vector<string> generateParenthesis(int n) {
