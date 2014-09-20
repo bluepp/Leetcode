@@ -1,9 +1,12 @@
 /*
  bluepp
+ 
  2014-05-28
  2014-07-05
  2014-08-03
  2014-08-29
+ 2014-09-20
+ 
  May the force be with me!
 
 
@@ -27,6 +30,60 @@
 
  Solution: Similar to 3Sum, 2Sum.
  */
+
+
+/* 2014-09-20, my version */
+
+    vector<vector<int> > fourSum(vector<int> &num, int target) {
+        vector<vector<int> > res;
+        int n = num.size();
+        if (n < 4) return res;
+        sort(num.begin(), num.end());
+    
+        
+        int l = 0, r = n-3;
+        
+        for (int i = 0; i < n-3; i++)
+        {
+            if (i > 0 && num[i] == num[i-1]) continue;
+            
+            for (int j = i+1; j < n-2; j++)
+            {
+                if (j > i+1 && num[j] == num[j-1]) continue;
+                
+                int l = j+1, r = n-1;
+                while (l < r)
+                {
+                    int tmp = num[i]+num[j]+num[l]+num[r];
+                    
+                    if (tmp == target)
+                    {
+                        vector<int> vec;
+                        vec.push_back(num[i]);
+                        vec.push_back(num[j]);
+                        vec.push_back(num[l]);
+                        vec.push_back(num[r]);
+                        
+                        res.push_back(vec);
+                        
+                        while (num[l] == num[l+1]) l++;
+                        while (num[r] == num[r-1]) r--;
+                        
+                        l++;
+                        r--;
+                        
+                    }
+                    else if (tmp < target) l++;
+                    else r--;
+                }
+            }
+        }
+        
+        return res;
+    }
+
+
+
 
     vector<vector<int> > fourSum(vector<int> &num, int target) {
         vector<vector<int> > res;
