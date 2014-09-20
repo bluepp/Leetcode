@@ -1,8 +1,11 @@
 /*
     bluepp
+    
     2014-06-3
     2014-07-08
     2014-08-07
+    2014-09-21
+    
     May the force be with me!
     
     Problem:    Binary Tree Zigzag Level Order Traversal
@@ -29,6 +32,49 @@
               3. Vector. Contributed by yinlinglin.
               
 */
+
+/* 2014-09-21, my version */
+    vector<vector<int> > zigzagLevelOrder(TreeNode *root) {
+        vector<vector<int> > res;
+        vector<int> vec;
+        
+        if (!root) return res;
+        queue<TreeNode *> q;
+        q.push(root);
+        q.push(NULL);
+        
+        bool left2right = true;
+        
+        while (!q.empty())
+        {
+            TreeNode *pCurr = q.front(); q.pop();
+            
+            if (pCurr)
+            {
+                vec.push_back(pCurr->val);
+                
+                if (pCurr->left) q.push(pCurr->left);
+                if (pCurr->right) q.push(pCurr->right);
+                
+            }
+            else
+            {
+                if (!left2right) reverse(vec.begin(), vec.end());
+                res.push_back(vec);
+                vec.clear();
+                
+                if (q.empty()) break;
+                q.push(NULL);
+                
+                left2right = !left2right;
+            }
+        }
+        
+        return res;
+    }
+
+
+
 
 /* My version, first solution *./
     vector<vector<int> > zigzagLevelOrder(TreeNode *root) {
