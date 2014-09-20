@@ -1,9 +1,12 @@
 /*
     bluepp
+    
     2014-06-01
     2014-07-07
     2014-08-06
     2014-08-26
+    2014-09-20
+    
     May the force be with me!
     
      
@@ -32,6 +35,44 @@
               2. DFS.
               
 */
+
+
+/* 2014-09-20, my version */
+    vector<vector<int> > levelOrder(TreeNode *root) {
+        
+        vector<int> vec;
+        vector<vector<int> > res;
+        if (!root) return res;
+        
+        queue<TreeNode *> q;
+        q.push(root);
+        q.push(NULL);
+        
+        while (!q.empty())
+        {
+            TreeNode *pCurr = q.front();
+            q.pop();
+            
+            if (pCurr)
+            {
+                vec.push_back(pCurr->val);
+                
+                if (pCurr->left) q.push(pCurr->left);
+                if (pCurr->right) q.push(pCurr->right);
+            }
+            else
+            {
+                res.push_back(vec);
+                vec.clear();
+                
+                if (q.empty()) break;
+                q.push(NULL);
+            }
+        }
+        
+        return res;
+    }
+
 
 /* my version */
     vector<vector<int> > levelOrder(TreeNode *root) {
