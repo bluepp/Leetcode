@@ -39,9 +39,6 @@
         int n = num.size();
         if (n < 4) return res;
         sort(num.begin(), num.end());
-    
-        
-        int l = 0, r = n-3;
         
         for (int i = 0; i < n-3; i++)
         {
@@ -52,6 +49,7 @@
                 if (j > i+1 && num[j] == num[j-1]) continue;
                 
                 int l = j+1, r = n-1;
+                
                 while (l < r)
                 {
                     int tmp = num[i]+num[j]+num[l]+num[r];
@@ -59,6 +57,7 @@
                     if (tmp == target)
                     {
                         vector<int> vec;
+                        
                         vec.push_back(num[i]);
                         vec.push_back(num[j]);
                         vec.push_back(num[l]);
@@ -71,10 +70,15 @@
                         
                         l++;
                         r--;
-                        
                     }
-                    else if (tmp < target) l++;
-                    else r--;
+                    else if (tmp < target)
+                    {
+                        l ++;
+                    }
+                    else
+                    {
+                        r--;
+                    }
                 }
             }
         }
