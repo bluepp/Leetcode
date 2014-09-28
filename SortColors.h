@@ -5,6 +5,7 @@
     2014-07-26
     2014-08-20
     2014-09-16
+    2014-09-29
     
     May the for be with me!
     
@@ -34,22 +35,20 @@
  
     void sortColors(int A[], int n) {
         int p = -1, q = n;
-        int i = 0;
         
-        for (int i = 0; i < q; )
+        for (int i = 0; i < q;)
         {
             switch(A[i])
             {
-            case 0:
-                swap(A[i], A[++p]);
-                i++;
-                break;
-            case 1:
-                i++;
-                break;
-            case 2:
-                swap(A[i], A[--q]);
-                break;
+                case 0:
+                    swap(A[i++], A[++p]);
+                    break;
+                case 1:
+                    i++;
+                    break;
+                case 2:
+                    swap(A[i], A[--q]);
+                    break;
             }
         }
     }
