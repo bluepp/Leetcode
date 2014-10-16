@@ -5,6 +5,7 @@
     2014-07-16
     2014-09-14
     2014-09-23
+    2014-10-16
     
     May the force be with me!
     
@@ -62,4 +63,30 @@ public:
         res.push_back(tmp);
         return res;
         
+    }
+    
+    
+    -----------------------
+        vector<Interval> merge(vector<Interval> &intervals) {
+        int n = intervals.size();
+        vector<Interval> res;
+        int i = 0;
+        
+        while (i < n)
+        {
+            Interval tmp = intervals[i];
+            
+            
+            while ((!((tmp.end < intervals[i].start) || (tmp.start > intervals[i].end))) && (i < n))
+            {
+                tmp.start = min(tmp.start, intervals[i].start);
+                tmp.end = max(tmp.end, intervals[i].end);
+                i++;
+            }
+            
+            res.push_back(tmp);
+          
+        }
+        
+        return res;
     }
