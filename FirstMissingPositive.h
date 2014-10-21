@@ -1,8 +1,11 @@
 /*
     bluepp
+    
     2014-06-08
     2014-07-10
     2014-08-13
+    2014-10-22
+    
     May the force be with you!
     
     Problem:    First Missing Positive
@@ -39,8 +42,8 @@
             j++;
 	
 	    //fisrt element maybe n, if so, the largest missed positive number should be n+1
-	    if (A[0] == j)
-	        ++j;
+	if (A[0] == j)
+	   ++j;
 
         return j;
 
