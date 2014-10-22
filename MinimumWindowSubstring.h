@@ -29,42 +29,46 @@
  */
  
     string minWindow(string S, string T) {
-        int n = S.size(), m = T.size();
-        if (n < m)
-            return "";
-        int need[256] = {0};
-        int find[256] = {0};
-        for (int i = 0; i < m; i++)
-            need[T[i]] ++;
-        int count = 0, resStart = -1, resEnd = n;
+        int n1 = S.size(), n2 = T.size();
+        if (n1 < n2) return "";
         
-        for (int start = 0, end = 0; end < n; end ++)
+        int need[256], find[256];
+        memset(need, 0, sizeof(need));
+        memset(find, 0, sizeof(find));
+        
+        for (int i = 0; i < n2; i++)
         {
-            if (need[S[end]] == 0)
-                continue;
-            if (find[S[end]] < need[S[end]])
-                count ++;
-            find[S[end]]++;
-            if (count != m)
-                continue;
+            need[T[i]]++;
+        }
+       
+        int resstart = -1, resend = n1;
+        int maxlen = 0;
+        int count = 0;
+        
+        for (int start = 0, end = 0; end < n1; end++)
+        {
+            if (need[S[end]] == 0) continue;
             
-            for(; start < end; start ++)
+            if (find[S[end]] < need[S[end]]) count++;
+            find[S[end]]++;
+            
+            if (count != n2) continue;
+            
+            for (; start < end; start++)
             {
-                if (need[S[start]] == 0)
-                    continue;
-                if (find[S[start]] <= need[S[start]])
-                    break;
-                find[S[start]]--;    
+                if (need[S[start]] == 0) continue;
+                if (find[S[start]] <= need[S[start]]) break;
+                find[S[start]]--;
             }
             
-            if (end - start < resEnd - resStart)
+            if (end-start < resend-resstart)
             {
-                resStart = start;
-                resEnd = end;
+                resstart = start;
+                resend = end;
             }
             
         }
         
-        return resStart == -1 ? "":S.substr(resStart, resEnd-resStart+1);
-        
+        return resstart == -1 ? "" : S.substr(resstart, resend-resstart+1);
+       
     }
