@@ -5,6 +5,7 @@
     2014-07-20
     2014-09-02
     2014-09-19
+    2014-10-24
     
     May the force be with me!
   
@@ -34,6 +35,41 @@
            3. tail recursive solution.
  */
  
+
+/* my version */
+    void connect(TreeLinkNode *root) {
+        
+        TreeLinkNode *pCurr = root;
+        
+        while (pCurr)
+        {
+            TreeLinkNode *pNode = pCurr;
+            TreeLinkNode *pNext = NULL, *pLast = NULL;
+            
+            while (pNode)
+            {
+               TreeLinkNode *pLeft = pNode->left, *pRight = pNode->right;
+               
+               if (pLeft || pRight)
+               {
+                   if (pLast) pLast->next = pLeft ? pLeft : pRight;
+                   if (pLeft) pLeft->next = pRight;
+                   if (!pNext) pNext = pLeft ? pLeft : pRight;
+                   pLast = pRight ? pRight : pLeft;
+               }
+               
+               pNode = pNode->next;
+            }
+            
+            pCurr = pNext;
+        }
+    }
+
+
+
+
+
+
  
     void connect(TreeLinkNode *root) {
         TreeLinkNode *pCurr = root;
