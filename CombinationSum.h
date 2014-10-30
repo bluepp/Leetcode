@@ -1,8 +1,11 @@
 /*
 	bluepp
+	
 	2014-06-05
 	2014-07-08
 	2014-08-10
+	2014-10-30
+	
 	May the force be with me!
 	
 	Problem:    Combination Sum
