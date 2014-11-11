@@ -5,6 +5,7 @@
     2014-08-01
     2014-08-18
     2014-08-29
+    2014-11-12
     
     May the force be with me!
     
@@ -75,3 +76,27 @@
         return true;
     }
     
+    /* 2014-11-12 */
+        bool isSymmetric(TreeNode *root) {
+        if (!root) return true;
+        stack<TreeNode *> s;
+        s.push(root->left);
+        s.push(root->right);
+        
+        while (!s.empty())
+        {
+            TreeNode *p1 = s.top(); s.pop();
+            TreeNode *p2 = s.top(); s.pop();
+            
+            if (!p1 && !p2) continue;
+            if (!p1 || !p2) return false;
+            if (p1->val != p2->val) return false;
+            
+            s.push(p1->left);
+            s.push(p2->right);
+            s.push(p1->right);
+            s.push(p2->left);
+        }
+        
+        return true;
+    }
