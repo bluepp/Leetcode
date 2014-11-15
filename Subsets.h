@@ -1,8 +1,11 @@
 /*
     bluepp
+    
     2014-06-26
     2014-07-27
     2014-08-19
+    2014-11-16
+    
     May the force be with me!
     
    
@@ -29,6 +32,42 @@
  Solution: 1. Recursive solution.
            2. Iterative solution. 
  */
+
+/* 2014-11-16 , my version */
+    vector<vector<int> > subsets(vector<int> &s) {
+
+        vector<vector<int> > res(1, vector<int>());
+        vector<int> vec;
+        sort(s.begin(), s.end());
+        
+        for (int i = 1; i <= s.size(); i++)
+        {
+            _subset(s, 0, i, vec, res);
+        }
+        
+        return res;
+        
+        
+    }
+    
+
+    void _subset(vector<int> &s, int start, int length, vector<int> &vec, vector<vector<int>> &res)
+    {
+        int n = s.size(), m = vec.size();
+        if (length == m)
+        {
+            res.push_back(vec);
+            return;
+        }
+        
+        for (int i = start; i < n; i++)
+        {
+            vec.push_back(s[i]);
+            _subset(s, i+1, length, vec, res);
+            vec.pop_back();
+        }
+        
+    }    
 
 
 /* recursion solution , DFS*/
