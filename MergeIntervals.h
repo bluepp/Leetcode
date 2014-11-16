@@ -6,6 +6,7 @@
     2014-09-14
     2014-09-23
     2014-10-16
+    2014-11-16
     
     May the force be with me!
     
@@ -20,6 +21,52 @@
     Solution: 1. Sort in ascending order of 'start'.
               2. Traverse the 'intervals', merge or push...
 */
+
+/* 2014-11-16 , my version */
+bool mycompare(Interval a, Interval b)
+ {
+     return a.start < b.start;
+ }
+ 
+
+class Solution {
+public:
+    vector<Interval> merge(vector<Interval> &intervals) {
+        
+        vector<Interval> res;
+        int n = intervals.size();
+        if (n == 0 || n == 1) return intervals;
+        
+        sort(intervals.begin(), intervals.end(), mycompare);
+        
+        Interval tmp = intervals[0];
+        
+        for (int i = 1; i < n; i++)
+        {
+            if (tmp.end < intervals[i].start)
+            {
+                res.push_back(tmp);
+                tmp = intervals[i];
+            }
+            else
+            {
+                tmp.start = min(tmp.start, intervals[i].start);
+                tmp.end = max(tmp.end, intervals[i].end);
+            }
+        }
+        
+        res.push_back(tmp);
+        
+        return res;
+    }
+};
+
+
+
+--------------------------------------------------------
+
+
+
 
 
  bool mycompare(Interval a, Interval b)
