@@ -23,6 +23,26 @@
  */
  
  
+/* 2014-11-20, update, long-> int */ 
+     int sqrt(int x) {
+        int nBeg = 0;
+        int nEnd = x;
+        
+        while (nBeg <= nEnd)
+        {
+            unsigned long long nMid = nBeg + (nEnd-nBeg)/2;
+            if (nMid*nMid == x || (nMid*nMid < x && (nMid+1)*(nMid+1) > x))
+                return nMid;
+            else if (nMid*nMid < x)
+                nBeg = nMid + 1;
+            else nEnd = nMid-1;
+        }
+         
+        return nBeg + (nEnd - nBeg)/2;
+    }
+ 
+ 
+ 
 http://haixiaoyang.wordpress.com/?s=sqrt 
  
     int sqrt(int x) {
