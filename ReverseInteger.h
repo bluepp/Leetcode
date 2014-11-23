@@ -4,6 +4,7 @@
     2014-06-21
     2014-07-23
     2014-09-02
+    2014-11-23
     
     May the force be with me!
     
@@ -23,6 +24,27 @@
 
  Solution: Use % and / iteratively.
  */
+ 
+ /*
+    2014-11-23
+    To check for overflow/underflow, we could check if ret > 214748364 or ret < –214748364 before multiplying by 10. 
+    On the other hand, we do not need to check if ret == 214748364, why?
+ */
+ 
+ public int reverse(int x) {
+   int ret = 0;
+   while (x != 0) {
+      // handle overflow/underflow
+      if (Math.abs(ret) > 214748364) {
+         return 0;
+      }
+      ret = ret * 10 + x % 10;
+      x /= 10;
+   }
+   return ret;
+}
+ 
+ 
  
  
     int reverse(int x) {
