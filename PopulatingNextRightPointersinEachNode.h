@@ -52,6 +52,58 @@
         connect(root->left);
         connect(root->right);
     }
+
+
+/* 2014-11-24, iterative */
+    void connect(TreeLinkNode *root) {
+        
+        TreeLinkNode *pCurr = root;
+        
+        while(pCurr)
+        {
+            TreeLinkNode *pNode = pCurr;
+            
+            while (pNode)
+            {
+                if (pNode->left) pNode->left->next = pNode->right;
+                if (pNode->right) pNode->right->next = pNode->next ? pNode->next->left : NULL;
+                
+                pNode = pNode->next;
+            }
+            
+            pCurr = pCurr->left;
+        }
+        
+    }    
+    
+ /* 2014-11-24, queue */
+     void connect(TreeLinkNode *root) {
+        
+        if (!root) return;
+        
+        queue<TreeLinkNode *> q;
+        q.push(root);
+        
+        while (!q.empty())
+        {
+            TreeLinkNode *pCurr = q.front();
+            q.pop();
+            
+            if (pCurr->left) 
+            {
+                pCurr->left->next = pCurr->right;
+                q.push(pCurr->left);
+            }
+            if (pCurr->right)
+            {
+                pCurr->right->next = pCurr->next ? pCurr->next->left : NULL;
+                q.push(pCurr->right);
+            }
+        }
+      
+    }
+
+    
     
     
 /* while , iterative version， my soluition */
@@ -81,6 +133,11 @@
       }
        
     }
+ 
+ 
+ 
+
+ 
  
  
  
