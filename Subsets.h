@@ -34,6 +34,44 @@
            2. Iterative solution. 
  */
 
+
+/* 2014-11-23, my version */
+
+    vector<vector<int> > subsets(vector<int> &s) {
+        vector<int> vec;
+        vector<vector<int> > res;
+        
+        int n = s.size();
+        sort(s.begin(), s.end());
+        
+        for (int i = 0; i <= n; i++)
+        {
+            _sub(s, 0, i, vec, res);
+        }
+        
+        return res;
+    }
+    
+    
+    void _sub(vector<int> &s, int start, int len, vector<int>& vec, vector<vector<int> >&res)
+    {
+        if (vec.size() == len)
+        {
+            res.push_back(vec);
+            return;
+        }
+        
+        for (int i = start; i < s.size(); i++)
+        {
+            vec.push_back(s[i]);
+            _sub(s, i+1, len, vec, res);
+            vec.pop_back();
+        }
+    }
+ 
+ 
+ 
+
 /* 2014-11-16 , my version */
     vector<vector<int> > subsets(vector<int> &s) {
 
