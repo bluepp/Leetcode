@@ -2,6 +2,7 @@
  bluepp
 
  2014-11-22
+ 2014-11-27
  
  Problem:    Maximum Product Subarray
  Difficulty: Medium
