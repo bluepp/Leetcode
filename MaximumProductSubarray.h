@@ -3,6 +3,7 @@
 
  2014-11-22
  2014-11-27
+ 2014-12-01
  
  Problem:    Maximum Product Subarray
  Difficulty: Medium
