@@ -2,6 +2,7 @@
  bluepp
  
  2014-11-22
+ 2014-12-02
  
  Problem:    Min Stack 
  Difficulty: Easy
