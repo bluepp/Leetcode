@@ -19,7 +19,7 @@
  	Solution: ...
  */
  
- 	vector<string> letterCombinations(string digits) {
+ vector<string> letterCombinations(string digits) {
         string mapping[] = {"abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
         
         string s;
