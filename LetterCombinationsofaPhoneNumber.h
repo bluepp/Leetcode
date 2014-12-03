@@ -1,7 +1,10 @@
 /*
 	bluepp
+	
 	2014-06-11
-	May the force be with you!
+	2014-12-03
+	
+	May the force be with ME!
 	
  	Problem:    Letter Combinations of a Phone Number
   	Source:     https://oj.leetcode.com/problems/letter-combinations-of-a-phone-number/
@@ -21,7 +24,7 @@
         
         string s;
         vector<string> res;
-        int n = digits.size();
+       
         _comb(digits, mapping, s, res);
         return res;
     }
