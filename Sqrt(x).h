@@ -38,7 +38,7 @@
             else nEnd = nMid-1;
         }
          
-        return nBeg + (nEnd - nBeg)/2;
+        return nBeg + (nEnd - nBeg)/2; /* 2014-12-05, return 0 ?*/
     }
  
  
