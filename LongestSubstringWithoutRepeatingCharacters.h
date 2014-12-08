@@ -7,6 +7,7 @@
     2014-09-23
     2014-10-21
     2014-11-23
+    2014-12-08
     
     May the force be with me!
     
@@ -19,6 +20,39 @@
 
     Solution: Pay attention when moving the 'start' pointer forward.
  */
+ 
+ /* 2014-12-08, my version */
+ 
+     int lengthOfLongestSubstring(string s) {
+        int n = s.size();
+        int dp[256];
+        memset(dp, 0, sizeof(dp));
+        int ret = 0;
+        
+        for (int start = 0, end = 0; end < n; end ++)
+        {
+            if (dp[s[end]] == 0) 
+            {
+                dp[s[end]]++;
+                ret = max(ret, end-start+1);
+            }
+            else
+            {
+                
+                for (; s[start] != s[end]; start++)
+                {
+                    dp[s[start]] = 0;
+                }
+                
+                start++;
+            }
+        }
+        
+        return ret;
+    }
+ 
+ 
+ 
  
  
     int lengthOfLongestSubstring(string s) {
