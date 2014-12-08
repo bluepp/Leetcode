@@ -28,6 +28,52 @@
  Solution: DFS. (For 'visited', using two-dimensional array will be faster than vector<vector>.[90+ms->50+ms])
  */
  
+ /* 2014-12-08 */
+ 
+     bool exist(vector<vector<char> > &board, string word) {
+        
+        if (board.empty() || board[0].empty()) return false;
+        int m = board.size(), n = board[0].size();
+        
+        vector<vector<char > > avail(m, vector<char>(n, '0'));
+        string s;
+        bool existt = false;
+        for (int i = 0; i < m; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                if (_exist(board, word, 0, i, j, avail)) return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    bool _exist(vector<vector<char> >&board, string word, int len, int row, int col, vector<vector<char> >&avail)
+    {
+        int m = board.size(), n = board[0].size();
+        if (len == word.size()) return true;
+        
+        if (row < 0 || row >= m || col < 0 || col >= n) return false;
+        if (board[row][col] != word[len] || avail[row][col] == 'x') return false;
+        
+        avail[row][col] = 'x';
+        if (_exist(board, word, len+1, row+1, col, avail)) return true;
+        if (_exist(board, word, len+1, row-1, col, avail)) return true;
+        if (_exist(board, word, len+1, row, col+1, avail)) return true;
+        if (_exist(board, word, len+1, row, col-1, avail)) return true;
+        avail[row][col] = '0';
+        
+        return false;
+        
+    }
+    
+/* ------------------------------------------------------    */
+ 
+ 
+ 
+ 
+ 
  typedef vector<vector<char> > VECTOR2D;
     
     bool exist(VECTOR2D &board, string word) {
