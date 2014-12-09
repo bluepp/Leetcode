@@ -5,6 +5,7 @@
     2014-07-26
     2014-08-20
     2014-12-04
+    2014-12-09
     
     May the force be with me!
     
@@ -27,6 +28,49 @@
 
  Solution: Add an additional '/' at the end of 'path' for simply detecting the end.
  */
+ 
+ 
+ /* 2014-12-09 */
+ /*http://bangbingsyb.blogspot.com/search?q=simplify+path */
+     string simplifyPath(string path) {
+                string ret, curDir;
+        vector<string> allDir;
+        
+        path.push_back('/');
+        for(int i=0; i<path.size(); i++) {
+            if(path[i]=='/') {
+                if(curDir.empty()) {
+                    continue;
+                }
+                else if(curDir==".") {
+                    curDir.clear();
+                }
+                else if(curDir=="..") {
+                    if(!allDir.empty())
+                        allDir.pop_back();
+                    curDir.clear();
+                }
+                else {
+                    allDir.push_back(curDir);
+                    curDir.clear();
+                }
+            }
+            else {
+                curDir.push_back(path[i]);
+            }
+        }
+        
+        
+        for(int i=0; i<allDir.size(); i++) 
+            ret.append("/"+allDir[i]);
+        if(ret.empty()) ret = "/";
+        return ret;
+       
+    }
+ 
+ 
+ 
+ 
  
     string simplifyPath(string path) {
         string res;
