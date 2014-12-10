@@ -5,6 +5,7 @@
     2014-07-08
     2014-08-07
     2014-09-06
+    2014-12-10
     
     May the force be with me!
     
@@ -23,33 +24,37 @@
 */
 
 /* O(N) space */
-    int candy(vector<int> &ratings) {
-       
-        int n = ratings.size();
-        if (n == 0)
-            return 0;
-        int candy[n];
+   int candy(vector<int> &ratings) {
         
+        int ret = 0;
+        int n = ratings.size();
+        
+        int candy[n];
         for (int i = 0; i < n; i++)
+        {
             candy[i] = 1;
-            
+        }
+        
         for (int i = 1; i < n; i++)
         {
             if (ratings[i] > ratings[i-1])
-                candy[i] = candy[i-1] + 1;
+                candy[i] = candy[i-1]+1;
         }
         
         for (int i = n-2; i >= 0; i--)
         {
             if (ratings[i] > ratings[i+1] && candy[i] <= candy[i+1])
-                candy[i] = candy[i+1] + 1;
+            {
+                candy[i] = candy[i+1]+1;
+            }
         }
         
-        int res = 0;
-        for (int i = 0; i < n; ++i)
-            res += candy[i];
-            
-        return res;
+        for (int i = 0; i < n; i++)
+        {
+            ret += candy[i];
+        }
+        
+        return ret;
     }
            
            
