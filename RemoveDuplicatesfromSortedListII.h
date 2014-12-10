@@ -4,6 +4,7 @@
     2014-06-21
     2014-07-22
     2014-12-03
+    2014-12-10
     
     May the force be with me!
     
@@ -18,42 +19,41 @@
  Solution: 1. iterative 2. recursive
  */
 
+/* 2014-12-10 */
     ListNode *deleteDuplicates(ListNode *head) {
-        if (!head || !head->next)
-            return head;
-        
-        ListNode dummy(0);
+        ListNode dummy(0), *prev = &dummy;
         dummy.next = head;
-        ListNode *prev = &dummy, *pCurr = prev->next;
+        
+        ListNode *pCurr = head;
         
         while (pCurr)
         {
-            bool del = false;
-            while (pCurr && pCurr->next && pCurr->val == pCurr->next->val)
+            ListNode *pNext = pCurr->next;
+            
+            bool bDel = false;
+            while (pNext && pNext->val == pCurr->val)
             {
-                del = true;
-                ListNode *pDel = pCurr;
-                pCurr = pCurr->next;
-                delete(pDel);
+                bDel = true;
+                
+                ListNode *pDelete = pNext;
+                pNext = pNext->next;
+                delete(pDelete);
             }
             
-            if (del)
+            if (bDel)
             {
-                ListNode *pDel = pCurr;
-                prev->next = pCurr->next;
-                delete(pDel);
+                delete(pCurr);
+                prev->next = pNext;
             }
             else
             {
                 prev = pCurr;
             }
             
-            pCurr = pCurr->next;
-            
+            pCurr = pNext;
         }
         
         return dummy.next;
-        
     }
     
 --------------------------------
