@@ -31,7 +31,7 @@
         int res = 0;
         for(int i = 0; i < n && !s.empty(); i++)
         {
-            if (s.find(num[i]) == s.end()) continue;
+//            if (s.find(num[i]) == s.end()) continue;  2014-12-10
             
             int upper = num[i], lower = num[i];
             
