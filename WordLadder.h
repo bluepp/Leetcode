@@ -32,6 +32,12 @@
 */
 
 
+/*http://www.danielbit.com/blog/puzzle/leetcode/leetcode-word-ladder*/
+/* not delete dict */
+
+
+
+
     int ladderLength(string start, string end, unordered_set<string> &dict) {
         queue<pair<string, int> > q;
         q.push(make_pair(start, 1));
@@ -63,3 +69,5 @@
         return 0;
         
     }
+    
+    
