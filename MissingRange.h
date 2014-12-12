@@ -12,6 +12,7 @@
 */  
 
 /* http://www.danielbit.com/blog/puzzle/leetcode/leetcode-missing-ranges */
+/*https://changhaz.wordpress.com/ */
 /* wrong, need to fix */
     vector<string> findMissingRanges(int A[], int n, int lower, int upper) {
         vector<string> res;
@@ -22,12 +23,18 @@
             return res;
         }
         
-        int start = INT_MAX, end = INT_MIN;
+        int start = lower, end = upper;
         for (int i = 0; i < n; i++)
         {
+            if (i == n-1)
+            {
+                start = A[i]+1;
+            }
+            
+            
             end = A[i]-1;
             
-            if (end > upper || start > upper || end < lower || start < lower) break;
+            if (end > upper || start > upper || end < lower || start < lower) continue;
             if (start > end) continue;
             
             string str = getrange(start, end);
@@ -41,19 +48,16 @@
     
     string getrange(int start, int end)
     {
-        string str;
+        string str = "";
         if (start == end)
         {
-            str.push_back(start+'0');
+            str += to_string(start);
         }
         else
         {
-            //str.push_back(start+'0');
-            //str.push_back('-');
-            //str.push_back('>');
-            //str.push_back(end+'0');
-            char t = 'a';
-            str = '3';
+           str += to_string(start);
+           str += "->";
+           str += to_string(end);
         }
         
         return str;
