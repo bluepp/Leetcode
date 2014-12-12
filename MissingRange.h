@@ -15,36 +15,45 @@
 /* wrong, need to fix */
     vector<string> findMissingRanges(int A[], int n, int lower, int upper) {
         vector<string> res;
-        
-        int prev = lower-1;
-        for (int i = 0; i <= n; i++)
+        if (n == 0)
         {
-            int curr = (i == n) ? upper+1 : A[i];
+            string str = getrange(lower, upper);
+            res.push_back(str);
+            return res;
+        }
+        
+        int start = INT_MAX, end = INT_MIN;
+        for (int i = 0; i < n; i++)
+        {
+            end = A[i]-1;
             
-            if (curr-prev >= 2)
-            {
-                string str = _getrange(prev+1,curr-1);
-                res.push_back(str);
-            }
+            if (end > upper || start > upper || end < lower || start < lower) break;
+            if (start > end) continue;
             
-            prev = curr;
+            string str = getrange(start, end);
+            res.push_back(str);
+            
+            start = A[i]+1;
         }
         
         return res;
     }
     
-    string _getrange(int from, int to)
+    string getrange(int start, int end)
     {
         string str;
-        if (from == to)
+        if (start == end)
         {
-            str.push_back(from);
+            str.push_back(start+'0');
         }
         else
         {
-            str.push_back(from);
-            str += "->";
-            str.push_back(to);
+            //str.push_back(start+'0');
+            //str.push_back('-');
+            //str.push_back('>');
+            //str.push_back(end+'0');
+            char t = 'a';
+            str = '3';
         }
         
         return str;
