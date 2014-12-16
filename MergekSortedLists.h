@@ -19,7 +19,11 @@
                complexity: O(NlgK)
  */
  
+/* recursion */
 
+ 
+ 
+/* traditional ways */
 class Mycompare {
 public:
     bool operator()(ListNode *a, ListNode *b) {
