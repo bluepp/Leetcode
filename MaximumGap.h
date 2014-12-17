@@ -59,3 +59,38 @@ public:
         return ret;
     }
 };
+
+/*---------------------------------- */
+/* need to take care minval, maxvel on the edge on range set. so ... , ? */
+
+    int maximumGap(vector<int> &num) {
+
+        int n = num.size();
+        if (n < 2) return 0;
+        int minVal = num[0], maxVal = num[0];
+        for (int i = 1; i < n; ++i) {
+            minVal = min(minVal, num[i]);
+            maxVal = max(maxVal, num[i]);
+        }
+        //delta = (maxVal + 1 - minVal) / (n + 1)
+        //idx = (val - minVal) / delta = (val - minVal) * (n + 1) / (maxVal + 1 - minVal)
+        vector<pair<int,int> > pool(n+2,make_pair(-1,-1));
+        for (int i = 0; i < n; ++i) {
+            int idx = (long long)(num[i] - minVal)* (n + 1) / (maxVal + 1 - minVal);
+            if (pool[idx].first == -1) {
+                pool[idx] = make_pair(num[i],num[i]);
+            } else {
+                pool[idx].first = min(pool[idx].first, num[i]);
+                pool[idx].second = max(pool[idx].second, num[i]);
+            }
+        }
+        int last = pool[0].second;
+        int res = 0;
+        for (int i = 1; i < n + 2; ++i) {
+            if (pool[i].first != -1) {
+                res = max(res, pool[i].first - last);
+                last = pool[i].second;
+            }
+        }
+        return res;
+    }
