@@ -58,3 +58,50 @@ public:
         return dummy.next;
     }
 };
+
+
+
+/* recursion, TLE, 2014-12-17 */
+    ListNode *mergeKLists(vector<ListNode *> &lists) {
+        int n = lists.size();
+        
+        vector<ListNode *>::iterator it = lists.begin();
+        return merge(it, n);
+    }
+    
+    ListNode *merge(vector<ListNode *>::iterator it, int n)
+    {
+        if (n == 0) return NULL;
+        if (n == 1) return *it;
+        if (n == 2) return merge2(*it, *(it+1));
+        
+        merge(it, n/2);
+        merge(it, n-n/2);
+    }
+    
+   
+    ListNode *merge2(ListNode *p1, ListNode *p2)
+    {
+        ListNode dummy(0), *prev = &dummy;
+        
+        while (p1 && p2)
+        {
+            if (p1->val < p2->val)
+            {
+                prev->next = p1;
+                prev = p1;
+                p1 = p1->next;
+            }
+            else
+            {
+                prev->next = p2;
+                prev = p2;
+                p2 = p2->next;
+            }
+        }
+        
+        if (p1) prev->next = p1;
+        if (p2) prev->next = p2;
+        
+        return dummy.next;
+    }
