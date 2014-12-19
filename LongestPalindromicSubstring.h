@@ -28,7 +28,7 @@
             {
                 bool isP = true;
                 
-                for (int k = 0; i-k > 0 && i+k < n && isP; k++)
+                for (int k = 0; i-k > 0 && i+j+k < n && isP; k++)
                 {
                     isP = s[i-k] == s[i+j+k];
                     
