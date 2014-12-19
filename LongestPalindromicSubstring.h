@@ -21,17 +21,17 @@
  
  
  /* solutioin 3 */
-     string longestPalindrome(string s) {
+    string longestPalindrome(string s) {
         int n = s.size();
-        pair<int, int> res = make_pair(0, 0);
+        pair<int, int> res(make_pair(0, 0));
         
         for (int i = 0; i < n; i++)
         {
             for (int j = 0; j <= 1; j++)
             {
                 bool isP = true;
-                
-                for (int k = 0; i-k > 0 && i+j+k < n && isP; k++)
+
+                for (int k = 0; i-k >= 0 && i+j+k < n && isP; k++)
                 {
                     isP = s[i-k] == s[i+j+k];
                     
@@ -42,5 +42,4 @@
         }
         
         return s.substr(res.first, res.second);
-        
     }
