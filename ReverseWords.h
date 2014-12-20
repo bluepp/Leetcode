@@ -1,6 +1,7 @@
 /*
-  2014-10-28
   bluepp
+  2014-10-28
+  2014-12-21
   May the force be with me!
   
   Reverse Words in a String
@@ -10,6 +11,30 @@
   Given s = "the sky is blue",
   return "blue is sky the".
 */
+
+    void reverseWords(string &s) {
+    
+        string rs;  
+    
+        for (int i = s.length()-1; i >= 0; )  
+        {  
+            while (i >= 0 && s[i] == ' ') i--;  
+            if (i < 0) break;  
+    
+            if (!rs.empty()) rs.push_back(' ');  
+    
+            string t;  
+    
+            while (i >= 0 && s[i] != ' ') t.push_back(s[i--]);  
+    
+            reverse(t.begin(), t.end());  
+            rs.append(t);  
+        }  
+    
+        s = rs;  
+    }
+
+
 
 void reverseWords(string &s) {
         string word; //tmp string to store each word
