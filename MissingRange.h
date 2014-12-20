@@ -2,6 +2,7 @@
   bluepp
   
   2014-12-12
+  2014-12-20
   
   May the force be with me!
   
@@ -10,6 +11,43 @@
 
   For example, given [0, 1, 3, 50, 75], lower = 0 and upper = 99, return ["2", "4->49", "51->74", "76->99"].
 */  
+
+
+/* 2014-12-20 */
+    vector<string> findMissingRanges(int A[], int n, int lower, int upper) {
+        
+        vector<string> res;
+        
+        int last = lower-1;
+        for (int i = 0; i < n; i++)
+        {
+            _addrange(last+1, A[i]-1, res);
+            last = A[i];
+        }
+        
+        _addrange(last+1, upper, res);
+        
+        return res;
+    }
+    
+    void _addrange(int l, int r, vector<string> &res)
+    {
+        string buf = "";
+        
+        if (r < l) return;
+        else if (r == l) buf += to_string(l);
+        else 
+        {
+            buf += to_string(l);
+            buf += "->";
+            buf += to_string(r);
+        }
+        
+        res.push_back(buf);
+    }
+
+
+
 
 /* http://www.danielbit.com/blog/puzzle/leetcode/leetcode-missing-ranges */
 /*https://changhaz.wordpress.com/ */
