@@ -12,6 +12,31 @@ T is "ece" which its length is 3.
 
 */
 
+/* http://www.danielbit.com/blog/puzzle/leetcode/leetcode-longest-substring-with-at-most-two-distinct-characters */
+    int lengthOfLongestSubstringTwoDistinct(string s) {
+        
+        int n = s.size();
+        if (n < 2) return n;
+        
+        int i = 0, j = -1;
+        int maxlen = 1;
+        for (int k = 1; k < n; k++)
+        {
+            if (s[k] == s[k-1]) continue;
+            if (j >= 0 && s[k] != s[j])
+            {
+                maxlen = max(maxlen, k - i);
+                i = j+1;
+            }
+            
+            j = k-1;
+        }
+        
+        return max(maxlen, n-i);
+       
+    }
+
+
 
     int lengthOfLongestSubstringTwoDistinct(string s) {
         int n = s.size();
