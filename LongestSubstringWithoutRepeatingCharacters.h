@@ -8,6 +8,7 @@
     2014-10-21
     2014-11-23
     2014-12-08
+    2014-12-23
     
     May the force be with me!
     
@@ -22,6 +23,7 @@
  */
  
  /* 2014-12-08, my version */
+ /* waste memory, int, and not dp, should use old version */
  
      int lengthOfLongestSubstring(string s) {
         int n = s.size();
