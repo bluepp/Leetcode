@@ -22,31 +22,29 @@
     Solution: Pay attention when moving the 'start' pointer forward.
  */
  
- /* 2014-12-08, my version */
- /* waste memory, int, and not dp, should use old version */
- 
-     int lengthOfLongestSubstring(string s) {
+ /* 2014-12-28 */
+    int lengthOfLongestSubstring(string s) {
         int n = s.size();
-        int dp[256];
-        memset(dp, 0, sizeof(dp));
-        int ret = 0;
+        bool exist[256];
+        memset(exist, false, sizeof(exist));
         
-        for (int start = 0, end = 0; end < n; end ++)
+        int ret = 0;
+        int start = 0, end = 0;
+        for (; end < n; end++)
         {
-            if (dp[s[end]] == 0) 
+            if (exist[s[end]] == 0)
             {
-                dp[s[end]]++;
+                exist[s[end]] = true;
                 ret = max(ret, end-start+1);
             }
             else
             {
-                
                 for (; s[start] != s[end]; start++)
                 {
-                    dp[s[start]] = 0;
+                    exist[s[start]] = false;
                 }
                 
-                start++;
+                start ++;
             }
         }
         
