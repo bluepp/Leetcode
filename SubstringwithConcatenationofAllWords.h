@@ -20,17 +20,17 @@
  Solution: ...
 */
 
-    vector<int> findSubstring(string S, vector<string> &L) {
+    vector<int> findSubstring(string s, vector<string>& words) {
         vector<int> res;
-        if (S.empty() || L.empty()) return res;
-        int m = S.size(), n = L.size();
-        int k = L[0].size();
+        if (s.empty() || words.empty()) return res;
+        int m = s.size(), n = words.size();
+        int k = words[0].size();
         
         unordered_map<string, int> need;
         unordered_map<string, int> found;
         
         for (int i = 0; i < n; ++i)
-            need[L[i]]++;
+            need[words[i]]++;
             
         for (int i = 0; i <= m - n * k; ++i)
         {
@@ -38,16 +38,15 @@
             int j;
             for (j = 0; j < n; ++j)
             {
-                string s = S.substr(i + j * k, k);
-                auto it = need.find(s);
+                string tmp = s.substr(i + j * k, k);
+                auto it = need.find(tmp);
                 if (it == need.end())
                     break;
-                if (it->second <= found[s])
+                if (it->second <= found[tmp])
                     break;
-                found[s]++;
+                found[tmp]++;
             }
-            if (j == N) res.push_back(i);
+            if (j == n) res.push_back(i);
         }
         return res;
-  
     }
