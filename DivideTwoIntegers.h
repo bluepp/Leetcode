@@ -7,6 +7,7 @@
 	2014-09-03
 	2014-09-22
 	2014-12-21
+	2015-05-25
 	
 	May the force be with me!
 	
@@ -19,28 +20,38 @@
 */
 
     int divide(int dividend, int divisor) {
-       assert(divisor != 0);
-       bool flag = ((divisor < 0 && dividend > 0) ||
-            (divisor > 0 && dividend < 0));
-       long long dend = abs((long long) dividend);
-       long long dsor = abs((long long) divisor);
-       int res = 0;
-       
-       while (dend >= dsor)
-       {
-           long long div = dsor;
-           int curr_q = 1;
-           
-           while (dend >= div + div)
-           {
-               div <<= 1;
-               curr_q <<= 1;
-           }
-           
-           dend -= div;
-           res |= curr_q;
-       }
-       
-       return flag ? -res : res;
-       
+        
+        long long dend = dividend, dsor = divisor;
+        bool bneg = false;
+        if (dend < 0)
+        {
+            bneg = !bneg;
+            dend = -dend;
+        }
+        if (dsor < 0)
+        {
+            bneg = !bneg;
+            dsor = -dsor;
+        }
+        
+        long long ret = 0;
+        while (dend >= dsor)
+        {
+            long long div = dsor;
+            
+            long long curr_q = 1;
+            long long add = 1;
+            while (dend >= div+div)
+            {
+                div <<= 1;
+                curr_q <<= 1;
+            }
+            
+            dend -= div;
+            ret |= curr_q;
+        }
+        
+        if (bneg) ret = -ret;
+        if (ret > INT_MAX) return INT_MAX;
+        return ret;
     }
