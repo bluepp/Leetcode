@@ -7,6 +7,7 @@
   2014-08-04
   2014-11-24
   2014-12-04
+  2015-06-09
   
   May the force be with me!
   
@@ -20,6 +21,40 @@
   Solution: Sort the string to see if they're anagrams.
            
 */
+
+/* my version, 2015-06-09 */
+    vector<string> anagrams(vector<string>& strs) {
+        vector<string> res;
+        
+        int n = strs.size();
+        if (n == 0) return res;
+        
+        unordered_map<string, int> map;
+        for (int i = 0; i < n; i++)
+        {
+            string tmp = strs[i];
+            sort(tmp.begin(), tmp.end());
+            
+            if (map.find(tmp) != map.end())
+            {
+                if (map[tmp] != -1) 
+                {
+                    res.push_back(strs[map[tmp]]);
+                    map[tmp] = -1;
+                }
+                res.push_back(strs[i]);
+            }
+            else
+            {
+                map[tmp] = i;
+            }
+        }
+        
+        return res;
+    }
+
+
+
 
   vector<string> anagrams(vector<string> &strs) {
         vector<string> res;
