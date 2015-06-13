@@ -18,6 +18,55 @@ https://leetcode.com/problems/implement-stack-using-queues/
 
 */
 
+/* my version */
+class Stack {
+private:
+    queue<int> q1;
+    queue<int> q2;
+    
+public:
+    // Push element x onto stack.
+    void push(int x) {
+        q1.push(x);
+    }
+
+    // Removes the element on top of the stack.
+    void pop() {
+        
+        while (q1.size() > 1)
+        {
+            int k = q1.front();
+            q1.pop();
+            q2.push(k);
+        }
+        
+        q1.pop();
+        swap(q1, q2);
+    }
+
+    // Get the top element.
+    int top() {
+        
+        int tmp;
+        while (!q1.empty())
+        {
+            tmp = q1.front();
+            q1.pop();
+            q2.push(tmp);
+        }
+        
+        swap(q1, q2);
+        return tmp;
+    }
+
+    // Return whether the stack is empty.
+    bool empty() {
+        return q1.empty();
+    }
+};
+
+
+
 class Stack {
 private:
     queue<int> q1;
