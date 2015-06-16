@@ -38,3 +38,28 @@ https://leetcode.com/problems/happy-number/
         else if (sum > 9) return isHappy(sum);
         else return false;
     }
+    
+    
+    bool isHappy(int n) {
+        
+        int sum = 0;
+        
+        while (1)
+        {
+            if (n == 1) return true;
+            
+            while (n)
+            {
+                sum += (n%10) * (n%10);
+                n /= 10;
+            }
+            
+            if (sum == 1) return true;
+            else if (sum < 10) return false;
+            else 
+            {
+                n = sum;
+                sum = 0;
+            }
+        }
+    }
