@@ -16,6 +16,7 @@ Return 4.
 https://leetcode.com/problems/maximal-square/
 */
 
+/* http://www.geeksforgeeks.org/maximum-size-sub-matrix-with-all-1s-in-a-binary-matrix/ */
     int maximalSquare(vector<vector<char>>& matrix) {
         if (matrix.empty() || matrix[0].empty()) return 0;
         
