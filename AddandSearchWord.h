@@ -25,6 +25,7 @@ You may assume that all words are consist of lowercase letters a-z.
 https://leetcode.com/problems/add-and-search-word-data-structure-design/
 */
 
+/* Trie, https://leetcode.com/discuss/39022/80ms-clear-c-code-with-detailed-explanations */
 class TrieNode
 {
     public:
