@@ -18,86 +18,82 @@ Note: Do not use the eval built-in library function.
 https://leetcode.com/problems/basic-calculator/
 */
 
+/* update, 2015-07-05 */
     int calculate(string s) {
+        
+        int n = s.length();
         
         stack<int> stk;
         stack<char> op;
-        stack<bool> parneg;
+        stack<char> par;
         
-        bool bnegop = false;
-        
-        int n = s.length();
         int i = 0;
         while (i < n)
         {
-            if (s[i] == ' ')
-            {
-                i++;
-            }
+            if (s[i] == ' ') i++;
             else if (s[i] == '(')
             {
-                i++;
-                
                 if (!op.empty() && op.top() == '-')
                 {
-                   parneg.push(true);
+                    par.push('-');
                 }
                 else
                 {
-                    parneg.push(false);
+                    par.push('+');
                 }
+                
+                i++;
             }
             else if (s[i] == ')')
             {
+                par.pop();
                 i++;
-                parneg.pop();
             }
-            else if (s[i] == '+' || s[i] == '-')
+            else if (s[i] <= '9' && s[i] >= '0')
             {
-                if (parneg.empty() && s[i] == '+')
-                {
-                    op.push('+');
-                }
-                else if (parneg.empty() && s[i] == '-')
-                {
-                    op.push('-');
-                }
-                else if ((!parneg.top() && s[i] == '+') || (parneg.top() && s[i] == '-')) op.push('+');
-                else if ((!parneg.top() && s[i] == '-') || (parneg.top() && s[i] == '+')) op.push('-');
+                int t = 0;
                 
-                i++;
-            }
-            else if (s[i] <= '9' || s[i] >= '0')
-            {
-                int num = 0;
                 while (i < n && s[i] <= '9' && s[i] >= '0')
                 {
-                    num = num * 10 + s[i]-'0';
+                    t = t * 10 + s[i]-'0';
                     i++;
                 }
                 
-                if (!op.empty())
+                if (op.empty()) stk.push(t);
+                else
                 {
-                    int t = stk.top();
-                    stk.pop();
-                    
+                    int tnum = stk.top(); stk.pop();
                     if (op.top() == '+')
                     {
-                        stk.push(t+num);
+                        stk.push(tnum+t);
                     }
                     else
                     {
-                        stk.push(t-num);
+                        stk.push(tnum-t);
                     }
                     
                     op.pop();
                 }
+            }
+            else if (s[i] == '+' || s[i] == '-')
+            {
+                if (par.empty()) op.push(s[i]);
                 else
                 {
-                    stk.push(num);
+                    if (par.top() == '+' && s[i] == '+' || par.top() == '-' && s[i] == '-')
+                    {
+                        op.push('+');
+                    }
+                    else
+                    {
+                        op.push('-');
+                    }
                 }
+                
+                i++;
             }
+        
         }
         
-        return stk.empty() ? 0 : stk.top();
+        return stk.top();
     }
