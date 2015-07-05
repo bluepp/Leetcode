@@ -14,25 +14,20 @@ For example, given [0,1,2,4,5,7], return ["0->2","4->5","7"].
         int n = nums.size();
         if (n == 0) return res;
         
-        string s;
+        string s = "";
         s += to_string(nums[0]);
-        if (n == 1)
-        {
-            res.push_back(s);
-            return res;
-        }
         
         for (int i = 1; i < n; i++)
         {
-            if ((long long)nums[i]-(long long )nums[i-1] > 1)
+            if ((long long)nums[i] - (long long)nums[i-1] > 1)
             {
                 res.push_back(s);
                 s.clear();
             }
             else
             {
-                size_t t = s.find('>');
-                if (t == string::npos)
+                int t = s.find('>');
+                if (t == string :: npos)
                 {
                     s += "->";
                 }
@@ -46,6 +41,5 @@ For example, given [0,1,2,4,5,7], return ["0->2","4->5","7"].
         }
         
         res.push_back(s);
-        
         return res;
     }
