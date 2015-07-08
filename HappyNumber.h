@@ -25,9 +25,6 @@ https://leetcode.com/problems/happy-number/
     bool isHappy(int n) {
         
         int sum = 0;
-        
-        if (n == 1) return true;
-        
         while (n)
         {
             sum += (n%10) * (n%10);
