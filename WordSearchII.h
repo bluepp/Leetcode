@@ -97,10 +97,60 @@ https://leetcode.com/problems/word-search-ii/
 
 
 
+/* Trie, TLE, my version */
 
 
-
-
+    vector<string> findWords(vector<vector<char>>& board, vector<string>& words) {
+        vector<string> res;
+        
+        if (board.empty() || board[0].empty() || words.empty()) return res;
+        
+        Trie *trie = new Trie();
+        for (int i = 0; i < words.size(); i++)
+        {
+            trie->insert(words[i]);
+        }
+        
+        int m = board.size(), n = board[0].size();
+        vector<vector<bool> >avail(m, vector<bool>(n, true));
+        
+        for (int i = 0; i < m; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                _find(trie, board, "", i, j, avail, res);
+            }
+        }
+        
+        return res;
+    }
+    
+    void _find(Trie* trie, vector<vector<char> >&board, string s, int row, int col, vector<vector<bool> > avail, vector<string> &res)
+    {
+        
+        int m = board.size(), n = board[0].size();
+        if (row < 0 || row >= m || col < 0 || col >= n || !avail[row][col]) return;
+        
+        s.push_back(board[row][col]);
+        
+        if (!trie->startwith(s)) return;
+        
+        if (trie->search(s)) 
+        {
+            res.push_back(s);
+            return;
+        }
+        
+        avail[row][col] = false;
+        
+        _find(trie, board, s, row-1, col, avail, res);
+        _find(trie, board, s, row+1, col, avail, res);
+        _find(trie, board, s, row, col-1, avail, res);
+        _find(trie, board, s, row, col+1, avail, res);
+        
+    //    s.pop_back();
+        avail[row][col] = true;
+    }
 
 
 
