@@ -17,6 +17,54 @@
     Solution: Hash + list.
 */
 
+class LRUCache{
+private:
+    int _capacity{0};
+    list<pair<int, int> > _vals;
+    unordered_map<int, list<pair<int, int> >::iterator> _keys;
+    
+public:
+    LRUCache(int capacity) : _capacity(capacity) {}
+    
+    int get(int key) {
+        auto i = _keys.find(key);
+        
+        if (i == _keys.end()) return -1;
+        
+        int value = i->second->second;
+        
+        _vals.erase(i->second);
+        _vals.push_front({key, value});
+        _keys[key] = _vals.begin();
+        
+        return value;
+    }
+    
+    void set(int key, int value)
+    {
+        if (!_keys.count(key))
+        {
+            if (_vals.size() >= _capacity)
+            {
+                auto oldkey = _vals.back().first;
+                _vals.pop_back();
+                _keys.erase(oldkey);
+            }
+        }
+        else
+        {
+            auto it = _keys[key];
+            _vals.erase(it);
+        }
+        
+        _vals.push_front({key, value});
+        _keys[key] = _vals.begin();
+    }
+
+};
+
+
+
 struct CacheNode{
     int key;
     int value;
