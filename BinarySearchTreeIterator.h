@@ -54,3 +54,61 @@ private:
     stack<TreeNode *> stk;
    
 };
+
+
+/* Morris */
+class BSTIterator {
+private:
+    TreeNode *node;
+    
+public:
+    BSTIterator(TreeNode *root) {
+        node = root;
+    }
+
+    /** @return whether we have a next smallest number */
+    bool hasNext() {
+        return node != NULL;
+    }
+
+    /** @return the next smallest number */
+    int next() {
+        
+        if (node == NULL) return 0;
+        
+        int res = 0;
+        
+        while (node != NULL)
+        {
+            if (node->left == NULL)
+            {
+                res = node->val;
+                node = node->right;
+                return res;
+            }
+            
+            TreeNode *pre = node->left;
+            while (pre->right != NULL && pre->right != node)
+            {
+                pre = pre->right;
+            }
+            
+            if (pre->right == NULL)
+            {
+                pre->right = node;
+                node = node->left;
+            }
+            else
+            {
+                res = node->val;
+                node = node->right;
+                pre->right = NULL;
+                
+                return res;
+            }
+        }
+        
+        return res;
+    }
+};
+
