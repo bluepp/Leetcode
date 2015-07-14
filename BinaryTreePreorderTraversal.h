@@ -56,6 +56,45 @@
     }
  
  
+ /* Morris Tree */
+    vector<int> preorderTraversal(TreeNode* root) {
+        vector<int> res;
+        TreeNode *pCurr = root;
+        
+        while(pCurr)
+        {
+            if (pCurr->left)
+            {
+                TreeNode *prev = pCurr->left;
+                while (prev->right && prev->right != pCurr)
+                {
+                    prev = prev->right;
+                }
+                
+                if (prev->right == pCurr)
+                {
+                    pCurr = pCurr->right;
+                    prev->right = NULL;
+                }
+                else
+                {
+                    res.push_back(pCurr->val);
+                    prev->right = pCurr;
+                    pCurr = pCurr->left;
+                }
+                
+            }
+            else
+            {
+                res.push_back(pCurr->val);
+                pCurr = pCurr->right;
+            }
+        }
+        
+        return res;
+    }
+ 
+ 
  
  /* 2014-09-15, my version */
      vector<int> preorderTraversal(TreeNode *root) {
