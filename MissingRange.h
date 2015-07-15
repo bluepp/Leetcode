@@ -47,6 +47,41 @@
     }
 
 
+/* 2015-07-15, update */
+    vector<string> findMissingRanges(vector<int>& nums, int lower, int upper) {
+        
+        vector<string> ret;
+        if (nums.empty())
+        {
+            if (lower < upper)
+            {
+                ret.push_back(to_string(lower) + "->" + to_string(upper));
+            }
+            else
+            {
+                ret.push_back(to_string(lower));
+            }
+            
+            return ret;
+        }
+        
+        int n = nums.size();
+        for (int i = 0, last = lower; i <= n; i++)
+        {
+            int num = i < n ? nums[i] : upper+1;
+            if (num > last)
+            {
+                if (last == num-1) ret.push_back(to_string(last));
+                else ret.push_back(to_string(last) + "->" + to_string(num-1));
+            }
+            
+            last = nums[i]+1;
+        }
+        
+        return ret;
+        
+    }
+
 
 
 /* http://www.danielbit.com/blog/puzzle/leetcode/leetcode-missing-ranges */
