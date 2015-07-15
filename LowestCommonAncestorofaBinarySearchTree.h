@@ -38,6 +38,7 @@ https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/
     }
     
 /* botton up, o(n) */
+/* http://articles.leetcode.com/2011/07/lowest-common-ancestor-of-a-binary-tree-part-i.html */
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
         if (!root) return NULL;
         
