@@ -18,6 +18,29 @@
               2. Iteration + Queue. Contributed by SUN Mian(孙冕).
  */
  
+ /* way 2 */
+    int minDepth(TreeNode* root) {
+      if (!root) return 0;
+        queue<TreeNode *> q;
+        q.push(root);
+        TreeNode * rightmost = root;
+        int depth = 1;
+        while (!q.empty())
+        {
+            TreeNode *node = q.front();
+            q.pop();
+            if (!node->left && !node->right) return depth;
+            if (node->left) q.push(node->left);
+            if (node->right) q.push(node->right);
+            if (node == rightmost) {
+                ++depth;
+                rightmost = node->right?node->right:node->left;
+            }
+        }
+    }
+ 
+ 
+ 
     int minDepth(TreeNode *root) {
         if (!root)
             return 0;
