@@ -32,6 +32,45 @@
     Solution: DFS. 
  */
  
+ /* 2015-07-17, update */
+     vector<vector<int>> pathSum(TreeNode* root, int sum) {
+        vector<int> vec;
+        vector<vector<int> > res;
+        
+        if (!root) return res;
+        
+        _path(root, sum, vec, res);
+        return res;
+    }
+    
+    void _path(TreeNode *root, int sum, vector<int> vec, vector<vector<int> >&res)
+    {
+        if (!root) return;
+        
+        vec.push_back(root->val);
+        if (!root->left && !root->right)
+        {
+            if (root->val == sum)
+            {
+                res.push_back(vec);
+                vec.pop_back();
+            }
+            
+            return;
+        }
+        
+        _path(root->left, sum-root->val, vec, res);
+        _path(root->right, sum-root->val, vec, res);
+        
+        vec.pop_back();
+    }
+    
+    
+    /*  -------------------- */
+ 
+ 
+ 
+ 
     vector<vector<int> > pathSum(TreeNode *root, int sum) {
         vector<int> vec;
         vector<vector<int> > res;
