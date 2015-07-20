@@ -20,15 +20,16 @@ https://leetcode.com/problems/basic-calculator-ii/
 
     int calculate(string s) {
         
-        stack<int> ret;
-        stack<char> op;
+        int ret = 0;
+        unordered_map<char, int> level;
         
-        unordered_map<char,int> level;
-        level['+'] = 0;
-        level['-'] = 0;
         level['*'] = 1;
         level['/'] = 1;
+        level['+'] = 0;
+        level['-'] = 0;
         
+        stack<int> stk;
+        stack<char> op;
         int n = s.length();
         
         int i = 0;
@@ -37,78 +38,69 @@ https://leetcode.com/problems/basic-calculator-ii/
             if (s[i] == ' ') i++;
             else if (s[i] <= '9' && s[i] >= '0')
             {
-                int num = 0;
+                int t = 0;
                 while (i < n && s[i] <= '9' && s[i] >= '0')
                 {
-                    num = num * 10 + s[i]-'0';
+                    t = t*10 + s[i]-'0';
                     i++;
                 }
                 
-                ret.push(num);
+                stk.push(t);
             }
-            else 
+            else
             {
-                if (op.empty()) op.push(s[i]);
-                else
+                while (!op.empty() && level[op.top()] >= level[s[i]])
                 {
-                    while (!op.empty() && level[op.top()] >= level[s[i]])
-                    {
-                        int b = ret.top();
-                        ret.pop();
-                        int a = ret.top();
-                        ret.pop();
+                        int b = stk.top(); stk.pop();
+                        int a = stk.top(); stk.pop();
                         
                         switch(op.top())
                         {
-                            case '+' :
-                                ret.push(a+b);
+                            case '+':
+                                stk.push(a+b);
                                 break;
-                            case '-' :
-                                ret.push(a-b);
+                            case '-':
+                                stk.push(a-b);
                                 break;
-                            case '*' :
-                                ret.push(a*b);
+                            case '*':
+                                stk.push(a*b);
                                 break;
-                            case '/' :
-                                ret.push(a/b);
+                            case '/':
+                                stk.push(a/b);
                                 break;
                         }
                         
                         op.pop();
-                    }
-                    
-                    op.push(s[i]);
                 }
                 
+                op.push(s[i]);
                 i++;
             }
         }
         
         while (!op.empty())
         {
-            int a = ret.top();
-            ret.pop();
-            int b = ret.top();
-            ret.pop();
+            int b = stk.top(); stk.pop();
+            int a = stk.top(); stk.pop();
             
             switch(op.top())
             {
                 case '+':
-                    ret.push(a+b);
+                    stk.push(a+b);
                     break;
                 case '-':
-                    ret.push(b-a);
+                    stk.push(a-b);
                     break;
                 case '*':
-                    ret.push(a*b);
+                    stk.push(a*b);
                     break;
                 case '/':
-                    ret.push(b/a);
+                    stk.push(a/b);
                     break;
             }
             
             op.pop();
         }
         
-        return ret.top();
+        return stk.top();
     }
