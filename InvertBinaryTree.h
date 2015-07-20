@@ -20,6 +20,18 @@ to
 https://leetcode.com/problems/invert-binary-tree/
 */
 
+/* recursion, 2015-07-20 update */
+    TreeNode* invertTree(TreeNode* root) {
+        if (!root) return NULL;
+        
+        TreeNode *L = root->left, *R = root->right;
+        root->left = invertTree(R);
+        root->right = invertTree(L);
+        
+        return root;
+    }
+    
+/* queue */
     TreeNode* invertTree(TreeNode* root) {
         if(!root) return NULL;
         
