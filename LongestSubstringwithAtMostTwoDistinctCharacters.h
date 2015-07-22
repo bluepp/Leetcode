@@ -14,6 +14,33 @@ https://leetcode.com/problems/longest-substring-with-at-most-two-distinct-charac
 
 */
 
+/* 2015-07-22, update, my version */
+    int lengthOfLongestSubstringTwoDistinct(string s) {
+        int n = s.length();
+        if (n < 2) return n;
+        
+        int ret = 0;
+        unordered_map<char, int> map;
+        for (int start = 0, end = 0; end < n; end++)
+        {
+            
+            map[s[end]]++;
+            
+            while (map.size() > 2)
+            {
+                map[s[start]]--;
+                if (map[s[start]] == 0) map.erase(s[start]);
+                start++;
+            }
+            
+            ret = max(ret, end-start+1);
+        }
+        
+        return ret;
+    }
+
+
+
     int lengthOfLongestSubstringTwoDistinct(string s) {
         int n = s.length();
         if (n <= 2) return n;
