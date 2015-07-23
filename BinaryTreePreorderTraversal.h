@@ -93,6 +93,34 @@
         
         return res;
     }
+    
+ 
+ /* another version */
+     vector<int> preorderTraversal(TreeNode* root) {
+        vector<int> res;
+        if (!root) return res;
+        
+        stack<TreeNode *> stk;
+        TreeNode *pCurr = root;
+        
+        while (pCurr || !stk.empty())
+        {
+            if (pCurr)
+            {
+                res.push_back(pCurr->val);
+                stk.push(pCurr);
+                pCurr = pCurr->left;
+            }
+            else if (!stk.empty())
+            {
+                pCurr = stk.top()->right;
+                stk.pop();
+            }
+        }
+        
+        return res;
+    }
+ 
  
  
  
