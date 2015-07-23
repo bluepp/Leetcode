@@ -64,3 +64,42 @@
   
     }
     
+    
+    /* 2015-07-23, update, Morris */
+        vector<int> inorderTraversal(TreeNode* root) {
+        vector<int> res;
+        
+        TreeNode *pCurr = root;
+        while (pCurr)
+        {
+            if (pCurr->left)
+            {
+                TreeNode *prev = pCurr->left;
+                while (prev->right && prev->right != pCurr)
+                {
+                    prev = prev->right;
+                }
+                
+                if (prev->right == pCurr)
+                {
+                    res.push_back(pCurr->val);
+                    
+                    pCurr = pCurr->right;
+                    prev->right = NULL;
+                }
+                else
+                {
+                    prev->right = pCurr;
+                    pCurr = pCurr->left;
+                }
+            }
+            else
+            {
+                res.push_back(pCurr->val);
+                pCurr = pCurr->right;
+            }
+        }
+        
+        return res;
+    }
+    
