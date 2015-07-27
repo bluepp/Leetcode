@@ -11,15 +11,20 @@ https://leetcode.com/problems/implement-trie-prefix-tree/
 */
 
 /* 2015-07-01, update, remove return out of loop */
+/* 2015-07-27, update i */
 
-class TrieNode {
+class TrieNode
+{
     public:
-        TrieNode() : isword(false) {}
+        TrieNode():isword(false){}
         bool isword;
         unordered_map<char, TrieNode*> map;
 };
 
 class Trie {    
+private:
+    TrieNode *root;
+
 public:
     Trie() {
         root = new TrieNode();
@@ -27,16 +32,15 @@ public:
 
     // Inserts a word into the trie.
     void insert(string word) {
-        
         TrieNode *node = root;
         
-        int i = 0;
-        for (; i < word.length(); i++)
+        for (int i = 0; i < word.size(); i++)
         {
             if (node->map.find(word[i]) == node->map.end())
             {
                 node->map.insert(make_pair(word[i], new TrieNode()));
             }
+            
             node = node->map.find(word[i])->second;
         }
         
@@ -45,11 +49,9 @@ public:
 
     // Returns if the word is in the trie.
     bool search(string word) {
-        
         TrieNode *node = root;
         
-        int i = 0;
-        for (; i < word.size(); i++)
+        for (int i = 0; i < word.size(); i++)
         {
             if (node->map.find(word[i]) == node->map.end()) return false;
             node = node->map.find(word[i])->second;
@@ -61,11 +63,9 @@ public:
     // Returns if there is any word in the trie
     // that starts with the given prefix.
     bool startsWith(string prefix) {
-        
         TrieNode *node = root;
         
-        int i = 0;
-        for (; i < prefix.size(); i++)
+        for (int i = 0; i < prefix.size(); i++)
         {
             if (node->map.find(prefix[i]) == node->map.end()) return false;
             node = node->map.find(prefix[i])->second;
@@ -73,11 +73,7 @@ public:
         
         return true;
     }
-    
-private:
-    TrieNode* root;;
 };
-
 
 
 
