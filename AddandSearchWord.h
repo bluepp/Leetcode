@@ -25,6 +25,87 @@ You may assume that all words are consist of lowercase letters a-z.
 https://leetcode.com/problems/add-and-search-word-data-structure-design/
 */
 
+
+
+/* my version, failed on test, why?  2015-07-30, update*/
+class TrieNode
+{
+public:    
+    TrieNode():isword(false){}
+    bool isword;
+    unordered_map<char, TrieNode*> map;
+};
+
+class WordDictionary {
+
+public:
+    WordDictionary()
+    {
+        root = new TrieNode();
+    }
+
+    // Adds a word into the data structure.
+    void addWord(string word) {
+        TrieNode *node = root;
+        
+        for (int i = 0; i < word.size(); i++)
+        {
+            if (node->map.find(word[i]) == node->map.end())
+            {
+                node->map.insert(make_pair(word[i], new TrieNode()));
+            }
+            
+            node = node->map.find(word[i])->second;
+        }
+        
+        node->isword = true;
+    }
+
+    // Returns if the word is in the data structure. A word could
+    // contain the dot character '.' to represent any one letter.
+    bool search(string word) {
+        TrieNode *node = root;
+        
+        return _search(word.c_str(), node);
+    }
+    
+private:
+    TrieNode *root;
+    
+    bool _search(const char *word, TrieNode *node)
+    {
+        TrieNode *p = node;
+        for (int i = 0; word[i]; i++)
+        {
+            if (word[i] == '.')
+            {
+                for (char c = 'a'; c <= 'z'; c++)
+                {
+                    auto t = p->map.find(c);
+                    
+                    if (t == p->map.end() && c != 'z') continue;
+                    else if (t == p->map.end()) return false;
+                    else
+                    {
+                        p = t->second;
+                        return _search(word+i+1, p);
+                    }
+                }
+            }
+            else
+            {
+                if (p->map.find(word[i]) == p->map.end()) return false;
+                p = p->map.find(word[i])->second;
+            }
+        }
+       
+        return p->isword;
+    }
+
+};
+
+
+
 /* Trie, https://leetcode.com/discuss/39022/80ms-clear-c-code-with-detailed-explanations */
 class TrieNode
 {
