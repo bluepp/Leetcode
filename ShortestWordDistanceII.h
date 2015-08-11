@@ -37,15 +37,16 @@ public:
         vector<int> t1 = map[word1], t2 = map[word2];
         
         int t = INT_MAX;
-        for (int i = 0; i < t1.size(); i++)
+        for (int i = 0, j = 0; i < t1.size() && j < t2.size(); )
         {
-            for (int j = 0; j < t2.size(); j++)
-            {
-                t = min(t, abs(t1[i]-t2[j]));
-            }
+            t = min(t, abs(t1[i]-t2[j]));
+            
+            if (t1[i] < t2[j]) i++;
+            else j++;
         }
         
         return t;
+        
     }
 
 private:
