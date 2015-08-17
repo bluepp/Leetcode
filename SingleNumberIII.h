@@ -16,6 +16,42 @@ Your algorithm should run in linear runtime complexity. Could you implement it u
 
 */
 
+/* linear time, constant space, https://leetcode.com/discuss/48119/single-number-iii?show=48119#q48119 */
+    vector<int> singleNumber(vector<int>& nums) {
+        int n = nums.size();
+        int x = 0;
+        for (int i = 0; i < n; i++)
+        {
+            x ^= nums[i];
+        }
+        
+        int t = 1;
+        for (int i = 0; i < 32; i++)
+        {
+            t <<= i;
+            if (t & x) break;
+        }
+        
+        int x1 = 0, x2 = 0;
+        for (int i = 0; i < n; i++)
+        {
+            if (t & nums[i])
+            {
+                x1 ^= nums[i];
+            }
+            else
+            {
+                x2 ^= nums[i];
+            }
+        }
+        
+        vector<int> res;
+        res = {x1, x2};
+        
+        return res;
+    }
+
+
 /* not constant space, how ? */
     vector<int> singleNumber(vector<int>& nums) {
         int n = nums.size();
