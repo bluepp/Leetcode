@@ -22,10 +22,9 @@
  */
  
  
- 
- vector<vector<int> > threeSum(vector<int> &num) {
+ /* 2015-08-13, update, vec = {} */
+    vector<vector<int>> threeSum(vector<int>& num) {
         vector<vector<int> > res;
-       
         int n = num.size();
         if (n < 3) return res;
         
@@ -39,25 +38,30 @@
             while (l < r)
             {
                 vector<int> vec;
-                int tmp = num[i] + num[l] + num[r];
-                if (tmp == 0) 
+                int t = num[i]+num[l]+num[r];
+                
+                if (t == 0)
                 {
-                    vec.push_back(num[i]);
-                    vec.push_back(num[l]);
-                    vec.push_back(num[r]);
-                    l++;r--;
+                    
+                    vec = {num[i], num[l], num[r]};
+                    
+                    l++;
+                    r--;
                     
                     while (l < r && num[l] == num[l-1]) l++;
                     while (l < r && num[r] == num[r+1]) r--;
                 }
-                else if (tmp < 0) l++;
+                else if (t < 0) l++;
                 else r--;
                 
                 if (vec.size() != 0)
+                {
                     res.push_back(vec);
+                }
             }
         }
         
         return res;
+
     }
  
