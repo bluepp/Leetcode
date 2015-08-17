@@ -72,7 +72,7 @@ public:
     }
 
     int next() {
-        hasNext();
+  //    hasNext();  /* delte, 2015-08-17 */
         return (*i)[j++];
     }
 
