@@ -16,6 +16,30 @@ You may assume that word1 does not equal to word2, and word1 and word2 are both 
 https://leetcode.com/problems/shortest-word-distance/
 */
 
+/* O(N), smart, wawa */
+/* https://leetcode.com/discuss/50234/ac-java-clean-solution */
+    int shortestDistance(vector<string>& words, string word1, string word2) {
+        
+        int n = words.size();
+        int idx1 = -1, idx2 = -1, dist = INT_MAX;
+        
+        for (int i = 0; i < n; i++)
+        {
+            if (words[i] == word1) idx1 = i;
+            else if (words[i] == word2) idx2 = i;
+            
+            if (idx1 != -1 && idx2 != -1)
+            {
+                dist = min(dist, abs(idx1-idx2));
+            }
+        }
+        
+        return dist;
+    }
+
+
+
+/* my solution, stupid!!! */
     int shortestDistance(vector<string>& words, string word1, string word2) {
         
         int n = words.size();
