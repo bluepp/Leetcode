@@ -15,6 +15,12 @@ Could you do it without any loop/recursion in O(1) runtime?
 https://leetcode.com/problems/add-digits/
 */
 
+/* no recursion, no loop, https://leetcode.com/discuss/52160/one-line-solution */
+    int addDigits(int num) {
+        return num%9 == 0? (num==0?0:9) : num % 9;
+    }
+
+
 /* recursion */
     int addDigits(int num) {
         if (num < 10) return num;
