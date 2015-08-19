@@ -11,15 +11,16 @@ https://leetcode.com/problems/ugly-number-ii/
 */
 
 /* http://www.fgdsb.com/2015/01/03/ugly-numbers/ */
-    int nthUglyNumber(int n) {
-        unsigned i2 = 0, i3 = 0, i5 = 0;
-        unsigned next_mul2 = 2, next_mul3 = 3, next_mul5 = 5;
+   int nthUglyNumber(int n) {
         
-        unsigned ret = 1;
-        vector<unsigned> ugly(n);
+        int i2 = 0, i3 = 0, i5 = 0;
+        int next_mul2 = 2, next_mul3 = 3, next_mul5 = 5;
+        
+        int ret = 1;
+        vector<int> ugly(n);
         ugly[0] = 1;
         
-        for (unsigned i = 1; i < n; i++)
+        for (int i = 1; i < n; i++)
         {
             ret = min(min(next_mul2, next_mul3), next_mul5);
             ugly[i] = ret;
