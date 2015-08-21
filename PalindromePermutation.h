@@ -10,6 +10,32 @@
   https://leetcode.com/problems/palindrome-permutation/
 */
 
+/* another way, works */
+    bool canPermutePalindrome(string s) {
+        int n = s.length();
+        if (n < 2) return true;
+        
+        unordered_map<char, int> map;
+        for (int i = 0; i < n; i++)
+        {
+            if (!map.count(s[i]))
+            {
+                map[s[i]] = i;
+            }
+            else
+            {
+                map.erase(s[i]);
+            }
+        }
+        
+        return (n%2) ? map.size() == 1 : map.size() == 0;
+    }
+
+
+
+
+
+
 /* does not pass */
 /* "AaBb//a" */ 
 
