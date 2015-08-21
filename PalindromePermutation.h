@@ -10,6 +10,9 @@
   https://leetcode.com/problems/palindrome-permutation/
 */
 
+/* does not pass */
+/* "AaBb//a" */ 
+
     bool canPermutePalindrome(string s) {
         int n = s.length();
         if (n < 2) return true;
