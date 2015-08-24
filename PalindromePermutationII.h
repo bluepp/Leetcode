@@ -14,66 +14,58 @@ https://leetcode.com/problems/palindrome-permutation-ii/
 
 /× https://leetcode.com/discuss/53626/ac-java-solution-with-explanation ×/
     vector<string> generatePalindromes(string s) {
-        
         vector<string> res;
         unordered_map<char, int> map;
-        int n = s.length();
         
         int odd = 0;
         for (auto p : s)
         {
             map[p]++;
-            odd += (map[p]%2) == 1 ? 1 : -1;
+            if (map[p] % 2) odd ++;
+            else odd--;
         }
         
         if (odd > 1) return res;
         
-        string mid = "";
         string list = "";
+        string mid = "";
         for (auto p : map)
         {
             if (p.second % 2) mid += p.first;
-            
+        
             for (int i = 0; i < p.second/2; i++)
             {
                 list += p.first;
             }
         }
         
+        string str = "";
         vector<bool> used(list.size(), false);
-        string sb = "";
-        _perm(list, mid, used, sb, res);
-        
+        _perm(list, mid, str, used, res);
         return res;
     }
     
-    void _perm(string list, string mid, vector<bool> used, string sb, vector<string> &res)
+    void _perm(string list, string mid, string str, vector<bool> used, vector<string> &res)
     {
-        
-        if (sb.length() == list.size())
+        if (str.length() == list.size())
         {
-            string t = sb;
+            string t = str;
             reverse(t.begin(), t.end());
-            
-            res.push_back(sb+mid+t);
+            res.push_back(str+mid+t);
             return;
         }
         
-        
-        for(int i = 0; i < list.size(); i++)
+        for (int i = 0; i < list.size(); i++)
         {
             if (i > 0 && list[i] == list[i-1] && !used[i-1]) continue;
             
             if (!used[i])
             {
-                
                 used[i] = true;
-                sb += list[i];
-                
-                _perm(list, mid, used, sb, res);
-                
+                str.push_back(list[i]);
+                _perm(list, mid, str, used, res);
+                str.pop_back();
                 used[i] = false;
-                sb.pop_back();
             }
         }
     }
