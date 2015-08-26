@@ -20,6 +20,45 @@
     Solution: dfs...
  */
  
+ /* update, 2015-08-26, */
+     vector<vector<int>> permuteUnique(vector<int>& nums) {
+        
+        vector<int> vec;
+        vector<vector<int> > res;
+        vector<bool> avail(nums.size(), true);
+        
+        sort(nums.begin(), nums.end());
+        _perm(nums, avail, vec, res);
+        return res;
+    }
+    
+    void _perm(vector<int> &nums, vector<bool> avail, vector<int>vec, vector<vector<int> >&res)
+    {
+        if (vec.size() == nums.size())
+        {
+            res.push_back(vec);
+            return;
+        }
+        
+        for (int i = 0; i < nums.size(); i++)
+        {
+            if (i > 0 && nums[i] == nums[i-1] && avail[i-1]) continue;
+            
+            if (avail[i])
+            {
+                avail[i] = false;
+                vec.push_back(nums[i]);
+                
+                _perm(nums, avail, vec, res);
+                
+                vec.pop_back();
+                avail[i] = true;
+            }
+        }
+    }
+ 
+ 
+ /* old --------------- */
     vector<vector<int> > permuteUnique(vector<int> &num) {
         vector<vector<int> > res;
         vector<int> vec;
