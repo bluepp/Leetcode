@@ -22,6 +22,40 @@
     Solution: Pay attention when moving the 'start' pointer forward.
  */
  
+ /* 2015-08-27, update */
+     int lengthOfLongestSubstring(string s) {
+        int n = s.length();
+        if (n == 0) return 0;
+        
+        unordered_map<char, int> map;
+        
+        int ret = INT_MIN;
+        int start = 0, end = 0;
+        
+        for (; end < n; end++)
+        {
+            if (map.count(s[end]))
+            {
+                ret = max(ret, end-start);
+                int t = map[s[end]];
+                
+                for (int i = start; i <= t; i++)
+                {
+                    map.erase(s[i]);
+                }
+                
+                start = t+1;
+            }
+            
+            map[s[end]] = end;
+        }
+        
+        ret = max(ret, end-start);
+        return ret;
+    }
+ 
+ 
+ 
  /* 2014-12-28 */
     int lengthOfLongestSubstring(string s) {
         int n = s.size();
