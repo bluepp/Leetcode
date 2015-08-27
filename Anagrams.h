@@ -19,6 +19,8 @@
   Note: All inputs will be in lower-case.
 
   Solution: Sort the string to see if they're anagrams.
+  
+  OLD, the latest i scalled group anagrams, 2015-08-28
            
 */
 
