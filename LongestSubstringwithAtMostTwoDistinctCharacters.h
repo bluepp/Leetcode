@@ -1,5 +1,6 @@
 /*
   2015-06-10
+  2015-08-27, update linear space, version
   bluepp
   May the force be with me!
   
@@ -13,6 +14,61 @@ T is "ece" which its length is 3.
 https://leetcode.com/problems/longest-substring-with-at-most-two-distinct-characters/
 
 */
+
+/* 2015-08-27, linear space, update */
+
+    int lengthOfLongestSubstringTwoDistinct(string s) {
+        int n = s.length();
+        char first = '0', second = '0';
+        int f_last = -1, s_last = -1;
+        
+        int ret = 0;
+        int start = 0;
+        for (int i = 0; i < n; i++)
+        {
+            if (first == '0')
+            {
+                first = s[i];
+                f_last = i;
+            }
+            else if (s[i] == first)
+            {
+                f_last = i;
+            }
+            else if (second == '0')
+            {
+                second = s[i];
+                s_last = i;
+            }
+            else if (s[i] == second)
+            {
+                s_last = i;
+            }
+            else
+            {
+                ret = max(ret, i-start);
+                
+                if (f_last < s_last) 
+                {
+                    first = s[i];
+                    start = f_last+1;
+                    f_last = i;
+                }
+                else
+                {
+                    second = s[i];
+                    start = s_last +1;
+                    s_last = i;
+                }
+            }
+        }
+        
+        ret = max(ret, n-start);
+        
+        return ret;
+    }
+
+
 
 /* 2015-07-22, update, my version */
     int lengthOfLongestSubstringTwoDistinct(string s) {
