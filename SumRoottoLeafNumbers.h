@@ -31,21 +31,21 @@
  */
  
  
- /* recursion, my version */
-    int sumNumbers(TreeNode *root) {
-        return _sum(root, 0);
+ /* recursion, my version, 2015-08-31 update */
+    int sumNumbers(TreeNode* root) {
+        int n = 0;
+        if (!root) return 0;
+        
+        return _sum(root, n);
     }
     
     int _sum(TreeNode *root, int n)
     {
         if (!root) return 0;
-        int value = n*10 + root->val;
-        if (!root->left && !root->right) return value;
+        n = n * 10 + root->val;
         
-        int l = _sum(root->left, value);
-        int r = _sum(root->right, value);
-        
-        return l+r;
+        if (!root->left && !root->right) return n;
+        return _sum(root->left, n) + _sum(root->right, n);
     }
     
     /* iteration  */
