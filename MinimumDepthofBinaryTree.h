@@ -88,8 +88,8 @@
        
     }
 
-/* 2014-09-12, my version */
-    int minDepth(TreeNode *root) {
+/* 2014-09-12, my version , update 2015-09-01*/
+        int minDepth(TreeNode* root) {
         if (!root) return 0;
         if (!root->left && !root->right) return 1;
         
@@ -110,10 +110,10 @@
             }
             else
             {
+                count ++;
+                
                 if (q.empty()) break;
                 q.push(NULL);
-                
-                count ++;
             }
         }
         
