@@ -19,7 +19,7 @@ Note: If there are several possible values for h, the maximum one is taken as th
 https://leetcode.com/problems/h-index/
 */
 
-
+/* O(nlogn) time, O(1)space */
     int hIndex(vector<int>& citations) {
         int n = citations.size();
         sort(citations.begin(), citations.end());
@@ -35,4 +35,26 @@ https://leetcode.com/problems/h-index/
         }
         
         return index;
+    }
+
+/* O(N)time, O(N) space */
+    int hIndex(vector<int>& citations) {
+        int n = citations.size();
+        int count[n+1];
+        memset(count, 0, sizeof(count));
+        
+        for (auto c : citations)
+        {
+            if (c > n) count[n]++;
+            else count[c]++;
+        }
+        
+        int total = 0;
+        for (int i = n; i >= 0; i--)
+        {
+            total += count[i];
+            if (total >= i) return i;
+        }
+        
+        return 0;
     }
