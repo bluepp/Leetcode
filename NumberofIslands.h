@@ -1,4 +1,6 @@
-/* 2015-05-22
+/*
+  2015-05-22
+  2015-09-08, update
   bluepp
   May the force be with me!
   
@@ -23,6 +25,43 @@ Answer: 3
 
 https://leetcode.com/problems/number-of-islands/
 */
+
+/* 2015-09-08, update */
+    int numIslands(vector<vector<char>>& grid) {
+        if (grid.empty() || grid[0].empty()) return 0;
+        
+        int m = grid.size(), n = grid[0].size();
+        int count = 0;
+        for (int i = 0; i < m; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                if (grid[i][j] == '1')
+                {
+                    _dfs(grid, i, j, count);
+                    count++;
+                }
+            }
+        }
+        
+        return count;
+    }
+    
+    void _dfs(vector<vector<char> >&grid, int row, int col, int &count)
+    {
+        if (row < 0 || row >= grid.size() || col < 0 || col >= grid[0].size()) return;
+        if (grid[row][col] == '0') return;
+        
+        grid[row][col] = '0';
+        _dfs(grid, row+1, col, count);
+        _dfs(grid, row-1, col, count);
+        _dfs(grid, row, col+1, count);
+        _dfs(grid, row, col-1, count);
+    }
+
+
+
+
    int numIslands(vector<vector<char>>& grid) {
         if (grid.empty() || grid[0].empty()) return 0;
         int m = grid.size(), n = grid[0].size();
