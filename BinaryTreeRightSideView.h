@@ -1,5 +1,6 @@
 /*
   2015-06-17
+  2015-09-08, add dfs
   bluepp
   May the force be with me!
   
@@ -16,8 +17,12 @@ Given the following binary tree,
 You should return [1, 3, 4].
 
 https://leetcode.com/problems/binary-tree-right-side-view/
+
+1. bfs
+2. dfs
 */
 
+/* 1 , bfs */
     vector<int> rightSideView(TreeNode* root) {
         vector<int> res;
         if (!root) return res;
@@ -49,4 +54,20 @@ https://leetcode.com/problems/binary-tree-right-side-view/
         }
     
         return res;
+    }
+    
+  /* 2. dfs */
+      vector<int> rightSideView(TreeNode* root) {
+        vector<int> vec;
+        if (!root) return vec;
+        _dfs(root, vec, 1);
+        return vec;
+    }
+    
+    void _dfs(TreeNode *root, vector<int> &vec, int level)
+    {
+        if (vec.size() < level) vec.push_back(root->val);
+        
+        if (root->right) _dfs(root->right, vec, level+1);
+        if (root->left) _dfs(root->left, vec, level+1);
     }
