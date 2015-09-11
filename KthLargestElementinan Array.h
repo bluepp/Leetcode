@@ -15,6 +15,9 @@ https://leetcode.com/problems/kth-largest-element-in-an-array/
 
 */
 
+/* quick sort, O(N) average */
+/* https://leetcode.com/discuss/38336/solutions-partition-priority_queue-multiset-respectively */
+
 
     int findKthLargest(vector<int>& nums, int k) {
         int n = nums.size();
