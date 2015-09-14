@@ -29,10 +29,16 @@
  All words contain only lowercase alphabetic characters.
 
  Solution: BFS.
+ 
+ 1. one direction
+ 2. two direction, deque
+ refer to http://www.fgdsb.com/2015/01/08/word-ladder/
+ 
 */
 
 /* BFS , queue */
 /* 2015-09-14, queue, do not delete dict */
+
     int ladderLength(string beginWord, string endWord, unordered_set<string>& wordDict) {
         queue<string> q;
         q.push(beginWord);
