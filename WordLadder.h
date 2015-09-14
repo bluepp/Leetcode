@@ -31,10 +31,44 @@
  Solution: BFS.
 */
 
+/* BFS , queue */
+/* 2015-09-14, queue, do not delete dict */
+    int ladderLength(string beginWord, string endWord, unordered_set<string>& wordDict) {
+        queue<string> q;
+        q.push(beginWord);
+        unordered_map<string, int> map= {{beginWord, 1}};
+        int len = beginWord.size();
+        
+        while (!q.empty())
+        {
+            string curr = q.front();
+            q.pop();
+            
+            for (int i = 0; i < len; i++)
+            {
+                auto old = curr[i];
+                int step = map[curr];
+                
+                for (char c = 'a'; c <= 'z'; c++)
+                {
+                    curr[i] = c;
+                    if (curr == endWord) return step+1;
+                    
+                    if (wordDict.count(curr) && !map.count(curr))
+                    {
+                        q.push(curr);
+                        map.insert({curr, step+1});
+                    }
+                    
+                    curr[i] = old;
+                }
+            }
+        }
+        
+        return 0;
+        
+    }
 
-/*http://www.danielbit.com/blog/puzzle/leetcode/leetcode-word-ladder*/
-/* not delete dict */
-/* use a set to track visited word in dict */
 
 
 /* old version */
