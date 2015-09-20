@@ -41,3 +41,62 @@
         
         return res;
     }
+
+
+
+/* pass large data */
+    vector<int> continuousSubarraySumII(vector<int>& A) {
+        // Write your code here
+        vector<int> res;
+        int n = A.size();
+        int sum = 0, maxsum = INT_MIN;
+        int start = 0;
+        int total = 0;
+        
+        for (int i = 0; i < n; i++)
+        {
+            total += A[i];
+            
+            if (sum + A[i] < A[i])
+            {
+                sum = A[i];
+                start = i;
+            }
+            else
+            {
+                sum += A[i];
+            }
+            
+            if (maxsum < sum)
+            {
+                maxsum = sum;
+                res = {start, i};
+            }
+        }
+        
+        sum = 0;
+        start = 0;
+        
+        for (int i = 0; i < n; i++)
+        {
+            if (sum > 0)
+            {
+                sum = A[i];
+                start = i;
+            }
+            else
+            {
+                sum += A[i];
+            }
+            
+            if (start == 0 && i == n-1) continue;
+            
+            if (total-sum >= maxsum)
+            {
+                maxsum = total-sum;
+                res = {(i+1)%n,(start-1+n)%n};
+            }
+        }
+        
+        return res;
+    }
