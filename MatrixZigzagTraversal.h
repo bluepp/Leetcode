@@ -18,6 +18,44 @@ return [1, 2, 5, 9, 6, 3, 4, 7, 10, 11, 8, 12]
 
 http://www.lintcode.com/en/problem/matrix-zigzag-traversal/#
 */
+
+/* my version */
+    vector<int> printZMatrix(vector<vector<int> > &matrix) {
+        // write your code here
+        vector<int> res;
+        if (matrix.empty() || matrix[0].empty()) return res;
+        int m = matrix.size(), n = matrix[0].size();
+        
+        int i = 0, j = 0;
+        while (i < m && j < n)
+        {
+            res.push_back(matrix[i][j]);
+            
+            if (j < n-1) j++;
+            else if (i < m-1) i++;
+            else break;
+            
+            while (j > 0 && i < m-1)
+            {
+                res.push_back(matrix[i++][j--]);
+            }
+            
+            res.push_back(matrix[i][j]);
+            
+            if (i < m-1) i++;
+            else if (j < n-1) j++;
+            else break;
+            
+            while (i > 0 && j < n-1)
+            {
+                res.push_back(matrix[i--][j++]);
+            }
+        }
+        
+        return res;
+    }
+
+
     vector<int> printZMatrix(vector<vector<int> > &matrix) {
         // write your code here
         vector<int> zigzag;
