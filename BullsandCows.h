@@ -29,10 +29,12 @@ You may assume that the secret number and your friend's guess only contain digit
 https://leetcode.com/problems/bulls-and-cows/
 */
 
-int [256] = {0}, a = 0, b = 0, i = 0;
+    string getHint(string secret, string guess) {
+        int m[256] = {0}, a = 0, b = 0, i = 0;
         for (char s : secret) {
             char g = guess[i++];
             a += s == g;
             b += (m[s]++ < 0) + (m[g]-- > 0);
         }
         return to_string(a) + "A" + to_string(b - a) + "B";
+    }
