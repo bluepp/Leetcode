@@ -33,6 +33,7 @@ Example 3:
 Return false
 */
 
+/* 1 */
     bool isValidSerialization(string preorder) {
         
         if (preorder.empty()) return false;
@@ -53,3 +54,17 @@ Return false
         return capacity == 0;
     }
 
+/* 2 */
+    bool isValidSerialization(string preorder) {
+        int null = 0, node = 1;
+        
+        for (int i = 0; i < preorder.size(); i++)
+        {
+            if (preorder[i] == ',') node ++;
+            if (preorder[i] == '#') null++;
+            if (2 * null == node+1 && i != preorder.length()-1) return false;
+        }
+        
+        return 2*null == node+1;
+      
+    }
