@@ -18,7 +18,7 @@ Show Similar Problems
 
 */
 
-
+/* 1. n! */
 /* https://leetcode.com/discuss/80933/simple-solution-complexity-analysis-exponential-factorial */
 
     bool canWin(string s) {
