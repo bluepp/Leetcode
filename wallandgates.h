@@ -48,6 +48,40 @@ Show Similar Problems
     }
 
 
+
+   void wallsAndGates(vector<vector<int>>& rooms) {
+        
+        if (rooms.empty() || rooms[0].empty()) return;
+        
+        for (int i = 0; i < rooms.size(); i++)
+        {
+            for (int j = 0; j < rooms[0].size(); j++)
+            {
+                if (rooms[i][j] == 0)
+                {
+                    _dfs(rooms, i, j, 0);
+                }
+            }
+        }
+    }
+    
+/* DFS, TLE */    
+    void _dfs(vector<vector<int>>& rooms, int row, int col, int d)
+    {
+        if (row < 0 || row >= rooms.size() || col < 0 || col >= rooms[0].size() || rooms[row][col] < d)
+        {
+            return;
+        }
+        
+        rooms[row][col] = d;
+        
+        _dfs(rooms, row-1, col, d+1);
+        _dfs(rooms, row+1, col, d+1);
+        _dfs(rooms, row, col-1, d+1);
+        _dfs(rooms, row, col-1, d+1);
+    }
+
+
 /* run time error */
 
     void wallsAndGates(vector<vector<int>>& rooms) {
