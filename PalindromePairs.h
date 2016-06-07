@@ -17,6 +17,56 @@ Return [[0, 1], [1, 0], [3, 2], [2, 4]]
 The palindromes are ["dcbaabcd", "abcddcba", "slls", "llssssll"]
 */
 
+
+   vector<vector<int>> palindromePairs(vector<string>& words) {
+        
+        vector<vector<int>> result;
+        if(words.empty()) return result;
+        unordered_map<string, int> table; //words and its corresponding index;
+        for(int i = 0; i < words.size(); i++) table[words[i]]=i;
+        for(int i = 0; i < words.size(); i++) 
+        {
+            string cur = words[i];
+            reverse(cur.begin(), cur.end());
+            int t=0, len=cur.size();
+            for(int l = 0; l <= len; l++) //l is the length of the sub-string;
+            {
+                if(isPal(cur,0, l-1))  //the current word will work as prefix;
+                {
+                    string tmp = cur.substr(l);
+                    if(table.count(tmp))  //accelerate the checking process;
+                    {
+                        t = table[tmp];
+                        if((t!=i) && (len>=words[t].size())) //avoid duplicates;
+                        result.push_back(vector<int>{i, t}); //the matched word will be the suffix;
+                    }
+                }
+                if(isPal(cur, l, len-1)) //the current word will work as suffix;
+                {
+                    string tmp = cur.substr(0,l); 
+                    if(table.count(tmp)) 
+                    {
+                        t = table[tmp];
+                        if((t!=i) && (len>words[t].size())) //avoid duplicates;
+                        result.push_back(vector<int>{t, i}); //the matched word the prefix;
+                    }
+                }
+            }
+        }
+        return result;
+       
+    }
+    
+    bool isPal(string& s, int start, int end)  //start and end refer to index;
+    {
+        while(s[start] == s[end]) start++, end--;
+        return start >= end;
+    }
+    
+    
+    /* ------------------------- */
+
+
     vector<vector<int>> palindromePairs(vector<string>& words) {
         
         vector<vector<int>> res;
