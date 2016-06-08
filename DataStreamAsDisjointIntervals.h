@@ -18,6 +18,9 @@ Follow up:
 What if there are lots of merges and the number of disjoint intervals are small compared to the data stream's size?
 */
 
+/* https://leetcode.com/discuss/105790/very-concise-c-solution */
+
+
 class SummaryRanges {
 private:
     vector<Interval> vec;
