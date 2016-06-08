@@ -19,7 +19,10 @@ To the right of 1 there is 0 smaller element.
 Return the array [2, 1, 1, 0].
 */
 
+/* https://leetcode.com/discuss/79463/segment-binary-indexed-binary-search-tree-clean-python-code */
 
+
+/* O(N2) */
     vector<int> countSmaller(vector<int>& nums) {
         
         if (nums.empty()) return {};
