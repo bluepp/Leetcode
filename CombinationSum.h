@@ -27,30 +27,35 @@
  	Solution: Sort & Recursion.
 */
 
-   vector<vector<int> > combinationSum(vector<int> &candidates, int target) {
-        vector<vector<int> > res;
-        if (candidates.size() == 0) return res;
+/* 2016-06-10, update */
+   vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        
         vector<int> vec;
+        vector<vector<int>> res;
         
         sort(candidates.begin(), candidates.end());
+        
         _comb(candidates, target, 0, vec, res);
+        
         return res;
     }
     
-    void _comb(vector<int> &candidates, int target, int start, vector<int>&vec, vector<vector<int> >&res)
+    void _comb(vector<int> &candidates, int target, int start, vector<int> vec, vector<vector<int>>&res)
     {
-        
         if (target == 0)
         {
             res.push_back(vec);
             return;
         }
-   
-        for (int i = start; i < candidates.size() && target >= candidates[i]; i++)
+        
+        for (int i = start; i < candidates.size() && candidates[i] <= target; i++)
         {
+            if (i > start && candidates[i] == candidates[i-1]) continue;
+            
             vec.push_back(candidates[i]);
             _comb(candidates, target-candidates[i], i, vec, res);
             vec.pop_back();
+            
         }
     }
     
