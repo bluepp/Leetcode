@@ -45,4 +45,33 @@ Can you do it in O(n) time and/or in-place with O(1) extra space?
         
     }
     
-    /* 2 https://leetcode.com/discuss/95156/step-by-step-explanation-of-index-mapping-in-java */
+    /* 2 https://leetcode.com/problems/wiggle-sort-ii/ */
+    /* O(1),O(N) */
+        void wiggleSort(vector<int>& nums) {
+        
+        int n = nums.size();
+        
+        auto midptr = nums.begin() + n/2;
+        nth_element(nums.begin(), midptr, nums.end());
+        int mid = *midptr;
+        
+        #define A(i) nums[(1+2*(i)) % (n|1)]
+        
+        int i = 0, j = 0, k = n-1;
+        while (j <= k)
+        {
+            if (A(j) > mid)
+            {
+                swap(A(i++), A(j++));
+            }
+            else if (A(j) < mid)
+            {
+                swap(A(j), A(k--));
+            }
+            else 
+                j++;
+            
+        }
+        
+    }
+    
