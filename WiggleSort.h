@@ -8,6 +8,29 @@ For example, given nums = [3, 5, 2, 1, 6, 4], one possible answer is [1, 6, 2, 5
 https://leetcode.com/problems/wiggle-sort/
 */
 
+/* 2016-06-10 update */
+   void wiggleSort(vector<int>& nums) {
+       
+       int n = nums.size();
+       
+       for (int i = 0; i < n-1; i++)
+       {
+           if (i%2 == 0 && nums[i] > nums[i+1])
+           {
+               swap(nums[i], nums[i+1]);
+           }
+           
+           if (i%2 == 1 && nums[i] < nums[i+1])
+           {
+               swap(nums[i], nums[i+1]);
+           }
+       }
+       
+    }
+
+/* ------------------- */
+
+
     void wiggleSort(vector<int>& nums) {
         int n = nums.size();
         if (n == 0) return;
