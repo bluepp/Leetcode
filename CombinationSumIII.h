@@ -27,28 +27,30 @@ Output:
 https://leetcode.com/problems/combination-sum-iii/
 */
 
-    vector<vector<int>> combinationSum3(int k, int n) {
-        vector<int> vec;
-        vector<vector<int> > res;
+   vector<vector<int>> combinationSum3(int k, int n) {
         
-        _comb(k, 1, n, vec, res);
+        vector<int> vec;
+        vector<vector<int>> res;
+        
+        _comb(k, n, 1, vec, res);
+        
         return res;
     }
     
-    void _comb(int k, int start, int n, vector<int> vec, vector<vector<int> > &res)
+    void _comb(int k, int n, int start, vector<int> vec, vector<vector<int>> &res)
     {
-        if (vec.size() == k && n == 0)
+        if (n == 0 && vec.size() == k)
         {
             res.push_back(vec);
             return;
         }
         
-        if (vec.size() == k || n == 0) return;
+        if (vec.size() == k || n <= 0) return;
         
-        for (int i = start; i <= 9; i++)
+        for (int i = start; i <= 9 && i <= n; i++)
         {
             vec.push_back(i);
-            _comb(k, i+1, n-i, vec, res);
+            _comb(k, n-i, i+1, vec, res);
             vec.pop_back();
         }
     }
