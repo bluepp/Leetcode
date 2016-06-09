@@ -21,6 +21,10 @@ Note: Do not use class member/global/static variables to store states. Your seri
 
 */
 
+/* three ways */
+/* https://leetcode.com/discuss/70853/recursive-dfs-iterative-dfs-and-bfs */
+
+
 class Codec {
 private:
     int helper(string &data)
