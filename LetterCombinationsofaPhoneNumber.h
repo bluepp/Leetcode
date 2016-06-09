@@ -19,17 +19,20 @@
  	Solution: ...
  */
  
- vector<string> letterCombinations(string digits) {
+ /* 2016-06-10 update */
+    vector<string> letterCombinations(string digits) {
         string mapping[] = {"abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
         
         string s;
         vector<string> res;
+        
+        if (digits.empty()) return res;
        
         _comb(digits, mapping, s, res);
         return res;
     }
     
-   void _comb(const string &digits, string mapping[], string &s, vector<string> &res)
+    void _comb(const string &digits, string mapping[], string &s, vector<string> &res)
     {
         if (s.size() == digits.size())
         {
