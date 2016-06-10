@@ -19,6 +19,61 @@ Write a function to compute the next state (after one update) of the board given
 https://leetcode.com/problems/game-of-life/
 */
 
+/* 2016-06-10 update */
+/* https://leetcode.com/discuss/68352/easiest-java-solution-with-explanation */
+
+    void gameOfLife(vector<vector<int>>& board) {
+        
+        if (board.empty() || board[0].empty()) return ;
+        int m = board.size(), n = board[0].size();
+        
+        for (int i = 0; i < m; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                int live = _live(board, m, n, i, j);
+                
+                if (board[i][j] == 1 && live >= 2 && live <= 3)
+                {
+                    board[i][j] = 3;
+                }
+                if (board[i][j] == 0 && live == 3)
+                {
+                    board[i][j] = 2;
+                }
+            }
+        }
+        
+        for (int i = 0; i < m; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                board[i][j] >>= 1;
+            }
+        }
+    }
+    
+    
+    int _live(vector<vector<int>> &board, int m, int n, int i, int j)
+    {
+        int live = 0;
+        
+        for (int x = max(i-1, 0); x <= min(i+1, m-1); x++)
+        {
+            for (int y = max(j-1, 0); y <= min(j+1, n-1); y++)
+            {
+                live += board[x][y] & 1;
+            }
+        }
+        
+        live -= board[i][j] & 1;
+        
+        return live;
+    }
+
+
+
+
 /* https://leetcode.com/discuss/64111/c-o-mn-time-o-1-space-sol*/
 /* o(mn) */
 
