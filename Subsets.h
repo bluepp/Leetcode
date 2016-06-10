@@ -70,6 +70,33 @@
         }
     }
  
+ /* 2016-06-10, iterative */
+     vector<vector<int>> subsets(vector<int>& nums) {
+        
+        int n = nums.size();
+        vector<vector<int>> ret;
+        if (n == 0)
+            return ret;
+
+       
+        int i = 0, j = 0, len = 0;
+        vector<int> temp;
+        ret.push_back(temp);
+
+        for (i = 0; i < n; i++)
+        {
+            len = ret.size();
+            for (j = 0; j < len; j++)
+            {
+                temp = ret[j];
+                temp.push_back(nums[i]);
+                ret.push_back(temp);
+            }
+        }
+
+        return ret;
+    }
+ 
  
  
 
