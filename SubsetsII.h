@@ -31,6 +31,41 @@
  Solution: ..Similar to Subset I, except for line 45.
  */
  
+ /* 2016-06-10, iterative */
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        
+        int n = nums.size();
+        vector<vector<int>> ret;
+        
+        sort(nums.begin(), nums.end());
+     
+        vector<int> temp;
+        ret.push_back(temp);
+        int begin = 0;
+
+        for (int i = 0; i < n; i++)
+        {
+            if (i == 0 ||(nums[i] != nums[i-1])) begin = 0;
+            
+            int len = ret.size();
+            
+            for (int j = begin; j < len; j++)
+            {
+                temp = ret[j];
+                temp.push_back(nums[i]);
+                ret.push_back(temp);
+            }
+            
+            begin = len;
+        }
+
+        return ret;
+       
+    }
+ 
+ 
+ 
+ 
  /* 2014-11-24 My version, easy to understand */
      vector<vector<int> > subsetsWithDup(vector<int> &s) {
         vector<int> vec;
