@@ -14,39 +14,46 @@ https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/
 */
 
 /*http://www.cnblogs.com/grandyang/p/4295761.html */
+
+
+/* 2016-06-11, rewrite */
     int maxProfit(int k, vector<int>& prices) {
-        if (prices.empty()) return 0;
-        if (k >= prices.size()) return solve(prices);
         
-        int g[k+1] = {0};
-        int l[k+1] = {0};
+        int n = prices.size();
+        if (n == 0) return 0;
         
-        for (int i = 0; i < prices.size()-1; i++)
+        int maxprofit = 0;
+        if (k >= n/2)
         {
-            int diff = prices[i+1] - prices[i];
+            for (int i = 1; i < n; i++)
+            {
+                if (prices[i] > prices[i-1])
+                {
+                    maxprofit += prices[i]-prices[i-1];
+                }
+            }
+            
+            return maxprofit;
+        }
+        
+        
+        int local[k+1] = {0};
+        int global[k+1] = {0};
+        
+        for (int i = 1; i < n; i++)
+        {
+            int diff = prices[i]-prices[i-1];
             
             for (int j = k; j >= 1; j--)
             {
-                l[j] = max(g[j-1] +max(diff, 0), l[j]+diff);
-                g[j] = max(g[j], l[j]);
+                local[j] = max(global[j-1]+max(diff,0), local[j]+diff);
+                global[j] = max(local[j], global[j]);
             }
         }
         
-        return g[k];
-    }
-    
-    int solve(vector<int> &prices)
-    {
-        int res = 0;
-        for (int i = 1; i < prices.size(); i++)
-        {
-            if (prices[i] - prices[i-1] > 0)
-            {
-                res += prices[i]-prices[i-1];
-            }
-        }
+        return global[k];
         
-        return res;
     }
+
 
 
