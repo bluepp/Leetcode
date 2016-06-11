@@ -24,6 +24,13 @@ https://leetcode.com/problems/missing-number/
        return sum + nums.size();
     }
 
+/* 2016-06-12, xor, https://leetcode.com/discuss/103553/xor-java-solution */
+public int missingNumber(int[] nums) {
+    int missing = 0, i = 0;
+    while(i < nums.length)
+       missing ^= i ^ nums[i++]; 
+    return missing ^ i;
+}
 
 
     int missingNumber(vector<int>& nums) {
