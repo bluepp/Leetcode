@@ -18,6 +18,28 @@ maxProfit = 3
 transactions = [buy, sell, cooldown, buy, sell]
 */
 
+/* 2016-06-11, dp, update */
+
+    int maxProfit(vector<int>& prices) {
+        
+        int n = prices.size();
+        if (n < 2) return 0;
+        
+        int sell[n] = {0}; // sell[i] means must sell at day i
+        int cooldown[n] = {0}; //cooldown[i] means day i is cooldown day
+        sell[1] = prices[1]-prices[0];
+        
+        for (int i = 2; i < n; i++)
+        {
+            cooldown[i] = max(sell[i-1], cooldown[i-1]);
+            sell[i] = prices[i]-prices[i-1] + max(sell[i-1], cooldown[i-2]);
+        }
+        
+        return max(sell[n-1], cooldown[n-1]);
+    }
+
+
+
 /* 1. make_tuple */
 
     int maxProfit(vector<int>& prices) {
