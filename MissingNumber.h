@@ -11,6 +11,21 @@ Could you implement it using only constant extra space complexity?
 https://leetcode.com/problems/missing-number/
 */
 
+/* 2016-06-12, https://leetcode.com/discuss/106780/very-sample-java-solution */
+
+    int missingNumber(vector<int>& nums) {
+       
+       int sum = 0;
+       for (int i = 0; i < nums.size(); i++)
+       {
+           sum = sum-nums[i]+ i;
+       }
+       
+       return sum + nums.size();
+    }
+
+
+
     int missingNumber(vector<int>& nums) {
         int n = nums.size();
         
