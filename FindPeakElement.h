@@ -14,6 +14,29 @@ You may imagine that num[-1] = num[n] = -∞.
 For example, in array [1, 2, 3, 1], 3 is a peak element and your function should return the index number 2.
 */
 
+
+/* https://leetcode.com/discuss/96588/general-binary-search-in-java */
+    int findPeakElement(vector<int>& nums) {
+        
+        int n = nums.size();
+        int lo = 0, hi = n - 1;
+        
+        while(lo < hi) {
+            int mid = lo + (hi - lo) / 2;
+            
+            if(nums[mid] < nums[mid+1]) {
+                lo = mid + 1; 
+            } else {
+                hi = mid;
+            }
+        }
+    
+        return lo;
+       
+    }
+
+
+
     int findPeakElement(const vector<int> &num) {
         int n = num.size();
         int left = 0, right = n - 1,mid;
