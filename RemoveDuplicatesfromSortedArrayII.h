@@ -21,6 +21,23 @@
  Solution: ...
  */
  
+ /* 2016-06-13 , update */
+     int removeDuplicates(vector<int>& nums) {
+        
+        int n = nums.size();
+        if (n < 3) return n;
+        
+        int index = 1;
+        for (int i = 2; i < n; i++)
+        {
+            if (nums[i] == nums[index] && nums[i] == nums[index-1]) continue;
+            nums[++index] = nums[i];
+        }
+        
+        return index+1;
+    }
+ 
+ 
  
     int removeDuplicates(int a[], int n) {
         if (n == 0 || n == 1 || n == 2)
