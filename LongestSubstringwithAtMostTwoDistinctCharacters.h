@@ -16,14 +16,16 @@ https://leetcode.com/problems/longest-substring-with-at-most-two-distinct-charac
 */
 
 /* 2015-08-27, linear space, update */
-
-    int lengthOfLongestSubstringTwoDistinct(string s) {
+/* 2016-06-14, update */
+   int lengthOfLongestSubstringTwoDistinct(string s) {
+        
         int n = s.length();
         char first = '0', second = '0';
         int f_last = -1, s_last = -1;
         
         int ret = 0;
         int start = 0;
+        
         for (int i = 0; i < n; i++)
         {
             if (first == '0')
@@ -46,8 +48,6 @@ https://leetcode.com/problems/longest-substring-with-at-most-two-distinct-charac
             }
             else
             {
-                ret = max(ret, i-start);
-                
                 if (f_last < s_last) 
                 {
                     first = s[i];
@@ -61,9 +61,9 @@ https://leetcode.com/problems/longest-substring-with-at-most-two-distinct-charac
                     s_last = i;
                 }
             }
+            
+            ret = max(ret, i-start+1);
         }
-        
-        ret = max(ret, n-start);
         
         return ret;
     }
