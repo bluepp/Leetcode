@@ -13,6 +13,24 @@
   By using the read4 API, implement the function int read(char *buf, int n) that reads n characters from the file.
 */
 
+/* 2016-06-14, update */
+    int read(char *buf, int n) {
+        
+        if (n <= 0) return n;
+        int bytes = 0, totalBytes = 0;
+        
+        while (true) {
+            bytes = read4(buf + totalBytes);
+            totalBytes += bytes;
+        
+            if (bytes == 0) return totalBytes; // end of file
+            if (totalBytes >= n) return n; // we have read what we were expected to read
+        }
+    }
+
+
+
+
 // Forward declaration of the read4 API.
 int read4(char *buf);
 
