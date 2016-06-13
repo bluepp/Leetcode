@@ -12,6 +12,47 @@ T is "ece" which its length is 3.
 
 */
 
+/* 1. my versioin , 2.template */
+
+/* 2016-06-14 , update, my version */
+
+    int lengthOfLongestSubstringKDistinct(string s, int k) {
+        
+        unordered_map<char, int> map;
+        int start = 0;
+        int ret = 0;
+        
+        for (int i = 0; i < s.length(); i++)
+        {
+            map[s[i]]++;
+            
+            int j = 0;
+            
+            if (map.size() > k)
+            {
+                for (j = start; j <= i; j++)
+                {
+                    map[s[j]]--;
+                    
+                    if (map[s[j]] == 0) 
+                    {
+                        map.erase(s[j]);
+                        start = j+1;
+                        break;
+                    }
+                }
+            }
+            
+            ret = max(ret, i-start+1);
+            
+        }
+        
+        return ret;
+       
+    }
+
+
+
 //template
 /* https://leetcode.com/discuss/72701/here-10-line-template-that-can-solve-most-substring-problems*/
 
