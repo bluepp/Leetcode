@@ -13,6 +13,40 @@ Given "abcd", return "dcbabcd".
 https://leetcode.com/problems/shortest-palindrome/
 */
 
+
+/* 2016-06-14, update */
+/* https://leetcode.com/discuss/107411/accepted-c-solution-easy-to-understand */
+
+    string shortestPalindrome(string s) {
+        
+        int n = s.length();
+        if (n == 0) return s;
+        
+        string v = s;
+        reverse(v.begin(), v.end());
+        
+        int i = n;
+        while (i >= 1)
+        {
+            if (s.substr(0, i) == v.substr(n-i))
+            {
+                break;
+            }
+            
+            i--;
+        }
+        
+        for (; i < s.size(); i += 2)
+        {
+            s = s[i]+s;
+        }
+        
+        return s;
+        
+    }
+
+
+
 /* https://leetcode.com/discuss/36807/c-8-ms-kmp-based-o-n-time-&-o-n-memory-solution */
 /* O(N) */
 
