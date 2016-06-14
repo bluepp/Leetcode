@@ -22,6 +22,29 @@
     Solution: Pay attention when moving the 'start' pointer forward.
  */
  
+ /* 2016-06-14, update another way */
+ /* https://leetcode.com/discuss/13336/shortest-o-n-dp-solution-with-explanations */
+ 
+     int lengthOfLongestSubstring(string s) {
+        
+        int n = s.length();
+        vector<int> map(256, -1);
+        int start = 0;
+        int ret = 0;
+        
+        for (int i = 0; i < n; i++)
+        {
+            start = max(start, map[s[i]]+1);
+            map[s[i]] = i;
+            
+            ret = max(ret, i-start+1);
+        }
+        
+        return ret;
+    }
+ 
+ 
+ 
  /* 2015-08-27, update */
      int lengthOfLongestSubstring(string s) {
         int n = s.length();
