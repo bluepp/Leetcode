@@ -32,6 +32,44 @@
  Solution: ...
  */
 
+/* 2016-06-14, update */
+/* https://leetcode.com/discuss/98230/my-8ms-c-solution-8-lines     */
+
+   int myAtoi(string str) {
+        
+        long result = 0;
+        bool negative = false;
+        
+        int i = str.find_first_not_of(' ');
+        
+        if (str[i] == '-') 
+        {
+            negative = true;
+            i++;
+        }
+        else if (str[i] == '+')
+        {
+            i++;
+        }
+        
+        for (int n = i; i - n <= 10 && isdigit(str[i]); i++)
+        {
+            result = result * 10 + (str[i]-'0');
+        }
+        
+        if (negative)
+        {
+            result = -result;
+        }
+        
+        return (result > INT_MAX ? INT_MAX : (result < INT_MIN ? INT_MIN : result));
+ 
+    }
+
+
+
+
+
     int atoi(const char *str) {
         if (!str) return 0;
         const char *p = str;
