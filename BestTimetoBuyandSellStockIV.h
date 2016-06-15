@@ -17,42 +17,37 @@ https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/
 
 
 /* 2016-06-11, rewrite */
+/* https://leetcode.com/discuss/102303/clear-c-solution */
+
     int maxProfit(int k, vector<int>& prices) {
         
         int n = prices.size();
-        if (n == 0) return 0;
-        
-        int maxprofit = 0;
+        if (n < 2) return 0;
+        int ret = 0;
         if (k >= n/2)
         {
             for (int i = 1; i < n; i++)
             {
                 if (prices[i] > prices[i-1])
                 {
-                    maxprofit += prices[i]-prices[i-1];
+                    ret += prices[i]-prices[i-1];
                 }
             }
             
-            return maxprofit;
+            return ret;
         }
         
+        vector<int> buy(k+1, INT_MIN), sale(k+1, 0);
         
-        int local[k+1] = {0};
-        int global[k+1] = {0};
-        
-        for (int i = 1; i < n; i++)
-        {
-            int diff = prices[i]-prices[i-1];
+        for(int i=0; i<n; i++){
+            for(int j=1; j<=k; j++){
             
-            for (int j = k; j >= 1; j--)
-            {
-                local[j] = max(global[j-1]+max(diff,0), local[j]+diff);
-                global[j] = max(local[j], global[j]);
+                buy[j] = max(buy[j], sale[j-1]-prices[i]);
+                sale[j] = max(sale[j], buy[j] + prices[i]);
             }
         }
         
-        return global[k];
-        
+        return sale[k];
     }
 
 
