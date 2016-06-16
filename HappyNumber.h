@@ -22,41 +22,28 @@ Example: 19 is a happy number
 https://leetcode.com/problems/happy-number/
 */
 
+/* https://leetcode.com/discuss/101005/4-c-solutions-with-explanations */
+
     bool isHappy(int n) {
         
-        int sum = 0;
-        while (n)
+        unordered_set<int> tmp;
+
+        while(n != 1)
         {
-            sum += (n%10) * (n%10);
-            n /= 10;
-        }
-        
-        if (sum == 1) return true;
-        else if (sum > 9) return isHappy(sum);
-        else return false;
-    }
-    
-    
-    bool isHappy(int n) {
-        
-        int sum = 0;
-        
-        while (1)
-        {
-            if (n == 1) return true;
-            
-            while (n)
+            if(tmp.find(n) == tmp.end())
+                tmp.insert(n);
+            else
+                return false;
+
+            int sum = 0;
+            while(n != 0)
             {
-                sum += (n%10) * (n%10);
-                n /= 10;
+                sum += pow(n % 10, 2);
+                n = n / 10;
             }
-            
-            if (sum == 1) return true;
-            else if (sum < 10) return false;
-            else 
-            {
-                n = sum;
-                sum = 0;
-            }
+
+            n = sum;
         }
+
+        return true;
     }
