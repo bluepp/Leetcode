@@ -15,6 +15,10 @@ https://leetcode.com/problems/kth-largest-element-in-an-array/
 
 */
 
+/* https://leetcode.com/discuss/93573/three-solutions-prioprity_queue-implement-quick-partition */
+/* Three solutions: (1) prioprity_queue as a heap (2) implement a heap by your own (3) quick sort partition */
+
+
 /* 2016-06-17, priority_queue */
 class mycompare
 {
@@ -25,7 +29,6 @@ public:
     }
 
 };
-
 
 class Solution {
 public:
