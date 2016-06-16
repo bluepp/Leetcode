@@ -15,6 +15,44 @@ https://leetcode.com/problems/kth-largest-element-in-an-array/
 
 */
 
+/* 2016-06-17, priority_queue */
+class mycompare
+{
+public:
+    bool operator()(int &a, int &b)
+    {
+        return a > b;
+    }
+
+};
+
+
+class Solution {
+public:
+    int findKthLargest(vector<int>& nums, int k) {
+        
+        int n = nums.size();
+        priority_queue<int, vector<int>, mycompare> q;
+        
+        for (auto p : nums)
+        {
+            q.push(p);
+            
+            if (q.size() > k)
+            {
+                q.pop();
+            }
+        }
+        
+        return q.top();
+    }
+
+};
+
+
+/* -------------------------------------------------------------- */
+
+
 /* quick sort, O(N) average */
 /* https://leetcode.com/discuss/38336/solutions-partition-priority_queue-multiset-respectively */
 
