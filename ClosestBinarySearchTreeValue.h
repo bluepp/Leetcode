@@ -23,18 +23,28 @@ https://leetcode.com/problems/closest-binary-search-tree-value/
         return abs(a-target) < abs(b-target) ? a : b;
     }
 
-
+/* iterative version */
 
     int closestValue(TreeNode* root, double target) {
-            int result=root->val;
+        
+        int ret = root->val;
+        
+        while (root)
+        {
+            if ((double)root->val == target)
+            {
+                return root->val;
+            }
             
-            while(root){
-            if((double)root->val==target)return root->val;
-            if(abs((double)root->val-target)<abs(result-target))
-                result=root->val;
-            if(root->val>target)root=root->left;
-            else root=root->right;
+            if (abs(root->val - target) < abs(ret - target))
+            {
+                ret = root->val;
+            }
+            
+            if (target < root->val) root = root->left;
+            else root = root->right;
+          
         }
         
-        return result;
-    }
+        return ret;
+    }    
