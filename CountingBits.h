@@ -19,6 +19,13 @@ Can you do it like a boss? Do it without using any builtin function like __built
 
 */
 
+/*
+https://leetcode.com/discuss/105490/cute-lovely-simple-c-solution
+Because for an integer i, 
+when i/2 equals to the bit representation of i shift right for one bit. 
+So it's r[i/2]. And we just need to add i%2 which is the most right hand side of the bit set.
+*/
+
     vector<int> countBits(int num) {
        
        vector<int> res;
@@ -28,6 +35,22 @@ Can you do it like a boss? Do it without using any builtin function like __built
        for (int i = 1; i <= num; i++)
        {
            int x = res[i/2] + (i%2);
+           res.push_back(x);
+       }
+       
+       return res;
+    }
+    
+/* 2016-06-17,  */
+    vector<int> countBits(int num) {
+       
+       vector<int> res;
+       
+       res.push_back(0);
+       
+       for (int i = 1; i <= num; i++)
+       {
+           int x = res[i >> 1] + (i & 1);
            res.push_back(x);
        }
        
