@@ -10,6 +10,22 @@ return 964176192 (represented in binary as 00111001011110000010100101000000).
 https://leetcode.com/problems/reverse-bits/
 */
 
+/* 2016-06-17, update */
+
+    uint32_t reverseBits(uint32_t n) {
+        
+        int ret = 0;
+        
+        for(int i = 0; i < 32; i++)
+        {
+            ret |= ((n >> i) & 1) << (31-i);
+        }
+        
+        return ret;
+    }
+
+
+
     uint32_t reverseBits(uint32_t n) {
         
         if (n == 0) return 0;
