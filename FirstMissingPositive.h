@@ -23,29 +23,27 @@
            Pick out the first one that does not satisfy A[i] == i + 1.
  */
  
-     int firstMissingPositive(int A[], int n) {
+/* 2016-06-17, update */
+    int firstMissingPositive(vector<int>& nums) {
         
-        int i = 0;
-        while (i < n)
+        int i, n = nums.size();
+        for(i=0; i<n; i++)
         {
-            //find the position for each element, kind like sort it, but much fast
-            if (A[i] >= 0 && A[i] < n && A[A[i]] != A[i])
+            while(nums[i]>=1 && nums[i]<=n && nums[i]!=nums[nums[i]-1])
             {
-                swap(A[i], A[A[i]]);
-                continue;
+                swap(nums[i], nums[nums[i]-1]);
             }
-
-            ++i;
         }
 
-        int j = 1;
-        while(j < n && A[j] == j)
-            j++;
-	
-	    //fisrt element maybe n, if so, the largest missed positive number should be n+1
-	if (A[0] == j)
-	   ++j;
+        int j=1;
+        for(j=1; j<=n; j++)
+        {
+            if(nums[j-1]!=j)
+            {
+                break;
+            }
+        }
 
         return j;
-
+       
     }
