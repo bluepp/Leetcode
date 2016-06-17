@@ -32,7 +32,11 @@ Could you do it without using any loop / recursion?
         return n == 1;
     }
 
+/*
+It is worthwhile to mention that Method 1 works only when the base is prime. 
+For example, we cannot use this algorithm to check if a number is a power of 4 or 6 or any other composite number.
 
+*/
 /* without any loop/recursion */
     bool isPowerOfThree(int n) {
         if (n<=0) return false;
