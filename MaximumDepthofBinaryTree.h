@@ -34,15 +34,14 @@
     }
 
 
-/* 2014-09-09, my solution */
-    int maxDepth(TreeNode *root) {
+/* 2016-06-18, update */
+    int maxDepth(TreeNode* root) {
         if (!root) return 0;
-        if (!root->left && !root->right) return 1;
         
         queue<TreeNode *> q;
         q.push(root);
         q.push(NULL);
-        int ret = 0;
+        
         int count = 0;
         
         while (!q.empty())
