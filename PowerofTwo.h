@@ -12,3 +12,21 @@
         
         return (n > 0) && !(n & (n-1));
     }
+
+
+/* 2016-06-17, update */
+    bool isPowerOfTwo(int n) {
+        if (n < 0) return false;
+        
+        int count = 0;
+        for (int i = 0; i < 32; i++)
+        {
+            int bit = 1 << i;
+            if (bit & n)
+            {
+                count ++;
+            }
+        }
+        
+        return count == 1;
+    }
