@@ -1,0 +1,67 @@
+/*
+bluepp
+2016-06-19
+May the force be with me!
+
+https://leetcode.com/problems/inorder-successor-in-bst/
+
+/* https://leetcode.com/discuss/77805/java-5ms-short-code-with-explanations */
+
+    TreeNode* inorderSuccessor(TreeNode* root, TreeNode* p) {
+        
+        TreeNode *res = NULL;
+        
+        while (root)
+        {
+            if (root->val > p->val)
+            {
+                res = root;
+                root = root->left;
+            }
+            else
+            {
+                root = root->right;
+            }
+        }
+        
+        return res;
+    }
+
+
+
+/* my version, inorder successor in Binary Tree */
+    TreeNode* inorderSuccessor(TreeNode* root, TreeNode* p) {
+        
+        if (!root || !p) return NULL;
+        
+        stack<TreeNode *> s;
+        TreeNode *pCurr = root, *prev = NULL;
+        
+        while (pCurr || !s.empty())
+        {
+            if (pCurr)
+            {
+                s.push(pCurr);
+                pCurr = pCurr->left;
+            }
+            else
+            {
+                pCurr = s.top();
+                s.pop();
+                
+                if (pCurr == p)
+                {
+                    prev = pCurr;
+                }
+                else if (prev)
+                {
+                    return pCurr;
+                }
+                
+                pCurr = pCurr->right;
+            }
+        }
+        
+        return NULL;
+    
+    }
