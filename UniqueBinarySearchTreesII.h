@@ -33,13 +33,16 @@
 
 
 /* DFS */
- vector<TreeNode *> generateTrees(int n) {
-       return _gen(1, n);
+    vector<TreeNode*> generateTrees(int n) {
+        
+        if (n == 0) return vector<TreeNode *> (0);
+        return _gen(1, n);
     }
     
     vector<TreeNode *> _gen(int l, int r)
     {
         vector<TreeNode *> res;
+        
         if (l > r)
         {
             res.push_back(NULL);
@@ -62,5 +65,7 @@
                 }
             }
         }
+        
+        return res;
     
     }
