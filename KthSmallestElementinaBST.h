@@ -14,6 +14,42 @@ How would you optimize the kthSmallest routine?
 
 */
 
+/* 2016-06-19, iterative */
+    int kthSmallest(TreeNode* root, int k) {
+        
+        stack<TreeNode *> s;
+        TreeNode *pCurr = root;
+        int count = 0;
+        
+        while (pCurr || !s.empty())
+        {
+            if (pCurr)
+            {
+                s.push(pCurr);
+                pCurr = pCurr->left;
+            }
+            else
+            {
+                pCurr = s.top();
+                s.pop();
+                
+                count ++;
+                if (count == k)
+                {
+                    return pCurr->val;
+                }
+                
+                pCurr = pCurr->right;
+            }
+        }
+        
+        return -1;
+      
+    }
+
+
+/* recursion */
+
     int kthSmallest(TreeNode* root, int k) {
         int ret = 0, count = 0;
         
