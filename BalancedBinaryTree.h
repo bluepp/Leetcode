@@ -18,6 +18,34 @@
   Solution: DFS.
  */
  
+/* 2016-06-18, update */
+   bool isBalanced(TreeNode* root) {
+        
+        int height = 0;
+        return _isBalanced(root, height);
+    }
+    
+    bool _isBalanced(TreeNode *root, int &height)
+    {
+        if (!root)
+        {
+            height = 0;
+            return true;
+        }
+        
+        int lh = 0, rh = 0;
+        
+        bool l = _isBalanced(root->left, lh);
+        bool r = _isBalanced(root->right, rh);
+        
+        height = max(lh, rh)+1;
+        
+        return (l && r && abs(lh-rh) <= 1);
+       
+    }
+ 
+ 
+ 
 /* my solution */ 
     bool isBalanced(TreeNode *root) {
         if (!root || !root->left && !root->right) return true;
