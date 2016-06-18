@@ -33,36 +33,32 @@
  */
  
  /* 2015-07-17, update */
-     vector<vector<int>> pathSum(TreeNode* root, int sum) {
-        vector<int> vec;
-        vector<vector<int> > res;
+ /* 2016-06-19, update */
+    vector<vector<int>> pathSum(TreeNode* root, int sum) {
         
+        vector<int> vec;
+        vector<vector<int>> res;
         if (!root) return res;
         
         _path(root, sum, vec, res);
         return res;
     }
     
-    void _path(TreeNode *root, int sum, vector<int> vec, vector<vector<int> >&res)
+    void _path(TreeNode *root, int sum, vector<int> vec, vector<vector<int>> &res)
     {
         if (!root) return;
         
         vec.push_back(root->val);
-        if (!root->left && !root->right)
+        
+        if (!root->left && !root->right && root->val == sum)
         {
-            if (root->val == sum)
-            {
-                res.push_back(vec);
-                vec.pop_back();
-            }
-            
+            res.push_back(vec);
             return;
         }
         
         _path(root->left, sum-root->val, vec, res);
         _path(root->right, sum-root->val, vec, res);
         
-        vec.pop_back();
     }
     
     
