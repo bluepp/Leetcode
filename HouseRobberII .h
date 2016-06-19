@@ -18,6 +18,40 @@ determine the maximum amount of money you can rob tonight without alerting the p
 https://leetcode.com/problems/house-robber-ii/
 */
 
+/* 2016-06-20, update ? */
+    int rob(vector<int>& nums) {
+        
+        int n = nums.size();
+        
+        if (n == 0) return 0;
+        if (n == 1) return nums[0];
+        if (n == 2) return max(nums[0], nums[1]);
+        
+        int ret = 0;
+        
+        for (int start = 0; start < n; start ++)
+        {
+            int dp[n];
+            memset(dp, 0, sizeof(dp));
+            
+            dp[0] = nums[start];
+            dp[1] = max(nums[start], nums[(start+1)%n]);
+            
+            for (int i = 2; i < n-1; i++)
+            {
+                dp[i] = max(dp[i-1], dp[i-2]+nums[(i+start)%n]);
+            }
+            
+            ret = max(ret, dp[n-2]);
+        }
+        
+        return ret;
+        
+    }
+    
+
+
+
     int rob(vector<int>& nums) {
         int n = nums.size();
         if (n == 0) return 0;
