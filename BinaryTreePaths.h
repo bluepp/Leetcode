@@ -19,6 +19,46 @@ All root-to-leaf paths are:
 https://leetcode.com/problems/binary-tree-paths/
 */
 
+/* 2016-06-19, update, delete reverse part */
+
+    vector<string> binaryTreePaths(TreeNode* root) {
+        
+        vector<string> res;
+        if (!root) return res;
+        
+        string s = "";
+        _path(root, s, res);
+        
+        return res;
+    }
+    
+    void _path(TreeNode *root, string s, vector<string> &res)
+    {
+        
+        s += to_string(root->val);
+        
+        if (!root->left && !root->right)
+        {
+            res.push_back(s);
+            return;
+        }
+        
+        s += "->";
+        
+        if (root->left)
+        {
+            _path(root->left, s, res);
+        }
+        if (root->right)
+        {
+            _path(root->right, s, res);
+        }
+  
+    }
+
+
+
+
     vector<string> binaryTreePaths(TreeNode* root) {
         string s = "";
         vector<string> res;
