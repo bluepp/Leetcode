@@ -30,6 +30,30 @@ Maximum amount of money the thief can rob = 4 + 5 = 9.
 
 */
 
+/* 2016-06-20, update */
+/* https://leetcode.com/discuss/93998/simple-c-solution */
+
+    int rob(TreeNode* root) {
+        
+        int l, r;
+        
+        return _rob(root, l, r);
+    }
+    
+    int _rob(TreeNode *root, int &l, int &r)
+    {
+        if (!root)
+            return 0;
+
+        int ll = 0, lr = 0, rl = 0, rr = 0;
+        l = _rob(root->left, ll, lr);
+        r = _rob(root->right, rl, rr);
+
+        return max(root->val + ll + lr + rl + rr, l + r);
+        
+    }
+
+
 
     int rob(TreeNode* root) {
         int n = 0;
