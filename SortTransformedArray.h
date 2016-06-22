@@ -22,6 +22,29 @@ nums = [-4, -2, 2, 4], a = -1, b = 3, c = 5
 Result: [-23, -5, 1, 7]
 */
 
+
+/* https://leetcode.com/discuss/108847/simple-and-concise-o-n-solution */
+function sortTransformedArray(nums, a, b, c) {
+    var arr = nums.map(n => a * n * n + b * n + c);
+    var offset = a ? c - (b * b) / (4 * a) : Math.min(arr[0], arr.slice(-1)[0]);
+    var res = [];
+
+    for (var l = 0, r = arr.length - 1; l <= r;) {
+        if (Math.abs(arr[l] - offset) >= Math.abs(arr[r] - offset)) {
+            res.push(arr[l++]);
+        } else {
+            res.push(arr[r--]);
+        }
+    }
+
+    return res[0] > res[res.length - 1] ? res.reverse() : res;
+}
+
+
+
+
+
+/* my version */
     vector<int> sortTransformedArray(vector<int>& nums, int a, int b, int c) {
         
         stack<int> s, aux;
