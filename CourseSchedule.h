@@ -24,6 +24,53 @@ So it is impossible.
 https://leetcode.com/problems/course-schedule/
 */
 
+/* bfs , 2016-06-23 update */
+
+    bool canFinish(int numCourses, vector<pair<int, int>>& prerequisites) {
+        
+        vector<vector<int>> graph(numCourses, vector<int>());
+        vector<int> in_degree(numCourses, 0);
+        
+        for (auto p : prerequisites)
+        {
+            graph[p.second].push_back(p.first);
+            in_degree[p.first]++;
+        }
+        
+        queue<int> zeros;
+        for (int i = 0; i < numCourses; i++)
+        {
+            if (in_degree[i] == 0)
+            {
+                zeros.push(i);
+            }
+        }
+        
+        
+        while (!zeros.empty())
+        {
+            int seq = zeros.front();
+            zeros.pop();
+            
+            for (auto it = graph[seq].begin(); it != graph[seq].end(); it++)
+            {
+                in_degree[*it]--;
+                
+                if (in_degree[*it] == 0)
+                {
+                    zeros.push(*it);
+                    
+                }
+            }
+            
+            numCourses--;
+        }
+        
+        return numCourses == 0;
+    }
+
+
+
 /* bfs */
     bool canFinish(int numCourses, vector<pair<int, int>>& prerequisites) {
         
