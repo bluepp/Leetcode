@@ -17,41 +17,24 @@ Follow up:
 Could you do better than O(n2)?
 
 */
-/* https://leetcode.com/discuss/109028/concise-o-n-c-solution */
 
-struct hashFunc {
-    
-    size_t operator()(const pair<int, int> &point) const
-    {
-        return point.first * 31 + point.second;
-    }
-};
-
-
-class Solution {
-    
-public:
     bool isReflected(vector<pair<int, int>>& points) {
         
-        if (points.size() <= 1) return true;
-        unordered_set<pair<int, int>, hashFunc> points_set;
-        
-        int xmin = numeric_limits<int>::max();
-        int xmax = numeric_limits<int>::min();
-        
-        for (auto point : points) {
-            
-            xmin = min(xmin, point.first);
-            xmax = max(xmax, point.first);
-            
-            points_set.emplace(point);
+        unordered_map<int, set<int>> m;
+        int mx = INT_MIN, mn = INT_MAX;
+        for (auto a : points) {
+            mx = max(mx, a.first);
+            mn = min(mn, a.first);
+            m[a.first].insert(a.second);
         }
-        
-        for (auto point : points_set) {
-            
-            if (!points_set.count(make_pair(xmax + xmin - point.first, point.second)))
+        double y = (double)(mx + mn) / 2;
+        for (auto a : points) {
+            int t = 2 * y - a.first;
+            if (!m.count(t) || !m[t].count(a.second)) {
                 return false;
+            }
         }
         return true;
+        
     }
 
