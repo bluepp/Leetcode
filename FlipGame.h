@@ -19,18 +19,18 @@ If there is no valid move, return an empty list [].
 */
 
 
-   vector<string> generatePossibleNextMoves(string s) {
-        vector<string> result;
-    
-        for (int i = 0; i<(int)(s.length() - 1); i++) {
-            
-            if (s[i] == '+' && s[i + 1] == '+') {
-                s[i] = '-', s[i + 1] = '-';
-                result.push_back(s);
-                s[i] = '+', s[i + 1] = '+';
+    vector<string> generatePossibleNextMoves(string s) {
+        
+        vector<string> res;
+        
+        for (int i = 1; i < s.size(); i++)
+        {
+            if (s[i] == '+' && s[i-1] == '+')
+            {
+                res.push_back(s.substr(0, i-1) + "--" + s.substr(i+1));
             }
         }
-
-        return result;
-       
+        
+        return res;
+        
     }
