@@ -33,49 +33,24 @@ Show Similar Problems
 
 */
 
+
+/* 2016-06-25, update */
 class ValidWordAbbr {
 private:
-    unordered_map<string, vector<string>> map;
-    
-    string abbr(string str)
-    {
-        string s;
-        int n = str.length();
-        if (n <= 2)
-        {
-            s = str;
-        }
-        else
-        {
-            s = str[0] + to_string(n-2)+ str[n-1];
-        }
-        
-        return s;
-    }
+   unordered_map<string, set<string>> map;
     
 public:
     ValidWordAbbr(vector<string> &dictionary) {
-        
         for (auto p : dictionary)
         {
-            string s = abbr(p);
-            map[s].push_back(p);
+            string k = p[0] + to_string(p.length()-2) + p.back();
+            map[k].insert(p);
         }
     }
 
     bool isUnique(string word) {
         
-        string s = abbr(word);
-        
-        if (!map.count(s)) return true;
-        
-        vector<string> strs = map[s];
-        
-        for (auto p : strs)
-        {
-            if (p != word) return false;
-        }
-        
-        return true;
+        string k = word[0] + to_string(word.length()-2) + word.back();
+        return map[k].count(word) == map[k].size();
     }
 };
