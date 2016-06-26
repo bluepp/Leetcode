@@ -25,6 +25,39 @@ You may assume k is always valid, ie: 1 ≤ k ≤ input array's size for non-emp
 https://leetcode.com/problems/sliding-window-maximum/
 */
 
+/* 2016-06-27, update */
+
+    vector<int> maxSlidingWindow(vector<int>& nums, int k) {
+        
+        vector<int> res;
+        deque<int> q;
+        
+        int n = nums.size();
+        
+        for (int i = 0; i < n; i++)
+        {
+            if (!q.empty() && q.front() == i-k)
+            {
+                q.pop_front();
+            }
+            
+            while (!q.empty() && nums[q.back()] < nums[i])
+            {
+                q.pop_back();
+            }
+            
+            q.push_back(i);
+            
+            if (i >= k-1)
+            {
+                res.push_back(nums[q.front()]);
+            }
+        }
+        
+        return res;
+    }
+
+
     vector<int> maxSlidingWindow(vector<int>& nums, int k) {
         vector<int> res;
         
