@@ -22,6 +22,44 @@
               This solution is much easier to understand.
 */
 
+/* 2016-06-26 , unordered_map */
+   int longestConsecutive(vector<int>& nums) {
+        
+        int ret = 0;
+        unordered_map<int, int> map;
+        
+        
+        for (int i = 0; i < nums.size(); i++)
+        {
+            map[nums[i]] = i;
+        }
+        
+        for (int i = 0; i < nums.size(); i++)
+        {
+            int d = nums[i];
+            int n = 1;
+            
+            map.erase(d);
+            while (map.find(++d) != map.end())
+            {
+                n++;
+                map.erase(d);
+            }
+            
+            d = nums[i];
+            while (map.find(--d) != map.end())
+            {
+                n++;
+                map.erase(d);
+            }
+            
+            ret = max(ret, n);
+        }
+        
+        return ret;
+    }
+
+
     int longestConsecutive(vector<int> &num) {
         unordered_set<int> s;
         int n = num.size();
