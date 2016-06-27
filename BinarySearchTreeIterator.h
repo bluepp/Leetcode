@@ -33,7 +33,7 @@ public:
 
     /** @return the next smallest number */
     int next() {
-        if (stk.empty() && !node) return 0;
+//        if (stk.empty() && !node) return 0; 2016.06.27 comment off
         
         while (node)
         {
