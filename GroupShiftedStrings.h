@@ -24,21 +24,20 @@ https://leetcode.com/problems/group-shifted-strings/
 
 
 /* 2016-06-30, update */
-   vector<vector<string>> groupStrings(vector<string>& strings) {
+    vector<vector<string>> groupStrings(vector<string>& strings) {
         
         vector<vector<string>> res;
-        unordered_map<string, multiset<string>> map;
+        unordered_map<string, vector<string>> map;
         
         for (auto p : strings)
         {
             string t = "";
-            
             for (char c : p)
             {
-                t += to_string((c + 26 - p[0]) % 26) + ",";
+                t += to_string((c - p[0] + 26) % 26) + ",";
             }
             
-            map[t].insert(p);
+            map[t].push_back(p);
         }
         
         for (auto it = map.begin(); it != map.end(); it++)
