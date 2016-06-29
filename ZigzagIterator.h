@@ -17,6 +17,47 @@ The "Zigzag" order is not clearly defined and is ambiguous for k > 2 cases. If "
 It should return [1,4,8,2,5,9,3,6,7].
 */
 
+/* 2016-06-30, another one */
+
+class ZigzagIterator {
+private:
+    vector<int> v;
+    int i = 0;
+
+public:
+    ZigzagIterator(vector<int>& v1, vector<int>& v2) {
+        
+        int n1 = v1.size(), n2 = v2.size(), n = max(n1, n2);
+        
+        for (int i = 0; i < n; i++)
+        {
+            if (i < n1)
+            {
+                v.push_back(v1[i]);
+            }
+            
+            if (i < n2)
+            {
+                v.push_back(v2[i]);
+            }
+        }
+        
+    }
+
+    int next() {
+        
+        return v[i++];
+    }
+
+    bool hasNext() {
+        
+        return i < v.size();
+    }
+};
+
+
+
+
 
 /* 2016-06-26, another one */
 class ZigzagIterator {
