@@ -11,6 +11,26 @@ You are guaranteed to have only one unique value in the BST that is closest to t
 https://leetcode.com/problems/closest-binary-search-tree-value/
 */
 
+/* 2016-06-30 */
+    int closestValue(TreeNode* root, double target) {
+        
+        int ret = root->val;
+        
+        while (root)
+        {
+            if (abs(ret-root->val) >= abs(root->val-target))
+            {
+                ret = root->val;
+            }
+            
+            root = target < root->val ? root->left: root->right;
+        }
+        
+        return ret;
+        
+    }
+
+
 /* 2016-06-16, update, recursion version*/
 
     int closestValue(TreeNode* root, double target) {
