@@ -22,6 +22,35 @@ Note: For the return value, each inner list's elements must follow the lexicogra
 https://leetcode.com/problems/group-shifted-strings/
 */
 
+
+/* 2016-06-30, update */
+   vector<vector<string>> groupStrings(vector<string>& strings) {
+        
+        vector<vector<string>> res;
+        unordered_map<string, multiset<string>> map;
+        
+        for (auto p : strings)
+        {
+            string t = "";
+            
+            for (char c : p)
+            {
+                t += to_string((c + 26 - p[0]) % 26) + ",";
+            }
+            
+            map[t].insert(p);
+        }
+        
+        for (auto it = map.begin(); it != map.end(); it++)
+        {
+            res.push_back(vector<string>(it->second.begin(), it->second.end()));
+        }
+        
+        return res;
+    }
+
+
+
 /* refer to , https://leetcode.com/discuss/50557/4ms-easy-c-solution-with-explanations */
     vector<vector<string>> groupStrings(vector<string>& strings) {
         unordered_map<string, vector<string> > map;
