@@ -34,6 +34,42 @@ Show Similar Problems
 */
 
 
+/* 2016-06-30, another one */
+
+class ValidWordAbbr {
+private:
+    unordered_map<string, string> map;
+
+public:
+    ValidWordAbbr(vector<string> &dictionary) {
+        
+        for (auto p : dictionary)
+        {
+            string t = p[0] + to_string(p.length()-2) + p.back();
+            
+            if (map.find(t) != map.end() && map[t] != p)
+            {
+                map[t] = "";
+            }
+            else
+            {
+                map[t] = p;
+            }
+        }
+        
+    }
+
+    bool isUnique(string word) {
+        
+        string t = word[0] + to_string(word.length()-2) + word.back();
+        
+        return map.find(t) == map.end() || map[t] == word;
+      
+    }
+};
+
+
+
 /* 2016-06-25, update */
 class ValidWordAbbr {
 private:
