@@ -21,6 +21,36 @@ As an added challenge, try to code it using only iterators in C++ or iterators i
 https://leetcode.com/problems/flatten-2d-vector/
 */
 
+
+/* 2016-06-30, update */
+class Vector2D {
+private:
+    vector<int> v;
+    int i;
+    
+public:
+    Vector2D(vector<vector<int>>& vec2d) {
+        
+        for (auto p : vec2d)
+        {
+            v.insert(v.end(), p.begin(), p.end());
+        }
+        
+    }
+
+    int next() {
+        
+        return v[i++];
+    }
+
+    bool hasNext() {
+        
+        return i < v.size();
+    }
+};
+
+
+
 /* key point, how to handle empty row ? */
 /* https://leetcode.com/discuss/50259/20ms-c-solution-with-explanations */
 class Vector2D {
