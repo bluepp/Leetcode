@@ -12,6 +12,19 @@ the linked list should become 1 -> 2 -> 4 after calling your function.
 https://leetcode.com/problems/delete-node-in-a-linked-list/
 */
 
+
+/* 2016-07-01 */
+    void deleteNode(ListNode* node) {
+        
+        ListNode *pNext = node->next;
+        
+        node->val = pNext->val;
+        node->next = pNext->next;
+        
+        delete pNext;
+    }
+
+
     void deleteNode(ListNode* node) {
         if (!node) return;
         node->val = node->next->val;
