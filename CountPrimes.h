@@ -8,6 +8,40 @@ Count the number of prime numbers less than a non-negative number, n.
 https://leetcode.com/problems/count-primes/
 */
 
+/* 2015-07-02, UPDATE */
+
+    int countPrimes(int n) {
+        
+        if (n <= 2)
+        {
+            return 0;
+        }
+        
+        vector<bool> prime(n, true);
+        int count = n-2;
+        int limit = sqrt(n);
+        
+        for (int i = 2; i <= limit; i++)
+        {
+            if (prime[i])
+            {
+                for (int j = i*2; j < n; j += i)
+                {
+                    if (prime[j])
+                    {
+                        prime[j] = false;
+                        count--;
+                    }
+                }
+            }
+        }
+        
+        return count;
+    }
+    
+    
+
+
     int countPrimes(int n) {
         if (n <= 2) return 0;
         if (n == 3) return 1;
