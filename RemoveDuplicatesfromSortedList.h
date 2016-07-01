@@ -16,6 +16,33 @@
            2. Copy value first (like Remove Duplicates from Array) and then delete the remaining elements.
  */
  
+ /* 2016-07-01 */
+ 
+    ListNode* deleteDuplicates(ListNode* head) {
+        
+        ListNode *pCurr = head;
+        
+        while (pCurr)
+        {
+            ListNode *pNext = pCurr->next;
+            
+            while (pNext && pNext->val == pCurr->val)
+            {
+                ListNode *pDel = pNext;
+                pNext = pNext->next;
+                delete(pDel);
+            }
+            
+            pCurr->next = pNext;
+            pCurr = pNext;
+        }
+        
+        return head;
+        
+    }
+ 
+ 
+ 
  /* my new version */
      ListNode *deleteDuplicates(ListNode *head) {
         if (!head || !head->next) return head;
