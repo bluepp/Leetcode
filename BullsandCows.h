@@ -29,6 +29,27 @@ You may assume that the secret number and your friend's guess only contain digit
 https://leetcode.com/problems/bulls-and-cows/
 */
 
+/* 2016-07-01, easy understanding one */
+
+    string getHint(string secret, string guess) {
+        
+        int m[256] = {0}, bulls = 0, cows = 0;
+        
+        for (int i = 0; i < secret.size(); ++i) {
+            
+            if (secret[i] == guess[i]) ++bulls;
+            else {
+                if (m[secret[i]]++ < 0) ++cows;
+                if (m[guess[i]]-- > 0) ++ cows;
+            }
+        }
+        
+        return to_string(bulls) + "A" + to_string(cows) + "B";
+        
+    }
+
+
+
     string getHint(string secret, string guess) {
         int m[256] = {0}, a = 0, b = 0, i = 0;
         for (char s : secret) {
