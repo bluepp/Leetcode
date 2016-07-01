@@ -22,6 +22,30 @@ Example: 19 is a happy number
 https://leetcode.com/problems/happy-number/
 */
 
+
+    bool isHappy(int n) {
+        
+       set <int> s;
+       
+       while (n != 1)
+       {
+           int t = 0;
+           
+           while (n)
+           {
+               t += (n % 10) * (n % 10);
+               n /= 10;
+           }
+           
+           n = t;
+           if (s.count(n)) break;
+           else s.insert(n);
+       }
+       
+       return n == 1;
+    }
+
+
 /* https://leetcode.com/discuss/101005/4-c-solutions-with-explanations */
 
     bool isHappy(int n) {
