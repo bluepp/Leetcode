@@ -29,6 +29,27 @@ Special thanks to @stellari for adding this problem and creating all test cases.
 
 */
 
+/* 2016-07-01, update */
+
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        
+        if (!headA || !headB)
+        {
+            return NULL;
+        }
+        
+        ListNode *a = headA, *b = headB;
+        while (a != b)
+        {
+            a = a ? a->next : headB;
+            b = b ? b->next : headA;
+        }
+        
+        return a;
+    }
+
+
+
 /* my solution */
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
         
