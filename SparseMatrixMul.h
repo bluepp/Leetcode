@@ -27,23 +27,29 @@ AB = | -1 0 3 | x | 0 0 0 | = | -7 0 3 |
                   
 */
 
-   vector<vector<int>> multiply(vector<vector<int>>& A, vector<vector<int>>& B) {
-        int m = A.size(), n = B.size(), p = B[0].size();
-        vector<vector<int> > mat(m, vector<int>(p, 0));
+
+/* 2016-07-03, update */
+
+    vector<vector<int>> multiply(vector<vector<int>>& A, vector<vector<int>>& B) {
         
-        for (int i = 0; i < m; i++)
+        vector<vector<int>> res (A.size(), vector<int>(B[0].size()));
+        
+        for (int i = 0; i < A.size(); i++)
         {
-            for (int j = 0; j < n; j++)
+            for (int k = 0; k < A[0].size(); k++)
             {
-                if (A[i][j])
+                if (A[i][k] != 0)
                 {
-                    for (int k = 0; k < p; k++)
+                    for (int j = 0; j < B[0].size(); j++)
                     {
-                        mat[i][k] += A[i][j] * B[j][k];
+                        if (B[k][j] != 0)
+                        {
+                            res[i][j] += A[i][k] * B[k][j];
+                        }
                     }
                 }
             }
         }
         
-        return mat;
+        return res;
     }
