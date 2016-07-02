@@ -30,6 +30,27 @@ https://leetcode.com/problems/wiggle-sort/
 
 /* ------------------- */
 
+/* 2016-07-02, with sort */
+
+    void wiggleSort(vector<int>& nums) {
+        
+        sort(nums.begin(), nums.end());
+        
+        int n = nums.size();
+        if (n <= 2)
+        {
+            return;
+        }
+        
+        for (int i = 2; i < n; i += 2)
+        {
+            swap(nums[i], nums[i-1]);
+        }
+    }
+    
+    
+
+
 
     void wiggleSort(vector<int>& nums) {
         int n = nums.size();
