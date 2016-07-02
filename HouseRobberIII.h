@@ -54,22 +54,32 @@ Maximum amount of money the thief can rob = 4 + 5 = 9.
     }
 
 
+/* 2016-07-03, update */
 
     int rob(TreeNode* root) {
+        
         int n = 0;
-        return _rob(root,n);
+        return _rob(root, n);
     }
     
     int _rob(TreeNode *root, int &n)
     {
-        if (!root) return 0;
-        if (!root->left && !root->right) return root->val;
+        if (!root)
+        {
+            return 0;
+        }
         
-        int l = 0, r = 0, nl = 0, nr = 0;
-        if (root->left) l = _rob(root->left, nl);
-        if (root->right) r = _rob(root->right, nr);
+        if (!root->left && !root->right)
+        {
+            return root->val;
+        }
         
-        n = l+r;
+        int nl = 0, nr = 0;
+        int l = _rob(root->left, nl);
+        int r = _rob(root->right,nr);
         
-        return max(n, nl+nr+root->val);
+        n = l + r;
+        
+        return max(n, root->val + nl+nr);
+        
     }
