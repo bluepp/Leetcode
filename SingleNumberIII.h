@@ -45,10 +45,7 @@ Your algorithm should run in linear runtime complexity. Could you implement it u
             }
         }
         
-        vector<int> res;
-        res = {x1, x2};
-        
-        return res;
+       return {x1, x2}; // 2016-07-02, update
     }
 
 
