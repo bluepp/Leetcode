@@ -15,6 +15,29 @@ Note:
 All costs are positive integers.
 https://leetcode.com/problems/paint-house/
 */
+/* 2016-07-02, update */
+
+    int minCost(vector<vector<int>>& costs) {
+        
+        if (costs.empty() || costs[0].empty())
+        {
+            return 0;
+        }
+        
+        vector<vector<int>> dp = costs;
+        
+        for (int i = 1; i < costs.size(); i++)
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                dp[i][j] += min(dp[i-1][(j+1)%3], dp[i-1][(j+2)%3]);
+            }
+        }
+        
+        return min(min(dp.back()[0], dp.back()[1]), dp.back()[2]);
+    }
+
+
 
 /* DP , http://www.cnblogs.com/EdwardLiu/p/4346139.html */
 
