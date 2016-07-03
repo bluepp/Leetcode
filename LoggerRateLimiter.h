@@ -35,12 +35,12 @@ logger.shouldPrintMessage(11,"foo"); returns true;
 
 */
 
-
+/* 2016-07-03, update */
 class Logger {
 private:
     unordered_map<string, int> map;
-
     
+
 public:
     /** Initialize your data structure here. */
     Logger() {
@@ -51,19 +51,14 @@ public:
         If this method returns false, the message will not be printed.
         The timestamp is in seconds granularity. */
     bool shouldPrintMessage(int timestamp, string message) {
-        if (!map.count(message))
-        {
-            map[message] = timestamp;
-            return true;
-        }
         
-        if (timestamp - map[message] >= 10)
+        if (!map.count(message) || timestamp - map[message] >= 10)
         {
             map[message] = timestamp;
             return true;
         }
         
         return false;
-        
+      
     }
 };
