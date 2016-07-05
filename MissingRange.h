@@ -12,6 +12,40 @@
   For example, given [0, 1, 3, 50, 75], lower = 0 and upper = 99, return ["2", "4->49", "51->74", "76->99"].
 */  
 
+/* 2016-07-06, update */
+
+   vector<string> findMissingRanges(vector<int>& nums, int lower, int upper) {
+        
+        vector<string> res;
+        
+        int n = nums.size();
+        int l = lower;
+        
+        for (int i = 0; i <= n; i++)
+        {
+            int r = (i < n && nums[i] <= upper) ? nums[i] : upper+1;
+            
+            if (l == r) 
+            {
+                l++;
+            }
+            else if (r > l)
+            {
+               
+                string t = r - l == 1 ? to_string(l) : to_string(l) + "->" + to_string(r - 1);
+                
+                res.push_back(t);
+                
+                l  = r+1;
+            }
+            
+        }
+        
+        return res;
+        
+    }
+
+
 
 /* 2014-12-20 */
     vector<string> findMissingRanges(int A[], int n, int lower, int upper) {
