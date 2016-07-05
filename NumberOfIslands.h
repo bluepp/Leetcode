@@ -36,41 +36,47 @@ https://leetcode.com/discuss/86977/bfs-commented-java-solution
 /* 3. union find*/
 
 /* 1. dfs */
+/* 2016-07-06, update */
     int numIslands(vector<vector<char>>& grid) {
         
-        if (grid.empty() || grid[0].empty()) return 0;
+        if (grid.empty() || grid[0].empty())
+        {
+            return 0;
+        }
         
         int m = grid.size(), n = grid[0].size();
+        int count = 0;
         
-        int count = 1;
         for (int i = 0; i < m; i++)
         {
             for (int j = 0; j < n; j++)
             {
+                
                 if (grid[i][j] == '1')
                 {
-                    _dfs(grid, i, j);
                     count++;
+                    _dfs(grid, i, j);
                 }
             }
         }
         
-        return count-1;
+        return count;
     }
-    
     
     void _dfs(vector<vector<char>> &grid, int row, int col)
     {
+        if (row < 0 || row >= grid.size() || col < 0 || col >= grid[0].size() || grid[row][col] != '1')
+        {
+            return;
+        }
         
-        if (row < 0 || row >= grid.size() || col < 0 || col >= grid[0].size() || grid[row][col] != '1') return;
-        
-        grid[row][col] = '#';
+        grid[row][col] = 'x';
         
         _dfs(grid, row+1, col);
         _dfs(grid, row-1, col);
         _dfs(grid, row, col+1);
         _dfs(grid, row, col-1);
-    
+        
     }
 
 /* 2. bfs */
