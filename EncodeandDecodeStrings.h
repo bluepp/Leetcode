@@ -46,6 +46,26 @@ public:
         return encode;
     }
 
+/* 2016-07-06, update */
+    vector<string> decode(string s) {
+        
+        vector<string> res;
+        
+        int i = 0;
+        while (i < s.length())
+        {
+            int pos = s.find_first_of('@', i);
+            int len = stoi(s.substr(i, pos-i));
+            
+            res.push_back(s.substr(pos+1, len));
+            
+            i = pos+len+1;
+        }
+        
+        return res;
+    }
+
+
     // Decodes a single string to a list of strings.
     vector<string> decode(string s) {
         vector<string> r;
