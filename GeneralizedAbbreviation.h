@@ -11,6 +11,47 @@ Given word = "word", return the following list (order does not matter):
 ["word", "1ord", "w1rd", "wo1d", "wor1", "2rd", "w2d", "wo2", "1o1d", "1or1", "w1r1", "1o2", "2r1", "3d", "w3", "4"]
 */
 
+/* 2016-07-07, iteration version */
+
+    vector<string> generateAbbreviations(string word) {
+        
+        vector<string> res;
+        
+        for (int i = 0; i < pow(2, word.size()); i ++)
+        {
+            string out = "";
+            int count = 0;
+            
+            for (int j = 0; j < word.size(); j++)
+            {
+                if ((i >> j) & 1)
+                {
+                    count ++;
+                }
+                else
+                {
+                    if (count != 0)
+                    {
+                        out += to_string(count);
+                        count = 0;
+                    }
+                    
+                    out += word[j];
+                }
+            }
+            
+            if (count > 0)
+            {
+                out += to_string(count);
+            }
+            
+            res.push_back(out);
+        }
+        
+        return res;
+    }
+
+
 
 /* straight forward recursion soluation */
 
