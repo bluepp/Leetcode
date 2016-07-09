@@ -14,20 +14,17 @@ https://leetcode.com/problems/closest-binary-search-tree-value/
 /* 2016-06-30 */
     int closestValue(TreeNode* root, double target) {
         
-        int ret = root->val;
-        
-        while (root)
-        {
-            if (abs(ret-root->val) >= abs(root->val-target))
-            {
-                ret = root->val;
+        int res = root->val;
+        while (root) {
+            
+            if (abs(res - target) >= abs(root->val - target)) {
+                res = root->val;
             }
             
-            root = target < root->val ? root->left: root->right;
+            root = target < root->val ? root->left : root->right;
         }
         
-        return ret;
-        
+        return res;
     }
 
 
