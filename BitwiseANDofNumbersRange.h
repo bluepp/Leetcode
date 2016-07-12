@@ -18,6 +18,21 @@ have a binary representation with the 10th bit is 1 and following 22 bit are all
 As all number between m and n are all start with 01110011 0, the result of bitwise AND is 01110011 0 + 23(0)
 */
 
+/* 2016-07-12, update */
+  int rangeBitwiseAnd(int m, int n) {
+        
+        int i = 0;
+        while (m != n)
+        {
+            m >>= 1;
+            n >>= 1;
+            i++;
+        }
+        
+        return m << i;
+        
+    }
+
 
     int rangeBitwiseAnd(int m, int n) {
         
