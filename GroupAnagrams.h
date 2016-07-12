@@ -20,29 +20,25 @@ All inputs will be in lower-case.
 https://leetcode.com/problems/anagrams/
 */
 
+
+/* 2016-07-13, update */
     vector<vector<string>> groupAnagrams(vector<string>& strs) {
         
-        unordered_map<string, vector<int> > map;
-        for (int i = 0; i < strs.size(); i++)
+        vector<vector<string>> res;
+        
+        unordered_map<string, vector<string>> map;
+        
+        for (auto p : strs)
         {
-            string t = strs[i];
+            string t = p;
             sort(t.begin(), t.end());
-            map[t].push_back(i);
+            
+            map[t].push_back(p);
         }
         
-        vector<vector<string> > res;
-        for (auto p : map)
+        for (auto it : map)
         {
-            vector<string> vec;
-            vector<int> t = p.second;
-            
-            for (auto k : t)
-            {
-                vec.push_back(strs[k]);
-            }
-            
-            sort(vec.begin(), vec.end());
-            res.push_back(vec);
+            res.push_back(it.second);
         }
         
         return res;
