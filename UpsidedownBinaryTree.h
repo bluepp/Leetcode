@@ -47,16 +47,24 @@ solution: 1. iteration http://www.danielbit.com/blog/puzzle/leetcode/leetcode-bi
     
     /* 2015-07-16, update */
     /* http://www.fgdsb.com/2015/01/04/binary-tree-upside-down/ */
-    TreeNode* upsideDownBinaryTree(TreeNode* root) {
-        if (!root || !root->left) return root;
+    /* 2016-07-13, update */
+    
+        TreeNode* upsideDownBinaryTree(TreeNode* root) {
         
-        TreeNode *ret = upsideDownBinaryTree(root->left);
+        if (!root || !root->left)
+        {
+            return root;
+        }
         
-        root->left->left = root->right;
-        root->left->right = root;
+        TreeNode *L = root->left;
+        TreeNode *R = root->right;
         
+        TreeNode *res = upsideDownBinaryTree(L);
+        
+        L->left = R;
+        L->right = root;
         root->left = NULL;
         root->right = NULL;
         
-        return ret;
+        return res;
     }
