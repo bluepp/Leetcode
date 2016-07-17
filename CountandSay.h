@@ -18,6 +18,53 @@
 
  	Solution: ...
 */	
+
+/* 2016-07-17, update */
+
+    string countAndSay(int n) {
+        
+        if (n <= 0)
+        {
+            return "";
+        }
+        
+        string res = "1";
+        int count = 0;
+        
+        for (int i = 1; i < n; i++)
+        {
+            string tmp = "";
+            res.push_back('$');
+            int len = res.length();
+            int count = 0;
+            
+            for (int j = 0; j < len; j++)
+            {
+                if (j == 0)
+                {
+                    count ++;
+                }
+                else
+                {
+                    if (res[j] != res[j-1])
+                    {
+                        tmp += to_string(count);
+                        tmp += res[j-1];
+                        count = 1;
+                    }
+                    else
+                    {
+                        count ++;
+                    }
+                }
+            }
+            
+            res = tmp;
+        }
+        
+        return res;
+       
+    }
 	
     string countAndSay(int n) {
         string res = "1";
