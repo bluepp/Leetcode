@@ -42,6 +42,39 @@ https://leetcode.com/problems/factor-combinations/
 
 */
 
+/* 2016-07-18, update */
+
+    vector<vector<int>> getFactors(int n) {
+        
+        vector<int> vec;
+        vector<vector<int>> res;
+        
+        _factor(n, 2, vec, res);
+        return res;
+    }
+    
+    void _factor(int n, int start, vector<int> vec, vector<vector<int>>& res)
+    {
+        if (n == 1)
+        {
+            if (vec.size() > 1)
+            {
+                res.push_back(vec);
+                return;
+            }
+        }
+        
+        for (int i = start; i <= n; i++)
+        {
+            if (n % i == 0)
+            {
+                vec.push_back(i);
+                _factor(n/i, i, vec, res);
+                vec.pop_back();
+            }
+        }
+    }
+
 
 /* https://leetcode.com/discuss/51257/share-simple-c-dfs-accepted-solution */
     vector<vector<int>> getFactors(int n) {
