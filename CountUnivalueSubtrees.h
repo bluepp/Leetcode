@@ -18,6 +18,31 @@ return 4.
 https://leetcode.com/problems/count-univalue-subtrees/
 */
 
+/* 2016-07-18, update */
+
+    int countUnivalSubtrees(TreeNode* root) {
+        
+        int res = 0;
+        isUni(root, -1, res);
+        
+        return res;
+    }
+    
+    bool isUni(TreeNode *root, int val, int &res)
+    {
+        if (!root) return true;
+        
+        if (!isUni(root->left, root->val, res) | !isUni(root->right, root->val, res)) 
+        {
+            return false;
+        }
+        
+        ++res;
+        
+        return root->val == val;
+    }
+
+
 
 /* 2015-08-17, my version */
 
