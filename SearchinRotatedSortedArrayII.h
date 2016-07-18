@@ -19,6 +19,53 @@
            Since there are duplicates, it's hard to decide which branch to go if binary-search is deployed.
  */
  
+ /* 2016-07-18, update binary search */
+     bool search(vector<int>& nums, int target) {
+        
+        int n = nums.size();
+        int l = 0, r = n-1;
+        
+        while (l <= r)
+        {
+            int m = (l+r)/2;
+            
+            if (nums[m] == target)
+            {
+                return true;
+            }
+            else if (nums[m] < nums[r])
+            {
+                if (nums[m] < target && nums[r] >= target)
+                {
+                    l = m+1;
+                }
+                else
+                {
+                    r = m-1;
+                }
+            }
+            else if (nums[m] > nums[r])
+            {
+                if (nums[l] <= target && nums[m] > target)
+                {
+                    r = m-1;
+                }
+                else
+                {
+                    l = m+1;
+                }
+            }
+            else
+            {
+                r--;
+            }
+        }
+        
+        return false;
+        
+    }
+ 
+ 
  
     bool search(int a[], int n, int target) {
         
