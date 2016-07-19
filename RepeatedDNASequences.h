@@ -18,6 +18,49 @@ Return:
 https://leetcode.com/problems/repeated-dna-sequences/
 */
 
+/* 2016-07-19, update */
+    vector<string> findRepeatedDnaSequences(string s) {
+        
+        vector<string> res;
+        unordered_map<int,int> map;
+        
+        int n = s.length();
+        if (n < 10)
+        {
+            return res;
+        }
+        
+        int curr = 0, i = 0;
+        int mask = 0x7ffffff;
+        
+        while (i < 9)
+        {
+            curr = (curr << 3) | (s[i++] & 7);
+        }
+        
+        while (i < n)
+        {
+            curr = ((curr & mask) << 3) | (s[i++] & 7);
+            
+            if (map.find(curr) != map.end())
+            {
+                if (map[curr] == 1)
+                {
+                    res.push_back(s.substr(i-10, 10));
+                }
+                
+                map[curr]++;
+            }
+            else
+            {
+                map[curr]++;
+            }
+        }
+        
+        return res;
+    }
+
+
     vector<string> findRepeatedDnaSequences(string s) {
         
         vector<string> res;
