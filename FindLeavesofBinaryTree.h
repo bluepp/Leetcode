@@ -31,6 +31,45 @@ Explanation:
 Returns [4, 5, 3], [2], [1].
 */
 
+/* 2016-07-29, another way */
+
+    vector<vector<int>> findLeaves(TreeNode* root) {
+        
+        vector<vector<int>> res;
+        
+        while (root)
+        {
+            vector<int> leaves;
+            root = _remove(root, leaves);
+            res.push_back(leaves);
+        }
+        
+        return res;
+    }
+    
+    TreeNode * _remove(TreeNode *root, vector<int> &leaves)
+    {
+        if (!root)
+        {
+            return NULL;
+        }
+        
+        if (!root->left && !root->right)
+        {
+            leaves.push_back(root->val);
+            return NULL;
+        }
+        
+        root->left = _remove(root->left, leaves);
+        root->right = _remove(root->right, leaves);
+        
+        return root;
+    }
+    
+    
+
+
+
     vector<vector<int>> findLeaves(TreeNode* root) {
         
         vector<vector<int>> res;
