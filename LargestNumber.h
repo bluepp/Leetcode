@@ -12,6 +12,24 @@ Note: The result may be very large, so you need to return a string instead of an
 https://leetcode.com/problems/largest-number/
 */
 
+/* 2016-08-01, update */
+    string largestNumber(vector<int>& nums) {
+        
+        string res;
+        sort(nums.begin(), nums.end(), [](int a, int b)
+        {
+            return to_string(a)+to_string(b) > to_string(b)+to_string(a);
+        });
+        
+        for (auto p : nums)
+        {
+            res += to_string(p);
+        }
+        
+        return res[0] == '0' ? "0" : res;
+    }
+
+
     string largestNumber(vector<int>& nums) {
          vector<string> arr;  
           
