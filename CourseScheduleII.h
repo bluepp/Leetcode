@@ -26,6 +26,51 @@ The input prerequisites is a graph represented by a list of edges, not adjacency
 
 */
 
+/* 2016-08-01, update */
+
+    vector<int> findOrder(int numCourses, vector<pair<int, int>>& prerequisites) {
+       
+        vector<vector<int>> graph(numCourses, vector<int>());
+        vector<int> in_degree(numCourses, 0);
+        
+        for (auto p : prerequisites)
+        {
+            graph[p.second].push_back(p.first);
+            in_degree[p.first]++;
+        }
+        
+        queue<int> q;
+        for (int i = 0; i < numCourses; i++)
+        {
+            if (in_degree[i] == 0)
+            {
+                q.push(i);
+            }
+        }
+        
+        
+        vector<int> ret;
+        while (!q.empty())
+        {
+            int t = q.front();
+            q.pop();
+            
+            ret.push_back(t);
+            
+            for (auto p : graph[t])
+            {
+                in_degree[p]--;
+                if (in_degree[p] == 0)
+                {
+                    q.push(p);
+                }
+            }
+        }
+        
+        return ret.size() == numCourses ? ret : vector<int>();
+    }
+
+
     vector<int> findOrder(int numCourses, vector<pair<int, int>>& prerequisites) {
         
         vector<vector<int>> graph(numCourses, vector<int>());
