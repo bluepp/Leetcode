@@ -23,17 +23,26 @@
 
     
 /* lower, upper bound */    
-    bool isValidBST(TreeNode *root) {
-        return _isValid(root, INT_MIN, INT_MAX);
+/* 2016-08-01, update */
+    bool isValidBST(TreeNode* root) {
+        
+        return _isvalid(root, LONG_MIN, LONG_MAX);
     }
     
-    bool _isValid(TreeNode *root, int min, int max)
+    bool _isvalid(TreeNode *root, long min, long max)
     {
-        if (!root) return true;
-        if (root->val <= min || root->val >= max) return false;
+        if (!root)
+        {
+            return true;
+        }
         
-        return _isValid(root->left, min, root->val) && _isValid(root->right, root->val, max);
-    }    
+        if (root->val <= min || root->val >= max)
+        {
+            return false;
+        }
+        
+        return _isvalid(root->left, min, root->val) && _isvalid(root->right, root->val, max);
+    }
     
     
     
