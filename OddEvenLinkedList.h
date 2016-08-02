@@ -18,7 +18,7 @@ The relative order inside both the even and odd groups should remain as it was i
 The first node is considered odd, the second node even and so on ...
 */
 
-    ListNode* oddEvenList(ListNode* head) {
+   ListNode* oddEvenList(ListNode* head) {
         
         if (!head || !head->next)
         {
@@ -29,10 +29,14 @@ The first node is considered odd, the second node even and so on ...
         
         while (even && even->next)
         {
-            odd = odd->next = even->next;
-            even = even->next = odd->next;
+            odd->next = even->next;
+            odd = odd->next;
+            
+            even->next = odd->next;
+            even = even->next;
         }
         
         odd->next = even_head;
+        
         return head;
     }
