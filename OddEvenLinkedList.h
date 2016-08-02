@@ -18,6 +18,7 @@ The relative order inside both the even and odd groups should remain as it was i
 The first node is considered odd, the second node even and so on ...
 */
 
+/* 2016-08-02, update, easy understanding */
    ListNode* oddEvenList(ListNode* head) {
         
         if (!head || !head->next)
