@@ -21,37 +21,32 @@ By calling next repeatedly until hasNext returns false, the order of elements re
 */
 
 /* with stack */
+/* 2016-08-03, update */
 class NestedIterator {
-private:    
-    stack<pair<const vector<NestedInteger>*, int>> s;
-    
 public:
-    NestedIterator(vector<NestedInteger> &nestedList)  {
-        if (nestedList.size() > 0)
-            s.push(make_pair(&nestedList, 0));
+    NestedIterator(vector<NestedInteger> &nestedList) {
+        for (int i = nestedList.size() - 1; i >= 0; --i) {
+            s.push(nestedList[i]);
+        }
     }
 
     int next() {
-        hasNext();
-        pair<const vector<NestedInteger>*, int>& p = s.top();
-        
-        int result = (*p.first)[p.second++].getInteger();
-        return result;  
+        NestedInteger t = s.top(); s.pop();
+        return t.getInteger();
     }
 
     bool hasNext() {
-        if (s.empty())  return false;
-
-        pair<const vector<NestedInteger>*, int>& p = s.top();
-        if ((*p.first).size() == 0 || (*p.first).size() == p.second) {
+        while (!s.empty()) {
+            NestedInteger t = s.top(); 
+            if (t.isInteger()) return true;
             s.pop();
-        return hasNext();
+            for (int i = t.getList().size() - 1; i >= 0; --i) {
+                s.push(t.getList()[i]);
+            }
         }
-
-        if ((*p.first)[p.second].isInteger())
-            return true;
-
-        s.push(make_pair(&(*p.first)[p.second++].getList(), 0));
-        return hasNext();
+        return false;
     }
+
+private:
+    stack<NestedInteger> s;
 };
