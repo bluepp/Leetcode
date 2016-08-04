@@ -26,6 +26,64 @@ nums = [
 Return 4
 The longest increasing path is [3, 4, 5, 6]. Moving diagonally is not allowed.
 
+*/
+
+/* 2016-08-04 , update */
+    int longestIncreasingPath(vector<vector<int>>& matrix) {
+        
+        if (matrix.empty() || matrix[0].empty())
+        {
+            return 0;
+        }
+        
+        int m = matrix.size(), n = matrix[0].size();
+        vector<vector<int>> dp(m, vector<int>(n, 0));
+        int ret = 0;
+        
+        for (int i = 0; i < m; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                ret = max(ret, _dfs(matrix, dp, i, j));
+            }
+        }
+        
+        return ret;
+    }
+    
+    int _dfs(vector<vector<int>> &matrix, vector<vector<int>> &dp, int i, int j)
+    {
+        if (dp[i][j])
+        {
+            return dp[i][j];
+        }
+        
+        vector<vector<int> > dirs = {{0, -1}, {-1, 0}, {0, 1}, {1, 0}};
+        
+        int mx = 1, m = matrix.size(), n = matrix[0].size();
+        
+        for (auto p : dirs)
+        {
+            int x = i + p[0], y = j + p[1];
+            
+            if (x < 0 || x >= m || y < 0 || y >= n || matrix[x][y] <= matrix[i][j])
+            {
+                continue;
+            }
+            
+            int len = 1 + _dfs(matrix, dp, x, y);
+            mx = max(mx, len);
+        }
+        
+        dp[i][j] = mx;
+        
+        return mx;
+    }
+
+
+
+
+
 https://leetcode.com/problems/longest-increasing-path-in-a-matrix/
 
      int longestIncreasingPath(vector<vector<int>>& matrix) {
