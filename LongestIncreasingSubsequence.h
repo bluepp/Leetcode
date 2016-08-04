@@ -50,3 +50,27 @@ Follow up: Could you improve it to O(n log n) time complexity?
         
         return dp.size();
     }
+    
+    /* 2016-08-04 */
+    /* o(n), easy understanding */
+        int lengthOfLIS(vector<int>& nums) {
+        
+        int n = nums.size();
+        vector<int> dp(n, 1);
+        int ret = 0;
+        
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < i; j++)
+            {
+                if (nums[i] > nums[j])
+                {
+                    dp[i] = max(dp[i], dp[j]+1);
+                }
+            }
+            
+            ret = max(ret, dp[i]);
+        }
+        
+        return ret;
+    }
