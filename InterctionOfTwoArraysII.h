@@ -18,6 +18,36 @@ What if nums1's size is small compared to num2's size? Which algorithm is better
 What if elements of nums2 are stored on disk, and the memory is limited such that you cannot load all elements into the memory at once?
 */
 
+/* 2016-08-25, hash map */
+
+    vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {
+        
+        vector<int> res;
+        unordered_map<int, int> map;
+        
+        for (auto p : nums1)
+        {
+            map[p]++;
+        }
+        
+        for (auto p : nums2)
+        {
+            if (map.count(p))
+            {
+                res.push_back(p);
+                map[p]--;
+            }
+            
+            if (map[p] == 0)
+            {
+                map.erase(p);
+            }
+        }
+        
+        return res;
+        
+    }
+
     vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {
         
         vector<int> res;
