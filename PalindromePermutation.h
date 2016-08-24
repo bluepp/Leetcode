@@ -10,6 +10,33 @@
   https://leetcode.com/problems/palindrome-permutation/
 */
 
+/* 2016-08-24, no need to check n%2 */
+    bool canPermutePalindrome(string s) {
+        
+        unordered_map<char, int> map;
+        
+        for (auto p : s)
+        {
+            if (map.count(p))
+            {
+                map[p]--;
+            }
+            else
+            {
+                map[p] ++;
+            }
+            
+            if (map[p] == 0)
+            {
+                map.erase(p);
+            }
+        }
+        
+        return map.empty() || map.size() == 1;
+        
+    }
+
+
 /* another way, works */
     bool canPermutePalindrome(string s) {
         int n = s.length();
