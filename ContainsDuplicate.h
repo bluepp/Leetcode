@@ -9,6 +9,26 @@
   https://leetcode.com/problems/contains-duplicate/
 */
 
+/* 2016-08-25, may the force be with me! */
+
+  bool containsDuplicate(vector<int>& nums) {
+        
+        unordered_map<int, int> map;
+        
+        for (auto p : nums)
+        {
+            if (map.count(p))
+            {
+                return true;
+            }
+            
+            map[p]++;
+        }
+        
+        return false;
+        
+    }
+
     bool containsDuplicate(vector<int>& nums) {
         int n = nums.size();
         if (n < 2) return false;
