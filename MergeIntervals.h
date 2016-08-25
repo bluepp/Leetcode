@@ -22,6 +22,46 @@
               2. Traverse the 'intervals', merge or push...
 */
 
+/* 2016-08-26 , update */
+    vector<Interval> merge(vector<Interval>& intervals) {
+        
+        vector<Interval> res;
+        int n = intervals.size();
+        if (n == 0)
+        {
+            return res;
+        }
+        
+        sort(intervals.begin(), intervals.end(), [](Interval a, Interval b)
+        {
+            return a.start < b.start;
+        });
+        
+        Interval newinterval = intervals[0];
+        for (int i = 1; i < intervals.size(); i++)
+        {
+            if (newinterval.end < intervals[i].start)
+            {
+                res.push_back(newinterval);
+                newinterval = intervals[i];
+            }
+            else if (intervals[i].end < newinterval.start)
+            {
+                res.push_back(intervals[i]);
+            }
+            else
+            {
+                newinterval.start = min(newinterval.start, intervals[i].start);
+                newinterval.end = max(newinterval.end, intervals[i].end);
+            }
+        }
+        
+        res.push_back(newinterval);
+        
+        return res;
+    }
+
+
 /* 2014-11-16 , my version */
 bool mycompare(Interval a, Interval b)
  {
