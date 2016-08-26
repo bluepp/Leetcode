@@ -18,6 +18,22 @@
     Solution: dp.
  */
  
+ /* 2016-08-26, update */
+ 
+     int maxSubArray(vector<int>& nums) {
+        
+        int ret = INT_MIN, sum = 0;
+        
+        for (auto p : nums)
+        {
+            sum = max(sum+p, p);
+            ret = max(ret, sum);
+        }
+        
+        return ret;
+    }
+ 
+ 
  /* 2016-07-12 , update */
     int maxSubArray(vector<int>& nums) {
         
