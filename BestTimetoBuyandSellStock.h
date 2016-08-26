@@ -15,6 +15,24 @@
     Solution: For each element, calculate the max difference with the former elements.
  */
  
+ /* 2016-08-26, update */
+ 
+     int maxProfit(vector<int>& prices) {
+        
+        int ret = 0;
+        int minval = INT_MAX;
+        
+        for (auto p : prices)
+        {
+            minval = min(minval, p);
+            ret = max(ret, p-minval);
+        }
+        
+        return ret;
+      
+    }
+ 
+ 
     int maxProfit(vector<int> &prices) {
         int maxprofit = 0;
         int min = 0;
