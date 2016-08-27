@@ -19,6 +19,30 @@ Can you do it like a boss? Do it without using any builtin function like __built
 
 */
 
+
+/* 2016-08-27, update */
+
+    vector<int> countBits(int num) {
+        
+        vector<int> res(num+1, 0);
+        
+        for (int i = 1; i <= num; i++)
+        {
+            if (i % 2 == 0)
+            {
+                res[i] = res[i/2];
+            }
+            else
+            {
+                res[i] = res[i/2]+1;
+            }
+        }
+        
+        return res;
+     
+    }
+
+
 /*
 https://leetcode.com/discuss/105490/cute-lovely-simple-c-solution
 Because for an integer i, 
