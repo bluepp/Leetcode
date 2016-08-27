@@ -18,6 +18,31 @@ maxProfit = 3
 transactions = [buy, sell, cooldown, buy, sell]
 */
 
+/* 2016-08-27, update */
+
+    int maxProfit(vector<int>& prices) {
+        
+        int n = prices.size();
+        if (n < 2)
+        {
+            return 0;
+        }
+        
+        vector<int> cooldown(n, 0), sell(n, 0);
+        
+        sell[1] = prices[1]-prices[0];
+        
+        for (int i = 2; i < n; i++)
+        {
+            cooldown[i] = max(sell[i-1], cooldown[i-1]);
+            sell[i] = prices[i]-prices[i-1] + max(sell[i-1], cooldown[i-2]);
+        }
+        
+        return max(sell[n-1], cooldown[n-1]);
+    }
+
+
+
 /* 2016-06-11, dp, update */
 
     int maxProfit(vector<int>& prices) {
