@@ -20,6 +20,48 @@
 
  */
   
+  /* 2016-08-28, update */
+  
+      ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        
+        ListNode dummy(0), *prev = &dummy;
+        int carry = 0;
+        
+        while (l1 || l2)
+        {
+            int sum = carry;
+            
+            if (l1)
+            {
+                sum += l1->val;
+                l1 = l1->next;
+            }
+            
+            if (l2)
+            {
+                sum += l2->val;
+                l2 = l2->next;
+            }
+            
+            int val = sum % 10;
+            carry = sum/10;
+            
+            ListNode *newnode = new ListNode(val);
+            prev->next = newnode;
+            prev = prev->next;
+        }
+        
+        if (carry)
+        {
+            ListNode* newnode = new ListNode(carry);
+            prev->next = newnode;
+        }
+        
+        return dummy.next;
+        
+    }
+  
+  
   /* seems long, but in fact, maybe faster */
   
    ListNode *addTwoNumbers(ListNode *l1, ListNode *l2) {
