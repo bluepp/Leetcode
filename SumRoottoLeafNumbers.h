@@ -31,6 +31,30 @@
  */
  
  
+/* 2016-08-28, update */ 
+    int sumNumbers(TreeNode* root) {
+        
+        return _sum(root, 0);
+    }
+    
+    int _sum(TreeNode *root, int n)
+    {
+        if (!root)
+        {
+            return 0;
+        }
+        
+        n = n*10 + root->val;
+        
+        if (!root->left && !root->right)
+        {
+            return n;
+        }
+        
+        return _sum(root->left, n) + _sum(root->right, n);
+    }
+ 
+ 
  /* recursion, my version, 2015-08-31 update */
     int sumNumbers(TreeNode* root) {
         int n = 0;
