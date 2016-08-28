@@ -34,6 +34,27 @@
         all the indices should be stored in the map.
  */
  
+/* 2016-08-29, update */ 
+   vector<int> twoSum(vector<int>& nums, int target) {
+        
+        unordered_map<int, int> map;
+        int t1 = -1, t2 = -1;
+        
+        for (int i = 0; i < nums.size(); i++)
+        {
+            if (map.count(target-nums[i]))
+            {
+                t1 = i;
+                t2 = map[target-nums[i]];
+                break;
+            }
+            
+            map[nums[i]] = i;
+        }
+        
+        return {min(t1, t2), max(t1, t2)};
+    }
+ 
  /* 2014-09-20, my version */
  
      vector<int> twoSum(vector<int> &numbers, int target) {
