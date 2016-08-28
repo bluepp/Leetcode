@@ -16,6 +16,33 @@
     Solution: ...
  */
  
+ /* 2016-08-28, update */
+    string longestCommonPrefix(vector<string>& strs) {
+        
+        string res;
+        if (strs.empty())
+        {
+            return res;
+        }
+        
+        for (int j = 0; j < strs[0].length(); j++)
+        {
+            int i = 1;
+            for (; i < strs.size(); i++)
+            {
+                if (strs[i][j] != strs[0][j])
+                {
+                    return res;
+                }
+            }
+            
+            res.push_back(strs[0][j]);
+        }
+        
+        return res;
+       
+    }
+ 
     string longestCommonPrefix(vector<string> &strs) {
        string res;
        if (strs.empty()) return res;
