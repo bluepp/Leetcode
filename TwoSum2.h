@@ -15,6 +15,32 @@ Input: numbers={2, 7, 11, 15}, target=9
 Output: index1=1, index2=2
 */
 
+/* 2016-08-29, update */
+    vector<int> twoSum(vector<int>& numbers, int target) {
+        
+        vector<int> ret;
+        
+        int l = 0, r = numbers.size()-1;
+        while (l < r)
+        {
+            int t = numbers[l] + numbers[r];
+            
+            if (t == target)
+            {
+                return {l+1, r+1};
+            }
+            else if (t < target)
+            {
+                l++;
+            }
+            else
+            {
+                r--;
+            }
+        }
+        
+        return {};
+    }
     vector<int> twoSum(vector<int> &numbers, int target) {
         
         vector<int> vec;
