@@ -41,6 +41,8 @@ Output: index1=1, index2=2
         
         return {};
     }
+    
+    
     vector<int> twoSum(vector<int> &numbers, int target) {
         
         vector<int> vec;
