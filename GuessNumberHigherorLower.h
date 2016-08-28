@@ -22,28 +22,28 @@ n = 10, I pick 6.
 Return 6.
 */
 
+/* 2016-08-28, update */
     int guessNumber(int n) {
         
         int l = 1, r = n;
-        
-        while (l < r)
+        while (l <= r)
         {
             int m = l + (r-l)/2;
+            int t = guess(m);
             
-            if (guess(m) == 0)
+            if (t == 0)
             {
                 return m;
             }
-            else if (guess(m) < 0)
+            else if (t == -1)
             {
                 r = m-1;
             }
-            else
+            else 
             {
                 l = m+1;
             }
         }
         
-        return l;
-        
+        return -1;
     }
