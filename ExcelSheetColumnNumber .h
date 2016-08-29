@@ -19,6 +19,21 @@ For example:
 https://leetcode.com/problems/excel-sheet-column-number/
 */
 
+/* 2016-08-29, update */
+    int titleToNumber(string s) {
+        
+        int ret = 0;
+        
+        for (int i = 0; i < s.length(); i++)
+        {
+            ret = ret * 26 + s[i]-'A'+1;
+        }
+        
+        return ret;
+    }
+
+
+
     int titleToNumber(string s) {
         int res = 0;
         if (s.length() == 0) return 0;
