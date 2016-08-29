@@ -31,6 +31,57 @@
 
  Solution: ...
  */
+ 
+ /* 2016-08-29, update */
+ 
+     int myAtoi(string str) {
+        
+        if (str.empty())
+        {
+            return 0;
+        }
+        
+        int i = 0;
+        while (i < str.length() && str[i] == ' ')
+        {
+            i++;
+        }
+        
+        bool positive = true;
+        if (str[i] == '+' || str[i] == '-')
+        {
+            if (str[i] == '-')
+            {
+                positive = false;
+            }
+            
+            i++;
+        }
+        
+        
+        if (str[i] < '0' || str[i] > '9')
+        {
+            return 0;
+        }
+        
+        
+        int ret = 0;
+        while (i < str.length() && str[i] <= '9' && str[i] >= '0')
+        {
+            if (ret > INT_MAX/10 || ret == INT_MAX/10 && str[i]-'0' >= 8)
+            {
+                return positive ? INT_MAX : INT_MIN;
+            }
+            
+            ret = ret * 10 + str[i]-'0';
+            i++;
+        }
+        
+        return positive ? ret : -ret;
+       
+    }
+    
+    
 
 /* 2016-06-14, update */
 /* https://leetcode.com/discuss/98230/my-8ms-c-solution-8-lines     */
