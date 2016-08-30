@@ -24,28 +24,36 @@
 */
 
 
-    int trap(int A[], int n) {
-         if (n == 0) return 0;
-        int left[n];
-        int right[n];
-
-        int lmax = A[0];
-        for (int i = 0; i < n; ++i)
+/* 2016-08-31, update */
+    int trap(vector<int>& height) {
+        
+        int n = height.size();
+        if (n == 0)
         {
-            lmax = max(lmax, A[i]);
+            return 0;
+        }
+        
+        vector<int> left(n, 0), right(n, 0);
+        
+        int lmax = height[0];
+        for (int i = 0; i < n; i++)
+        {
+            lmax = max(lmax, height[i]);
             left[i] = lmax;
         }
-
-        int rmax = A[n-1];
-        for (int i = n - 1; i >= 0; --i)
+        
+        int rmax = height[n-1];
+        for (int i = n-1; i >= 0; i--)
         {
-            rmax = max(rmax, A[i]);
+            rmax = max(rmax, height[i]);
             right[i] = rmax;
         }
-
-        int res = 0;
-        for (int i = 0; i < n; ++i)
-            res += min(left[i], right[i]) - A[i];
-
-        return res;
+        
+        int ret = 0;
+        for (int i = 0; i < n; i++)
+        {
+            ret += min(left[i], right[i]) - height[i];
+        }
+        
+        return ret;
     }
