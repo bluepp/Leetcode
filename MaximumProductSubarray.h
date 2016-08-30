@@ -14,18 +14,31 @@
  the contiguous subarray [2,3] has the largest product = 6.
 */
 
-    int maxProduct(int A[], int n) {
-        if (n <= 0) {
+
+/* 2016-08-31, update */
+
+     int maxProduct(vector<int>& nums) {
+        
+        int n = nums.size();
+        if (n == 0)
+        {
             return 0;
         }
-        int maxVal = A[0], minVal = A[0], res = A[0];
-        for (int i = 1; i < n; ++i) {
-            int tmpVal = maxVal;
-            maxVal = max(max(maxVal * A[i], minVal * A[i]), A[i]);
-            minVal = min(min(tmpVal * A[i], minVal * A[i]), A[i]);
-            res = max(res, maxVal);
+        
+        int minval = nums[0], maxval = nums[0];
+        int ret = nums[0];
+        
+        for (int i = 1; i < n; i++)
+        {
+            int tval = maxval;
+            
+            maxval = max(max(maxval*nums[i], minval*nums[i]), nums[i]);
+            minval = min(min(tval*nums[i], minval*nums[i]), nums[i]);
+            
+            ret = max(ret, maxval);
         }
-        return res;
+        
+        return ret;
     }
 
     int maxProduct_2(int A[], int n) {
