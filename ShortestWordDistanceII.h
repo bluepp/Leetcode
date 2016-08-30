@@ -51,8 +51,6 @@ public:
             v1[i] < v2[j] ? i++ : j++;
         }
         
-        
-        
         return ret;
     }
 };
