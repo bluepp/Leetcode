@@ -18,28 +18,18 @@ Show Similar Problems
 
 */
 
-/* 1. n! */
-/* https://leetcode.com/discuss/80933/simple-solution-complexity-analysis-exponential-factorial */
+/* 2016-08-31, update */
 
     bool canWin(string s) {
         
-        int t = s.length();
-        for (int i = 0; i < t-1; i++)
+        int n = s.length();
+        
+        for (int i = 1; i < n; i++)
         {
-            if (s[i] == '-' || s[i+1] == '-')
+            if (s[i] == '+' && s[i - 1] == '+' && !canWin(s.substr(0, i - 1) + "--" + s.substr(i + 1)))
             {
-                continue;
+                return true;
             }
-            
-            s[i] = '-';
-            s[i+1] = '-';
-            
-            bool otherwin = canWin(s);
-            
-            s[i] = '+';
-            s[i+1] = '+';
-            
-            if (!otherwin) return true;
         }
         
         return false;
