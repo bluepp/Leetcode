@@ -18,6 +18,47 @@ For example, given three people living at (0,0), (0,4), and (2,2):
 The point (0,2) is an ideal meeting point, as the total travel distance of 2+2+2=6 is minimal. So return 6.
 */
 
+/* 2016-09-01, update */
+    int minTotalDistance(vector<vector<int>>& grid) {
+        
+        vector<int> row, col;
+        
+        for (int i = 0; i < grid.size(); i++)
+        {
+            for (int j = 0; j < grid[0].size(); j++)
+            {
+                if (grid[i][j] == 1)
+                {
+                    row.push_back(i);
+                    col.push_back(j);
+                }
+            }
+        }
+        
+        sort(row.begin(), row.end());
+        sort(col.begin(), col.end());
+        
+        int ret = 0;
+        int mid1 = row[row.size()/2], mid2 = col[col.size()/2];
+        
+        for (auto p : row)
+        {
+            ret += abs(p-mid1);
+        }
+        
+        for (auto p : col)
+        {
+            ret += abs(p-mid2);
+        }
+        
+        return ret;
+    }
+    
+    
+
+
+
+
     int minTotalDistance(vector<vector<int>>& grid) {
         const int row = grid.size();
     
