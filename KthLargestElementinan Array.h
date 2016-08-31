@@ -15,6 +15,30 @@ https://leetcode.com/problems/kth-largest-element-in-an-array/
 
 */
 
+/* 2016-08-31, update */
+
+    int findKthLargest(vector<int>& nums, int k) {
+        
+        priority_queue<int> q;
+        
+        for (auto p : nums)
+        {
+            q.push(p);
+        }
+        
+        int ret = 0;
+        for(int i = 0; i < k; i++)
+        {
+            ret = q.top();
+            q.pop();
+        }
+        
+        return ret;
+        
+    }
+
+
+
 /* https://leetcode.com/discuss/93573/three-solutions-prioprity_queue-implement-quick-partition */
 /* Three solutions: (1) prioprity_queue as a heap (2) implement a heap by your own (3) quick sort partition */
 
