@@ -30,6 +30,49 @@
            5. compare [12,16] with [3,10], insert newInterval [3,10], then all the remaining intervals...
 */
 
+/* 2016-09-03, update */
+
+    vector<Interval> insert(vector<Interval>& intervals, Interval newInterval) {
+        
+        vector<Interval> res;
+        sort(intervals.begin(), intervals.end(), [](Interval &a, Interval &b)
+        {
+            return a.start < b.start;
+        });
+        
+        bool flag = false;
+        
+        for (int i = 0; i < intervals.size(); i++)
+        {
+            if (flag || intervals[i].end < newInterval.start)
+            {
+                res.push_back(intervals[i]);
+            }
+            else if (newInterval.end < intervals[i].start)
+            {
+                res.push_back(newInterval);
+                res.push_back(intervals[i]);
+                flag = true;
+            }
+            else 
+            {
+                newInterval.start = min(newInterval.start, intervals[i].start);
+                newInterval.end = max(newInterval.end, intervals[i].end);
+            }
+        }
+        
+        if (!flag)
+        {
+            res.push_back(newInterval);
+        }
+        
+        return res;
+       
+    }
+
+
+
+
 
 vector<Interval> insert(vector<Interval> &intervals, Interval newInterval) {
         vector<Interval> res;
