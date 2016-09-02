@@ -13,6 +13,31 @@ return false.
 https://leetcode.com/problems/meeting-rooms/
 */
 
+
+/* 2016-09-03, update */
+
+    bool canAttendMeetings(vector<Interval>& intervals) {
+        
+        sort(intervals.begin(), intervals.end(), [](Interval &a, Interval &b)
+        {
+            return a.start < b.start;
+        });
+        
+        for (int i = 1; i < intervals.size(); i++)
+        {
+            if (intervals[i].start < intervals[i-1].end)
+            {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+
+
+
+
+
 bool mycompare (Interval a, Interval b)
 {
     return a.start < b.start;
