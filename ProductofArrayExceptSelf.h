@@ -8,6 +8,32 @@ For example, given [1,2,3,4], return [24,12,8,6].
 https://leetcode.com/problems/product-of-array-except-self/
 */
 
+/* 2016-09-02, update */
+
+    vector<int> productExceptSelf(vector<int>& nums) {
+        
+        int n = nums.size();
+        vector<int> vec(n, 1);
+
+        int p = 1;
+        for (int i = 1; i < n; i++)
+        {
+            p = p * nums[i-1];
+            vec[i] = p;
+        }
+        
+        p = 1;
+        for (int i = n-2; i >= 0; i--)
+        {
+            p = p * nums[i+1];
+            vec[i] *= p;
+        }
+        
+        return vec;
+   
+    }
+    
+
     vector<int> productExceptSelf(vector<int>& nums) {
         int n = nums.size();
         vector<int> vec(n, 0);
