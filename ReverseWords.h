@@ -12,6 +12,57 @@
   return "blue is sky the".
 */
 
+/* 2016-09-06, update */
+
+    void reverseWords(string &s) {
+        
+        int i = 0, j = 0, k = 0, wordcount = 0;
+        
+        while (true)
+        {
+            while (i < s.length() && s[i] == ' ')
+            {
+                i++;
+            }
+            
+            if (i == s.length())
+            {
+                break;
+            }
+            
+            if (wordcount)
+            {
+                s[j++] = ' ';
+            }
+            
+            k = j;
+            
+            while (i < s.length() && s[i] != ' ')
+            {
+                s[j] = s[i];
+                i++;
+                j++;
+            }
+            
+            _reverse(s, k, j-1);
+            wordcount++;
+        }
+        
+        s.resize(j);
+        _reverse(s, 0, j-1);
+        
+    }
+    
+    void _reverse(string &s, int l, int r)
+    {
+        while (l < r)
+        {
+            swap(s[l++], s[r--]);
+        }
+    }
+    
+    
+
     void reverseWords(string &s) {
     
         string rs;  
