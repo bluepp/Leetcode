@@ -34,3 +34,34 @@
         
         return res;    
     }
+    
+
+/* 2016-09-06, update */    
+    
+        double myPow(double x, int n) {
+        
+        if (n == 0)
+        {
+            return 1;
+        }
+        
+        if (n == 1)
+        {
+            return x;
+        }
+        
+        double r = myPow(x, n/2);
+        
+        if (n % 2 == 0)
+        {
+            return r * r;
+        }
+        else if (n > 0)
+        {
+            return r * r * x;
+        }
+        else
+        {
+            return r*r/x;
+        }
+    }
