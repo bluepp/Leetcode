@@ -16,6 +16,20 @@ Related problem: Reverse Words in a String II
 https://leetcode.com/problems/rotate-array/
 */
 
+/* 2016-09-06, update */
+
+    void rotate(vector<int>& nums, int k) {
+        
+        vector<int> t = nums;
+        
+        for (int i = 0; i < nums.size(); i++)
+        {
+            nums[(i+k) % nums.size()] = t[i];
+        }
+    }
+
+
+
     void rotate(vector<int>& nums, int k) {
         int n = nums.size();
         k = k % n;
