@@ -37,3 +37,37 @@ public:
         
         return sum;
     }
+    
+    
+    
+/* 2016-09-11, update */
+   int depthSum(vector<NestedInteger>& nestedList) {
+        
+        int ret = 0;
+        
+        for (auto p : nestedList)
+        {
+            ret += _sum(p, 1);
+        }
+        
+        return ret;
+    }
+    
+    int _sum(NestedInteger p, int level)
+    {
+        int ret = 0;
+        
+        if (p.isInteger())
+        {
+            return p.getInteger() * level;
+        }
+        else
+        {
+            for (auto a : p.getList())
+            {
+                ret += _sum(a, level+1);
+            }
+        }
+        
+        return ret;
+    }    
