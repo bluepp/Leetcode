@@ -8,6 +8,28 @@ For example, given n = 12, return 3 because 12 = 4 + 4 + 4; given n = 13, return
 https://leetcode.com/problems/perfect-squares/
 */
 
+/* 2016-09-11, update */
+    int numSquares(int n) {
+        
+        vector<int> dp(n+1, INT_MAX);
+        dp[0] = 0;
+        
+        for (int i = 0; i <= n; i++)
+        {
+            for (int j = 1; i+j*j <= n; j++)
+            {
+                dp[i+j*j] = min(dp[i]+1, dp[i+j*j]);
+            }
+        }
+        
+        return dp[n];
+   
+    }
+    
+
+
+
+
    int numSquares(int n) {
         int dp[n+1];
         memset(dp, 0, sizeof(dp));
