@@ -16,6 +16,32 @@
  Solution: Update 7/16/2013: Let j start from 0 for better understanding.
  */
  
+ 
+ /* 2016-09-13, update */
+     int removeDuplicates(vector<int>& nums) {
+        
+        int n = nums.size();
+        if (n < 2)
+        {
+            return n;
+        }
+        
+        int index = 0;
+        
+        for (int i = 1; i < n; i++)
+        {
+            if (nums[i] != nums[index])
+            {
+                nums[++index] = nums[i];
+            }
+        }
+        
+        return index+1;
+     
+    }
+ 
+ 
+ 
  /* 2016-06-11 update */
      int removeDuplicates(vector<int>& nums) {
        int n = nums.size();
