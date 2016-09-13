@@ -19,6 +19,41 @@
  	Solution: ...
  */
  
+ 
+/* 2016-09-14, update */ 
+ 
+     vector<string> letterCombinations(string digits) {
+        
+        string mapping[] = {"abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+        
+        vector<string> res;
+      
+        if (digits.empty()) return res;
+        
+        _comb(digits, mapping, "", res);
+        
+        return res;
+    }
+    
+    void _comb(const string &digits, string mapping[], string s, vector<string> &res)
+    {
+        if (s.size() == digits.size())
+        {
+            res.push_back(s);
+            return;
+        }
+        
+        string letters = mapping[digits[s.size()] -'2'];
+        for (int i = 0; i < letters.size(); ++i)
+        {
+            s.push_back(letters[i]);
+            _comb(digits, mapping, s, res);
+            s.pop_back();
+        }
+    }
+ 
+ 
+ 
  /* 2016-06-10 update */
     vector<string> letterCombinations(string digits) {
         string mapping[] = {"abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
