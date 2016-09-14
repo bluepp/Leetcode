@@ -13,6 +13,34 @@
   By using the read4 API, implement the function int read(char *buf, int n) that reads n characters from the file.
 */
 
+/* 2016-09-14, update */
+    int read(char *buf, int n) {
+        
+        if (n == 0)
+        {
+            return 0;
+        }
+        
+        int ret = 0;
+        
+        for (int i = 0; i <= n/4; i++)
+        {
+            int curr = read4(buf+ret);
+            
+            if (curr == 0)
+            {
+                break;
+            }
+            
+            ret += curr;
+        }
+        
+        return min(n, ret);
+        
+    }
+    
+
+
 /* 2016-06-14, update */
     int read(char *buf, int n) {
         
