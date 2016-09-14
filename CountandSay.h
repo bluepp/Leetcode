@@ -19,6 +19,44 @@
  	Solution: ...
 */	
 
+/* 2016-09-14, update */
+    string countAndSay(int n) {
+        
+        if (n == 0)
+        {
+            return "";
+        }
+        
+        string res = "1";
+        
+        for (int i = 2; i <= n; i++)
+        {
+            string ss = "";
+            
+            int j = 0, N = res.size();
+            
+            while (j < N)
+            {
+                int k = j+1;
+                
+                while (k < N && res[j] == res[k])
+                {
+                    k++;
+                }
+                
+                ss += to_string(k-j) + res[j];
+                j = k;
+            }
+            
+            res = ss;
+        }
+        
+        return res;
+    }
+    
+    
+
+
 /* 2016-07-17, update */
 
     string countAndSay(int n) {
