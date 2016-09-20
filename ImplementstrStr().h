@@ -14,6 +14,41 @@
     Solution: Check in the haystack one by one. If not equal to needle, reset the pointer.
  */
  
+ /* 2016-09-21, update */
+ 
+     int strStr(string haystack, string needle) {
+        
+        int m = haystack.size(), n = needle.size();
+        if (n == 0)
+        {
+            return 0;
+        }
+        if (m < n)
+        {
+            return -1;
+        }
+        
+        for (int i = 0; i < m-n+1; i++)
+        {
+            int j = 0;
+            
+            while(j < n && haystack[i+j] == needle[j])
+            {
+                j++;
+            }
+            
+            if (j == n)
+            {
+                return i;
+            }
+        }
+        
+        return -1;
+     
+    }
+ 
+ 
+ 
     char *strStr(char *haystack, char *needle) {
         
         while (true)
