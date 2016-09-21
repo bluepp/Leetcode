@@ -19,27 +19,32 @@
  */
  
  
+ /* 2016-09-22, update */
+ 
     string multiply(string num1, string num2) {
+        
         int n1 = num1.size(), n2 = num2.size();
         string res(n1+n2, '0');
         
         for (int i = n1-1; i >= 0; i--)
         {
             int carry = 0;
+            
             for (int j = n2-1; j >= 0; j--)
             {
-                int t = (num1[i]-'0')*(num2[j]-'0')+(res[i+j+1]-'0')+carry;
+                int t = (num1[i]-'0') * (num2[j]-'0') + carry + res[i+j+1]-'0';
                 
-                int num = t % 10;
-                carry = t/10;
-                res[i+j+1] = num+'0';
+                res[i+j+1] = t % 10 + '0';
+                carry = t / 10;
             }
             
             res[i] += carry;
         }
         
-        while(res.size() > 1 && res[0] == '0')
+        while (res.size() > 1 && res[0] == '0')
+        {
             res.erase(res.begin());
+        }
         
-        return res;   
+        return res;
     }
