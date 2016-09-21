@@ -18,6 +18,45 @@ Given "paper", "title", return true.
 https://leetcode.com/problems/isomorphic-strings/
 */
 
+/* 2016-09-22, update, one map */
+
+   bool wordPattern(string pattern, string str) {
+        
+        unordered_map<char, string> map;
+        istringstream in(str);
+        
+        int i = 0;
+        
+        for (string word; in >> word; i++)
+        {
+            if (map.count(pattern[i]))
+            {
+                if (map[pattern[i]] != word)
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                for (auto it : map)
+                {
+                    if (it.second == word)
+                    {
+                        return false;
+                    }
+                }
+                
+                map[pattern[i]] = word;
+            }
+        }
+        
+        return i == pattern.size();
+    }
+    
+    
+
+
+
 /* 2016-07-01, a simple one */
     bool isIsomorphic(string s, string t) {
         
