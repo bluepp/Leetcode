@@ -18,6 +18,46 @@ You may assume pattern contains only lowercase letters, and str contains lowerca
 https://leetcode.com/problems/word-pattern/
 */
 
+
+/* 2016-09-22, update */
+
+   bool wordPattern(string pattern, string str) {
+        
+        unordered_map<char, string> map;
+        istringstream in(str);
+        
+        int i = 0;
+        
+        for (string word; in >> word; i++)
+        {
+            if (map.count(pattern[i]))
+            {
+                if (map[pattern[i]] != word)
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                for (auto it : map)
+                {
+                    if (it.second == word)
+                    {
+                        return false;
+                    }
+                }
+                
+                map[pattern[i]] = word;
+            }
+        }
+        
+        return i == pattern.size();
+    }
+
+
+
+
+
     bool wordPattern(string pattern, string str) {
         
        vector <string> a, b;
