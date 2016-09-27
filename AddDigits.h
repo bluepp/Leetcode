@@ -32,13 +32,16 @@ https://leetcode.com/problems/add-digits/
 
 /* recursion */
     int addDigits(int num) {
-        if (num < 10) return num;
+        
+        if (num < 10)
+        {
+            return num;
+        }
         
         int ret = 0;
         while (num)
         {
-            int t = num % 10;
-            ret += t;
+            ret += num % 10;
             num /= 10;
         }
         
