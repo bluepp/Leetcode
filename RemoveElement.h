@@ -14,15 +14,20 @@
  Solution: Refactor: Update solution. Use two pointers.
  */
  
-    int removeElement(int A[], int n, int elem) {
+/* 2016-10-02 , update */
+
+    int removeElement(vector<int>& nums, int val) {
         
-        int k = 0;
+        int n = nums.size();
+        int idx = 0;
+        
         for (int i = 0; i < n; i++)
         {
-            if (A[i] == elem) continue;
-            A[k] = A[i];
-            k++;
+            if (nums[i] != val)
+            {
+                nums[idx++] = nums[i];
+            }
         }
         
-        return k;
+        return idx;
     }
