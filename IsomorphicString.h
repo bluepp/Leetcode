@@ -20,18 +20,20 @@ https://leetcode.com/problems/isomorphic-strings/
 
 /* 2016-09-22, update, one map */
 
-   bool wordPattern(string pattern, string str) {
+    bool isIsomorphic(string s, string t) {
         
-        unordered_map<char, string> map;
-        istringstream in(str);
-        
-        int i = 0;
-        
-        for (string word; in >> word; i++)
+        if (s.length() != t.length())
         {
-            if (map.count(pattern[i]))
+            return false;
+        }
+        
+        unordered_map<char, char> map;
+        
+        for (int i = 0; i < s.length(); i++)
+        {
+            if (map.count(s[i]))
             {
-                if (map[pattern[i]] != word)
+                if (map[s[i]] != t[i])
                 {
                     return false;
                 }
@@ -40,17 +42,18 @@ https://leetcode.com/problems/isomorphic-strings/
             {
                 for (auto it : map)
                 {
-                    if (it.second == word)
+                    if (it.second == t[i])
                     {
                         return false;
                     }
                 }
                 
-                map[pattern[i]] = word;
+                map[s[i]] = t[i];
             }
         }
         
-        return i == pattern.size();
+        return true;
+
     }
     
     
