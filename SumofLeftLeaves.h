@@ -18,6 +18,21 @@ Example:
 There are two left leaves in the binary tree, with values 9 and 15 respectively. Return 24.
 */
 
+/* 2016-10-13, another one */
+    int sumOfLeftLeaves(TreeNode* root) {
+        
+        if (!root) return 0;
+        if (root->left && !root->left->left && !root->left->right)
+        {
+            return root->left->val + sumOfLeftLeaves(root->right);
+        }
+        
+        return sumOfLeftLeaves(root->left) + sumOfLeftLeaves(root->right);
+ 
+    }
+
+
+
     int sumOfLeftLeaves(TreeNode* root) {
         
         int ret = 0;
