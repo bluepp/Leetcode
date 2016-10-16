@@ -20,23 +20,19 @@ return false.
 
 */
 
+
+/* 2016-10-17, update */
     bool increasingTriplet(vector<int>& nums) {
-       
-       int sole_max = INT_MIN, pair_2nd_max = INT_MIN;
-       
-       for (int i = nums.size()-1 ; i >= 0; i--)
-       {
-           if (nums[i] < pair_2nd_max) return true;
-           else if (nums[i] >= sole_max)
-           {
-               sole_max = nums[i];
-           }
-           else
-           {
-               pair_2nd_max = nums[i];
-           }
-       }
-       
-       return false;
-       
+        
+        int m1 = INT_MAX, m2 = INT_MAX;
+        
+        for (auto p : nums)
+        {
+            if (m1 >= p) m1 = p;
+            else if (m2 >= p) m2 = p;
+            else return true;
+        }
+        
+        return false;
+     
     }
