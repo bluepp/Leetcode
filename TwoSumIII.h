@@ -16,26 +16,26 @@ find(7) -> false
 */
 
 class TwoSum {
-    
-private:    
+private:
     unordered_map<int, int> map;
-   
+
 public:
+    // Add the number to an internal data structure.
 	void add(int number) {
 	    map[number]++;
 	}
 
+    // Find if there exists any pair of numbers which sum is equal to the value.
 	bool find(int value) {
 	    
-	   for (auto it : map) {
-	       
-            int i = it.first;
-            int j = value - i;
-            
-            if ((i == j && it.second > 1) || (i != j && map.find(j) != map.end())) {
-                return true;
-            }
-        }
-        return false;
+	    for (auto it : map)
+	    {
+	        int t = value - it.first;
+	        
+	        if ((t != it.first && map.count(t)) || (t == it.first && map[t] > 1)) return true;
+	    }
+	    
+	    return false;
 	}
+	
 };
