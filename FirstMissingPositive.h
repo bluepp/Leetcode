@@ -26,24 +26,24 @@
 /* 2016-06-17, update */
     int firstMissingPositive(vector<int>& nums) {
         
-        int i, n = nums.size();
-        for(i=0; i<n; i++)
+        int n = nums.size();
+        for(int i=0; i < n; i++)
         {
-            while(nums[i]>=1 && nums[i]<=n && nums[i]!=nums[nums[i]-1])
+            while(nums[i]>= 1 && nums[i]<= n && nums[i]!=nums[nums[i]-1])
             {
                 swap(nums[i], nums[nums[i]-1]);
             }
         }
 
         int j=1;
-        for(j=1; j<=n; j++)
+        for(; j <= n; j++)
         {
-            if(nums[j-1]!=j)
+            if (nums[j-1] != j)
             {
                 break;
             }
         }
 
         return j;
-       
+      
     }
