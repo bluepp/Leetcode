@@ -27,8 +27,7 @@ public:
 
     /** @return whether we have a next smallest number */
     bool hasNext() {
-        if (stk.empty() && !node) return false;
-        return true;
+        return !s.empty() || node;
     }
 
     /** @return the next smallest number */
