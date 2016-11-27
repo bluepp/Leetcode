@@ -14,19 +14,19 @@
     Solution: ...
  */
  
-    vector<int> plusOne(vector<int> &digits) {
-       int carry = 1;
-       
-       for (int i = digits.size() -1 ; i >= 0 && carry; i--)
-       {
-           int sum = digits[i] + carry;
-           digits[i] = sum % 10;
-           carry = sum / 10;
-       }
-       
-       if (carry)
-            digits.insert(digits.begin(), 1);
+   vector<int> plusOne(vector<int>& digits) {
         
-       return digits;    
-       
+        int carry = 1;
+        
+        for (int i = digits.size()-1; i >= 0; i--)
+        {
+            int t = digits[i]+carry;
+            
+            digits[i] = t%10;
+            carry = t/10;
+        }
+        
+        if (carry) digits.insert(digits.begin(), 1);
+        
+        return digits;
     }
