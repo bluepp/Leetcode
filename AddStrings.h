@@ -19,16 +19,28 @@ You must not use any built-in BigInteger library or convert the inputs to intege
     string addStrings(string num1, string num2) {
         
         string res = "";
-        int m = num1.size(), n = num2.size(), i = m - 1, j = n - 1, carry = 0;
+        int m = num1.size(), n = num2.size();
+        int i = m-1, j = n-1, carry = 0;
         
-        while (i >= 0 || j >= 0) {
-            int a = i >= 0 ? num1[i--] - '0' : 0;
-            int b = j >= 0 ? num2[j--] - '0' : 0;
-            int sum = a + b + carry;
-            res.insert(res.begin(), sum % 10 + '0');
-            carry = sum / 10;
+        while (i >= 0 || j >= 0)
+        {
+            int sum = carry;
+            
+            if (i >= 0)
+            {
+                sum += num1[i]-'0';
+                i--;
+            }
+            
+            if (j >= 0)
+            {
+                sum += num2[j]-'0';
+                j--;
+            }
+            
+            res.insert(res.begin(), sum%10 +'0');
+            carry = sum/10;
         }
         
-        return carry ? "1" + res : res;
-  
+        return carry ? "1"+res : res;
     }
