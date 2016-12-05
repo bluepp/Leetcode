@@ -21,24 +21,17 @@ Explanation: The perimeter is the 16 yellow stripes in the image below:
 
     int islandPerimeter(vector<vector<int>>& grid) {
         
-        if (grid.empty() || grid[0].empty()) return 0;
-        
-        int m = grid.empty(), n = grid[0].empty();
-        int ret = 0;
-        
-        for (int i = 0; i < m; i++)
-        {
-            for (int j = 0; j < n; j++)
-            {
+       if (grid.empty() || grid[0].empty()) return 0;
+        int m = grid.size(), n = grid[0].size(), res = 0;
+        for (int i = 0; i < m; ++i) {
+            for (int j = 0; j < n; ++j) {
                 if (grid[i][j] == 0) continue;
-                
-                if (j == 0 || grid[i][j-1] == 0) ret ++;
-                if (i == 0 || grid[i-1][j] == 0) ret++;
-                if (j = n-1 || grid[i][j+1] == 0) ret++;
-                if (i = m-1 || grid[i+1][j] == 0) ret++;
+                if (j == 0 || grid[i][j - 1] == 0) ++res;
+                if (i == 0 || grid[i - 1][j] == 0) ++res;
+                if (j == n - 1 || grid[i][j + 1] == 0) ++res;
+                if (i == m - 1 || grid[i + 1][j] == 0) ++res;
             }
         }
-        
-        return ret;
+        return res;
         
     }
