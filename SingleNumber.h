@@ -17,12 +17,12 @@
  Solution: XOR.
 */
 
-    int singleNumber(int a[], int n) {
+    int singleNumber(vector<int>& nums) {
         int x = 0;
         
-        for (int i = 0; i < n; i++)
-            x ^= a[i];
+        for (int i = 0; i < nums.size(); i++)
+            x ^= nums[i];
         
-        return x;   
-    
+        return x;
+        
     }
