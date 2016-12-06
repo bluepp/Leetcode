@@ -10,8 +10,6 @@
 /* iteration */
     ListNode* reverseList(ListNode* head) {
         
-        if (!head || !head->next) return head;
-        
         ListNode *pCurr = head, *prev = NULL;
         while (pCurr)
         {
@@ -24,6 +22,7 @@
         }
         
         return prev;
+        
     }
     
     
