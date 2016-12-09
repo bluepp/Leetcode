@@ -23,7 +23,7 @@ What if there are lots of merges and the number of disjoint intervals are small 
 
 class SummaryRanges {
 private:
-    vector<Interval> vec;
+    vector<Interval> v;
     
 public:
     /** Initialize your data structure here. */
@@ -33,23 +33,31 @@ public:
     
     void addNum(int val) {
         
-        auto Cmp = [](Interval a, Interval b) { return a.start < b.start; };
-        auto it = lower_bound(vec.begin(), vec.end(), Interval(val, val), Cmp);
-        int start = val, end = val;
-        
-        if (it != vec.begin() && (it-1)->end+1 >= val) it--;
-        
-        while (it != vec.end() && val+1 >= it->start && val-1 <= it->end)
-        {
-            start = min(start, it->start);
-            end = max(end, it->end);
-            it = vec.erase(it);
+        Interval cur(val, val);
+        vector<Interval> res;
+        int pos = 0;
+        for (auto a : v) {
+            if (cur.end + 1 < a.start) {
+                res.push_back(a);
+            } else if (cur.start > a.end + 1) {
+                res.push_back(a);
+                ++pos;
+            } else if (cur.start - 1 == a.end) {
+                cur.start = a.start;
+            } else if (cur.end + 1 == a.start) {
+                cur.end = a.end;
+            } else {
+                cur.start = min(cur.start, a.start);
+                cur.end = max(cur.end, a.end);
+            }
         }
+        res.insert(res.begin() + pos, cur);
+        v = res;
         
-        vec.insert(it, Interval(start, end));
     }
     
     vector<Interval> getIntervals() {
-        return vec;
+        
+        return v;
     }
 };
