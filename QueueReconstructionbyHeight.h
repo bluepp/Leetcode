@@ -22,18 +22,16 @@ Output:
 
     vector<pair<int, int>> reconstructQueue(vector<pair<int, int>>& people) {
         
-        sort(people.begin(), people.end(), [](const pair<int,int> &a, const pair<int, int>&b)
+        sort(people.begin(), people.end(), [](pair<int,int> &a, pair<int, int> &b)
         {
-            return a.first > b.first ||a.first == b.first && a.second < b.second;
+            return a.first > b.first || a.first == b.first && a.second < b.second;
         });
         
-        vector<pair<int,int>> res;
-        
+        vector<pair<int, int>> res;
         for (auto p : people)
         {
-            res.push_back(a);
+            res.insert(res.begin()+p.second, p);
         }
         
         return res;
-        
     }
