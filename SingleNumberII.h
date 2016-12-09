@@ -20,23 +20,23 @@
  Solution: Count the number of each bit.
 */
 
-    int singleNumber(int a[], int n) {
-        int x = 0;
+    int singleNumber(vector<int>& nums) {
+        
+        int ret = 0;
+        int n = nums.size();
         
         for (int i = 0; i < 32; i++)
         {
-            int count = 0, bit = 1 << i;
-            for (int j = 0; j < n; j++)
+            int count = 0;
+            int bit = 1 << i;
+            for (auto p : nums)
             {
-                if (a[j] & bit)
-                    count ++;
+                if (bit & p) count++;
             }
             
-            if (count % 3 != 0)
-                x |= bit;
-            
+            if (count % 3 != 0) ret |= bit;
         }
         
-        return x;
+        return ret;
         
     }
