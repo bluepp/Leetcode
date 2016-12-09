@@ -22,6 +22,39 @@ https://leetcode.com/problems/flatten-2d-vector/
 */
 
 
+/* 2016-12-09, update */
+class Vector2D {
+private:
+    vector<int> v;
+    int idx = 0;
+    
+public:
+    Vector2D(vector<vector<int>>& vec2d) {
+        
+        for (int i = 0; i < vec2d.size(); i ++)
+        {
+            for (int j = 0; j < vec2d[i].size(); j++)
+            {
+                v.push_back(vec2d[i][j]);
+            }
+        }
+    }
+
+    int next() {
+        
+        return v[idx++];
+    }
+
+    bool hasNext() {
+        
+        return idx < v.size();
+    }
+};
+
+
+
+
+
 /* 2016-06-30, update */
 class Vector2D {
 private:
