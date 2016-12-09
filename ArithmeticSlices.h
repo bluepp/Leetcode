@@ -32,28 +32,15 @@ return: 3, for 3 arithmetic slices in A: [1, 2, 3], [2, 3, 4] and [1, 2, 3, 4] i
 
 */
 
-    int numberOfArithmeticSlices(vector<int>& A) {
-        
-        int ret = 0, len = 2, n = A.size();
-        
-        for (int i = 2; i < n; i++)
-        {
-            if (A[i]-A[i-1] == A[i-1]-A[i-2])
-            {
-                len++;
-            }
-            else
-            {
-                if (len > 2)
-                {
-                    ret += (len-1)*(len-2) * 0.5;
-                    len = 2;
-                }
+   int numberOfArithmeticSlices(vector<int>& A) {
+        int res = 0, cur = 0;
+        for (int i = 2; i < A.size(); ++i) {
+            if (A[i] - A[i - 1] == A[i - 1] - A[i - 2]) {
+                cur += 1;
+                res += cur;
+            } else {
+                cur = 0;
             }
         }
-        
-        if (len > 2) ret += (len-1)*(len-2) *0.5;
-        
-        return ret;
-        
+        return res;
     }
