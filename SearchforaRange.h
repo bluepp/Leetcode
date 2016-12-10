@@ -25,30 +25,31 @@
  */
  
  
-/* There is another solution */ 
-/* My solution, not logn? */ 
-    vector<int> searchRange(int A[], int n, int target) {
-        vector<int> res;
-        int l = 0, r = n-1;
-        while(l <= r)
-        {
-            int m = l+(r-l)/2;
-            if(target == A[m])
-            {
-                int ll = m, rr = m;
-                while (ll > 0 && A[ll-1] == A[m]) ll--;
-                while (rr < n-1 && A[rr+1] == A[m]) rr++;
-                res.push_back(ll);
-                res.push_back(rr);
-                return res;
-            }
-            else if (target < A[m]) r = m-1;
-            else l = m+1;
+
+    vector<int> searchRange(vector<int>& nums, int target) {
+        
+        vector<int> res(2, -1);
+        
+        int left = 0, right = nums.size() - 1;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] < target) left = mid + 1;
+            else right = mid;
         }
         
-        res.push_back(-1);
-        res.push_back(-1);
+        if (nums[right] != target) return res;
+        res[0] = right;
+        right = nums.size();
+        
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] <= target) left = mid + 1;
+            else right= mid;
+        }
+        
+        res[1] = left - 1;
         return res;
+        
     }
  
 -------------------------------------------------------------------    
