@@ -23,24 +23,25 @@
  */
  
  
-    int search(int a[], int n, int target) {
-        int l = 0, r = n-1;
+     int search(vector<int>& nums, int target) {
+        
+        int l = 0, r = nums.size()-1;
         while (l <= r)
         {
             int m = l + (r-l)/2;
-            if (a[m] == target)
+            if (nums[m] == target)
                 return m;
                 
-            if (a[l] <= a[m])
+            if (nums[l] <= nums[m])
             {
-                if (target < a[m] && target >= a[l])
+                if (target < nums[m] && target >= nums[l])
                     r = m-1;
                 else
                     l = m+1;
             }
-            else if (a[m] <= a[r])
+            else if (nums[m] <= nums[r])
             {
-                if (target > a[m] && target <= a[r])
+                if (target > nums[m] && target <= nums[r])
                     l = m+1;
                 else
                     r = m-1;
@@ -50,6 +51,5 @@
             
         }
         
-        return -1;
-        
+        return -1;        
     }
