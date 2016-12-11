@@ -14,15 +14,15 @@
  You may assume no duplicate exists in the array.
 */
 
-    int findMin(vector<int> &num) {
-        int n = num.size();
+    int findMin(vector<int>& nums) {
+        int n = nums.size();
         
         int l = 0, r = n-1;
-        while (l < r && num[l] > num[r])
+        while (l < r && nums[l] > nums[r])
         {
             int m = l + (r-l)/2;
             
-            if (num[m] > num[r])
+            if (nums[m] > nums[r])
             {
                 l = m+1;
             }
@@ -32,5 +32,5 @@
             }
         }
         
-        return num[l];
+        return nums[l];        
     }
