@@ -17,14 +17,13 @@ Output: 5
 */
 
    int countSegments(string s) {
-        int res = 0, n = s.size();
         
-        for (int i = 0; i < n; ++i) {
-            if (s[i] == ' ') continue;
-            ++res;
-            while (i < n && s[i] != ' ') ++i;
+        int res = 0;
+        for (int i = 0; i < s.size(); ++i) {
+            if (s[i] != ' ' && (i == 0 || s[i - 1] == ' ')) {
+                ++res;
+            }
         }
-        
         return res;
         
     }
