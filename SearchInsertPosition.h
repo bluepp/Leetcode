@@ -21,19 +21,20 @@
  Solution: Binary search.
  */
  
- int searchInsert(int a[], int n, int target) {
+    int searchInsert(vector<int>& nums, int target) {
         
-        int l = 0, r = n-1;
+        int l = 0, r = nums.size()-1;
         while (l <= r)
         {
             int m = l + (r-l)/2;
-            if (a[m] == target)
+            if (nums[m] == target)
                 return m;
             
-            if (a[m] < target)
+            if (nums[m] < target)
                 l = m+1;
             else r = m - 1;    
         }
         
         return l;
+        
     }
