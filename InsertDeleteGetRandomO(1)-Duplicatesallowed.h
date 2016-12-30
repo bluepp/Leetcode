@@ -37,6 +37,60 @@ collection.getRandom();
 */
 
 
+/* set */
+
+class RandomizedCollection {
+private:
+    vector<int> nums;
+    unordered_map<int, unordered_set<int>> map;
+
+public:
+    /** Initialize your data structure here. */
+    RandomizedCollection() {
+        
+    }
+    
+    /** Inserts a value to the collection. Returns true if the collection did not already contain the specified element. */
+    bool insert(int val) {
+        
+        nums.push_back(val);
+        map[val].insert(nums.size()-1);
+        
+        return map[val].size() == 1;
+    }
+    
+    /** Removes a value from the collection. Returns true if the collection contained the specified element. */
+    bool remove(int val) {
+        
+        if (!map.count(val)) return false;
+        
+        int last = nums.back();
+        nums.pop_back();
+        map[last].erase(nums.size());
+        
+        if (last != val)
+        {
+            int id = *map[val].begin();
+            map[val].erase(id);
+            map[last].insert(id);
+            nums[id] = last;
+        }
+        
+        if (map[val].empty()) map.erase(val);
+        
+        return true;
+ 
+    }
+    
+    /** Get a random element from the collection. */
+    int getRandom() {
+        
+        return nums[rand() % nums.size()];
+    }
+};
+
+
+
 class RandomizedCollection {
 private:
     vector<int> nums;
