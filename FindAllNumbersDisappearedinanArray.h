@@ -27,10 +27,9 @@ Output:
         
         for (int i = 0; i < n; i++)
         {
-            if (nums[i] != nums[nums[i]-1])
+            while (nums[i] != nums[nums[i]-1])
             {
                 swap(nums[i], nums[nums[i]-1]);
-                i--;
             }
         }
         
@@ -40,6 +39,5 @@ Output:
         }
         
         return res;
-        
     }
     
