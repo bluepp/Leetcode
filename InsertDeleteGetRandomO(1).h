@@ -65,9 +65,11 @@ public:
         if (!map.count(val)) return false;
         
         int last = nums.back();
+        int idx = map[val];
         
-        map[last] = map[val];
-        nums[map[val]] = last;
+        map[last] = idx;
+        nums[idx] = last;
+        
         nums.pop_back();
         map.erase(val);
         
