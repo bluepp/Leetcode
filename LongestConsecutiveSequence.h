@@ -46,6 +46,31 @@
     }
 
 
+/* another one */
+    int longestConsecutive(vector<int>& nums) {
+        
+        int ret = 0;
+        unordered_map<int, int> map;
+        
+        for (auto p : nums)
+        {
+            if (!map.count(p))
+            {
+                int l = map.count(p-1) ? map[p-1] : 0;
+                int r = map.count(p+1) ? map[p+1] : 0;
+                
+                int sum = l+r+1;
+                map[p] = sum;
+                ret = max(ret, sum);
+                
+                map[p-l] = sum;
+                map[p+r] = sum;
+            }
+        }
+        
+        return ret;
+        
+    }
 
 
 
