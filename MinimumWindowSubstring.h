@@ -31,6 +31,51 @@
            2. Use array as hashtable.
  */
  
+/* 2016-12-31, update */
+    string minWindow(string s, string t) {
+        
+        if (t.size() > s.size()) return "";
+        
+        string res = "";
+        
+        int start = 0, count = 0, minLen = s.size() + 1;
+        unordered_map<char, int> map;
+        
+        for (auto p : t) map[p]++;
+        
+        for (int i = 0; i < s.size(); i++) 
+        {
+            if (map.count(s[i]))    
+            {
+                map[s[i]]--;
+                
+                if (map[s[i]] >= 0) ++count;
+                
+                while (count == t.size()) 
+                {
+                    if (i - start + 1 < minLen) {
+                        minLen = i - start + 1;
+                        res = s.substr(start, minLen);
+                    }
+            
+                    if (map.count(s[start]))              
+                    {
+                        map[s[start]]++;
+                        if (map[s[start]] > 0) count--;
+                    }
+                    
+                    start++;
+                }
+            }
+        }
+        
+        return res;
+        
+    }
+
+
+
+
     string minWindow(string S, string T) {
         int n1 = S.size(), n2 = T.size();
         if (n1 < n2) return "";
