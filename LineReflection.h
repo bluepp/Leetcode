@@ -18,23 +18,32 @@ Could you do better than O(n2)?
 
 */
 
+/* 2017-01-01, update */
     bool isReflected(vector<pair<int, int>>& points) {
         
-        unordered_map<int, set<int>> m;
-        int mx = INT_MIN, mn = INT_MAX;
-        for (auto a : points) {
-            mx = max(mx, a.first);
-            mn = min(mn, a.first);
-            m[a.first].insert(a.second);
+        unordered_map<int, set<int>> map;
+        int mn = INT_MAX, mx = INT_MIN;
+        
+        for (auto p : points)
+        {
+            mn = min(p.first, mn);
+            mx = max(p.first, mx);
+            map[p.first].insert(p.second);
         }
-        double y = (double)(mx + mn) / 2;
-        for (auto a : points) {
-            int t = 2 * y - a.first;
-            if (!m.count(t) || !m[t].count(a.second)) {
+        
+        
+        double mid = (double)(mn+mx) /2;
+        
+        for (auto p : points)
+        {
+            int t = 2*mid - p.first;
+            
+            if (!map.count(t) || !map[t].count(p.second))
+            {
                 return false;
             }
         }
-        return true;
         
+        return true;
     }
 
