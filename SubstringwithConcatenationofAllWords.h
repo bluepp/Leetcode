@@ -20,33 +20,39 @@
  Solution: ...
 */
 
+
+/* 2017-01-01, update */
+
     vector<int> findSubstring(string s, vector<string>& words) {
+        
         vector<int> res;
+        
         if (s.empty() || words.empty()) return res;
-        int m = s.size(), n = words.size();
-        int k = words[0].size();
+        int m = s.size(), n = words.size(), k = words[0].length();
         
-        unordered_map<string, int> need;
-        unordered_map<string, int> found;
-        
-        for (int i = 0; i < n; ++i)
-            need[words[i]]++;
+        unordered_map<string, int> need, found;
+            
+        for (auto p : words)
+        {
+            need[p]++;
+        }
             
         for (int i = 0; i <= m - n * k; ++i)
         {
             found.clear();
-            int j;
-            for (j = 0; j < n; ++j)
+            
+            int j = 0;
+            for (; j < n; ++j)
             {
                 string tmp = s.substr(i + j * k, k);
-                auto it = need.find(tmp);
-                if (it == need.end())
-                    break;
-                if (it->second <= found[tmp])
-                    break;
+                    
+                if (!need.count(tmp) || need[tmp] <= found[tmp]) break;
+                    
                 found[tmp]++;
             }
+            
             if (j == n) res.push_back(i);
         }
+        
         return res;
     }
