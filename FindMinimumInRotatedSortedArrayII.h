@@ -32,3 +32,35 @@ The array may contain duplicates.
         
         return num[l];
     }
+
+
+/* 2016-12-31 */
+    int findMin(vector<int>& nums) {
+        
+        if (nums.empty()) return 0;
+        
+        int l = 0, r = nums.size()-1;
+        int ret = nums[0];
+        
+        while (l < r-1)
+        {
+            int m = l + (r-l)/2;
+            
+            if (nums[l] < nums[m])
+            {
+                ret = min(ret, nums[l]);
+                l = m+1;
+            }
+            else if (nums[l] > nums[m])
+            {
+                ret = min(ret, nums[m]);
+                r = m;
+            }
+            else l++;
+        }
+        
+        ret = min(ret, min(nums[l], nums[r]));
+        
+        return ret;
+        
+    }
