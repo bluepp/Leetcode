@@ -17,20 +17,23 @@ Find the minimum element.
 The array may contain duplicates.
 */
 
-    int findMin(vector<int> &num) {
-        int n = num.size();
+
+/* 2016-12-31, update */
+    int findMin(vector<int>& nums) {
+        
+        int n = nums.size();
         
         int l = 0, r = n-1;
-        while (l < r && num[l] >= num[r])
+        while (l < r && nums[l] >= nums[r])
         {
             int m = l + (r-l)/2;
             
-            if (num[m] > num[r]) l = m+1;
-            else if (num[m] <num[l]) r = m;
+            if (nums[m] > nums[r]) l = m+1;
+            else if (nums[m] <nums[l]) r = m;
             else l++;
         }
         
-        return num[l];
+        return nums[l];
     }
 
 
