@@ -26,33 +26,27 @@
     vector<int> findSubstring(string s, vector<string>& words) {
         
         vector<int> res;
+        unordered_map<string, int> m1, m2;
+        int m = s.length(), n = words.size(), k = words[0].length();
         
-        if (s.empty() || words.empty()) return res;
-        int m = s.size(), n = words.size(), k = words[0].length();
+        for (auto p : words) m1[p]++;
         
-        unordered_map<string, int> need, found;
-            
-        for (auto p : words)
+        for (int i = 0; i < m-n*k+1; i++)
         {
-            need[p]++;
-        }
-            
-        for (int i = 0; i <= m - n * k; ++i)
-        {
-            found.clear();
+            m2.clear();
             
             int j = 0;
-            for (; j < n; ++j)
+            for (; j < n; j++)
             {
-                string tmp = s.substr(i + j * k, k);
-                    
-                if (!need.count(tmp) || need[tmp] <= found[tmp]) break;
-                    
-                found[tmp]++;
+                string t = s.substr(i+j*k, k);
+                
+                if (!m1.count(t) || m2[t] >= m1[t]) break;
+                m2[t]++;
             }
             
             if (j == n) res.push_back(i);
         }
         
         return res;
+ 
     }
