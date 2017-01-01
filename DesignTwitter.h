@@ -40,12 +40,12 @@ twitter.getNewsFeed(1);
 */
 
 class Twitter {
-
 private:
-    int cnt;
     unordered_map<int, set<int>> friends;
-    unordered_map<int, map<int, int>> tweets;
-    
+    unordered_map<int, map<int, int>> tweet;
+    int cnt;
+
+
 public:
     /** Initialize your data structure here. */
     Twitter() {
@@ -57,7 +57,7 @@ public:
     void postTweet(int userId, int tweetId) {
         
         follow(userId, userId);
-        tweets[userId].insert({cnt++, tweetId});
+        tweet[userId].insert({cnt++, tweetId});
     }
     
     /** Retrieve the 10 most recent tweet ids in the user's news feed. Each item in the news feed must be posted by users who the user followed or by the user herself. Tweets must be ordered from most recent to least recent. */
@@ -68,14 +68,11 @@ public:
         
         for (auto it : friends[userId])
         {
-            for (auto p : tweets[it])
+            for(auto p : tweet[it])
             {
-                top10.insert({p.first, p.second});
+                top10.insert({p});
                 
-                if (top10.size() > 10) 
-                {
-                    top10.erase(top10.begin());
-                }
+                if (top10.size() > 10) top10.erase(top10.begin());
             }
         }
         
@@ -85,16 +82,15 @@ public:
         }
         
         reverse(res.begin(), res.end());
-        
         return res;
-        
+   
     }
     
     /** Follower follows a followee. If the operation is invalid, it should be a no-op. */
     void follow(int followerId, int followeeId) {
         
         friends[followerId].insert(followeeId);
-        
+      
     }
     
     /** Follower unfollows a followee. If the operation is invalid, it should be a no-op. */
@@ -104,6 +100,6 @@ public:
         {
             friends[followerId].erase(followeeId);
         }
-        
+
     }
 };
