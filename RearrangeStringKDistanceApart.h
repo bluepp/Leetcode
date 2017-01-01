@@ -34,32 +34,45 @@ The same letters are at least distance 2 from each other.
 
 /* https://leetcode.com/discuss/108174/c-unordered_map-priority_queue-solution-using-cache  */
 
+
+/* 2017-01-01, update */
+
     string rearrangeString(string str, int k) {
-        if(k == 0) return str;
-        int length = (int)str.size(); 
-
+        
+        if (k == 0) return str;
+        
         string res;
-        unordered_map<char, int> dict;
-        priority_queue<pair<int, char>> pq;
-
-        for(char ch : str) dict[ch]++;
-        for(auto it = dict.begin(); it != dict.end(); it++){
-            pq.push(make_pair(it->second, it->first));
+        int len = str.length();
+        unordered_map<char, int> map;
+        priority_queue<pair<int, char>> q;
+        
+        for (auto p : str) map[p]++;
+     
+        for (auto it : map)
+        {
+            q.push({it.second, it.first});
         }
-
-        while(!pq.empty()){
-            vector<pair<int, char>> cache; //store used char during one while loop
-            int count = min(k, length); //count: how many steps in a while loop
-            for(int i = 0; i < count; i++){
-                if(pq.empty()) return "";
-                auto tmp = pq.top();
-                pq.pop();
-                res.push_back(tmp.second);
-                if(--tmp.first > 0) cache.push_back(tmp);
-                length--;
+        
+        while (!q.empty()) {
+            
+            vector<pair<int, int>> v;
+            int cnt = min(k, len);
+            
+            for (int i = 0; i < cnt; ++i) {
+                
+                if (q.empty()) return "";
+                
+                auto t = q.top(); 
+                q.pop();
+                
+                res.push_back(t.second);
+                if (--t.first > 0) v.push_back(t);
+                --len;
             }
-            for(auto p : cache) pq.push(p);
+            
+            for (auto a : v) q.push(a);
         }
+        
         return res;
     }
 
