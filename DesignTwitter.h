@@ -66,14 +66,10 @@ public:
         vector<int> res;
         map<int, int> top10;
         
-      
-        
         for (auto it : friends[userId])
         {
             for (auto p : tweets[it])
             {
-                if (top10.size() > 0 && top10.begin()->first > p.first && top10.size() > 10) break;
-                
                 top10.insert({p.first, p.second});
                 
                 if (top10.size() > 10) 
@@ -82,9 +78,6 @@ public:
                 }
             }
         }
-        
-        
-        
         
         for (auto it : top10)
         {
