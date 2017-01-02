@@ -12,6 +12,42 @@ T is "ece" which its length is 3.
 
 */
 
+
+/* 2017-01-03, update */
+   int lengthOfLongestSubstringKDistinct(string s, int k) {
+        
+        if (k == 0) return 0;
+        
+        int n = s.length();
+        int ret = 0;
+        int start = 0;
+        unordered_map<char, int> map;
+        
+        for (int i = 0; i < n; i++)
+        {
+            map[s[i]]++;
+            
+            while (start < i && map.size() > k)
+            {
+                map[s[start]]--;
+                if (map[s[start]] == 0)
+                {
+                    map.erase(s[start]);
+                }
+                start ++;
+            }
+            
+            ret = max(ret, i-start+1);
+        }
+        
+        return ret;
+   
+    }
+
+
+
+
+
 /* 1. my versioin , 2.template */
 
 /* 2016-06-14 , update, my version */
