@@ -26,26 +26,29 @@ Return false.
 
 */
 
+
+/* 2017-01-03, update */
     bool validWordAbbreviation(string word, string abbr) {
         
-       int m = word.size(), n = abbr.size();
-       int p = 0, cnt = 0;
-       
-       for (int i = 0; i < n; i++)
-       {
-           if (abbr[i] >= '0' && abbr[i] <= '9')
-           {
-               if (cnt == 0 && abbr[i] == '0') return false;
-               cnt = cnt * 10 + abbr[i] - '0';
-           }
-           else
-           {
-               p += cnt;
-               if (p >= m || word[p++] != abbr[i]) return false;
-               cnt = 0;
-           }
-       }
-       
-       return p + cnt == m;
+        int m = word.length(), n = abbr.length();
+        if (m < n) return false;
+        int pos = 0, cnt = 0;
         
+        for (int i = 0; i < n; i++)
+        {
+            if (abbr[i] == '0' && cnt == 0) return false;
+            if (abbr[i] >= '0' && abbr[i] <= '9')
+            {
+                cnt = cnt*10 + abbr[i]-'0';
+            }
+            else
+            {
+                pos += cnt;
+                
+                if (pos >= m || word[pos++] != abbr[i]) return false;
+                cnt = 0;
+            }
+        }
+        
+        return cnt+pos == m;
     }
