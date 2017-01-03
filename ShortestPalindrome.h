@@ -13,38 +13,25 @@ Given "abcd", return "dcbabcd".
 https://leetcode.com/problems/shortest-palindrome/
 */
 
-
-/* 2016-06-14, update */
-/* https://leetcode.com/discuss/107411/accepted-c-solution-easy-to-understand */
-
+/* 2017-01-04, update */
     string shortestPalindrome(string s) {
         
-        int n = s.length();
-        if (n == 0) return s;
+        string t = s;
+        reverse(t.begin(), t.end());
         
-        string v = s;
-        reverse(v.begin(), v.end());
+        int n = s.size(), i = n;
         
-        int i = n;
-        while (i >= 1)
-        {
-            if (s.substr(0, i) == v.substr(n-i))
-            {
+        for (; i >= 0; --i) {
+            
+            if (s.substr(0, i) == t.substr(n - i)) {
                 break;
             }
-            
-            i--;
         }
         
-        for (; i < s.size(); i += 2)
-        {
-            s = s[i]+s;
-        }
         
-        return s;
+        return t.substr(0, n - i) + s;
         
     }
-
 
 
 /* https://leetcode.com/discuss/36807/c-8-ms-kmp-based-o-n-time-&-o-n-memory-solution */
