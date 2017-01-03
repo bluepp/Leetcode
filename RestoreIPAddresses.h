@@ -22,40 +22,41 @@
  Solution: DFS.
  */
 
-/* 2014-09-23 */
+/* 2017-01-04, update */
     vector<string> restoreIpAddresses(string s) {
+        
         vector<string> res;
-        _addr(s, res, "", 0, 0);
+        _ipaddr(s, 0, 0, "", res);
+        
         return res;
     }
     
-    void _addr(string s, vector<string> &res, string str, int start, int len)
+    void _ipaddr(string s, int start, int len, string str, vector<string> &res)
     {
-        if (start == s.size() && len == 4)
+        if (start == s.length() && len == 4)
         {
             res.push_back(str);
             return;
         }
         
-        if (len == 4) return;
+        if (start == s.length() || len == 4) return;
         
-        int length = str.size();
-        if (length > 0) str.push_back('.');
+        if (!str.empty())
+        {
+            str.push_back('.');
+        }
         
         int num = 0;
-        for (int i = start; i < s.size(); i++)
+        for (int i = start; i < s.length(); i++)
         {
-            num = num * 10 + s[i] - '0';
+            num = num*10 + s[i]-'0';
             if (num > 255) break;
             
             str.push_back(s[i]);
             
-            _addr(s, res, str, i+1, len+1);
-            
+            _ipaddr(s, i+1, len+1, str, res);
             if (num == 0) break;
         }
-        
-        //str.resize(length); ---------------------//2014-09-23
     }
 
 
