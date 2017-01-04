@@ -23,6 +23,7 @@ Return 167
 */
 
 /*https://leetcode.com/problems/burst-balloons/ */
+/* dp[i][j] = max(dp[i][j], nums[i - 1]*nums[k]*nums[j + 1] + dp[i][k - 1] + dp[k + 1][j])                 ( i ≤ k ≤ j ) */
 
 {
         
