@@ -17,45 +17,39 @@ Given numerator = 2, denominator = 3, return "0.(6)".
 */
 
     string fractionToDecimal(int numerator, int denominator) {
-
-        long long num = numerator, den = denominator;
-    
-        bool bneg = false;
-        if (num < 0)
-        {
-            bneg = !bneg;
-            num = -num;
+        
+        int s1 = numerator >= 0 ? 1 : -1;
+        int s2 = denominator >= 0 ? 1 : -1;
+        
+        long long num = abs( (long long)numerator );
+        long long den = abs( (long long)denominator );
+        long long out = num / den;
+        long long rem = num % den;
+        
+        unordered_map<long long, int> map;
+        string res = to_string(out);
+        
+        if (s1 * s2 == -1 && (out > 0 || rem > 0)) res = "-" + res;
+        if (rem == 0) return res;
+        
+        res += ".";
+        string s = "";
+        int pos = 0;
+        
+        while (rem != 0) {
+            
+            if (map.count(rem))
+            {
+                s.insert(map[rem], "(");
+                s += ")";
+                return res+s;
+            }
+            
+            map[rem] = pos;
+            s += to_string((rem * 10) / den);
+            rem = (rem * 10) % den;
+            pos++;
         }
-        if (den < 0)
-        {
-            bneg = !bneg;
-            den = -den;
-        }
-
-        string ret = to_string(num / den);
-        num %= den;
-    
-        if (num != 0) ret.push_back('.');
-    
-        map<int,int> rems;
-   
-        while(num != 0 && !rems.count(num)) {
-            rems[num] = (int)ret.size();
-            num *= 10;
-            ret += to_string(num/den);
-            num %= den;
-        }
-   
-   
-        if (num != 0) {
-            ret.insert(ret.begin() + rems[num], '(');
-            ret += ")";
-        } 
-    
-        if (bneg && !(ret.size() == 1 && ret[0] == '0'))
-        {
-            ret.insert(ret.begin(), '-');
-        }
-    
-        return ret;
+        
+        return res + s;
     }
