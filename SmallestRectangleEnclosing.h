@@ -51,29 +51,37 @@ Return 6.
     }
 
 
-/* 2016-10-15, update */
+
+/* 2017-01-05, update */
 
     int minArea(vector<vector<char>>& image, int x, int y) {
         
-        int left = y, right = y, up = x, down = x;
+        if (image.empty() || image[0].empty()) return 0;
         
-        dfs(image, x, y, left, right, up, down);
+        int xmin = x, xmax = x, ymin = y, ymax = y;
         
-        return (right-left+1) *(down-up+1);
+        _dfs(image, x, y, xmin, xmax, ymin, ymax);
+        
+        return (xmax-xmin+1) * (ymax-ymin+1);
     }
     
-    void dfs(vector<vector<char>> &image, int x, int y, int &left, int &right, int &up, int &down) {
+    
+    void _dfs(vector<vector<char>> &image, int i, int j, int &xmin, int &xmax, int &ymin, int &ymax)
+    {
+        if (i < 0 || i >= image.size() || j < 0 || j >= image[0].size() || image[i][j] != '1') return;
         
-        if (x < 0 || x >= image.size() || y < 0 || y >= image[0].size() || image[x][y] != '1') return;
-        left = min(left, y); 
-        right = max(right, y);
-        up = min(up, x);
-        down = max(down, x);
-        image[x][y] = 'x';
-        dfs(image, x + 1, y, left, right, up, down);
-        dfs(image, x - 1, y, left, right, up, down);
-        dfs(image, x, y + 1, left, right, up, down);
-        dfs(image, x, y - 1, left, right, up, down);
+        image[i][j] = 'x';
+        
+        xmin = min(xmin, i);
+        xmax = max(xmax, i);
+        ymin = min(ymin, j);
+        ymax = max(ymax, j);
+        
+        _dfs(image, i+1, j, xmin, xmax, ymin, ymax);
+        _dfs(image, i-1, j, xmin, xmax, ymin, ymax);
+        _dfs(image, i, j+1, xmin, xmax, ymin, ymax);
+        _dfs(image, i, j-1, xmin, xmax, ymin, ymax);
+  
     }
 
 
