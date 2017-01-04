@@ -18,6 +18,25 @@ Return:
 https://leetcode.com/problems/repeated-dna-sequences/
 */
 
+
+/* 2017-01-05, update , simple one */
+    vector<string> findRepeatedDnaSequences(string s) {
+        
+        set<string> res, st;
+        
+        for (int i = 0; i + 9 < s.size(); ++i) {
+            
+            string t = s.substr(i, 10);
+            if (st.count(t)) res.insert(t);
+            else st.insert(t);
+        }
+        
+        return vector<string>{res.begin(), res.end()};
+        
+    }
+
+
+
 /* 2016-07-19, update */
 /* 2016-08-01, minor update, easy understanding */
    vector<string> findRepeatedDnaSequences(string s) {
