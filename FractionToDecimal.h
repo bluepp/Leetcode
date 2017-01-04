@@ -16,6 +16,7 @@ Given numerator = 2, denominator = 1, return "2".
 Given numerator = 2, denominator = 3, return "0.(6)".
 */
 
+/* 2017-01-04, update */
     string fractionToDecimal(int numerator, int denominator) {
         
         int s1 = numerator >= 0 ? 1 : -1;
