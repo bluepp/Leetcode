@@ -24,6 +24,8 @@ https://leetcode.com/problems/dungeon-game/
 */
 
 /* http://www.fgdsb.com/2015/01/06/harry-potter-game/ */
+/* dp[i][j] = max(1, min(dp[i+1][j], dp[i][j+1]) - dungeon[i][j]) */
+
      int calculateMinimumHP(vector<vector<int>>& dungeon) {
         
         int m = dungeon.size();
