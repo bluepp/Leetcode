@@ -38,4 +38,40 @@ Given envelopes = [[5,4],[6,4],[6,7],[2,3]], the maximum number of envelopes you
         
         return ret;
     }
-};
+
+
+/* binary search */
+
+    int maxEnvelopes(vector<pair<int, int>>& envelopes) {
+        
+        vector<int> dp;
+        
+        sort(envelopes.begin(), envelopes.end(), [](const pair<int, int> &a, const pair<int, int> &b){
+            if (a.first == b.first) return a.second > b.second;
+            return a.first < b.first;
+        });
+        
+        for (int i = 0; i < envelopes.size(); ++i) {
+            
+            int left = 0, right = dp.size(), t= envelopes[i].second;
+            
+            while (left < right) {
+                int mid = left + (right - left) / 2;
+                if (dp[mid] < t) left = mid + 1;
+                else right = mid;
+            }
+            
+            if (right >= dp.size()) dp.push_back(t);
+            else dp[right] = t;
+        }
+        
+        return dp.size();
+      
+    }
+
+
+
+
+
+
+
