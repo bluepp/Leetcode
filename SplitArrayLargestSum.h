@@ -30,21 +30,30 @@ where the largest sum among the two subarrays is only 18.
 
     int splitArray(vector<int>& nums, int m) {
         
-        long long left = 0, right = 0;
+        int sum = 0, maxv = INT_MIN;
         
-        for (int i = 0; i < nums.size(); ++i) {
-            left = max((int)left, nums[i]);
-            right += nums[i];
+        for (auto p : nums)
+        {
+            sum += p;
+            maxv = max(maxv, p);
         }
         
-        while (left < right) {
-            long long mid = left + (right - left) / 2;
-            if (can_split(nums, m, mid)) right = mid;
-            else left = mid + 1;
+        int l = maxv, r = sum;
+        
+        while (l < r)
+        {
+            int mid = l + (r-l)/2;
+            
+            if (can_split(nums, m, mid)) 
+            {
+                r = mid;
+            }
+            else l = mid+1;
         }
         
-        return left;
+        return l;
     }
+    
     
     bool can_split(vector<int>& nums, int m, int sum) {
         
