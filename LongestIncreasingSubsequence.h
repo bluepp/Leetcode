@@ -52,7 +52,7 @@ Follow up: Could you improve it to O(n log n) time complexity?
     }
     
     /* 2016-08-04 */
-    /* o(n), easy understanding */
+    /* o(n2), easy understanding */
         int lengthOfLIS(vector<int>& nums) {
         
         int n = nums.size();
