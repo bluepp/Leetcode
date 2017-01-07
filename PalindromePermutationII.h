@@ -12,6 +12,53 @@ Given s = "abc", return [].
 https://leetcode.com/problems/palindrome-permutation-ii/
 */
 
+/* 2017-01-08, update */
+    vector<string> generatePalindromes(string s) {
+
+        vector<string> res;
+        unordered_map<char, int> map;
+        
+        
+        for (auto p : s) map[p]++;
+        
+        string t = "", mid = "";
+        for (auto it : map) {
+            
+            if (it.second % 2 == 1) mid += it.first;
+            t += string(it.second / 2, it.first);
+            
+            if (mid.size() > 1) return {};
+        }
+        
+        _perm(t, 0, mid, res);
+        
+        return res;
+    }
+    
+    
+    void _perm(string t, int start, string mid, vector<string> &res)
+    {
+        if (start >= t.size()) 
+        {
+            res.push_back(t + mid + string(t.rbegin(), t.rend()));
+        }
+        
+        for (int i = start; i < t.size(); i++)
+        {
+            if (i != start && t[i] == t[start]) continue;
+            
+            swap(t[i], t[start]);
+            _perm(t, start+1, mid, res);
+            swap(t[i], t[start]);
+        }
+    }
+
+
+
+
+
+
+
 /× https://leetcode.com/discuss/53626/ac-java-solution-with-explanation ×/
     vector<string> generatePalindromes(string s) {
         vector<string> res;
