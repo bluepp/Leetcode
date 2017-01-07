@@ -63,26 +63,24 @@ https://leetcode.com/problems/n-queens/
 
 
 
-/* 2016-09-07, update */
+/* 2017-01-08, update */
 
     vector<vector<string>> solveNQueens(int n) {
         
-        vector<vector<string> > res;
+        vector<vector<string>> res;
         vector<int> pos(n, -1);
         
-        _solve(pos, 0, res);
-        
+        _dfs(pos, 0, res);
         return res;
     }
     
-    
-    void _solve(vector<int> &pos, int row, vector<vector<string>> &res)
+    void _dfs(vector<int> pos, int row, vector<vector<string>> &res)
     {
         int n = pos.size();
         
         if (row == n)
         {
-            vector<string> out (n, string(n, '.'));
+            vector<string> out(n, string(n, '.'));
             
             for (int i = 0; i < n; i++)
             {
@@ -92,19 +90,22 @@ https://leetcode.com/problems/n-queens/
             res.push_back(out);
             return;
         }
-        
-        for (int col = 0; col < n; col++)
+        else
         {
-            if (isvalid(pos, row, col))
+            for (int col = 0; col < n; col++)
             {
-                pos[row] = col;
-                _solve(pos, row+1, res);
-                pos[row] = -1;
+                if (isvalid(pos, row, col))
+                {
+                    pos[row] = col;
+                    _dfs(pos, row+1, res);
+                    pos[row] = -1;
+                }
             }
         }
     }
     
-    bool isvalid(vector<int>&pos, int row, int col)
+    
+    bool isvalid(vector<int> pos, int row, int col)
     {
         for (int i = 0; i < row; i++)
         {
