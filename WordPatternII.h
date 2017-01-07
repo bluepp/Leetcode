@@ -18,51 +18,44 @@ You may assume both pattern and str contains only lowercase letters.
 
 */
 
-   unordered_map<char, string> pDict;
-    unordered_map<string, char> sDict;
-
     bool wordPatternMatch(string pattern, string str) {
         
-        return _match(pattern, str, 0, 0);
+        unordered_map<char, string> map;
+        return _help(pattern, 0, str, 0, map);
     }
     
-    bool _match(string pattern, string str, int i, int j)
+    bool _help(string pattern, int p, string str, int r, unordered_map<char, string> map)
     {
-        int m = pattern.size();
-        int n = str.size();
+        if (p == pattern.size() && r == str.size()) return true;
+        if (p == pattern.size() || r == str.size()) return false;
         
-        if (i == m || j == n) {
-            if (i == m && j == n)
-                return true;
-            return false;
-        }
+        char c = pattern[p];
         
-        bool ins = false;
-        for (int k = j; k < n; k++) {
-        
-            string s = str.substr(j, k - j + 1);
-        
-            if (pDict.find(pattern[i]) != pDict.end()) {
-                if (pDict[pattern[i]] != s)
-                    continue;
-            } else if (sDict.find(s) != sDict.end()) {
-                if (sDict[s] != pattern[i])
-                    continue;
-            } else {
-                pDict[pattern[i]] = s;
-                sDict[s] = pattern[i];
-                ins = true;
+        for (int i = r; i < str.size(); i++)
+        {
+            string t = str.substr(r, i-r+1);
+            
+            if (map.count(c) && map[c] == t)
+            {
+                if (_help(pattern, p+1, str, i+1, map)) return true;
             }
-        
-            if (_match(pattern, str, i+1,  k + 1))
-                return true;
-        
-            if (ins) {
-                pDict.erase(pattern[i]);
-                sDict.erase(s);
+            else if (!map.count(c))
+            {
+                bool b = false;
+                
+                for (auto it : map)
+                {
+                    if (it.second == t) b = true;
+                }
+                
+                if (!b)
+                {
+                    map[c] = t;
+                    if (_help(pattern, p+1, str, i+1, map)) return true;
+                    map.erase(c);
+                }
             }
         }
         
         return false;
-        
     }
