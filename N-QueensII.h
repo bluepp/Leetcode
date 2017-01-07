@@ -9,6 +9,55 @@ Now, instead outputting board configurations, return the total number of distinc
 https://leetcode.com/problems/n-queens-ii/
 */
 
+/* 2017-01-08, update */
+    int totalNQueens(int n) {
+        
+        int res = 0;
+        vector<int> pos(n, -1);
+        
+        _dfs(pos, 0, res);
+        return res;
+    }
+    
+    void _dfs(vector<int> pos, int row, int &res)
+    {
+        int n = pos.size();
+        if (row == n)
+        {
+            res ++;
+        }
+        else
+        {
+            for (int col = 0; col < n; col++)
+            {
+                if (isvalid(row, col, pos))
+                {
+                    pos[row] = col;
+                    _dfs(pos, row+1, res);
+                    pos[row] = -1;
+                }
+            }
+        }
+    }
+    
+    
+    bool isvalid(int row, int col, vector<int> pos)
+    {
+        for (int i = 0; i < row; i++)
+        {
+            if (col == pos[i] || abs(i-row) == abs(col-pos[i]))
+            {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+
+
+
+
+
 /* bit */
     int totalNQueens(int n) {
        int res = 0;
