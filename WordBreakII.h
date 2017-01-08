@@ -26,10 +26,9 @@
 */
 
 /* 2017-01-08, update */
-    vector<string> wordBreak(string s, vector<string>& wordDict) {
+   vector<string> wordBreak(string s, vector<string>& wordDict) {
         
         vector<string> res;
-        string out;
         vector<bool> possible(s.size() + 1, true);
         
         unordered_set<string> set;
@@ -38,26 +37,39 @@
             set.insert(str);
         }
         
-        wordBreakDFS(s, set, 0, possible, out, res);
+        wordBreakDFS(s, set, 0, possible, "", res);
         return res;
     }
     
-    void wordBreakDFS(string s, unordered_set<string> &wordDict, int start, vector<bool> &possible, string &out, vector<string> &res) {
+    void wordBreakDFS(string s, unordered_set<string> wordDict, int start, vector<bool> &possible, string out, vector<string> &res) {
+        
         if (start == s.size()) {
-            res.push_back(out.substr(0, out.size() - 1));
+            res.push_back(out);
             return;
         }
+       
+       
+       if (!out.empty()) out += " ";
+       
+        
         for (int i = start; i < s.size(); ++i) {
-            string word = s.substr(start, i - start + 1);
-            if (wordDict.find(word) != wordDict.end() && possible[i + 1]) {
-                out.append(word).append(" ");
+            
+            string t = s.substr(start, i-start+1);
+        
+            if (wordDict.count(t) && possible[i+1])
+            {
+       
+                out += t;
                 int oldSize = res.size();
+                
                 wordBreakDFS(s, wordDict, i + 1, possible, out, res);
+                
                 if (res.size() == oldSize) possible[i + 1] = false;
-                out.resize(out.size() - word.size() - 1);
+                out.resize(out.size() - t.size());
             }
         }
     }
+
 
 
 vector<string> wordBreak(string s, unordered_set<string> &dict) {
