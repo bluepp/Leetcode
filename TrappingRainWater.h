@@ -23,8 +23,7 @@
  Solution: Find left bound and right bound for each element. O(n).
 */
 
-
-/* 2016-08-31, update */
+/* 2017-01-09, update */
     int trap(vector<int>& height) {
         
         int n = height.size();
@@ -35,24 +34,20 @@
         
         vector<int> left(n, 0), right(n, 0);
         
-        int lmax = height[0];
+        int lmax = INT_MIN, rmax = INT_MIN;
+        int ret = 0;
         for (int i = 0; i < n; i++)
         {
             lmax = max(lmax, height[i]);
             left[i] = lmax;
         }
         
-        int rmax = height[n-1];
         for (int i = n-1; i >= 0; i--)
         {
             rmax = max(rmax, height[i]);
             right[i] = rmax;
-        }
-        
-        int ret = 0;
-        for (int i = 0; i < n; i++)
-        {
-            ret += min(left[i], right[i]) - height[i];
+            
+            ret += min(left[i], right[i])-height[i];
         }
         
         return ret;
