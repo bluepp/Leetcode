@@ -17,6 +17,37 @@ Given "cbacdcbc"
 Return "acdb"
 */
 
+/* 2017-01-09, update */
+    string removeDuplicateLetters(string s) {
+        
+        unordered_map<char, int> map;
+        unordered_map<char, bool> visited;
+        string res = "";
+        
+        for (auto p : s) map[p]++;
+        
+        for (auto p : s)
+        {
+            map[p]--;
+            if (visited[p]) continue;
+            
+            while (p < res.back() && map[res.back()] > 0)
+            {
+                visited[res.back()] = false;
+                res.pop_back();
+            }
+            
+            res += p;
+            visited[p] = true;
+        }
+        
+        return res;
+      
+    }
+
+
+
+
     string removeDuplicateLetters(string s) {
         int counts[26] = {};
         bool inresult[26] = {};
