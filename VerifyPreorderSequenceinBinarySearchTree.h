@@ -13,6 +13,34 @@ https://leetcode.com/problems/verify-preorder-sequence-in-binary-search-tree/
 
 */
 
+
+/* 1. stack, 2.constant space */
+
+/* 2017-01-10, update, stack */
+
+    bool verifyPreorder(vector<int>& preorder) {
+        
+        int low = INT_MIN;
+        stack<int> s;
+        
+        for (auto p : preorder)
+        {
+            if (p < low) return false;
+            
+            while (!s.empty() && p > s.top())
+            {
+                low = s.top();
+                s.pop();
+            }
+            
+            s.push(p);
+        }
+        
+        return true;
+    }
+
+
+
 /* stack , https://leetcode.com/discuss/51543/java-o-n-and-o-1-extra-space */
 
     bool verifyPreorder(vector<int>& preorder) {
