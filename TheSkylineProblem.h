@@ -26,3 +26,45 @@ There must be no consecutive horizontal lines of equal height in the output skyl
 */
 
 /* https://briangordon.github.io/2014/08/the-skyline-problem.html */
+
+
+
+/* 2017-01-10, update */
+
+    vector<pair<int, int>> getSkyline(vector<vector<int>>& buildings) {
+        
+        vector<pair<int, int>> res, h;
+        multiset<int> m;
+        int pre = 0, curr = 0;
+        
+        for (auto p : buildings)
+        {
+            h.push_back({p[0], -p[2]});
+            h.push_back({p[1], p[2]});
+        }
+        
+        sort(h.begin(), h.end());
+        m.insert(0);
+        
+        for (auto p : h)
+        {
+            if (p.second < 0)
+            {
+                m.insert(-p.second);
+            }
+            else
+            {
+                m.erase(m.find(p.second));
+            }
+            
+            curr = *m.rbegin();
+            if (curr != pre)
+            {
+                res.push_back({p.first, curr});
+                pre = curr;
+            }
+        }
+        
+        return res;
+       
+    }
