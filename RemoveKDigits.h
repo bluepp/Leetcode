@@ -27,14 +27,16 @@ Output: "0"
 Explanation: Remove all the digits from the number and it is left with nothing which is 0.
 */
 
+/* 2017-01-10, update */
+
     string removeKdigits(string num, int k) {
         
         string res = "";
-        int n = num.size(), keep = n-k;
+        int n = num.length(), keep = n-k;
         
-        for(char c : num)
+        for (auto c : num)
         {
-            while (k && res.size() && res.back() > c)
+            while (k && res.back() > c)
             {
                 res.pop_back();
                 k--;
@@ -51,5 +53,4 @@ Explanation: Remove all the digits from the number and it is left with nothing w
         }
         
         return res.empty() ? "0" : res;
-        
     }
