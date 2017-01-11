@@ -23,22 +23,20 @@
            1. traverse only once with O(1) space. 2. O(n) space.
 */
 
+/* 2017-01-11, update */
 /* O(N) space */
-   int candy(vector<int> &ratings) {
+    int candy(vector<int>& ratings) {
         
-        int ret = 0;
         int n = ratings.size();
-        
-        int candy[n];
-        for (int i = 0; i < n; i++)
-        {
-            candy[i] = 1;
-        }
+        vector<int> candy(n, 1);
+        int ret = 0;
         
         for (int i = 1; i < n; i++)
         {
             if (ratings[i] > ratings[i-1])
+            {
                 candy[i] = candy[i-1]+1;
+            }
         }
         
         for (int i = n-2; i >= 0; i--)
@@ -49,14 +47,14 @@
             }
         }
         
-        for (int i = 0; i < n; i++)
+        for (auto p : candy)
         {
-            ret += candy[i];
+            ret += p;
         }
         
         return ret;
+       
     }
-           
            
            
 /* O(1) space , do not understand */
