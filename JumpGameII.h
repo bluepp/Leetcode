@@ -25,6 +25,33 @@
     Solution: Jump to the position where we can jump farthest (index + A[index]) next time.
  */
  
+/* 2017-01-11, update */
+
+    int jump(vector<int>& nums) {
+        
+        int steps = 0;
+        int curr_far = 0, far = 0;
+        int n = nums.size();
+        
+        for (int i = 0; i < n; i++)
+        {
+            if (i > far)
+            {
+                steps++;
+                
+                far = curr_far;
+                if (curr_far >= n-1) break;
+            }
+            
+            curr_far = max(curr_far, i+nums[i]);
+        }
+        
+        return steps;
+      
+    }
+
+
+
  
 /* 2016-06-12, pass */
 /* https://leetcode.com/discuss/95897/my-very-simple-c-solution */
