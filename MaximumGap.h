@@ -10,6 +10,53 @@ Return 0 if the array contains less than 2 elements.
 You may assume all elements in the array are non-negative integers and fit in the 32-bit signed integer range.
 */
 
+/* 2017-01-11, update , bucket sort */
+
+    int maximumGap(vector<int>& nums) {
+        
+        if (nums.empty()) return 0;
+        
+        int n = nums.size();
+        int mx = INT_MIN, mn = INT_MAX;
+        
+        for (auto p : nums)
+        {
+            mx = max(mx, p);
+            mn = min(mn, p);
+        }
+        
+        int size = (mx-mn)/n + 1;
+        int bucket_num = (mx - mn)/size + 1;
+        
+        vector<int> bucket_min(bucket_num, INT_MAX);
+        vector<int> bucket_max(bucket_num, INT_MIN);
+        
+        set<int> s;
+        
+        for (auto p : nums)
+        {
+            int idx = (p-mn)/size;
+            
+            bucket_min[idx] = min(bucket_min[idx], p);
+            bucket_max[idx] = max(bucket_max[idx], p);
+            
+            s.insert(idx);
+        }
+        
+        int pre = 0, res = 0;
+        for (int i = 1; i < n; i++)
+        {
+            if (!s.count(i)) continue;
+            
+            res = max(res, bucket_min[i]-bucket_max[pre]);
+            pre = i;
+        }
+        
+        return res;
+    }
+
+
+
 /* radix sort */
 https://leetcode.com/discuss/53636/radix-sort-solution-in-java-with-explanation
 
