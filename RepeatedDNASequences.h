@@ -19,7 +19,7 @@ https://leetcode.com/problems/repeated-dna-sequences/
 */
 
 
-/* 2017-01-05, update , simple one */
+/* 2017-01-05, update , simple one , large memory consumption */
     vector<string> findRepeatedDnaSequences(string s) {
         
         set<string> res, st;
