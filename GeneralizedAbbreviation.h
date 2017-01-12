@@ -12,7 +12,7 @@ Given word = "word", return the following list (order does not matter):
 */
 
 /* 2017-01-12, iterative, update */
-    vector<string> generateAbbreviations(string word) {
+   vector<string> generateAbbreviations(string word) {
         
         vector<string> res;
         int n = word.length();
@@ -21,15 +21,12 @@ Given word = "word", return the following list (order does not matter):
         {
             string str;
             int count = 0;
-            int t = i;
             
             for (int j = 0; j < n; j++)
             {
-                if (t & 1 == 1)
+                if ((i >> j) & 1)
                 {
                     count++;
-                    
-                    if (j == n-1) str += to_string(count);
                 }
                 else
                 {
@@ -41,8 +38,11 @@ Given word = "word", return the following list (order does not matter):
                     
                     str += word[j];
                 }
-                
-                t >>= 1;
+            }
+            
+            if (count > 0)
+            {
+                str += to_string(count);
             }
             
             res.push_back(str);
