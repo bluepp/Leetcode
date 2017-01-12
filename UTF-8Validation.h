@@ -39,6 +39,35 @@ The next byte is a continuation byte which starts with 10 and that's correct.
 But the second continuation byte does not start with 10, so it is invalid.
 */
 
+
+/* 2017-01-12, another one */
+
+    bool validUtf8(vector<int>& data) {
+        
+        int count = 0;
+        
+        for (auto p : data)
+        {
+            if (count == 0)
+            {
+                if ((p >> 5) == 0b110) count = 1;
+                else if ((p >> 4) == 0b1110) count = 2;
+                else if ((p >> 3) == 0b11110) count = 3;
+                else if (p >> 7) return false;
+            }
+            else
+            {
+                if ((p >> 6) != 0b10) return false;
+                count--;
+            }
+        }
+        
+        return count == 0;
+    }
+
+
+
+
     bool validUtf8(vector<int>& data) {
         
         for (int i = 0; i < data.size(); ++i) {
