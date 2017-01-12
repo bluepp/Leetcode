@@ -24,6 +24,7 @@ No such pair of words.
 
 */
 
+/* mask, to record ,character */
    int maxProduct(vector<string>& words) {
         
         int ret = 0;
@@ -51,4 +52,35 @@ No such pair of words.
         
         return ret;
         
+    }
+
+
+
+/* hash table to recored lenth */
+   int maxProduct(vector<string>& words) {
+        
+        int ret = 0;
+        unordered_map<int, int> map;
+        
+        for (auto str : words)
+        {
+            int mask = 0;
+            for (p : str)
+            {
+                mask |= 1 << (p - 'a');
+            }
+            
+            map[mask] = max(map[mask], (int)str.size());
+            
+            for (auto it : map)
+            {
+                if (!(mask & it.first))
+                {
+                    ret = max(ret, (int)str.size() * it.second);
+                }
+            }
+        }
+        
+        return ret;
+      
     }
