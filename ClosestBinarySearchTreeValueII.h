@@ -14,30 +14,36 @@ Assume that the BST is balanced, could you solve it in less than O(n) runtime (w
 https://leetcode.com/problems/closest-binary-search-tree-value-ii/
 */
 
+
+/* 2917-01-13, update */
+
     vector<int> closestKValues(TreeNode* root, double target, int k) {
-        vector<int> vec;
-        if (!root) return vec;
         
-        priority_queue<pair<double, int>> q;
-        _cloest(root, q, target, k);
+        vector<int> res;
+        priority_queue<pair<double,int>> q;
+        
+        _inorder(root, target, k, q);
         
         while (!q.empty())
         {
-            vec.push_back(q.top().second);
+            auto it = q.top();
             q.pop();
+            
+            res.push_back(it.second);
         }
         
-        return vec;
+        return res;
     }
     
-    void _cloest(TreeNode *root, priority_queue<pair<double, int> > &q, double target, int k)
+    
+    void _inorder(TreeNode *root, double target, int k, priority_queue<pair<double, int>> &q)
     {
         if (!root) return;
-        double curr = (double)(root->val);
-        q.push(make_pair(fabs(curr-target), root->val));
+        
+        _inorder(root->left, target, k, q);
+        
+        q.push({fabs(target-root->val), root->val});
         if (q.size() > k) q.pop();
         
-        _cloest(root->left, q, target, k);
-        _cloest(root->right, q, target, k);
+        _inorder(root->right, target, k, q);
     }
-
