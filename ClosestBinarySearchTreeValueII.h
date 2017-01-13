@@ -43,7 +43,7 @@ https://leetcode.com/problems/closest-binary-search-tree-value-ii/
         _inorder(root->left, target, k, q);
         
         q.push({fabs(target-root->val), root->val});
-        if (q.size() > k) q.pop();
+        if (q.size() > k) q.pop(); // max heap, pop the first, largest one
         
         _inorder(root->right, target, k, q);
     }
