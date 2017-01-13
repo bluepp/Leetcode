@@ -14,7 +14,7 @@ https://leetcode.com/problems/verify-preorder-sequence-in-binary-search-tree/
 */
 
 
-/* 1. stack, 2.constant space */
+/* 1. stack, 2.constant space , 3. divide and conquer, set lower and upper bound*/
 
 /* 2017-01-10, update, stack */
 
@@ -67,6 +67,31 @@ https://leetcode.com/problems/verify-preorder-sequence-in-binary-search-tree/
         return true;
     }
     
+
+/* 2017-01-13, divide and conquer */
+
+    bool verifyPreorder(vector<int>& preorder) {
+        
+        return _help(preorder, 0, preorder.size()-1, INT_MIN, INT_MAX);
+    }
+    
+    bool _help(vector<int> &preorder, int l, int r, int mn, int mx)
+    {
+        if (l > r) return true;
+        
+        int val = preorder[l], i = 0;
+        if (val <= mn || val >= mx) return false;
+        
+        for (i = l+1; i <= r; i++)
+        {
+            if (preorder[i] >= val) break;
+        }
+        
+        return _help(preorder, l+1, i-1, mn, val) && _help(preorder, i, r, val, mx);
+        
+    }
+
+
 /* wow! https://leetcode.com/discuss/51543/java-o-n-and-o-1-extra-space */
     bool verifyPreorder(vector<int>& preorder) {
         int low = INT_MIN, index = -1;
