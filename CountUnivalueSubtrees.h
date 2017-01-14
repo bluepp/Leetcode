@@ -44,6 +44,32 @@ https://leetcode.com/problems/count-univalue-subtrees/
 
 
 
+/* 2017-01-14, update */
+    int countUnivalSubtrees(TreeNode* root) {
+        
+        bool b = true;
+        
+        return _isuni(root, b);
+    }
+    
+    int _isuni(TreeNode*root, bool &b)
+    {
+        if (!root) return 0;
+        
+        bool l = true, r = true;
+        int res = _isuni(root->left, l) + _isuni(root->right, r);
+        
+        bool ll = root->left ? root->val == root->left->val : true;
+        bool rr = root->right ? root->val == root->right->val : true;
+        
+        b = l && r && ll && rr;
+        return res + b;
+        
+    }
+
+
+
+
 /* 2015-08-17, my version */
 
     int countUnivalSubtrees(TreeNode* root) {
