@@ -65,3 +65,36 @@ Explanation: The conditional expressions group right-to-left. Using parenthesis,
         
         return string(1, s.top());
     }
+
+
+
+/* 2017-01-17, my versiion */
+   string parseTernary(string expression) {
+        
+        string res = "";
+        int n = expression.length();
+        stack<char> stk;
+        
+        for (int i = n-1; i >= 0; i--)
+        {
+            if (expression[i] >= '0' && expression[i] <= '9')
+            {
+                stk.push(expression[i]);
+            }
+            else if (expression[i] == 'T' || expression[i] == 'F')
+            {
+                if (i+1 < n && expression[i+1] == '?')
+                {
+                    char t1 = stk.top(); stk.pop();
+                    char t2 = stk.top(); stk.pop();
+                    
+                    if (expression[i] == 'T') stk.push(t1);
+                    else stk.push(t2);
+                }
+                else stk.push(expression[i]);
+            }
+            else continue;
+        }
+        
+        return stk.empty() ? "" : res + stk.top();
+    }
