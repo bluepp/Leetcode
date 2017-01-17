@@ -28,43 +28,49 @@
            2. BFS (queue).
  */
  
- void solve(vector<vector<char>> &board) {
+
+/* 2017-01-18, my version, fail to pass large data */
+    void solve(vector<vector<char>>& board) {
+        
         if (board.empty() || board[0].empty()) return;
         
         int m = board.size(), n = board[0].size();
         
         for (int i = 0; i < m; i++)
+        {
             for (int j = 0; j < n; j++)
             {
                 if (i == 0 || j == 0 || i == m-1 || j == n-1)
+                {
                     _dfs(board, i, j);
+                }
             }
+        }
         
         for (int i = 0; i < m; i++)
         {
             for (int j = 0; j < n; j++)
             {
-                if (board[i][j] != 'V')
+                if (board[i][j] != 'X')
                 {
-                    board[i][j] = (board[i][j] == 'V') ? 'O' : 'X';
+                    board[i][j] = (board[i][j] == 'T') ? 'O' : 'X';
                 }
             }
         }
+     
     }
     
-   
-    void _dfs(vector<vector<char> >&board, int row, int col)
+    
+    void _dfs(vector<vector<char>> &board, int i, int j)
     {
-        int m = board.size(), n = board[0].size();
-        if (row < 0 || row >= n || col < 0 || col >= m) return;
         
-        if (board[row][col] != 'O') return;
+        if (i < 0 || i >= board.size() || j < 0 || j >= board[0].size() || board[i][j] != 'O') return;
         
-        board[row][col] = 'V';
+        board[i][j] = 'T';        
         
-        _dfs(board, row+1, col);
-        _dfs(board, row-1, col);
-        _dfs(board, row, col+1, m, n);
-        _dfs(board, row, col-1, m, n);
+        _dfs(board, i+1, j);
+        _dfs(board, i-1, j);
+        _dfs(board, i, j+1);
+        _dfs(board, i, j-1);
         
     }
