@@ -48,16 +48,19 @@ There will be at least one building. If it is not possible to build such house a
                         int ii = q.front().first, jj = q.front().second;
                         q.pop();
                         
-                        for (int k = 0; k < dirs.size(); ++k) 
+                        for (int k = 0; k < 4; ++k) 
                         {
                             int x = ii + dirs[k][0], y = jj + dirs[k][1];
                             if (x >= 0 && x < m && y >= 0 && y < n && grid[x][y] == val) 
                             {
-                                --grid[x][y];
+                                grid[x][y]--;
+                                
                                 dist[x][y] = dist[ii][jj] + 1;
                                 sum[x][y] += dist[x][y] - 1;
-                                q.push({x, y});
+                                
                                 res = min(res, sum[x][y]);
+                                
+                                q.push({x, y});
                             }
                         }
                     }
@@ -68,7 +71,6 @@ There will be at least one building. If it is not possible to build such house a
         }
         
         return res == INT_MAX ? -1 : res;
-        
     }
 
 
