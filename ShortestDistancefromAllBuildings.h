@@ -23,6 +23,55 @@ Note:
 There will be at least one building. If it is not possible to build such house according to the above rules, return -1.
 */
 
+
+/* 2017-01-18, update */
+
+    int shortestDistance(vector<vector<int>>& grid) {
+        
+        int res = INT_MAX, val = 0, m = grid.size(), n = grid[0].size();
+        vector<vector<int>> sum = grid;
+        vector<vector<int>> dirs{{0,-1},{-1,0},{0,1},{1,0}};
+        
+        for (int i = 0; i < m; i++) 
+        {
+            for (int j = 0; j < n; j++) 
+            {
+                if (grid[i][j] == 1) 
+                {
+                    res = INT_MAX;
+                    vector<vector<int>> dist = grid;
+                    queue<pair<int, int>> q;
+                    q.push({i, j});
+                    
+                    while (!q.empty()) 
+                    {
+                        int ii = q.front().first, jj = q.front().second;
+                        q.pop();
+                        
+                        for (int k = 0; k < dirs.size(); ++k) 
+                        {
+                            int x = ii + dirs[k][0], y = jj + dirs[k][1];
+                            if (x >= 0 && x < m && y >= 0 && y < n && grid[x][y] == val) 
+                            {
+                                --grid[x][y];
+                                dist[x][y] = dist[ii][jj] + 1;
+                                sum[x][y] += dist[x][y] - 1;
+                                q.push({x, y});
+                                res = min(res, sum[x][y]);
+                            }
+                        }
+                    }
+                    
+                    val--;                    
+                }
+            }
+        }
+        
+        return res == INT_MAX ? -1 : res;
+        
+    }
+
+
 /* https://leetcode.com/discuss/74453/36-ms-c-solution */
 /* https://leetcode.com/discuss/75038/16ms-c-fastest-improvement-of-stefanporsches-code */
 
