@@ -86,3 +86,74 @@ Return:
         _dfs(matrix, visited, matrix[i][j], i, j-1);
     }
     
+
+
+/* 2017-01-18, runtime error */
+
+    vector<pair<int, int>> pacificAtlantic(vector<vector<int>>& matrix) {
+        
+        vector<pair<int, int>> res;
+        int m = matrix.size(), n = matrix[0].size();
+        
+        vector<vector<bool>> pacific(m, vector<bool>(n, false));
+        vector<vector<bool>> atlantic(m, vector<bool>(n, false));
+       
+        
+        for(int i = 0; i < m; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                if (_upleft(matrix, i, j, INT_MAX)) pacific[i][j] = true;
+                if (_downright(matrix, i, j, INT_MAX)) atlantic[i][j] = true;
+                
+            }
+        }
+        
+        
+        
+        for (int i = 0; i < m; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                if (pacific[i][j] && atlantic[i][j])
+                {
+                    res.push_back({i,j});
+                }
+            }
+        }
+        
+        
+        return res;
+    }
+    
+    
+    bool _upleft(vector<vector<int>> &matrix, int i, int j, int pre)
+    {
+        
+        if (i < 0 || i >= matrix.size() || j < 0 || j >= matrix[0].size()|| matrix[i][j] >= pre) return false;
+        
+        if (i == 0 || j == 0) return true;
+        
+        if (_upleft(matrix, i-1, j, matrix[i][j]) || _upleft(matrix, i, j-1, matrix[i][j]))
+        {
+            return true;
+        }
+        
+        
+        return false;
+    }
+    
+    bool _downright(vector<vector<int>> &matrix, int i, int j, int pre)
+    {
+        if (i < 0 || i >= matrix.size() || j < 0 || j >= matrix.size() || matrix[i][j] >= pre) return false;
+        
+        if (i == matrix.size()-1 || j == matrix[0].size()-1) return true;
+        
+        if (_downright(matrix, i+1, j, matrix[i][j]) || _downright(matrix, i, j+1, matrix[i][j]))
+        {
+            return true;
+        }
+        
+        return false;
+    }
+    
