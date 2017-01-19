@@ -43,6 +43,30 @@ Show Hint
 
 */
 
+/* 2017-01-19, easy understanding */
+
+    vector<int> getModifiedArray(int length, vector<vector<int>>& updates) {
+        
+        vector<int> num(length+1, 0);
+        vector<int> res;
+        
+        for (int i = 0; i < updates.size(); i++)
+        {
+            num[updates[i][0]] += updates[i][2];
+            num[updates[i][1]+1] -= updates[i][2];
+        }
+        
+        int sum = 0;
+        for (int i = 0; i < length; i++)
+        {
+            sum += num[i];
+            res.push_back(sum);
+        }
+        
+        return res;
+    }
+
+
     vector<int> getModifiedArray(int length, vector<vector<int>>& updates) {
         vector<int> res(length + 1);
         for (auto a : updates) {
