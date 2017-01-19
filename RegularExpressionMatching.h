@@ -25,6 +25,23 @@
  Solution: Both of the two solutions are from http://leetcode.com/2011/09/regular-expression-matching.html .
 */
 
+/* 2017-01-19, update */
+
+   bool isMatch(string s, string p) {
+        
+        if (p.empty()) return s.empty();
+        if (p.size() > 1 && p[1] == '*')
+        {
+            return isMatch(s, p.substr(2)) || (!s.empty() && (s[0] == p[0] || p[0] == '.') && isMatch(s.substr(1), p));
+        }
+        else
+        {
+            return !s.empty() && (s[0] == p[0] || p[0] == '.') && isMatch(s.substr(1), p.substr(1));
+        }
+        
+    }
+
+
 /* 2016-06-26 , update */
 
    bool isMatch(string s, string p) {
