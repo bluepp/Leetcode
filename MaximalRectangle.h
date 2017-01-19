@@ -14,6 +14,58 @@
               2. calculate 'Largest Rectangle in Histogram' for each row.
  */
  
+
+/* 2017-01-19, update */
+
+    int maximalRectangle(vector<vector<char>>& matrix) {
+        
+        if (matrix.empty() || matrix[0].empty()) return 0;
+        int m = matrix.size(), n = matrix[0].size();
+        vector<int> height(n+1, 0);
+        int ret = 0;
+        
+        for (int i = 0; i < m; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                height[j] = (matrix[i][j] == '0') ? 0 : 1+height[j];
+            }
+            
+            ret = max(ret, _large(height));
+        }
+        
+        return ret;
+    }
+    
+    int _large(const vector<int> &height)
+    {
+        stack<int> s;
+        int res = 0, n = height.size();
+        
+        for (int i = 0; i < n; i++)
+        {
+            int count = 0;
+            while (!s.empty() && s.top() > height[i])
+            {
+                count++;
+                res = max(res, count*s.top());
+                s.pop();
+            }
+            
+            while (count --)
+            {
+                s.push(height[i]);
+            }
+            
+            s.push(height[i]);
+        }
+        
+        return res;
+    }
+
+
+
+
  /* The second one */
  
  int maximalRectangle(vector<vector<char> > &matrix) {
