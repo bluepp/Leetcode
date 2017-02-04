@@ -94,6 +94,33 @@ class UnionFind
     }
 
 
+
+/* 2017-02-04, union find, another one */
+
+    bool validTree(int n, vector<pair<int, int>>& edges) {
+        
+        vector<int> roots(n, -1);
+        
+        for (auto p : edges)
+        {
+            int x = find(roots, p.first), y = find(roots, p.second);
+            
+            if (x == y) return false;
+            roots[x] = y;
+        }
+        
+        return edges.size() == n-1;
+    }
+    
+    int find(vector<int> &roots, int i) {
+        while (roots[i] != -1) i = roots[i];
+        return i;
+    }
+
+
+
+
+
 /* regular graph, if there is no loop, it is a tree */
 /* http://www.fgdsb.com/2015/02/16/valid-tree/ */
 
