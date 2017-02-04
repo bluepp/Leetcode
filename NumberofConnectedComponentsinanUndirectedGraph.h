@@ -59,7 +59,7 @@ Given n = 5 and edges = [[0, 1], [1, 2], [2, 3], [3, 4]], return 1.
     
     
     
-    /* solution 2 */
+    /* solution 2 , union find */
        int countComponents(int n, vector<pair<int, int>>& edges) {
         
         int res = n;
