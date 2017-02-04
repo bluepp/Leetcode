@@ -96,40 +96,36 @@ class UnionFind
 
 /* regular graph, if there is no loop, it is a tree */
 /* http://www.fgdsb.com/2015/02/16/valid-tree/ */
+
+/* 2017-02-04, update */
     bool validTree(int n, vector<pair<int, int>>& edges) {
-        vector<vector<int> >neigh(n);
-        for (int i = 0; i < edges.size(); i++)
+        
+        vector<vector<int>> graph(n, vector<int>());
+        vector<bool> v(n, false);
+        
+        for (auto p : edges)
         {
-            neigh[edges[i].first].push_back(edges[i].second);
-            neigh[edges[i].second].push_back(edges[i].first);
+            graph[p.first].push_back(p.second);
+            graph[p.second].push_back(p.first);
         }
         
-        unordered_set<int> visited, path;
-        if (!solve(neigh, 0, -1, visited, path)) return false;
+        if (!_dfs(graph, v, 0, -1)) return false;
         
-        for (int i = 0; i < n; i++)
+        for (auto p : v)
         {
-            if (!visited.count(i)) return false;
+            if (!p) return false;
         }
         
         return true;
     }
     
-    bool solve(vector<vector<int> >&edges, int n, int parent, unordered_set<int> &visited, unordered_set<int> &path)
-    {
-        if (path.count(n)) return false;
-        path.insert(n);
-        visited.insert(n);
-        
-        for (int i = 0; i < edges[n].size(); i++)
-        {
-            if (parent != edges[n][i] && !solve(edges, edges[n][i], n, visited, path))
-            {
-                return false;
+    bool _dfs(vector<vector<int>> &g, vector<bool> &v, int cur, int pre) {
+        if (v[cur]) return false;
+        v[cur] = true;
+        for (auto a : g[cur]) {
+            if (a != pre) {
+                if (!_dfs(g, v, a, cur)) return false;
             }
         }
-        
-        path.erase(n);
         return true;
     }
-
