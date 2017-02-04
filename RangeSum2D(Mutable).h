@@ -25,45 +25,43 @@ sumRegion(2, 1, 4, 3) -> 10
 
 */
 
+/* 2017-02-04, update */
+
 class NumMatrix {
 private:
-    vector<vector<int> > mat;
+    vector<vector<int>> mat;
+    vector<vector<int>> colSum;
     
 public:
-    NumMatrix(vector<vector<int>> &matrix) {
+    NumMatrix(vector<vector<int>> matrix) {
         
-        for (int i = 0; i < matrix.size(); i++)
-        {
-            int sum = 0;
-            vector<int> sum_row;
-            for (int j = 0; j < matrix[0].size(); j++)
-            {
-                sum += matrix[i][j];
-                sum_row.push_back(sum);
+        if (matrix.empty() || matrix[0].empty()) return;
+        mat = matrix;
+        colSum.resize(matrix.size() + 1, vector<int>(matrix[0].size(), 0));
+        
+        for (int i = 1; i < colSum.size(); ++i) {
+            for (int j = 0; j < colSum[0].size(); ++j) {
+                colSum[i][j] = colSum[i - 1][j] + matrix[i - 1][j];
             }
-            
-            mat.push_back(sum_row);
         }
     }
-
+    
     void update(int row, int col, int val) {
         
-        int delta = mat[row][col-1] + val - mat[row][col];
-        
-        for (int j = col; j < mat[0].size(); j++)
-        {
-            mat[row][j] += delta;
+        for (int i = row + 1; i < colSum.size(); ++i) {
+            colSum[i][col] += val - mat[row][col];
         }
+        
+        mat[row][col] = val;
     }
-
+    
     int sumRegion(int row1, int col1, int row2, int col2) {
-        int sum = 0;
         
-        for (int i = row1; i <= row2; i++)
-        {
-            sum += mat[i][col2] - mat[i][col1-1];
-        }
+        int res = 0;
+        for (int j = col1; j <= col2; ++j) {
+            res += colSum[row2 + 1][j] - colSum[row1][j];
+        } 
         
-        return sum;
+        return res;
     }
 };
