@@ -18,6 +18,22 @@
               2. Iteration + Queue. Contributed by SUN Mian(孙冕).
  */
  
+
+
+/* 2017-02-05, recursion */
+
+    int minDepth(TreeNode* root) {
+        
+        if (!root) return 0;
+        
+        if (!root->left) return minDepth(root->right)+1;
+        else if (!root->right) return minDepth(root->left)+1;
+        else return min(minDepth(root->left), minDepth(root->right))+1;
+       
+    }
+
+
+
  /* way 2 */
     int minDepth(TreeNode* root) {
       if (!root) return 0;
