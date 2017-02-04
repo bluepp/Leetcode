@@ -16,58 +16,56 @@ Examples:
 
 /* 1. dfs, not write yet*/
 
-/* 2 */
+/* 2 bfs */
+/* 2017-02-05, update */
     vector<string> removeInvalidParentheses(string s) {
-       vector<string> result;
-        if(s==""){
-            result.push_back(s);
-            return result;
-        } 
         
-        /*** use the visited to record the visited string ***/
-        unordered_set<string> visited;
-        /*** use the deque to do the BFS ***/
-        deque<string> queue;
-        queue.push_back(s);
-        visited.insert(s);
-        bool found=false;
+        vector<string> res;
+        unordered_map<string, int> visited;
+        queue<string> q;
         
-        while(!queue.empty()){
-            string temp=queue.front();
-            queue.pop_front();
-            if(check(temp)){
-                result.push_back(temp);
-                found=true;
+        q.push(s);
+        visited[s]++;
+        bool found = false;
+        
+        while (!q.empty())
+        {
+            s = q.front();
+            q.pop();
+            
+            if (isvalid(s))
+            {
+                res.push_back(s);
+                found = true;
             }
-        
-            /*** if found, stop to increase the level depth ***/
-            if(found)  continue;
-            for(int i=0; i<temp.size(); i++){
-                if(temp[i]!='(' && temp[i]!=')') continue;
-                string str=temp.substr(0, i)+temp.substr(i+1);
-                if(visited.find(str)==visited.end()){
-                    queue.push_back(str);
-                    visited.insert(str);
+            
+            if (found) continue;
+            
+            for (int i = 0; i < s.size(); i++)
+            {
+                if (s[i] != '(' && s[i] != ')') continue;
+                
+                string t = s.substr(0, i) + s.substr(i+1);
+                
+                if (!visited.count(t))
+                {
+                    q.push(t);
+                    visited[t]++;
                 }
             }
         }
         
-        return result;
+        return res;
     }
     
-    bool check(string s)
+    bool isvalid(string t)
     {
         int count = 0;
         
-        for (int i = 0; i < s.size(); i++)
+        for (auto p : t)
         {
-            char c = s[i];
-            if (c == '(') count ++;
-            if (c == ')')
-            {
-                if (count == 0) return false;
-                count --;
-            }
+            if (p == '(') count++;
+            else if (p == ')' &&  count-- == 0) return false;
         }
         
         return count == 0;
