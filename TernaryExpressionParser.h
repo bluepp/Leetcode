@@ -93,7 +93,7 @@ Explanation: The conditional expressions group right-to-left. Using parenthesis,
                 }
                 else stk.push(expression[i]);
             }
-            else continue;
+            
         }
         
         return stk.empty() ? "" : res + stk.top();
