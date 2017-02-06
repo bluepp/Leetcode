@@ -69,3 +69,37 @@ Another valid answer is [5,2,6,null,4,null,7].
         return root;
         
     }
+
+
+/* 2017-02-07, recursion */
+    TreeNode* deleteNode(TreeNode* root, int key) {
+        
+        if (!root) return NULL;
+        
+        if (root->val > key)
+        {
+            root->left = deleteNode(root->left, key);
+        }
+        else if (root->val < key)
+        {
+            root->right = deleteNode(root->right, key);
+        }
+        else
+        {
+            if (!root->left || !root->right)
+            {
+                root = (root->left) ? root->left : root->right;
+            }
+            else
+            {
+                TreeNode *curr = root->right;
+                
+                while (curr->left) curr = curr->left;
+                root->val = curr->val;
+                root->right = deleteNode(root->right, curr->val);
+            }
+        }
+        
+        return root;
+        
+    }
