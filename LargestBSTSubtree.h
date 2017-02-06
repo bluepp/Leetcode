@@ -23,7 +23,10 @@ The return value is the subtree's size, which is 3.
 
 /* https://leetcode.com/discuss/85959/12ms-c-solution */
 
+/* 2017-02-07, update */
+
     int largestBSTSubtree(TreeNode* root) {
+        
         if (!root) return 0;
         
         int n = 0;
@@ -50,7 +53,7 @@ The return value is the subtree's size, which is 3.
         
         if (left && right)
         {
-            if ((!root->left || root->val >= l_maxi) && (!root->right || root->val <= r_mini))
+            if ((!root->left || root->val > l_maxi) && (!root->right || root->val < r_mini))
             {
                 n = ln+rn+1;
                 
