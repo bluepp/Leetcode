@@ -31,21 +31,21 @@ You need to output 2.
 
     int findContentChildren(vector<int>& g, vector<int>& s) {
         
-        int ret = 0, p = 0;
+        int m = g.size(), n = s.size();
+        int i = 0, j = 0;
         
         sort(g.begin(), g.end());
         sort(s.begin(), s.end());
         
-        for (int i = 0; i < s.size(); i++)
+        while (i < m && j < n)
         {
-            if (s[i] >= g[p])
+            if (s[j] >= g[i])
             {
-                ret ++;
-                p++;
-                
-                if (p >= g.size()) break;
+                i++;
+                j++;
             }
+            else j++;
         }
         
-        return ret;
+        return i;
     }
