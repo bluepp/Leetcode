@@ -28,11 +28,8 @@ and another arrow at x = 11 (bursting the other two balloons).
         
         vector<pair<int, int>> res;
         if (points.empty()) return 0;
-        
-        sort(points.begin(), points.end(), [](pair<int,int> a, pair<int, int> b)
-        {
-            return a.first < b.first;
-        });
+       
+        sort(points.begin(), points.end());
         
         pair<int, int> p = points[0];
         for (int i = 1; i < points.size(); i++)
@@ -52,7 +49,6 @@ and another arrow at x = 11 (bursting the other two balloons).
         res.push_back(p);
         return res.size();
     }
-
 
 
    int findMinArrowShots(vector<pair<int, int>>& points) {
