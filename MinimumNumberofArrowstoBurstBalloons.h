@@ -18,8 +18,42 @@ Output:
 2
 
 Explanation:
-One way is to shoot one arrow for example at x = 6 (bursting the balloons [2,8] and [1,6]) and another arrow at x = 11 (bursting the other two balloons).
+One way is to shoot one arrow for example at x = 6 (bursting the balloons [2,8] and [1,6]) 
+and another arrow at x = 11 (bursting the other two balloons).
 */
+
+/* 2017-02-08, update, my version */
+
+    int findMinArrowShots(vector<pair<int, int>>& points) {
+        
+        vector<pair<int, int>> res;
+        if (points.empty()) return 0;
+        
+        sort(points.begin(), points.end(), [](pair<int,int> a, pair<int, int> b)
+        {
+            return a.first < b.first;
+        });
+        
+        pair<int, int> p = points[0];
+        for (int i = 1; i < points.size(); i++)
+        {
+            if (p.second < points[i].first)
+            {
+                res.push_back(p);
+                p = points[i];
+            }
+            else 
+            {
+                p.first = max(p.first, points[i].first);
+                p.second = min(p.second, points[i].second);
+            }
+        }
+        
+        res.push_back(p);
+        return res.size();
+    }
+
+
 
    int findMinArrowShots(vector<pair<int, int>>& points) {
         
