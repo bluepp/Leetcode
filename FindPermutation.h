@@ -58,3 +58,17 @@ but since we want to find the one with the smallest lexicographical permutation,
         
         return res;
     }
+
+
+    vector<int> findPermutation(string s) {
+        vector<int> res;
+        for (int i = 0; i < s.size() + 1; ++i) {
+            if (i == s.size() || s[i] == 'I') {
+                int size = res.size();
+                for (int j = i + 1; j > size; --j) {
+                    res.push_back(j);
+                }
+            }
+        }
+        return res;
+    }
