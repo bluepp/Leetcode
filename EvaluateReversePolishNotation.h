@@ -17,28 +17,29 @@
         Solution: stack.
  */
  
-    int evalRPN(vector<string> &tokens) {
-        int n = tokens.size();
-        stack<int> s;
+     int evalRPN(vector<string>& tokens) {
+      
+        stack<int> stk;
         
-        for (int i = 0; i < n; i++)
+        for (auto str : tokens)
         {
-            string op = tokens[i];
-            if (op != "+" && op != "-" && op != "*" && op != "/")
-                s.push(stoi(tokens[i]));
+            if (str == "+" || str == "-" || str == "*" || str == "/")
+            {
+                int t1 = stk.top(); 
+                stk.pop();
+                int t2 = stk.top();
+                stk.pop();
+                
+                if (str == "+") stk.push(t1+t2);
+                else if (str == "*") stk.push(t1*t2);
+                else if (str == "-") stk.push(t2-t1);
+                else if (str == "/") stk.push(t2/t1);
+            }
             else
             {
-                int n1 = s.top(); s.pop();
-                int n2 = s.top(); s.pop();
-                int n;
-                
-                if (op == "+") n = n1+n2;
-                else if (op == "-") n = n2-n1;
-                else if (op == "*") n = n1*n2;
-                else n = n2/n1;
-                s.push(n);
+                stk.push(stoi(str));
             }
         }
         
-        return s.top();
+        return stk.empty() ? 0 : stk.top();
     }
