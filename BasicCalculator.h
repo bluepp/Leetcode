@@ -18,6 +18,30 @@ Note: Do not use the eval built-in library function.
 https://leetcode.com/problems/basic-calculator/
 */
 
+/* 2017-02-09, update */
+   int calculate(string s) {
+        
+        int res = 0;
+        vector<int> sign(2, 1);
+        for (int i = 0; i < s.size(); ++i) {
+            char c = s[i];
+            if (c >= '0') {
+                int num = 0;
+                while (i < s.size() && s[i] >= '0') {
+                    num = 10 * num + s[i++] - '0';
+                }
+                res += sign.back() * num;
+                sign.pop_back();
+                --i;
+            }
+            else if (c == ')') sign.pop_back();
+            else if (c != ' ') sign.push_back(sign.back() * (c == '-' ? -1 : 1));
+        }
+        return res;
+    }
+
+
+
 /* update, 2015-07-05 */
     int calculate(string s) {
         
