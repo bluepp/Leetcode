@@ -13,6 +13,41 @@
               b) For each element(i,j), calculate the area of rectangle including the element itself.
               2. calculate 'Largest Rectangle in Histogram' for each row.
  */
+
+/* 2017-02-09, update */
+    int maximalRectangle(vector<vector<char>>& matrix) {
+        
+        if (matrix.empty() || matrix[0].empty()) return 0;
+        int ret = 0;
+        int m = matrix.size(), n = matrix[0].size();
+        vector<int> height(n+1, 0);
+        
+        for (int i = 0; i < m; i++)
+        {
+            stack<int> s;
+            
+            for (int j = 0; j < n+1; j++)
+            {
+                if (j < n)
+                {
+                    height[j] = matrix[i][j] == '1' ? height[j]+1 : 0;
+                }
+                
+                while (!s.empty() && height[s.top()] >= height[j])
+                {
+                    int curr = s.top();
+                    s.pop();
+                    
+                    ret = max(ret, height[curr] * (s.empty() ? j : j-s.top()-1));
+                }
+                
+                s.push(j);
+            }
+        }
+        
+        return ret;
+       
+    }
  
 
 /* 2017-01-19, update */
