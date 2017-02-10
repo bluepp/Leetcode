@@ -12,7 +12,7 @@ Given s = "abc", return [].
 https://leetcode.com/problems/palindrome-permutation-ii/
 */
 
-/* 2017-01-08, update */
+/* 2017-01-08, wrong, can not pass whole testing */
     vector<string> generatePalindromes(string s) {
 
         vector<string> res;
