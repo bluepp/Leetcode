@@ -52,3 +52,36 @@ Return false.
         
         return cnt+pos == m;
     }
+
+
+
+/* 2017-02-13, my version */
+    bool validWordAbbreviation(string word, string abbr) {
+        
+        int m = word.size(), n = abbr.size();
+        if (m < n) return false;
+        
+        int i = 0, j = 0;
+        int count = 0;
+        while (i < m && j < n)
+        {
+            if (abbr[j] == '0' && count == 0)  return false;
+            else if (abbr[j] <= '9' && abbr[j] >= '0')
+            {
+                count = count*10 + abbr[j]-'0';
+                j++;
+            }
+            else
+            {
+                i += count;
+                count = 0;
+                
+                if (word[i] != abbr[j]) return false;
+                i++;
+                j++;
+            }
+        }
+        
+        return count+i == m;
+      
+    }
