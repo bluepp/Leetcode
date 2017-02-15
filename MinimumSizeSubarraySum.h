@@ -13,30 +13,31 @@ https://leetcode.com/problems/minimum-size-subarray-sum/
 */
 
 /* O(N) */
-/* 2017-02-12, update */
+/* 2017-02-16, update */
+
     int minSubArrayLen(int s, vector<int>& nums) {
         
-        int n = nums.size();
-        
-        int sum = 0;
-        int start = 0;
+        int n = nums.size(), start = 0, sum = 0;
         int ret = n+1;
         
         for (int i = 0; i < n; i++)
         {
             sum += nums[i];
-        
-            while (start < i && (sum-nums[start]) >= s)
+            
+            if (sum >= s)
             {
-                sum -= nums[start];
-                start++;
-            }
+                while (start < i && sum-nums[start] >= s)
+                {
+                    sum -= nums[start];
+                    start++;
+                }
                 
-            if (sum >= s) ret = min(ret, i-start+1);
-        
+                ret = min(ret, i-start+1);
+            }
+            
         }
         
-        return ret== n+1 ? 0 : ret;
+        return ret == n+1 ? 0 : ret;
     }
 
 
