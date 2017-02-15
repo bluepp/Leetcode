@@ -46,6 +46,51 @@
     }
 
 
+/* 2017-02-16, 
+
+runtime error
+Last executed input:
+[-2147483648,2147483647]
+-2147483648
+2147483647
+
+*/
+   vector<string> findMissingRanges(vector<int>& nums, int lower, int upper) {
+        
+        vector<string> res;
+        if (nums.empty() || lower+1 == upper) return res;
+        
+        
+        string str;
+        int end = lower;
+        
+        for (int i = 0; i < nums.size(); i++)
+        {
+            if (nums[i] != nums[i-1] + 1)
+            {
+                str += to_string(nums[end+1]);
+                if (end != nums[i]-1)
+                {
+                    str += "->" + to_string(nums[i]-1);
+                }
+            }
+            else
+            {
+                
+                if (str.size()) 
+                {
+                    res.push_back(str);
+                    str.clear();
+                }
+                end = nums[i];
+            }
+        }
+        
+        
+        return res;
+    }
+
+
 
 /* 2014-12-20 */
     vector<string> findMissingRanges(int A[], int n, int lower, int upper) {
