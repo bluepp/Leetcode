@@ -60,3 +60,42 @@ public:
     }
 };
 
+
+/* 2017-02-16, reservoir sampling */
+
+class Solution {
+private:
+    ListNode *head;
+    
+public:
+    /** @param head The linked list's head.
+        Note that the head is guaranteed to be not null, so it contains at least one node. */
+    Solution(ListNode* head) {
+        
+        this->head = head;
+    }
+    
+    /** Returns a random node's value. */
+    int getRandom() {
+        
+        int ret = head->val;
+        int i = 2;
+        
+        ListNode *pCurr = head->next;
+        
+        while (pCurr)
+        {
+            int j = rand()%i;
+            if (j == 0)
+            {
+                ret = pCurr->val;
+            }
+            
+            i++;
+            pCurr = pCurr->next;
+        }
+        
+        return ret;
+    }
+};
+
