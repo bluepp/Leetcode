@@ -30,44 +30,73 @@ https://leetcode.com/problems/alien-dictionary/
 /* 2017-02-17, update */
     string alienOrder(vector<string>& words) {
         
-        set<pair<char, char> > s;
+        set<pair<char, char>> set;
         unordered_set<char> ch;
-        vector<int> in(256, 0);
+        vector<int> in_degree(256, 0);
         queue<char> q;
         string res = "";
-        for (auto a : words) ch.insert(a.begin(), a.end());
-        for (int i = 0; i < words.size() - 1; ++i) {
-            int mn = min(words[i].size(), words[i + 1].size()), j = 0;
-            for (; j < min(words[i].size(), words[i + 1].size()); ++j) {
-                if (words[i][j] != words[i + 1][j]) {
-                    s.insert(make_pair(words[i][j], words[i + 1][j]));
+        
+        for (auto p : words)
+        {
+            ch.insert(p.begin(), p.end());
+        }
+        
+        for (int i = 0; i < words.size()-1; i++)
+        {
+            int mn = min(words[i].size(), words[i+1].size());
+            
+            int j = 0;
+            for (; j < mn; j++)
+            {
+                if (words[i][j] != words[i+1][j])
+                {
+                    set.insert({words[i][j], words[i+1][j]});
                     break;
                 }
             }
-            if (j == mn && words[i].size() > words[i + 1].size()) return "";
+            
+            if (j == mn && words[i].size() > words[i+1].size()) return "";
         }
-        for (auto a : s) ++in[a.second];
-        for (auto a : ch) {
-            if (in[a] == 0) {
-                q.push(a);
-                res += a;
-            } 
+        
+        for (auto p : set)
+        {
+            in_degree[p.second]++;
         }
-        while (!q.empty()) {
-            char c = q.front(); q.pop();
-            for (auto a : s) {
-                if (a.first == c) {
-                    --in[a.second];
-                    if (in[a.second] == 0) {
-                        q.push(a.second);
-                        res += a.second;
+        
+        for (auto p : ch)
+        {
+            if (in_degree[p] == 0)
+            {
+                q.push(p);
+                res += p;
+            }
+        }
+        
+        while (!q.empty())
+        {
+            char c = q.front();
+            q.pop();
+            
+            for (auto p : set)
+            {
+                if (p.first == c)
+                {
+                    in_degree[p.second]--;
+                    
+                    if (in_degree[p.second] == 0)
+                    {
+                        q.push(p.second);
+                        res += p.second;
                     }
                 }
             }
         }
+        
         return res.size() == ch.size() ? res : "";
         
     }
+
+
 
 /* https://leetcode.com/discuss/54188/16-18-lines-python-29-lines-c */
 
