@@ -17,6 +17,52 @@
     Solution: Hash + list.
 */
 
+/* 2017-02-17, update */
+
+class LRUCache {
+private:
+    int capacity;
+    list<pair<int, int>> cachelist;
+    unordered_map<int, list<pair<int, int>>::iterator> map;
+
+    
+public:
+    LRUCache(int capacity) {
+        this->capacity = capacity;
+    }
+    
+    int get(int key) {
+        
+        auto it = map.find(key);
+        if (it == map.end()) return -1;
+        
+        cachelist.splice(cachelist.begin(), cachelist, it->second);
+        return it->second->second;
+    }
+    
+    void put(int key, int value) {
+        
+        auto it = map.find(key);
+        if (it != map.end())
+        {
+            cachelist.erase(it->second);
+        }
+        
+        cachelist.push_front({key, value});
+        map[key] = cachelist.begin();
+        
+        if (map.size() > capacity)
+        {
+            int k = cachelist.rbegin()->first;
+            cachelist.pop_back();
+            
+            map.erase(k);
+        }
+     
+    }
+};
+
+
 class LRUCache{
 private:
     int _capacity{0};
