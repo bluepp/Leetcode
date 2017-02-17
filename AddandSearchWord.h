@@ -188,3 +188,44 @@ private:
     }
 };
 
+/* --------------------------------------- */
+/* 2017-02-18, TLE , seems still need Trie */
+
+class WordDictionary {
+private:
+    unordered_map<string, int> map;
+
+public:
+
+    // Adds a word into the data structure.
+    void addWord(string word) {
+        map[word] = word.length();
+    }
+
+    // Returns if the word is in the data structure. A word could
+    // contain the dot character '.' to represent any one letter.
+    bool search(string word) {
+        
+        if (map.count(word)) return true;
+        else
+        {
+            for (auto it : map)
+            {
+                string t = it.first;
+                if (it.second != word.size()) continue;
+                
+                int j = 0;
+                
+                for (; j < word.size(); j++)
+                {
+                    if (word[j] != '.' && word[j] != t[j]) break;
+                }
+                
+                if (j == t.size()) return true;
+            }
+        }
+        
+        return false;
+        
+    }
+};
