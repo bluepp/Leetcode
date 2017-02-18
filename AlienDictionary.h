@@ -27,7 +27,7 @@ https://leetcode.com/problems/alien-dictionary/
 
 */
 
-/* 2017-02-17, update */
+/* 2017-02-18, update */
     string alienOrder(vector<string>& words) {
         
         set<pair<char, char>> set;
@@ -36,9 +36,9 @@ https://leetcode.com/problems/alien-dictionary/
         queue<char> q;
         string res = "";
         
-        for (auto p : words)
+        for (auto word : words)
         {
-            ch.insert(p.begin(), p.end());
+            ch.insert(word.begin(), word.end());
         }
         
         for (int i = 0; i < words.size()-1; i++)
@@ -55,39 +55,38 @@ https://leetcode.com/problems/alien-dictionary/
                 }
             }
             
-            if (j == mn && words[i].size() > words[i+1].size()) return "";
+            if (j == mn && words[i].size() > words[i + 1].size()) return "";
         }
         
-        for (auto p : set)
+        for (auto p : set) 
         {
             in_degree[p.second]++;
         }
         
         for (auto p : ch)
         {
-            if (in_degree[p] == 0)
+            if (in_degree[p] == 0) 
             {
                 q.push(p);
-                res += p;
             }
         }
         
         while (!q.empty())
         {
-            char c = q.front();
+            char ch = q.front();
             q.pop();
+            res += ch;
             
             for (auto p : set)
             {
-                if (p.first == c)
+                if (p.first == ch)
                 {
                     in_degree[p.second]--;
-                    
                     if (in_degree[p.second] == 0)
                     {
                         q.push(p.second);
-                        res += p.second;
                     }
+                    
                 }
             }
         }
