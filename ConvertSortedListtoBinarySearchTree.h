@@ -13,7 +13,7 @@
     Solution: Recursion. Pre-order. O(n)
 */
 
-/* 2016-07-12, update */
+/* 2017-02-20, update */
 
     TreeNode* sortedListToBST(ListNode* head) {
         
@@ -30,14 +30,14 @@
             fast = fast->next->next;
         }
         
-        fast = slow->next;
+        ListNode *head2 = slow->next;
         last->next = NULL;
         
-        TreeNode *cur = new TreeNode(slow->val);
-        if (head != slow) cur->left = sortedListToBST(head);
-        cur->right = sortedListToBST(fast);
+        TreeNode *root = new TreeNode(slow->val);
+        if (head != slow) root->left = sortedListToBST(head);
+        root->right = sortedListToBST(head2);
         
-        return cur;
+        return root;
     }
 
 
