@@ -45,25 +45,36 @@ Explanation: The conditional expressions group right-to-left. Using parenthesis,
           -> "F"                                    -> "F"
 */
 
+/* 2017-02-20, update */
     string parseTernary(string expression) {
         
-        stack<char> s;
+        string res;
+        stack<char> stk;
         
-        for (int i = expression.size() - 1; i >= 0; --i) {
+        int n = expression.size();
+        for (int i = n-1; i >= 0; i--)
+        {
+            char ch = expression[i];
             
-            char c = expression[i];
-            if (!s.empty() && s.top() == '?') {
-                s.pop();
-                char first = s.top(); s.pop();
-                s.pop();
-                char second = s.top(); s.pop();
-                s.push(c == 'T' ? first : second);
-            } else {
-                s.push(c);
+            if (!stk.empty() && stk.top() == '?')
+            {
+                stk.pop();
+                char c1 = stk.top();
+                stk.pop();
+                stk.pop();
+                char c2 = stk.top();
+                stk.pop();
+                
+                if (ch == 'T') stk.push(c1);
+                else if (ch == 'F') stk.push(c2);
+            }
+            else
+            {
+                stk.push(ch);
             }
         }
         
-        return string(1, s.top());
+        return res+stk.top();
     }
 
 
