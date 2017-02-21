@@ -68,3 +68,30 @@ Note: You may assume the tree (i.e., the given root node) is not NULL.
         ret = vec.front();
         return ret;
     }
+
+
+/* another one */
+
+    int findBottomLeftValue(TreeNode* root) {
+        
+        if (!root) return 0;
+        
+        int max_depth = 1, ret = root->val;
+        _find(root, 1, max_depth, ret);
+        
+        return ret;
+    }
+    
+    void _find(TreeNode* node, int depth, int &max_depth, int &ret)
+    {
+        if (!node) return;
+        
+        if (depth > max_depth)
+        {
+            max_depth = depth;
+            ret = node->val;
+        }
+        
+        _find(node->left, depth+1, max_depth, ret);
+        _find(node->right, depth+1, max_depth, ret);
+    }
