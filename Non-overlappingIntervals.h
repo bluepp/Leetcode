@@ -30,6 +30,46 @@ Output: 0
 Explanation: You don't need to remove any of the intervals since they're already non-overlapping.
 */
 
+/* 2017-02-23, my version, reasonable ? */
+
+    int eraseOverlapIntervals(vector<Interval>& intervals) {
+        
+        int ret = 0;
+        int n = intervals.size();
+        if (n == 0) return ret;
+        
+        
+        sort(intervals.begin(), intervals.end(), [](Interval a, Interval b)
+        {
+            return a.start < b.start;
+        });
+        
+        
+        Interval inter = intervals[0];
+        
+        for (int i = 1; i < n; i++)
+        {
+            if (inter.end <= intervals[i].start)
+            {
+                inter = intervals[i];
+            }
+            else 
+            {
+                if (inter.end > intervals[i].end)
+                {
+                    inter = intervals[i];
+                }
+                
+                ret++;
+            }
+        }
+        
+        
+        return ret;
+      
+    }
+
+
 
 /* 2017-02-08, my version */
     int eraseOverlapIntervals(vector<Interval>& intervals) {
