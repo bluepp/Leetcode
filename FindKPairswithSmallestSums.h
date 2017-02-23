@@ -34,18 +34,26 @@ All possible pairs are returned from the sequence:
 [1,3],[2,3]
 */
 
+/* 2017-02-23, update */
+
     vector<pair<int, int>> kSmallestPairs(vector<int>& nums1, vector<int>& nums2, int k) {
-        vector<pair<int, int>> res;
         
-        for (int i = 0; i < min((int)nums1.size(), k); ++i) {
-            for (int j = 0; j < min((int)nums2.size(), k); ++j) {
-                res.push_back({nums1[i], nums2[j]});
-            }
-        }
-        
-        sort(res.begin(), res.end(), [](pair<int, int> &a, pair<int, int> &b){return a.first + a.second < b.first + b.second;});
-        
-        if (res.size() > k) res.erase(res.begin() + k, res.end());
-        return res;
-        
+       vector<pair<int, int>> res;
+       
+       for (auto p1 : nums1)
+       {
+           for (auto p2 : nums2)
+           {
+               res.push_back({p1,p2});
+           }
+       }
+       
+       sort(res.begin(), res.end(), [](pair<int, int> a , pair<int, int> b)
+       {
+           return a.first+a.second < b.first+b.second;
+       });
+       
+       if (k < res.size()) res.resize(k);
+       return res;
+       
     }
