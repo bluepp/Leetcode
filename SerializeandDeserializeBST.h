@@ -19,37 +19,45 @@ Note: Do not use class member/global/static variables to store states. Your seri
 
 */
 
-    // Encodes a tree to a single string.
+/* 2017-02-24, update */
+
+  // Encodes a tree to a single string.
     string serialize(TreeNode* root) {
-         ostringstream os;
-         serialize(root, os);
+        
+        ostringstream os;
+         _serialize(root, os);
          return os.str();
     }
 
     // Decodes your encoded data to tree.
     TreeNode* deserialize(string data) {
+     
         istringstream is(data);
-        return deserialize(is);
+        return _deserialize(is);
     }
+  
     
-    void serialize(TreeNode *root, ostringstream &os)
-    {
-        if (!root) os << "# ";
-        else {
-            os << root->val << " ";
-            serialize(root->left, os);
-            serialize(root->right, os);
+    void _serialize(TreeNode* root, ostringstream& os) {
+        if (!root) 
+        {
+            os << "# ";
+            return;
         }
-    }
     
-    TreeNode* deserialize(istringstream &is)
-    {
-       string val = "";
+        os << root->val << " ";
+        _serialize(root->left, os);
+        _serialize(root->right, os);
+    }
+  
+    
+    
+    TreeNode* _deserialize(istringstream& is) {
+        string val = "";
         is >> val;
         if (val == "#") return NULL;
         TreeNode* node = new TreeNode(stoi(val));
-        node->left = deserialize(is);
-        node->right = deserialize(is);
+        node->left = _deserialize(is);
+        node->right = _deserialize(is);
         return node;
     }
     
