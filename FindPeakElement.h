@@ -15,6 +15,25 @@ For example, in array [1, 2, 3, 1], 3 is a peak element and your function should
 */
 
 
+
+/* 2017-02-25, my update */
+    int findPeakElement(vector<int>& nums) {
+        
+        int n = nums.size();
+        int l = 0, r = n-1;
+        
+        while (l < r)
+        {
+            int m = l + (r-l)/2;
+            
+            if (m < r && nums[m] < nums[m+1]) l = m+1;
+            else r = m;
+        }
+        
+        return l;
+    }
+
+
 /* https://leetcode.com/discuss/96588/general-binary-search-in-java */
     int findPeakElement(vector<int>& nums) {
         
