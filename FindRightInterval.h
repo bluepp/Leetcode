@@ -36,6 +36,49 @@ For [2,3], the interval [3,4] has minimum-"right" start point.
 
 */
 
+/* 2017-02-25, my version, update */
+
+    vector<int> findRightInterval(vector<Interval>& intervals) {
+        
+        int n = intervals.size();
+        vector<int> res(n, -1);
+        
+        unordered_map<int, int> map;
+        
+        
+        for (int i = 0; i < n; i++)
+        {
+            map[intervals[i].start] = i;
+        }
+        
+        
+        sort(intervals.begin(), intervals.end(), [](Interval a, Interval b)
+        {
+            return a.start < b.start;
+        });
+        
+        
+        for (int i = 0; i < n; i++)
+        {
+            int idx = map[intervals[i].start];
+            
+            for (int j = i+1; j < n; j++)
+            {
+                if (intervals[i].end <= intervals[j].start)
+                {
+                    res[idx] = map[intervals[j].start];
+                    break;
+                }
+            }
+        }
+        
+        return res;
+    }
+
+
+
+
+
     vector<int> findRightInterval(vector<Interval>& intervals) {
         
         vector<int> res, v;
