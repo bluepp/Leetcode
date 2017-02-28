@@ -35,7 +35,7 @@ The same letters are at least distance 2 from each other.
 /* https://leetcode.com/discuss/108174/c-unordered_map-priority_queue-solution-using-cache  */
 
 
-/* 2017-01-01, update */
+/* 2017-02-28, update */
 
     string rearrangeString(string str, int k) {
         
@@ -43,36 +43,42 @@ The same letters are at least distance 2 from each other.
         
         string res;
         int len = str.length();
-        unordered_map<char, int> map;
-        priority_queue<pair<int, char>> q;
         
+        unordered_map<char, int> map;
         for (auto p : str) map[p]++;
-     
+        
+        priority_queue<pair<int, char>> q;
         for (auto it : map)
         {
             q.push({it.second, it.first});
         }
         
-        while (!q.empty()) {
+        while (!q.empty())
+        {
+            int count = min(len, k);
+            vector<pair<int, char>> vec;
             
-            vector<pair<int, int>> v;
-            int cnt = min(k, len);
-            
-            for (int i = 0; i < cnt; ++i) {
-                
+            for (int i = 0; i < count; i++)
+            {
                 if (q.empty()) return "";
                 
-                auto t = q.top(); 
+                auto it = q.top();
                 q.pop();
                 
-                res.push_back(t.second);
-                if (--t.first > 0) v.push_back(t);
-                --len;
+                res.push_back(it.second);
+                
+                if (--it.first > 0)
+                {
+                    vec.push_back(it);
+                }
+                
+                len--;
             }
             
-            for (auto a : v) q.push(a);
+            for (auto p : vec) q.push(p);
         }
         
-        return res;
+        return res.empty() ? "0" : res;
+      
     }
 
