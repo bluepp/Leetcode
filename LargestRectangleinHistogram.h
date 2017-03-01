@@ -23,25 +23,29 @@
               2. Keep a non-descending stack. O(n).
 */
 
-/* 2017-02-09 */
+/* 2017-03-01, update */
     int largestRectangleArea(vector<int>& heights) {
         
        int res = 0;
-        stack<int> s;
-        heights.push_back(0);
-        
-        for (int i = 0; i < heights.size(); ++i) {
-            
-            if (s.empty() || heights[s.top()] < heights[i]) s.push(i);
-            else {
-                int cur = s.top();
-                s.pop();
-                res = max(res, heights[cur] * (s.empty() ? i : (i - s.top() - 1)));
-                --i;
-            }
-        }
-        
-        return res;
+       
+       heights.push_back(0);
+       int n = heights.size();
+       stack<int> s;
+       
+       for (int i = 0; i < n; i++)
+       {
+           while (!s.empty() && heights[i] < heights[s.top()])
+           {
+               int h = heights[s.top()];
+               s.pop();
+               int w = s.empty() ? i : i-s.top()-1;
+               res = max(res,h*w);
+           }
+           
+           s.push(i);
+       }
+       
+       return res;
     }
 
 
