@@ -22,34 +22,30 @@
  Solution: Binary search. O(lgn) eg. [4 5 6] -7- 8 1 2, 5 6 0 -1- [2 3 4]
  */
  
- 
-     int search(vector<int>& nums, int target) {
+ /* 2017-03-01, update */
+
+    int search(vector<int>& nums, int target) {
+        if (nums.empty()) return -1;
         
         int l = 0, r = nums.size()-1;
+        
         while (l <= r)
         {
             int m = l + (r-l)/2;
-            if (nums[m] == target)
-                return m;
-                
-            if (nums[l] <= nums[m])
+            
+            if (nums[m] == target) return m;
+            else if (nums[m] < nums[r])
             {
-                if (target < nums[m] && target >= nums[l])
-                    r = m-1;
-                else
-                    l = m+1;
-            }
-            else if (nums[m] <= nums[r])
-            {
-                if (target > nums[m] && target <= nums[r])
-                    l = m+1;
-                else
-                    r = m-1;
+                if (target > nums[m] && target <= nums[r]) l = m+1;
+                else r = m-1;
             }
             else
-                break;
-            
+            {
+                if (target >= nums[l] && target < nums[m]) r = m-1;
+                else l = m+1;
+            }
         }
         
-        return -1;        
+        return -1;
+        
     }
