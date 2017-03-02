@@ -27,6 +27,29 @@ Note: There are at least two nodes in this BST.
 
     int getMinimumDifference(TreeNode* root) {
         
+        int mindiff = INT_MAX, val = INT_MIN;
+        
+        function<void (TreeNode *) > solve = [&](TreeNode * root)
+        {
+            if (!root) return;
+            
+            solve(root->left);
+            
+            if (val != INT_MIN) mindiff = min(mindiff, abs(root->val-val));
+            val = root->val;
+            
+            solve(root->right);
+        };
+        
+        solve(root);
+        return mindiff;
+    }
+
+
+
+
+    int getMinimumDifference(TreeNode* root) {
+        
         int mindiff = INT_MAX, val = -1;
         
         _diff(root, val, mindiff);
