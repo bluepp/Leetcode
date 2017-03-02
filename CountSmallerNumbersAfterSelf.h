@@ -20,6 +20,33 @@ Return the array [2, 1, 1, 0].
 */
 
 
+
+/* 2017-03-02, update, lllll? */
+
+    vector<int> countSmaller(vector<int>& nums) {
+        
+        int n = nums.size();
+        vector<int> res(n), t;
+        
+        for (int i = n-1; i >= 0; i--)
+        {
+            int l = 0, r = t.size();
+            
+            while (l < r)
+            {
+                int m = l + (r-l)/2;
+                if (t[m] >= nums[i]) r = m;
+                else l = m+1;
+            }
+            
+            res[i] = l;
+            t.insert(t.begin()+l, nums[i]);
+        }
+        
+        return res;
+    }
+
+
 /* 2017-01-04, update, binary search */
     vector<int> countSmaller(vector<int>& nums) {
         
