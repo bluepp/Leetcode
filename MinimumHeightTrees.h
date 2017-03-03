@@ -37,6 +37,8 @@ Given n = 6, edges = [[0, 3], [1, 3], [2, 3], [4, 3], [5, 4]]
 return [3, 4]
 */
 
+/* 2017-03-03, update */
+
     vector<int> findMinHeightTrees(int n, vector<pair<int, int>>& edges) {
         
         if (n == 1) return {0};
