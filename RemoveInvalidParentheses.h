@@ -17,40 +17,40 @@ Examples:
 /* 1. dfs, not write yet*/
 
 /* 2 bfs */
-/* 2017-02-05, update */
+/* 2017-03-03, update */
     vector<string> removeInvalidParentheses(string s) {
         
         vector<string> res;
-        unordered_map<string, int> visited;
+        unordered_map<string, int> map;
+        
         queue<string> q;
-        
         q.push(s);
-        visited[s]++;
-        bool found = false;
+        map[s]++;
         
+        bool found = false;
         while (!q.empty())
         {
-            s = q.front();
+            auto t = q.front();
             q.pop();
             
-            if (isvalid(s))
+            if (isvalid(t))
             {
-                res.push_back(s);
+                res.push_back(t);
                 found = true;
             }
             
             if (found) continue;
             
-            for (int i = 0; i < s.size(); i++)
+            for (int i = 0; i < t.length(); i++)
             {
-                if (s[i] != '(' && s[i] != ')') continue;
+                if (t[i] != '(' && t[i] != ')') continue;
                 
-                string t = s.substr(0, i) + s.substr(i+1);
+                string tt = t.substr(0, i) + t.substr(i+1);
                 
-                if (!visited.count(t))
+                if (!map.count(tt))
                 {
-                    q.push(t);
-                    visited[t]++;
+                    q.push(tt);
+                    map[tt]++;
                 }
             }
         }
@@ -58,14 +58,14 @@ Examples:
         return res;
     }
     
-    bool isvalid(string t)
+    
+    bool isvalid(string s)
     {
         int count = 0;
-        
-        for (auto p : t)
+        for (auto p : s)
         {
             if (p == '(') count++;
-            else if (p == ')' &&  count-- == 0) return false;
+            else if (p == ')' && count-- == 0) return false;
         }
         
         return count == 0;
