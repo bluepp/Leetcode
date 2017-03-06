@@ -34,15 +34,18 @@ Note: You may assume the tree (i.e., the given root node) is not NULL.
 */
 
 /* 1. queue, level order */
+/* 2017-03-06, update */
+
     int findBottomLeftValue(TreeNode* root) {
+        if (!root) return 0;
         
         int ret = 0;
-        if (!root) return -1;
-        
         queue<TreeNode *> q;
+        
         q.push(root);
         q.push(NULL);
-        vector<int> vec;
+        
+        bool flag = false;
         
         while (!q.empty())
         {
@@ -51,7 +54,11 @@ Note: You may assume the tree (i.e., the given root node) is not NULL.
             
             if (t)
             {
-                vec.push_back(t->val);
+                if (!flag) 
+                {
+                    ret = t->val;
+                    flag = true;
+                }
                 
                 if (t->left) q.push(t->left);
                 if (t->right) q.push(t->right);
@@ -60,12 +67,11 @@ Note: You may assume the tree (i.e., the given root node) is not NULL.
             {
                 if (q.empty()) break;
                 
+                flag = false;
                 q.push(NULL);
-                vec.clear();
             }
         }
         
-        ret = vec.front();
         return ret;
     }
 
