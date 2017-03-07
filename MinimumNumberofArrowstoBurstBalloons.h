@@ -22,34 +22,39 @@ One way is to shoot one arrow for example at x = 6 (bursting the balloons [2,8] 
 and another arrow at x = 11 (bursting the other two balloons).
 */
 
-/* 2017-02-08, update, my version */
+/* 2017-03-07, update */
 
     int findMinArrowShots(vector<pair<int, int>>& points) {
         
-        vector<pair<int, int>> res;
-        if (points.empty()) return 0;
-       
-        sort(points.begin(), points.end());
+        int n = points.size();
+        if (n == 0) return 0;
         
-        pair<int, int> p = points[0];
-        for (int i = 1; i < points.size(); i++)
+        sort(points.begin(), points.end(), [&](pair<int, int> a, pair<int, int> b)
         {
-            if (p.second < points[i].first)
+            return a.first < b.first;
+        });
+        
+        vector<pair<int, int>> res;
+        pair<int, int> inter = points[0];
+        
+        for (int i = 1; i < n; i++)
+        {
+            if (inter.second < points[i].first) 
             {
-                res.push_back(p);
-                p = points[i];
+                res.push_back(inter);
+                inter = points[i];
             }
-            else 
+            else
             {
-                p.first = max(p.first, points[i].first);
-                p.second = min(p.second, points[i].second);
+            //    inter.first = max(inter.first, points[i].first);
+                inter.second = min(inter.second, points[i].second);
             }
         }
         
-        res.push_back(p);
+        res.push_back(inter);
+        
         return res.size();
     }
-
 
    int findMinArrowShots(vector<pair<int, int>>& points) {
         
