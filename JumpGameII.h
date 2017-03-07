@@ -24,7 +24,35 @@
 
     Solution: Jump to the position where we can jump farthest (index + A[index]) next time.
  */
+
+
+/* 2017-03-07, update */
  
+    int jump(vector<int>& nums) {
+        
+        int n = nums.size();
+        int count = 0, start = 0;
+        
+        while (start < n-1)
+        {
+            count ++;
+            int far = start + nums[start];
+            if (far >= n-1) return count;
+            
+            int max = start;
+            for (int i = start+1; i <= far; i++)
+            {
+                if (nums[i]+i > nums[max]+max) max = i;
+            }
+            
+            start = max;
+        }
+        
+        return count;
+    }
+
+
+
 /* 2017-01-11, update */
 
     int jump(vector<int>& nums) {
