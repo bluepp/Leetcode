@@ -21,42 +21,53 @@ s = "2[abc]3[cd]ef", return "abcabccdcdcdef".
 
 */
 
-/* 2017-01-08, stack */
+/* 2017-03-07, stack */
+
     string decodeString(string s) {
         
-        string res = "", t = "";
-        stack<int> s_num;
-        stack<string> s_str;
-        int cnt = 0;
+        string res;
+        stack<string> stk_s;
+        stack<int> stk_n;
+        int n = s.length();
         
-        for (int i = 0; i < s.size(); ++i) {
-            
-            if (s[i] >= '0' && s[i] <= '9') 
+        string t = "";
+        int num = 0;
+        
+        for (auto p : s)
+        {
+            if (p >= '0' && p <= '9')
             {
-                cnt = 10 * cnt + s[i] - '0';
+                num = num*10 + p -'0';
+            }
+            else if (p == '[')
+            {
+                stk_n.push(num);
+                stk_s.push(t);
                 
-            } 
-            else if (s[i] == '[') 
-            {
-                s_num.push(cnt);
-                s_str.push(t);
-                cnt = 0; 
+                num = 0;
                 t.clear();
-                
-            } 
-            else if (s[i] == ']') 
+            }
+            else if (p == ']')
             {
-                int k = s_num.top(); s_num.pop();
-                for (int j = 0; j < k; ++j) s_str.top() += t;
-                t = s_str.top(); s_str.pop();
-            } 
-            else {
-                t += s[i];
+                int count = stk_n.top();
+                stk_n.pop();
+                
+                for (int i = 0; i < count; i++)
+                {
+                    stk_s.top() += t;
+                }
+                
+                t = stk_s.top();
+                stk_s.pop();
+                
+            }
+            else
+            {
+                t += p;
             }
         }
         
-        return s_str.empty() ? t : s_str.top();
-      
+        return stk_s.empty() ? t : stk_s.top();      
     }
 
 
