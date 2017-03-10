@@ -23,6 +23,26 @@ Only two moves are needed (remember each move increments or decrements one eleme
 [1,2,3]  =>  [2,2,3]  =>  [2,2,2]
 */
 
+/* 2017-03-10, update */
+    int minMoves2(vector<int>& nums) {
+        
+        int ret = 0;
+        int n = nums.size();
+        
+        sort(nums.begin(), nums.end());
+        int mid = nums[n/2];
+        
+        for (auto p : nums)
+        {
+            ret += abs(p-mid);
+        }
+        
+        return ret;
+    }
+
+
+
+
     int minMoves2(vector<int>& nums) {
         
         int ret = 0;
