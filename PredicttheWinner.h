@@ -23,6 +23,38 @@ Explanation: Player 1 first chooses 1. Then player 2 have to choose between 5 an
 Finally, player 1 has more score (234) than player 2 (12), so you need to return True representing player1 can win.
 */
 
+/* 2017-03-16, another one */
+    bool PredictTheWinner(vector<int>& nums) {
+        
+        return canwin(nums, 0, 0, 1);
+    }
+    
+    bool canwin(vector<int>& nums, int sum1, int sum2, int player)
+    {
+        if (nums.empty()) return sum1 >= sum2;
+        
+        if (nums.size() == 1)
+        {
+            if (player == 1) return sum1+nums[0] >= sum2;
+            else if (player == 2) return sum1+nums[0] < sum2;
+        }
+        
+        vector<int> va = vector<int>(nums.begin()+1, nums.end());
+        vector<int> vb = vector<int>(nums.begin(), nums.end()-1);
+        
+        if (player == 1)
+        {
+            return !canwin(va, sum1+nums[0], sum2, 2) || !canwin(vb, sum1+nums.back(), sum2, 2);
+        }
+        else if (player == 2)
+        {
+            return !canwin(va, sum1, sum2+nums[0], 1) || !canwin(vb, sum1, sum2+nums.back(), 1);
+        }
+        
+    }
+
+
+
 
     bool PredictTheWinner(vector<int>& nums) {
         
