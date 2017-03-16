@@ -22,6 +22,44 @@ Solution solution = new Solution(head);
 solution.getRandom();
 */
 
+
+/* 2017-03-06, update */
+
+
+class Solution {
+private:
+    ListNode *head;
+    
+public:
+    /** @param head The linked list's head.
+        Note that the head is guaranteed to be not null, so it contains at least one node. */
+    Solution(ListNode* head) {
+        this->head = head;
+    }
+    
+    /** Returns a random node's value. */
+    int getRandom() {
+        
+        int ret = head->val, i = 1;
+        ListNode *pCurr = head;
+        
+        while (pCurr)
+        {
+            if (rand() % i == 0)
+            {
+                ret = pCurr->val;
+            }
+            
+            pCurr = pCurr->next;
+            i++;
+        }
+        
+        return ret;
+    }
+};
+
+
+
 class Solution {
 private:
     int len;
@@ -59,6 +97,7 @@ public:
         return pCurr->val;
     }
 };
+
 
 
 /* 2017-02-16, reservoir sampling */
