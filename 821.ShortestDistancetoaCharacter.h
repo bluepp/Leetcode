@@ -8,30 +8,25 @@ Output: [3, 2, 1, 0, 1, 0, 0, 1, 2, 2, 1, 0]
 */
 
     vector<int> shortestToChar(string S, char C) {
-  
-        int n = S.length();
-        vector<int> res(n, INT_MAX);
         
+        int n = S.length();
+   
+        vector<int> res(n, INT_MAX);
+    
         int index = -1;
-        for (int i = 0; i < n; i++){
-            if (S[i] == C) {
-                index = i;
-            }
-            
+    
+        for (int i = 0; i < n; ++i) {
+            if (S[i] == C) index = i;
             if (index < 0) continue;
-            res[i] = abs(i-index);
+            res[i] = abs(i - index);
         }
         
         index = -1;
-        for (int i = n-1; i >= 0; i--) {
-            if (S[i] == C) {
-                index = i;
-            }
-            
+        for (int i = n - 1; i >= 0; --i) {
+            if (S[i] == C) index = i;
             if (index < 0) continue;
-            res[i] = min(res[i], abs(i-index));
+            res[i] = min(res[i], abs(i - index));
         }
         
         return res;
-       
     }
