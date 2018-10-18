@@ -39,3 +39,38 @@ Output: [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 15, 22]
         return true;
        
     }
+
+
+/* ---------------------------------------------------------- */
+
+    vector<int> selfDividingNumbers(int left, int right) {
+        vector<int> res;
+        
+        for (int i = left; i <= right; i++) {
+            if (_isDivid(i)) {
+                res.push_back(i);
+            }
+        }
+        
+        return res;
+    }
+    
+    bool _isDivid(int n) {
+        if (n < 10) {
+            return true;
+        }
+        
+        int nn = n;
+        
+        while (n) {
+            int t = n % 10;
+            if ((t == 0) || (nn % t)) {
+                return false;
+            } 
+   
+            n /= 10;
+        }
+        
+        return true;
+        
+    }
