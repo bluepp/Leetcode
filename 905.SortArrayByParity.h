@@ -28,3 +28,17 @@ The outputs [4,2,3,1], [2,4,1,3], and [4,2,1,3] would also be accepted.
         even.insert(even.end(), odd.begin(), odd.end());
         return even;
     }
+
+/* ------------------------------------------------- */
+    vector<int> sortArrayByParity(vector<int>& A) {
+ 
+        int i = 0, j = A.size() - 1;
+        while (i < j) {
+            while ((i < j) && (A[i] % 2 == 0)) ++ i;
+            while ((i < j) && (A[j] % 2 == 1)) -- j;
+            swap(A[i], A[j]);
+            i ++; 
+            j --;
+        }
+        return A;
+    }
