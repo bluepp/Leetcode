@@ -18,22 +18,24 @@ The number of nodes in the graph will be in the range [2, 15].
 You can print different paths in any order, but you should keep the order of nodes inside one path.
 */
 
-   vector<vector<int>> allPathsSourceTarget(vector<vector<int>>& graph) {
+     vector<vector<int>> allPathsSourceTarget(vector<vector<int>>& graph) {
         
         vector<vector<int>> res;
-        _help(graph, 0, {}, res);
-        
+        _path(graph, 0, {}, res);
         return res;
-    }
+    } 
     
-    void _help(vector<vector<int>> &graph, int curr, vector<int> path, vector<vector<int>> &res) {
+    void _path(vector<vector<int>> &graph, int curr, vector<int> path, vector<vector<int>> &res) {
+        
         path.push_back(curr);
         
         if (curr == graph.size()-1) {
             res.push_back(path);
-        } else {
-            for (auto neigh: graph[curr]) {
-                _help(graph, neigh, path, res);
-            }
-        }  
+            return;
+        }
+        
+        for (auto p : graph[curr]) {
+            _path(graph, p, path, res);
+        }
+        
     }
