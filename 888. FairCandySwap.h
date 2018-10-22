@@ -27,8 +27,8 @@ Input: A = [1,2,5], B = [2,4]
 Output: [5,4]
 */
 
-    vector<int> fairCandySwap(vector<int>& A, vector<int>& B) {
-        int sum_a = accumulate(begin(A), end(A), 0);
+     vector<int> fairCandySwap(vector<int>& A, vector<int>& B) {
+        int sum_a = accumulate(A.begin(), A.end(), 0);
         int sum_b = 0;
         
         unordered_set<int> s;
@@ -40,9 +40,12 @@ Output: [5,4]
         
         int diff = (sum_b - sum_a)/2;
         
+        vector<int> res;
         for(auto p : A) {
             if (s.count(p+diff)) {
-                return {p, p+diff};
+                res = {p, p+diff};
             }
         } 
+        
+        return res;
     }
