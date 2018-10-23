@@ -42,6 +42,26 @@ Explanation:
 Note that 'A' and 'a' are treated as two different characters.
 */
 
+/* 2018-10-24 , another one*/
+
+    string frequencySort(string s) {
+        unordered_map<char, int> map;
+        
+        for (auto p : s) {
+            map[p]++;
+        }
+        
+        sort(s.begin(), s.end(), [&](char &a, char &b) {
+            return (map[a] > map[b]) || (map[a] == map[b] && a < b);
+        });
+       
+        return s;
+    }
+
+/* ----------------------------------------------- */
+
+
+
     string frequencySort(string s) {
         
         string res;
