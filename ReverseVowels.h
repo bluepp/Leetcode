@@ -12,30 +12,26 @@ https://leetcode.com/problems/reverse-vowels-of-a-string/
 */
 
     string reverseVowels(string s) {
-        int n = s.length();
-        int l = 0, r = n-1;
+        int l = 0, r = s.length();
         
-        while (l < r)
-        {
-            while (l < r && !isvowel(s[l]))
-            {
-                l ++;
-            }
-            while (l < r && !isvowel(s[r]))
-            {
-                r--;
-            }
-            
-            if (l < r)
-            {
+        while (l < r) {
+            if (isvowel(s[l]) && isvowel(s[r])) {
                 swap(s[l], s[r]);
                 l++;
                 r--;
             }
+            
+            if (l < r && !isvowel(s[l])) {
+                l++;
+            }
+            
+            if (l < r && !isvowel(s[r])) {
+                r--;
+            }
         }
-        
+    
         return s;
-        
+         
     }
     
     bool isvowel(char c)
