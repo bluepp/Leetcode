@@ -16,6 +16,31 @@ https://leetcode.com/problems/add-digits/
 */
 
 
+    int addDigits(int num) {
+        
+        string s = to_string(num);
+        
+        while (1) {
+            int accum = 0;
+           
+            for (auto p : s) {
+                accum += p - '0';
+            }
+            
+            if (s.size() == 1) {
+                break;
+            }
+            
+            s = to_string(accum);
+            
+        }
+      
+        int ret = s[0]-'0';
+        return ret;
+  
+    }
+
+
 /* 2016-06-30, another one */
    int addDigits(int num) {
         
