@@ -22,33 +22,33 @@ Example: 19 is a happy number
 https://leetcode.com/problems/happy-number/
 */
 
-/* TLE */
     bool isHappy(int n) {
-        
+        unordered_set<int> set;
         string ss = to_string(n);
-        int accum = 0;
-       
+        
         while (1) {
-            for (int i = 0; i < ss.length(); i++) {
-                int t = ss[i]-'0';
-                accum = t *t;
+            int accum = 0;
+            
+            for (auto p : ss) {
+                int t = p-'0';
+                accum += t*t;
             }
             
             if (accum == 1) {
                 return true;
-                
-            } else if (accum < 10){
+            } else if (set.count(accum)) {
                 return false;
             } else {
+                set.insert(accum);
                 ss = to_string(accum);
-                accum = 0;
             }
         }
         
         return false;
-        
     }
 
+
+/* -------------------------------------------------------- */
 
 
     bool isHappy(int n) {
