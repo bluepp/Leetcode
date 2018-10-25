@@ -51,34 +51,43 @@ The number of keys in all rooms combined is at most 3000.
     }
 
 
-/* wrong, why? */
+/* my solution , 2018/10/26 */
+
     bool canVisitAllRooms(vector<vector<int>>& rooms) {
-      
         int n = rooms.size();
-        vector<bool> visit(n, false);
-        visit[0] = true;
+        queue<int> q;
+        if (n == 0) {
+            return true;
+        }
         
-        for (int i = 0; i < n; i++) {
-            if (visit[i]){
-                for (auto p : rooms[i]) {
-                    visit[p] = true;
+        for (auto p : rooms[0]) {
+            q.push(p);
+        }
+        
+        vector<bool> visited(n, false);
+        visited[0] = true;
+        
+        while (!q.empty()) {
+            
+            int roomNum = q.front();
+            q.pop();
+            visited[roomNum] = true;
+            
+            
+            for (auto p : rooms[roomNum]) {
+                if (!visited[p]) {
+                    q.push(p);
                 }
+             
             }
         }
         
-        for (int i = n-1; i >= 0; i--) {
-            if (visit[i]) {
-                for (auto p : rooms[i]) {
-                    visit[p] = true;
-                }
-            }
-        }
-        
-        for (auto p : visit) {
-            if (p == false) {
+        for (auto p : visited) {
+            if (!p) {
                 return false;
             }
         }
         
         return true;
+      
     }
