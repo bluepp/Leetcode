@@ -12,6 +12,31 @@
 
  Solution: ...
  */
+
+/* 2018/10/26  */
+
+    ListNode* insertionSortList(ListNode* head) {
+        ListNode dummy(-1);
+        ListNode *pCurr = &dummy;
+        
+        while (head) {
+            ListNode *pNext = head->next;
+            
+            pCurr = &dummy;
+            
+            while (pCurr->next && pCurr->next->val <= head->val) {
+                pCurr = pCurr->next;
+            }
+            
+            head->next = pCurr->next;
+            pCurr->next = head;
+            head = pNext;
+        }
+        
+        return dummy.next;
+    }
+
+
  
      ListNode *insertionSortList(ListNode *head) {
         ListNode dummy(INT_MIN);
