@@ -15,28 +15,28 @@
 
 /* 2018/10/26  */
 
-    ListNode* insertionSortList(ListNode* head) {
-        ListNode dummy(-1);
+        ListNode* sortList(ListNode* head) {
+        ListNode dummy(INT_MIN);
+        ListNode *pNode = head;
         ListNode *pCurr = &dummy;
         
-        while (head) {
-            ListNode *pNext = head->next;
-            
+        while (pNode) {
             pCurr = &dummy;
-            
-            while (pCurr->next && pCurr->next->val <= head->val) {
+            ListNode *pNext = pNode->next;
+       
+            while (pCurr->next && pCurr->next->val <= pNode->val) {
                 pCurr = pCurr->next;
             }
             
-            head->next = pCurr->next;
-            pCurr->next = head;
-            head = pNext;
+            pNode->next = pCurr->next;            
+            pCurr->next = pNode;
+            
+            pNode = pNext;
         }
         
         return dummy.next;
+   
     }
-
-
  
      ListNode *insertionSortList(ListNode *head) {
         ListNode dummy(INT_MIN);
