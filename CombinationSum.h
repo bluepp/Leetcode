@@ -27,9 +27,8 @@
  	Solution: Sort & Recursion.
 */
 
-/* 2016-06-10, update */
-   vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
-        
+/* 2018/10/29 */
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
         vector<int> vec;
         vector<vector<int>> res;
         
@@ -49,13 +48,10 @@
         }
         
         for (int i = start; i < candidates.size() && candidates[i] <= target; i++)
-        {
-            if (i > start && candidates[i] == candidates[i-1]) continue;
-            
+        {           
             vec.push_back(candidates[i]);
             _comb(candidates, target-candidates[i], i, vec, res);
             vec.pop_back();
-            
         }
     }
     
