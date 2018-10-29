@@ -15,6 +15,29 @@ You may assume the string contains only lowercase alphabets.
 https://leetcode.com/problems/valid-anagram/
 */
 
+/* 2018/10/29 */
+    bool isAnagram(string s, string t) { 
+        if (s.length() != t.length()) {
+            return false;
+        }
+        
+        unordered_map<char, int> map;
+        
+        for (auto p : s) {
+            map[p]++;
+        }
+        
+        for (auto p : t) {
+            if (--map[p] < 0) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+
+
+
 /* 2016-09-27, update */
 
     bool isAnagram(string s, string t) {
