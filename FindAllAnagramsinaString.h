@@ -37,10 +37,9 @@ The substring with start index = 2 is "ab", which is an anagram of "ab".
 */
 
     vector<int> findAnagrams(string s, string p) {
-        
         if (s.empty()) return {};
         vector<int> res, cnt(128, 0);
-        int m = s.size(), n = p.size(), i = 0;
+        int m = s.size(), n = p.size();
         
         for (char c : p) ++cnt[c];
         
@@ -64,5 +63,4 @@ The substring with start index = 2 is "ab", which is an anagram of "ab".
         }
         
         return res;
-        
     }
