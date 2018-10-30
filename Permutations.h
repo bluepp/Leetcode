@@ -21,16 +21,15 @@
  	Solution: dfs...
  */
  
-    vector<vector<int> > permute(vector<int> &num) {
-        vector<int> vec;
+    vector<vector<int>> permute(vector<int>& nums) {
         vector<vector<int> >res;
-        vector<bool> avail(num.size(), true);
+        vector<bool> avail(nums.size(), true);
         
-        _perm(num, avail, vec, res);
+        _perm(nums, avail, {}, res);
         return res;
     }
     
-    void _perm(vector<int> &num, vector<bool> &avail, vector<int>&vec, vector<vector<int> >&res)
+    void _perm(vector<int> &num, vector<bool> &avail, vector<int> vec, vector<vector<int> >&res)
     {
         if(vec.size() == num.size())
         {
