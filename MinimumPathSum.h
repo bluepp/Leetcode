@@ -17,6 +17,30 @@
 
     Solution: Dynamic Programming. Space O(N).
  */
+
+/* runtime error ? why???? */
+   int minPathSum(vector<vector<int>>& grid) {
+        int minSum = INT_MAX;
+        int m = grid.size(), n = grid[0].size();
+        
+        _dfs(grid, 0, 0, 0, minSum);
+        return minSum;
+    }
+    
+    void _dfs(vector<vector<int>> &grid, int i, int j, int sum, int &minSum) {
+
+        if (i == grid.size() && j == grid[0].size()) {
+            minSum = min(minSum, sum);
+            return;
+        }
+        
+        sum += grid[i][j];
+        
+        
+        _dfs(grid, i+1, j, sum, minSum);
+        _dfs(grid, i, j+1, sum, minSum);
+
+    }
  
  
 /* space O(n) */
