@@ -13,6 +13,37 @@ Multiplication of any three numbers in the input won't exceed the range of 32-bi
 */
 
     int maximumProduct(vector<int>& nums) { 
+      
+        int mx1 = INT_MIN, mx2 = INT_MIN, mx3 = INT_MIN;
+        int mn1 = INT_MAX, mn2 = INT_MAX;
+        
+        for (auto p : nums) {
+            if (p > mx1) {
+                mx3 = mx2;
+                mx2 = mx1;
+                mx1 = p;
+            } else if (p > mx2) {
+                mx3 = mx2;
+                mx2 = p;
+            } else if (p > mx3) {
+                mx3 = p;
+            }
+            
+            if (p < mn1) {
+                mn2 = mn1;
+                mn1 = p;
+            } else if (p < mn2) {
+                mn2 = p;
+            }
+        }
+        
+        int ret = max(mx1 * mx2 * mx3, mn1 * mn2 * mx1);
+        return ret;
+    }
+
+/* ------------------------------------------------------------- */
+
+    int maximumProduct(vector<int>& nums) { 
         int n = nums.size();
         sort(nums.begin(), nums.end());
         
