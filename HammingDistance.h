@@ -26,6 +26,26 @@ Explanation:
 The above arrows point to positions where the corresponding bits are different.
 */
 
+/* 2018/11/01 */
+
+    int hammingDistance(int x, int y) {
+        
+        int ret = 0;
+        
+        for (int i = 0; i < 32; i++) {
+            int bit = 1 << i;
+            
+            if ((x & bit) ^ (y & bit)) {
+                ret ++;
+            }
+            
+        }
+        
+        return ret;
+    }
+
+
+
     int hammingDistance(int x, int y) {
         
         int ret = 0;
