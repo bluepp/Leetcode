@@ -15,6 +15,36 @@
 */
 
 
+/* 2018/11/07, another one */
+
+    int maxProduct(vector<int>& nums) {
+        
+        int ret = INT_MIN;
+        int prod = 1, n = nums.size();
+        
+        for (int i = 0; i < n; i++) {
+            prod *= nums[i];
+            ret = max(ret, prod);
+            
+            if (nums[i] == 0) {
+                prod = 1;
+            }
+        }
+        
+        prod = 1;
+        for (int i = n-1; i >= 0; i--) {
+            prod *= nums[i];
+            ret = max(ret, prod);
+            
+            if (nums[i] == 0) {
+                prod = 1;
+            } 
+        }
+        
+        return ret;
+    }
+
+
 /* 2016-08-31, update */
 
      int maxProduct(vector<int>& nums) {
