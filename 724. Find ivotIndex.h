@@ -25,6 +25,29 @@ Each element nums[i] will be an integer in the range [-1000, 1000].
 
 */
 
+
+    int pivotIndex(vector<int>& nums) {
+        
+        int sum = accumulate(nums.begin(), nums.end(), 0);
+        
+        int leftSum = 0;
+        for (int i = 0; i < nums.size(); i++){
+            
+            if (sum-nums[i] == 2 * leftSum) {
+                return i;
+            }
+            
+            leftSum += nums[i];
+        }
+        
+        return -1;
+     
+    }
+
+/* --------------------------------------------------------------------- */
+
+
+
     int pivotIndex(vector<int>& nums) {
         
         int n = nums.size();
