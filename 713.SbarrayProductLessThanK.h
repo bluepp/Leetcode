@@ -22,10 +22,7 @@ Note:
         
         int prod = 1, j = 0;
         for (int i = 0; i < nums.size(); i++) {
-            prod *= nums[i];
-            
-           
-            
+            prod *= nums[i]; 
             while (prod >= k) prod /= nums[j++];
             
             ret += i-j+1;
