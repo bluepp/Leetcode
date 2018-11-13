@@ -25,6 +25,35 @@ https://leetcode.com/problems/course-schedule/
 */
 
 
+/* DFS */
+
+    bool canFinish(int numCourses, vector<pair<int, int>>& prerequisites) {
+        vector<vector<int>> graph(numCourses, vector<int>(0));
+        vector<int> visited(numCourses, 0);
+        
+        for (auto a : prerequisites) {
+            graph[a.second].push_back(a.first);
+        }
+        
+        for (int i = 0; i < numCourses; ++i) {
+            if (!canFinishDFS(graph, visited, i)) return false;
+        }
+        
+        return true;
+    }
+    
+    bool canFinishDFS(vector<vector<int> > &graph, vector<int> &visit, int i) {
+        if (visit[i] == -1) return false;
+        if (visit[i] == 1) return true;
+        visit[i] = -1;
+        for (auto a : graph[i]) {
+            if (!canFinishDFS(graph, visit, a)) return false;
+        }
+        visit[i] = 1;
+        return true;
+    }
+
+
 /* 2017-03-02, my version, seems fine, res.size() == numCourses */
 
     bool canFinish(int numCourses, vector<pair<int, int>>& prerequisites) {
