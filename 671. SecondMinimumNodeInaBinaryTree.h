@@ -23,7 +23,10 @@ Input:
 
 Output: -1
 Explanation: The smallest value is 2, but there isn't any second smallest value.
-*/    int findSecondMinimumValue(TreeNode* root) {
+*/    
+
+/* recursion */
+    int findSecondMinimumValue(TreeNode* root) {
         int first = root->val, second = INT_MAX;
         
         _dfs(root, first, second);
@@ -42,4 +45,31 @@ Explanation: The smallest value is 2, but there isn't any second smallest value.
             second = root->val;
         }
         
+    }
+
+/* iterative */
+
+    int findSecondMinimumValue(TreeNode* root){
+        int first = root->val, second = INT_MAX;
+        queue<TreeNode*> q;
+        q.push(root);
+        
+        while (!q.empty()) {
+            auto t = q.front();
+            q.pop();
+            
+            if (t->val > first && t->val < second) {
+                second = t->val;
+            }
+            
+            if (t->left) {
+                q.push(t->left);
+            }
+            
+            if (t->right) {
+                q.push(t->right);
+            }
+        }
+        
+        return (second == first || second == INT_MAX) ? -1 : second;
     }
