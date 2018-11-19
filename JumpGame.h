@@ -19,6 +19,22 @@
  	A = [2,3,1,1,4], return true.
  	A = [3,2,1,0,4], return false.
  */
+
+   bool canJump(vector<int>& nums) {
+        int n = nums.size(), far = 0;
+        
+        for (int i = 0; i < n; i++) {
+            if (i > far || far >= n-1) {
+                break;
+            }
+            
+            far = max(far, i+nums[i]);
+        }
+       
+        return far >= n-1;
+    }
+
+
  
  /* 2014-09-20, my version */
      bool canJump(int A[], int n) {
