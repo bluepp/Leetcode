@@ -17,6 +17,26 @@ S and J will consist of letters and have length at most 50.
 The characters in J are distinct.
 */
 
+
+
+    int numJewelsInStones(string J, string S) {
+        
+        unordered_set<char> set;
+        for (auto p : J) {
+            set.insert(p);
+        }
+        
+        int count = 0;
+        for (auto p : S) {
+            if (set.count(p)) {
+                count ++;
+            }
+        }
+      
+        return count;
+    }
+
+
     int numJewelsInStones(string J, string S) {
         
         int ret = 0;
