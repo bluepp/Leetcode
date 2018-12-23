@@ -20,6 +20,30 @@
  	A = [3,2,1,0,4], return false.
  */
 
+
+/* 2018/12/24 */
+    bool canJump(vector<int>& nums) {
+        int n = nums.size();
+        if (n == 0) {
+            return false;
+        }
+        if (n == 1) {
+            return true;
+        }
+            
+        int far = nums[0];
+        for (int i = 1; i <= far; i++) {
+            far = max(far, i+nums[i]);
+            if (far >= n-1) {
+                return true;
+            }
+        }
+        
+        return far >= n-1;
+    }
+
+
+
    bool canJump(vector<int>& nums) {
         int n = nums.size(), far = 0;
         
