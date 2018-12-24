@@ -21,6 +21,27 @@
            2. Newton iteration method. x(i+1) = (x(i) + n/x(i)) / 2.
  See  (http://www.cnblogs.com/AnnieKim/archive/2013/04/18/3028607.html) for more explanation (in Chinese).
  */
+
+
+    int mySqrt(int x) {
+        if (x <= 1) {
+            return x;
+        }
+        
+        int l = 0, r = x;
+        while (l < r) {
+            int m = l + (r-l)/2;
+            
+            if (x/m >= m) {
+                l = m+1;
+            } else {
+                r = m;
+            }
+        }
+        
+        return l-1;    
+    }
+
  
  
 /* 2014-11-20, update, long-> int */ 
