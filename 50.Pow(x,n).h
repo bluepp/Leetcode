@@ -12,6 +12,33 @@
  
     Solution: recursion.
  */
+
+
+    double myPow(double x, int n) {
+        
+        if (n < 0) {
+            return 1 / power(x, n);
+        }
+        
+        return power(x, n);
+    }
+    
+    double power(double x, int n) {
+        if (n == 0) {
+            return 1;
+        }
+        
+        double r = power(x, n/2);
+        
+        if (n % 2) {
+            return r * r *x;
+        } else {
+            return r*r;
+        }
+    }
+
+
+
  
 /* 2016-12-11 */
     double myPow(double x, int n) {
