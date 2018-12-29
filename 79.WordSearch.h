@@ -27,6 +27,58 @@
 
  Solution: DFS. (For 'visited', using two-dimensional array will be faster than vector<vector>.[90+ms->50+ms])
  */
+
+
+/* 2018/12/30 */
+
+
+    bool exist(vector<vector<char>>& board, string word) {
+        
+        if (board.empty() || board[0].empty()) {
+            return false;
+        }
+        
+        int m = board.size(), n = board[0].size();
+        vector<vector<bool>> visited(m, vector<bool>(n, false));
+        
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (_exist(board, word, visited, i, j, 0)) {
+                    return true;
+                }
+            }
+        }
+        
+        return false;
+    }
+    
+    
+    bool _exist(vector<vector<char>> &board, string word, vector<vector<bool>> &visited, int i, int j, int start) {
+        
+        if (start == word.length()) {
+            return true;
+        }
+        
+        int m = board.size(), n = board[0].size();
+        if (i < 0 || i >= m || j < 0 || j >= n || visited[i][j] || board[i][j] != word[start]) {
+            return false;
+        }
+        
+        visited[i][j] = true;
+        
+        if (_exist(board, word, visited, i+1, j, start+1) || _exist(board, word, visited, i-1, j, start+1) 
+           || _exist(board, word, visited, i, j+1, start+1) || _exist(board, word, visited, i, j-1, start+1)) {
+            return true;
+        }
+        
+        visited[i][j] = false;
+        
+        return false;
+        
+    }
+
+
+
  
  /* 2014-12-08 */
  /* 2015-09-14, update */
