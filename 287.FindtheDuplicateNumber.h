@@ -34,3 +34,32 @@ There is only one duplicate number in the array, but it could be repeated more t
         
         return ret;
     }
+
+
+/* ologn */
+    int findDuplicate(vector<int>& nums) {
+        
+        int l = 0, r = nums.size()-1;
+        
+        while (l < r) {
+            int m = l + (r-l)/2;
+            
+            int count = 0;
+            for (auto p : nums) {
+                if (p <= m) {
+                    count ++;
+                }
+            }
+            
+            if (count <= m) {
+                l = m+1;
+            } else {
+                r = m;
+            }
+            
+        }
+        
+        
+        return r;
+      
+    }
