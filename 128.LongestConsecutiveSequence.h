@@ -22,23 +22,27 @@
               This solution is much easier to understand.
 */
 
-/* 2016-12-31, update */
-    int longestConsecutive(vector<int>& nums) {
-        
+   int longestConsecutive(vector<int>& nums) {
         int ret = 0;
+        unordered_set<int> set(nums.begin(), nums.end());
         
-        unordered_set<int> set (nums.begin(), nums.end());
-        
-        for (auto p : nums)
-        {
-            if (!set.count(p)) continue;
+        for (auto p : nums) {
+            if (!set.count(p)) {
+                continue;
+            }
             
             set.erase(p);
-            int pre = p-1, next = p+1;
-            while (set.count(pre)) set.erase(pre--);
-            while (set.count(next)) set.erase(next++);
+            int prev = p-1, next = p+1;
+            while (set.count(prev)) {
+                set.erase(prev);
+                prev--;
+            }
+            while (set.count(next)) {
+                set.erase(next);
+                next++;
+            }
             
-            ret = max(ret, next-pre-1);
+            ret = max(ret, next-prev-1);
         }
         
         return ret;
