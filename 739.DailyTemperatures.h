@@ -7,23 +7,22 @@ Note: The length of temperatures will be in the range [1, 30000]. Each temperatu
 
 */
 
-    vector<int> dailyTemperatures(vector<int>& temperatures) {
+    vector<int> dailyTemperatures(vector<int>& T) {
         
-        int n = temperatures.size();
+        int n = T.size();
         vector<int> res(n, 0);
         stack<int> stk;
         
-        for (int i = 0; i < n; i++) {
-            while (!stk.empty() && temperatures[i] > temperatures[stk.top()]) {
-                int index = stk.top();
+        for (int i = 0; i < T.size(); i++) {
+            
+            while (!stk.empty() && T[i] > T[stk.top()]) {
+                auto t = stk.top();
                 stk.pop();
-                res[index] = i-index;
+                res[t] = i-t;
             }
             
             stk.push(i);
-            
         }
         
         return res;
-        
     }
