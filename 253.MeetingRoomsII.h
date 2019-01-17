@@ -13,24 +13,17 @@ return 2.
 https://leetcode.com/problems/meeting-rooms-ii/
 */
 
-/* https://leetcode.com/discuss/50948/c-o-n-log-n-584-ms-3-solutions */
     int minMeetingRooms(vector<Interval>& intervals) {
-        
-        map<int, int> changes;
-        
-        for (auto i : intervals)
-        {
-            changes[i.start] += 1;
-            changes[i.end] -= 1;
+        map<int, int> m;
+        for (auto a : intervals) {
+            ++m[a.start];
+            --m[a.end];
         }
-        
-        
-        int rooms = 0, maxrooms = 0;
-        
-        for (auto change : changes)
-            maxrooms = max(maxrooms, rooms += change.second);
-        
-        return maxrooms;
+        int rooms = 0, res = 0;
+        for (auto it : m) {
+            res = max(res, rooms += it.second);
+        }
+        return res;
     }
 
 
