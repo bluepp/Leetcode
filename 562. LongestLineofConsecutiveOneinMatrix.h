@@ -9,37 +9,41 @@ Output: 3
 Hint: The number of elements in the given matrix will not exceed 10,000.
 */
 
-
-
-/* stack overflow !!! */
     int longestLine(vector<vector<int>>& M) {
+        if (M.empty() || M[0].empty()) {
+            return 0;
+        }
         
         int m = M.size(), n = M[0].size();
         int ret = 0;
         
+        vector<vector<int>> dirs {{1, 0}, {0, 1}, {-1, -1}, {-1, 1}};
+        
         for (int i = 0; i < m; i++){
-            for (int j = 0; j < n; j++){
-                
-                int count = 1;
-                if (M[i][j] == 1) {
-                    _dfs(M, i, j, count);
+            for (int j = 0; j < n; j++) {
+                if (M[i][j] == 0) {
+                    continue;
                 }
                 
-                ret = max(ret, count);
+                for (int k = 0; k < 4; k++) {
+                    
+                    int count = 0;
+                    int x = i, y = j;
+                    
+                    while (x >= 0 && x < m && y >= 0 && y < n && M[x][y] == 1) {
+                        x += dirs[k][0];
+                        y += dirs[k][1];
+                        
+                        count++;
+                    }
+                    
+                    ret = max(ret, count);
+                    
+                }
             }
         }
-        
+
         return ret;
     }
-    
-    void _dfs(vector<vector<int>> &M, int i, int j, int count){
-        int m = M.size(), n = M[0].size();
-        if (i < 0 || i >= m || j < 0 || j >= n || M[i][j] != 1) {  
-            return;
-        }
-                
-        _dfs(M, i+1, j, ++count);
-        _dfs(M, i-1, j, ++count);
-        _dfs(M, i, j+1, ++count);
-        _dfs(M, i, j-1, ++count);  
-    }
+
+
