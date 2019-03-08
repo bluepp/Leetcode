@@ -23,23 +23,17 @@ The final answer is guaranteed to be less than 2^31.
 
     int rangeSumBST(TreeNode* root, int L, int R) {
         
-        int sum = 0;
-        _bst(root, L, R, sum);
-        
-        return sum;
-    }
-    
-    void _bst(TreeNode *root, int L, int R, int &sum) {
-        
-        if (!root) {
-            return;
+        if (!root){
+            return 0;
         }
         
-        if (root->val >= L && root->val <= R) {
+        int sum = 0;
+        if (root->val >= L && root->val <= R){
             sum += root->val;
         }
         
-        _bst(root->left, L, R, sum);
-        _bst(root->right, L, R, sum);
+        sum += rangeSumBST(root->left, L, R);
+        sum += rangeSumBST(root->right, L, R);
         
+        return sum;
     }
