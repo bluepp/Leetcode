@@ -31,14 +31,21 @@ The outputs [4,2,3,1], [2,4,1,3], and [4,2,1,3] would also be accepted.
 
 /* ------------------------------------------------- */
     vector<int> sortArrayByParity(vector<int>& A) {
- 
-        int i = 0, j = A.size() - 1;
-        while (i < j) {
-            while ((i < j) && (A[i] % 2 == 0)) ++ i;
-            while ((i < j) && (A[j] % 2 == 1)) -- j;
-            swap(A[i], A[j]);
-            i ++; 
-            j --;
+        
+        int l = 0, r = A.size()-1;
+        
+        while (l < r) {
+            while (l < r && A[l]%2 == 0) {
+                l++;
+            }
+            
+            while (l < r && A[r]%2 == 1) {
+                r--;
+            }
+            
+            swap(A[l], A[r]);
         }
+        
         return A;
+      
     }
