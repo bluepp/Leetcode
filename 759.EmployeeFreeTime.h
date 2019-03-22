@@ -55,48 +55,46 @@ schedule and schedule[i] are lists with lengths in range [1, 50].
 
 
 
-/* wrong version */
+/* My Version */
     vector<Interval> employeeFreeTime(vector<vector<Interval>>& schedule) {
-       
-        vector<Interval> res, cache, cache1;
-        int n = schedule.size();
-        if (n < 2){
+        
+        vector<Interval> res, vec, merge;
+        
+        for(auto p : schedule){
+            for (auto q : p){
+                vec.push_back(q);
+            }
+        }
+        
+        if (vec.size() < 2){
             return res;
         }
         
-        for (int i = 0; i < n; i++){
-            for (int j = 0; j < schedule[i].size(); j++){
-                cache.push_back(schedule[i][j]);
-            }
-        }
-       
-        sort(cache.begin(), cache.end(), [](Interval a, Interval b){
-            return a.start < b.start;
+        sort(vec.begin(), vec.end(), [](Interval a, Interval b){
+            return (a.start < b.start) || (a.start == b.start && a.end < b.end);
         });
         
-        Interval interval = cache[0];
-        for(int i = 1; i < cache.size(); i++){
-            if (interval.end < cache[i].start){
-                cache1.push_back(interval);
-            } else{
-                interval.start = min(interval.start, cache[i].start);
-                interval.end = max(interval.end, cache[i].end);
+        Interval inter = vec[0];
+        for (int i = 1; i < vec.size(); i++){
+            if (inter.end < vec[i].start){
+                merge.push_back(inter);
+                inter = vec[i];
+            } else {
+
+                inter.end = max(inter.end, vec[i].end);
             }
         }
         
-        cache1.push_back(interval);
+        merge.push_back(inter);
         
-        if (cache1.size() < 2){
+        if (merge.size() < 2){
             return res;
         }
         
-        for (int i = 1; i < cache1.size(); i++){
-            Interval gap;
-            gap.start = cache1[i-1].end;
-            gap.end = cache1[i].start;
-            
-            res.push_back(gap);
+        for (int i = 1; i < merge.size(); i++){
+            res.push_back({merge[i-1].end, merge[i].start});
         }
         
         return res;
+  
     }
